@@ -37,7 +37,7 @@ if(["acre_main"] call KGE_Core_fnc_ClassExists) then {
 };
 
 // Set player alive
-[KGE_Player, "Alive"] call KGE_Core_fnc_SetState;
+[KGE_Player, true] call KGE_Core_fnc_SetAlive;
 
 // Exit spectator
 [] call KGE_Spectator_fnc_ForceExit;

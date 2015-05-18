@@ -30,8 +30,8 @@ if(hasInterface) then {
 	[KGE_Player] call KGE_Core_fnc_SetName;
 
 	// If player state has not been set then add it
-	if([KGE_Player] call KGE_Core_fnc_GetState == "NotDefined") then {
-		[KGE_Player, "Alive"] call KGE_Core_fnc_SetState;
+	if(isNil (format["KGE_Core_Alive_%1", [_unit] call KGE_Core_fnc_GetName])) then {
+		[KGE_Player, true] call KGE_Core_fnc_SetAlive;
 	};
 
 	// If unit has no varname then add it

@@ -32,7 +32,7 @@ if(["acre_main"] call KGE_Core_fnc_ClassExists) then {
 };
 
 // Set player dead
-[KGE_Player, "Dead"] call KGE_Core_fnc_SetState;
+[KGE_Player, false] call KGE_Core_fnc_SetAlive;
 
 // Disable player movement
 [] call KGE_Respawn_fnc_AnimationLoop;

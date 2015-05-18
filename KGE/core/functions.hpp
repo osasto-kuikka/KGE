@@ -11,7 +11,7 @@ class KGE_Core
 		class GetGroupLeader;
 		class GetName;
 		class GetSide;
-		class GetState;
+		//class GetState;
 		class GetUnitFromName;
 		class Hint;
 		class isAdmin;
@@ -19,8 +19,8 @@ class KGE_Core
 		class isLeader;
 		class JoinGroup;
 		class MP;
+		class SetAlive;
 		class SetName;
-		class SetSide;
-		class SetState;
+		class SetSide;		
 	};
 };
