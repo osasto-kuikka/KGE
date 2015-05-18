@@ -1,4 +1,4 @@
-#define listBox 2101;
+#define listBox 2101
 
 _curIndex = lbCurSel listBox;
 lbClear listBox;

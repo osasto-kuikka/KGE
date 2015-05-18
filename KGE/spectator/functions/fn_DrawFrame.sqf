@@ -2,7 +2,7 @@
 	if(!KGE_Spectator_toggleTags && {!KGE_Spectator_AllowTags}) exitWith {};
 
 	// Exit if forced
-	if(KGE_Spectator_forcedExit) then {
+	if(KGE_Spectator_forcedExit) exitWith {
 		[_this select 1] call CBA_fnc_removePerFrameHandler;
 	};
 

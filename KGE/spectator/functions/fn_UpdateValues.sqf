@@ -27,12 +27,12 @@
 
 		// Add frame units
 		KGE_Spectator_Frame_Group = _list;
-	}, _groupListFrame, 0.1, 0.05, true] call KGE_Core_fnc_ExecDelayed;
+	}, [_groupListFrame], 0.1, 0.05, true] call KGE_Core_fnc_ExecDelayed;
 	
 	
 	// Update frame units list after 0.2 seconds
 	[{
-		private ["_unitList", "_index", ""]
+		private ["_unitList", "_index"];
 
 		// Genarate side list
 		_unitList = [];
@@ -62,7 +62,7 @@
 				lbAdd [2100, ("	" + ([_x] call KGE_Core_fnc_GetName))];
 			};
 		} forEach _unitList;
-	}, _groupList, 0.2, 0.1, true] call KGE_Core_fnc_ExecDelayed;
+	}, [_groupList], 0.2, 0.1, true] call KGE_Core_fnc_ExecDelayed;
 	
 
 	// OLD CODE
