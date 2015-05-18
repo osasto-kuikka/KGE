@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+  // Template for all languages if needed ;)
+  <Key ID="">
+    <Original></Original>
+    <English></English> 
+    <Czech></Czech>
+    <French></French>
+    <German></German>
+    <Italian></Italian>
+    <Polish></Polish>
+    <Portuguese></Portuguese>
+    <Russian></Russian>
+    <Spanish></Spanish>
+  </Key>
+-->
+
+
+<Project name="KGE">
+  <!-- 
+  /********************************************************************************************************
+  * KGE AISkill 
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_AISkill">
+
+    <!-- ******************** Module *************************** -->
+
+    <Key ID="STR_AISkill_Module_CategoryName">      
+      <Original>KGE AI Skill</Original>
+      <English>KGE AI Taso</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues">   
+      <Original>Change Values</Original>
+      <English>Muuta Arvoja</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingAccuracy_Name">     
+      <Original>Aiming Accuracy</Original>
+      <English>Osumatarkkuus</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingAccuracy_Description">   
+      <Original>Aiming Accuracy of AI</Original>
+      <English>Tekoälyn osumatarkkuus</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingShake_Name">   
+      <Original>Aiming Shake</Original>
+      <English>Tähtäimen Heiluminen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingShake_Description">      
+      <Original>How much AI aiming shakes</Original>
+      <English>Kuinka paljon tekoälyn tähtäin heiluu</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingSpeed_Name">      
+      <Original>Aiming Speed</Original>
+      <English>Tähtäämisen nopeus</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_AimingSpeed_Description">     
+      <Original>How fast AI targets</Original>
+      <English>Kuinka nopeasti tekoäly tähtää kohteeseen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Commanding_Name">   
+      <Original>Commanding</Original>
+      <English>Komentaminen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Commanding_Description">      
+      <Original>How good AI is at commanding</Original>
+      <English>Kuinka hyvä tekoäly on komentamaan joukkoja</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Courage_Name">     
+      <Original>Courage</Original>
+      <English>Rohkeus</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Courage_Description">     
+      <Original>How courageus AI is</Original>
+      <English>Kuinka rohkea tekoäly on</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Endurance_Name">    
+      <Original>Endurance</Original>
+      <English>Kestävyys</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Endurance_Description">   
+      <Original>How much endurance AI has</Original>
+      <English>Kuinka hyvin tekoäly kestää</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_General_Name">  
+      <Original>General</Original>
+      <English>Yleinen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_General_Description">     
+      <Original>General AI skill level</Original>
+      <English>Yleinen tekoälyn taso</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_ReloadSpeed_Name">      
+      <Original>Reload Speed</Original>
+      <English>Latausnopeus</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_ReloadSpeed_Description">      
+      <Original>How fast AI reloads weapon</Original>
+      <English>Kuinka nopesti tekoäly lataa aseensa</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_SpotDistance_Name">     
+      <Original>Spot Distance</Original>
+      <English>Havainti etäisyys</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_SpotDistance_Description">     
+      <Original>Distance AI notices enemy</Original>
+      <English>Kuinka pitkän matkan päästä tekoäly huomaa vihollisen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_SpotTime_Name">  
+      <Original>Spot Time</Original>
+      <English>Havainti etäisyys</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_SpotTime_Description">     
+      <Original>Time it takes to notice enemy</Original>
+      <English>Kuinka kauan tekoälyllä kestää huomata vihollinen</English>
+    </Key>
+    <Key ID="STR_AISkill_Module_ChangeValues_Description">     
+      <Original>With this module you can change skill level of AI in this mission. Every value need to be between 0-1!</Original>
+      <English>Tällä moduulilla saat vaihdettua tekoälyn tasoa. Kaikki arvot tulee olle 0-1 välillä!</English>
+    </Key>
+
+    <!-- ******************** Functions *************************** -->
+
+    <Key ID="STR_AISkill_OutsideBounds_AimingAccuracy">
+      <!-- %1 equals value given to function -->   
+      <Original>Aiming Accuracy cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>Osumatarkkuus ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_AimingShake">
+      <!-- %1 equals value given to function -->    
+      <Original>Aiming Shake cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Aiming Shake' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_AimingSpeed">
+      <!-- %1 equals value given to function -->      
+      <Original>'Aiming Speed' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Aiming Speed' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_Commanding">
+      <!-- %1 equals value given to function -->      
+      <Original>'Commanding' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Commanding' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_Courage">
+      <!-- %1 equals value given to function -->     
+      <Original>'Courage' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Courage' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_Endurance">
+      <!-- %1 equals value given to function -->      
+      <Original>'Endurance' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Endurance' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_General">
+      <!-- %1 equals value given to function -->      
+      <Original>'General' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'General' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_ReloadSpeed">
+      <!-- %1 equals value given to function -->     
+      <Original>'Reload Speed' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Reload Speed' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_SpotDistance">
+      <!-- %1 equals value given to function -->     
+      <Original>'Spot Distance' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Spot Distance' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+    <Key ID="STR_AISkill_OutsideBounds_SpotTime">
+      <!-- %1 equals value given to function -->    
+      <Original>'Spot Time' cannot be outside of values between 0-1! Given value is %1</Original>
+      <English>'Spot Time' ei voi olla sallittujen arvojen 0-1 ulkopuolella! Annettu arvo: %1</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Cleanup
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Cleanup">
+
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Core
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Core">
+    <!-- ******************** Functions *************************** -->
+    <Key ID="STR_Core_Name_Unknown">   
+      <Original>Unknown Name</Original>
+      <English>Tuntematon Nimi</English>
+    </Key>
+    <Key ID="STR_Core_Init_VersionError">
+      <!-- %1 player name, %2 player version, %3 server version -->     
+      <Original>Different KGE version for player %1. Player version %2, Server version %3</Original>
+      <English>Virheellinen KGE versio pelaajalla %1. Pelaajan versio %2, Serverin versio %3</English>
+    </Key>
+
+    <!-- ******************** UI *************************** -->
+
+    <!-- ******************* Main ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_Main_Header">
+      <Original>KGE Menu</Original>
+      <English>KGE Valikko</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Main_Respawn">     
+      <Original>Respawn</Original>
+      <English>Respawn</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Main_TeamRoster">
+      <Original>Team Roster</Original>
+      <English>Team Roster</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Main_Gear">   
+      <Original>Gear</Original>
+      <English>Gear</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Main_Role">     
+      <Original>Role</Original>
+      <English>Rooli</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Main_Admin">   
+      <Original>Admin Menu</Original>
+      <English>Admin Valikko</English>
+    </Key>
+    <!-- ******************* Respawn ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_Respawn_Header">     
+      <Original>Respawn Menu</Original>
+      <English>Respawn Valikko</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Respawn_Left">     
+      <Original>Respawns Left</Original>
+      <English>Respawneja Jäljellä</English>
+    </Key>
+    <!-- ******************* Team Roster ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_TeamRoster_Header">     
+      <Original>Team Roster Menu</Original>
+      <English>Team Roster Valikko</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_TeamRoster_Update">
+      <Original>Update</Original>
+      <English>Päivitä</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_TeamRoster_Hint">
+      <Original>Show Hint Message</Original>
+      <English>Näytä Hint Viestinä</English>
+    </Key>
+    <!-- ******************* Gear ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_Gear_Header"> 
+      <Original>Gear Menu</Original>
+      <English>Gear Valikko</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Gear_Update">     
+      <Original>Update</Original>
+      <English>Päivitä</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Gear_Magazines">     
+      <Original>Show Magazine Count</Original>
+      <English>Näytä Lippaiden Määrä</English>
+    </Key>
+    <!-- ******************* Admin ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_Admin_Header">   
+      <Original>Gear Menu</Original>
+      <English>Gear Valikko</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Admin_UpdateLog">
+      <Original>Update Log</Original>
+      <English>Päivitä Logi</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Admin_ReturnDead">
+      <Original>Return Alive</Original>
+      <English>Palauta Kuolleista</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Admin_Teleport">
+      <Original>Teleport</Original>
+      <English>Teleporttaa</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_Admin_Zeus">  
+      <Original>Activate Zeus</Original>
+      <English>Aktivoi Zeus</English>
+    </Key>
+    <!-- ******************* Admin Respawn ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawn_Header">
+      <Original>Admin Respawn Menu</Original>
+      <English>Palauta Kuolleista</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawn_All">
+      <Original>All</Original>
+      <English>Kaikki</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawn_Side">    
+      <Original>Side</Original>
+      <English>Puoli</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawn_Single">  
+      <Original>Single Player</Original>
+      <English>Yksittäinen Pelaaja</English>
+    </Key>
+    <!-- ******************* Admin Respawn Side ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawnSide_Header">
+      <Original>Choose Side</Original>
+      <English>Valitse Puoli</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawnSide_Blufor">   
+      <Original>Blufor</Original>
+      <English>Blufor</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawnSide_Opfor"> 
+      <Original>Opfor</Original>
+      <English>Opfor</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawnSide_Independent">   
+      <Original>Independent</Original>
+      <English>Independent</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminRespawnSide_Civilian"> 
+      <Original>Civilian</Original>
+      <English>Civilian</English>
+    </Key>
+    <!-- ******************* Admin Teleport ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleport_Header">   
+      <Original>Teleport</Original>
+      <English>Teleporttaa</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleport_All"> 
+      <Original>All</Original>
+      <English>Kaikki</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleport_Group">    
+      <Original>Group</Original>
+      <English>Ryhmä</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleport_Single"> 
+      <Original>Single Player</Original>
+      <English>Yksittäinen Pelaaja</English>
+    </Key>
+    <!-- ******************* Admin Teleport All ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportAll_Header"> 
+      <Original>Teleport All to</Original>
+      <English>Teleporttaa Kaikki</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportAll_Map">   
+      <Original>Map Position</Original>
+      <English>Karttaruutuun</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportAll_Admin">    
+      <Original>Admin</Original>
+      <English>Adminin Luokse</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportAll_Leader">   
+      <Original>Group Leader</Original>
+      <English>Ryhmänjohtajan Luokse</English>
+    </Key>
+    <!-- ******************* Admin Teleport Group ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportGroup_Header"> 
+      <Original>Teleport Group to</Original>
+      <English>Teleporttaa Ryhmä</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportGroup_Map">
+      <Original>Map Position</Original>
+      <English>Karttaruutuun</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportGroup_Admin">  
+      <Original>Admin</Original>
+      <English>Adminin Luokse</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportGroup_Leader"> 
+      <Original>Group Leader</Original>
+      <English>Ryhmänjohtajan Luokse</English>
+    </Key>
+    <!-- ******************* Admin Teleport Group ************************ -->
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportSingle_Header">
+      <Original>Teleport Player to</Original>
+      <English>Teleporttaa Pelaaja</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportSingle_Map"> 
+      <Original>Map Position</Original>
+      <English>Karttaruutuun</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportSingle_Admin">
+      <Original>Admin</Original>
+      <English>Adminin Luokse</English>
+    </Key>
+    <Key ID="STR_Core_InitUI_KGE_AdminTeleportSingle_Leader"> 
+      <Original>Group Leader</Original>
+      <English>Ryhmänjohtajan Luokse</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Debug
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Debug">
+    <Key ID="STR_Debug_NewLog">  
+      <Original>There was error in KGE! Update latest log info to map screen to see what went wrong!</Original>
+      <English>"KGE:ssä tapahtui virhe! Päivitä karttaruutuun uusin debug logi tarkistaakseni missä virhe tapahtui!"</English>
+    </Key>
+    <Key ID="STR_Debug_LogAdded">
+      <Original>Newest log text was updated to map screen</Original>
+      <English>Uusin logi teksti päivitetty karttaruutuun!</English>
+    </Key>
+    <Key ID="STR_Debug_LogEmpty"> 
+      <Original>Log is empty! Nothing was added to map screen!</Original>
+      <English>Logi on tyhjä! Mitään ei lisätty karttaruutuun!</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Gear
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Gear">
+    <Key ID="STR_Gear_DiarySubject">      
+      <Original>Group Gear</Original>
+      <English>Ryhmän Gear</English>
+    </Key>
+    <Key ID="STR_Gear_InitNotification">     
+      <Original>NOTE! This is gear you have in initialization so some of you gear may change when game start depending on mods you are running!</Original>
+      <English>HUOM! Tämä on initialisoinnissa oleva geari ja jotkut esineet gearistasi saattavat muuttua pelin alkaessa riippuen käyttämistä modeista!</English>
+    </Key>
+    <Key ID="STR_Gear_DiaryRecord">
+      <!-- %1 equals incrementing number which is needed for new diary records -->     
+      <Original>Group Gear - %1</Original>
+      <English>Ryhmän Gear - %1</English>
+    </Key>
+    <Key ID="STR_Gear_MainWeaponAttachments">   
+      <Original>Main weapons and attachments</Original>
+      <English>Pääaseet ja lisävarusteet</English>
+    </Key>
+    <Key ID="STR_Gear_SideWeaponAttachments">   
+      <Original>Side weapons and attachments</Original>
+      <English>kakkossaseet ja lisävarusteet</English>
+    </Key>
+    <Key ID="STR_Gear_Items">
+      <Original>Items</Original>
+      <English>Itemit</English>
+    </Key>
+    <Key ID="STR_Gear_Magazines">
+      <Original>Magazines</Original>
+      <English>Lippaat</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Respawn
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Respawn">
+    <!-- ******************* Module ************************ -->
+    <Key ID="STR_Respawn_Module_Category">      
+      <Original>KGE Respawn</Original>
+      <English>KGE Respawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_Name">      
+      <Original>Start Respawn</Original>
+      <English>Käynnistä Respawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_Description">      
+      <Original>With this module you can start KGE Respawn</Original>
+      <English>Tällä moduulilla saat käynnistettyä KGE Respawnin</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_RespawnAmount_Name">      
+      <Original>Respawn Amount</Original>
+      <English>Respawn Määrä</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_RespawnAmount_Description">      
+      <Original>How many times player can respawn before going to spectator (-1 is infinite amount)</Original>
+      <English>Kuinka monta kertaa pelaaja voi syntyä uudelleen ennekuin hän joutuu spektaattori tilaan (-1 on loputon määärä)</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_BluforMarker_Dead_Name">      
+      <Original>Blufor Dead</Original>
+      <English>Blufor Dead</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_BluforMarker_Dead_Description">      
+      <Original>Where Blufor player is teleported after he/she is moved to spectator mode</Original>
+      <English>Mihin Blufor pelaaja teleportataan kun hänet on siirretty spektaattori tilaan</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_BluforMarker_Spawn_Name">      
+      <Original>Blufor Spawn</Original>
+      <English>Blufor Spawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_BluforMarker_Spawn_Description">      
+      <Original>Where Blufor player is teleported after respawn</Original>
+      <English>Mihin Blufor pelaaja teleportataan kun hänet on spawnattu uudelleen peliin</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_OpforMarker_Dead_Name">      
+      <Original>Opfor Dead</Original>
+      <English>Opfor Dead</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_OpforMarker_Dead_Description">      
+      <Original>Where Opfor player is teleported after he/she is moved to spectator mode</Original>
+      <English>Mihin Opfor pelaaja teleportataan kun hänet on siirretty spektaattori tilaan</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_OpforMarker_Spawn_Name">      
+      <Original>Opfor Spawn</Original>
+      <English>Opfor Spawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_OpforMarker_Spawn_Description">      
+     <Original>Where Opfor player is teleported after respawn</Original>
+      <English>Mihin Opfor pelaaja teleportataan kun hänet on spawnattu uudelleen peliin</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_IndependentMarker_Dead_Name">      
+      <Original>Independent Dead</Original>
+      <English>Independent Dead</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_IndependentMarker_Dead_Description">      
+      <Original>Where Independent player is teleported after he/she is moved to spectator mode</Original>
+      <English>Mihin Independent pelaaja teleportataan kun hänet on siirretty spektaattori tilaan</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_IndependentMarker_Spawn_Name">      
+      <Original>Independent Spawn</Original>
+      <English>Independent Spawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_IndependentMarker_Spawn_Description">      
+      <Original>Where Independent player is teleported after respawn</Original>
+      <English>Mihin Independent pelaaja teleportataan kun hänet on spawnattu uudelleen peliin</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_CivilianMarker_Dead_Name">      
+      <Original>Civilian Dead</Original>
+      <English>Civilian Dead</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_CivilianMarker_Dead_Description">      
+      <Original>Where Civilian player is teleported after he/she is moved to spectator mode</Original>
+      <English>Mihin Civilian pelaaja teleportataan kun hänet on siirretty spektaattori tilaan</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_CivilianMarker_Spawn_Name">      
+      <Original>Civilian Spawn</Original>
+      <English>Civilian Spawn</English>
+    </Key>
+    <Key ID="STR_Respawn_Module_CivilianMarker_Spawn_Description">      
+      <Original>Where Civilian player is teleported after respawn</Original>
+      <English>Mihin Civilian pelaaja teleportataan kun hänet on spawnattu uudelleen peliin</English>
+    </Key>
+
+    <!-- ******************* Functions ************************ -->
+    <Key ID="STR_Respawn_Amount_ValueNotAllowed"> 
+    <!-- %1 equals amount of respawns left -->      
+      <Original>Respawn amount %1 is not allowed!</Original>
+      <English>Respawn määrä %1 on virheellinen!</English>
+    </Key>
+    <Key ID="STR_Respawn_Marker_NotFound_Spawn">      
+      <Original>Spawn marker was not found!</Original>
+      <English>Spawn markkeria ei löydetty!</English>
+    </Key>
+    <Key ID="STR_Respawn_Marker_NotFound_Dead">     
+      <Original>Dead marker was not found!</Original>
+      <English>Kuolleiden markkeria ei löydetty!</English>
+    </Key>
+    <Key ID="STR_Respawn_ReturnAliveSingle_Header">  
+      <Original>Return Player</Original>
+      <English>Palauta Pelaaja</English>
+    </Key>
+    <Key ID="STR_Respawn_Left_Dead">   
+      <Original>You are dead!</Original>
+      <English>Olet kuollut!</English>
+    </Key>
+    <Key ID="STR_Respawn_Left_Unlimited">   
+      <Original>Unlimited amount of respawns!</Original>
+      <English>Loputon määrä respawneja!</English>
+    </Key>
+    <Key ID="STR_Respawn_Left_Amount">
+      <!-- %1 equals amount of respawns left --> 
+      <Original>Respawns left: %1</Original>
+      <English>Respawneja jäljellä: %1</English>
+    </Key>
+    <Key ID="STR_Respawn_NullValueGiven">
+      <Original>Given player is NULL!</Original>
+      <English>Annettu pelaaja on NULL!</English>
+    </Key>
+    <Key ID="STR_Respawn_RespawnNotStarted">
+      <Original>KGE Respawn not started!</Original>
+      <English>KGE Respawn ei ole käynnissä!</English>
+    </Key>
+  </Package>
+  <!-- 
+  /********************************************************************************************************
+  * KGE Safestart
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_SafeStart">
+    <!-- ******************* Module ************************ --> 
+    <Key ID="STR_SafeStart_Module_Category">
+      <Original>KGE SafeStart</Original>
+      <English>KGE SafeStart</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Name">
+      <Original>Start SafeStart</Original>
+      <English>Käynnistä SafeStart</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Description">
+      <Original>With this module you can Start KGE Safestart in mission start for specific sides or for all sides</Original>
+      <English>Tällä moduulilla saat käynnistettyä KGE SafeStartin tietylle puolelle. Jos haluat monelle eri puolelle safestarting niin laita jokaiselle puolelle oma moduuli</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Timer_Name">
+      <Original>Time in minutes</Original>
+      <English>Aika minuutteina</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Timer_Description">
+      <Original>How many minutes safestart is on in game start</Original>
+      <English>Kuinka monta minuuttia safestart on pelin alussa päällä</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Name">
+      <Original>Side</Original>
+      <English>Puoli</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Description">
+      <Original>Side in which this Safestart will be shown</Original>
+      <English>Puoli, jolle SafeStart näkyy</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Blufor">
+      <Original>Blufor</Original>
+      <English>Blufor</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Opfor">
+      <Original>Opfor</Original>
+      <English>Opfor</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Independent">
+      <Original>Independent</Original>
+      <English>Independent</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_Civilian">
+      <Original>Civilian</Original>
+      <English>Civilian</English>
+    </Key>
+    <Key ID="STR_SafeStart_Module_Side_All">
+      <Original>All Sides</Original>
+      <English>Kaikki Puolet</English>
+    </Key>
+
+    <!-- ******************* Functions ************************ --> 
+    <Key ID="STR_SafeStart_TimeLeft">
+      <!-- %1 equals time left in minutes --> 
+      <Original>Time left: %1 minutes</Original>
+      <English>Aikaa jäljellä: %1 minuuttia</English>
+    </Key>
+    <Key ID="STR_SafeStart_MissionStarts">
+      <Original>Mission starts!</Original>
+      <English>Tehtävä käynnistyy!</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Spectator
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Spectator">
+    <!-- ******************* Dialog ************************ -->
+    <Key ID="STR_Spectator_Dialog_HelpWindow_OK">
+      <Original>OK</Original>
+      <English>OK</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_ShowAI">
+      <Original>Show AI</Original>
+      <English>Show AI</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_HideAI">
+      <Original>Hide AI</Original>
+      <English>Hide AI</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_Tooltip_ToggleAI">
+      <Original>Toogle AI visibily on tags and screen</Original>
+      <English>Vaihtele AI:n näkymistä ruudulla</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_ShowTags">
+      <Original>Show Tags</Original>
+      <English>Show Tags</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_HideTags">
+      <Original>Hide Tags</Original>
+      <English>Hide Tags</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_Tooltip_ToggleTags">
+      <Original>Toggle showing and hiding tags on screen</Original>
+      <English>Vaihtele tagien näkymistä ruudulla</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_FirstPerson">
+      <Original>First Person</Original>
+      <English>First Person</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_ThirdPerson">
+      <Original>Third Person</Original>
+      <English>Third Person</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Menu_Tooltip_ToggleCamera">
+      <Original>Switch between First Person or Third person</Original>
+      <English></English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Spectating">
+      <Original>Spectating:</Original>
+      <English>Spektataan:</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_CameraPan">
+      <Original>Hold right-click to pan the camera.</Original>
+      <English>Pidä pohjassa hiiren oikeaa kääntääksesi kameraa.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Zoom">
+      <Original>Use the scroll wheel or numpad+/- to zoom in and out.</Original>
+      <English>Hiiren rullalla tai numpadin +/- voit zoomata sisään tai ulos.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_FovZoom">
+      <Original>Use ctrl + rightclick to fov zoom.</Original>
+      <English>Hiiren oikea + ctrl vaihtaa fov zoomia.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Window">
+      <Original>Press H to show and close the help window.</Original>
+      <English>H näppäimellä saat avattua ja suljettuä ohje ikkunan.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Map">
+      <Original>Press M to toggle between no map,minimap and full size map.</Original>
+      <English>M näppäimellä voit vaihdella ei karttaa, pienen kartan ja koko ruudun kartan välillä.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Tracers">
+      <Original>T for switching on tracers on the map.</Original>
+      <English>T näppäimellä vaihdella tracerien näkymisen ja piilottamisen välillä.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Freecam">
+      <Original>Space to switch to freecam.</Original>
+      <English>Välilyönnillä voit vaihtaa vapaaseen kameraan.</English>
+    </Key>
+    <Key ID="STR_Spectator_Dialog_Help_Close">
+      <Original>Press H to close this window.</Original>
+      <English>H näppäimellä voit sulkea tämän ikkunan.</English>
+    </Key>
+
+    <!-- ******************* Functions ************************ -->
+    <Key ID="STR_Spectator_Tracers_Activated">
+      <Original>Tracers on map activated</Original>
+      <English>Tracerien näkyminen kartassa käynnistetty</English>
+    </Key>
+    <Key ID="STR_Spectator_Tracers_Deactivated">
+      <Original>Tracers on map deactivated</Original>
+      <English>Tracerien näkyminen kartassa suljettu</English>
+    </Key>
+    <Key ID="STR_Spectator_NotAllowed_FreeCam">
+      <Original>FreeCam is not allowed on this mission!</Original>
+      <English>Freecam ei ole sallittu tässä tehtävässä!</English>
+    </Key>
+    <Key ID="STR_Spectator_NotAllowed_Map">
+      <Original>Map looking in spectator is not allowed on this mission!</Original>
+      <English>Kartan katsominen spektaattorissa ei ole sallittu tässä tehtävässä!</English>
+    </Key>
+    <Key ID="STR_Spectator_NotAllowed_ShowAI">
+      <Original>AI visibility is not allowed on this mission!</Original>
+      <English>AI:n näyttäminen ei ole sallittu tässä tehtävässä!</English>
+    </Key>
+    <Key ID="STR_Spectator_NotAllowed_ShowTags">
+      <Original>Tags visibility is not allowed on this mission!</Original>
+      <English>Tagien näyttäminen ei ole sallittu tässä tehtävässä!</English>
+    </Key>
+    <Key ID="STR_Spectator_NotAllowed_ThirdPerson">
+      <Original>Third person camera is not allowed on this mission!</Original>
+      <English>Kolmannen persoonan kamera ei ole sallittu tässä tehtävässä!</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Team Roster
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_TeamRoster">
+    <Key ID="STR_TeamRoster_Subject">
+      <Original>Team Roster</Original>
+      <English>Team Roster</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Diary">
+      <!-- %1 player side, %2 iteration number --> 
+      <Original>Team Roster (%1) - %2</Original>
+      <English>Team Roster (%1) - %2</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Private">
+      <Original>Pvt.</Original>
+      <English>Stm.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Corporal">
+      <Original>Corp.</Original>
+      <English>Korpl.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Sergeant">
+      <Original>Sgt.</Original>
+      <English>Kers.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Lieutenant">
+      <Original>Ltn.</Original>
+      <English>Luutn.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Captain">
+      <Original>Cpt.</Original>
+      <English>Kapt.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Major">
+      <Original>Majr.</Original>
+      <English>Majr.</English>
+    </Key>
+    <Key ID="STR_TeamRoster_Rank_Colonel">
+      <Original>Col.</Original>
+      <English>Kenr.</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Teleport
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Teleport">
+    <Key ID="STR_Teleport_TypeError">
+      <Original>Invalid type number!</Original>
+      <English>Tyyppinumero on virheellinen!</English>
+    </Key>
+    <Key ID="STR_Teleport_TeleportPlayer_Header">
+      <Original>Teleport Player</Original>
+      <English>Teleporttaa Pelaaja</English>
+    </Key>
+    <Key ID="STR_Teleport_TeleportGroup_Header">
+      <Original>Teleport Group</Original>
+      <English>Teleporttaa Ryhmä</English>
+    </Key>
+    <Key ID="STR_Teleport_TeleportGroup_Interaction">
+      <!-- %1 group leader name --> 
+      <Original>Group: %1</Original>
+      <English>Ryhmä: %1</English>
+    </Key>
+    <Key ID="STR_Teleport_MapClick">
+      <Original>Right click on map to choose position to teleport!</Original>
+      <English>Klikkaa karttaa valitaksesi teleporttauskohteen!</English>
+    </Key>
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE UI
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_UI">
+    <Key ID="STR_UI_NotFound_Menu">
+      <Original>Tried to add interaction before any menus have been added</Original>
+      <English>Yritettiin lisätä interaction ennekuin valikkoja on lisätty</English>
+    </Key>
+    <Key ID="STR_UI_NotFound_MenuID">
+      <!-- %1 ID given --> 
+      <Original>Menu with ID %1 was not found</Original>
+      <English>Valikkoa ID:llä %1 ei löydetty</English>
+    </Key>  
+    <Key ID="STR_UI_Exists_MenuID">
+      <!-- %1 ID given --> 
+      <Original>Menu with ID %1 was already exists</Original>
+      <English>Luotava valikkko ID:llä %1 on jo olemassa</English>
+    </Key>
+    <Key ID="STR_UI_NotFound_MenuID">
+      <!-- %1 ID given --> 
+      <Original>No interaction found with ID %1</Original>
+      <English>Antamallasi ID:llä %1 ei löydetty yhtään valikon nappia</English>
+    </Key>  
+    <Key ID="STR_UI_Empty_Menu">
+      <Original>List is empty</Original>
+      <English>Lista on tyhjä</English>
+    </Key>  
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * KGE Zeus
+  ********************************************************************************************************/
+  -->
+  <Package name="KGE_Zeus">
+    <Key ID="STR_Zeus_NotFound_Module">
+      <Original>Zeus module is missing!</Original>
+      <English>Zeus moduuli puuttuu!</English>
+    </Key> 
+    <Key ID="STR_Zeus_Activated">
+      <Original>Zeus activated! Just press Zeus key (default Y) to start.</Original>
+      <English>Zeus aktivoitu! Paina zeus nappia käynnistääksesi (default Y) zeus moodin.</English>
+    </Key>  
+  </Package>
+
+  <!-- 
+  /********************************************************************************************************
+  * CSSA3
+  ********************************************************************************************************/
+  -->
+  <Package name="MainHudCommon">    
+    <Key ID="STR_CSSA3_Spectator">
+      <Original>Spectator</Original>
+      <Italian>Spettatore</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Init">
+      <Original>CSSA3 Initiated. Press 'F1' for more help. You can hide the HUD at any time by pressing 'H'</Original>
+      <Italian>CSSA3 Inizializzato. Premi 'F1' per aiuto. Puoi nascondere l'HUD quando vuoi premendo 'H'</Italian>
+    </Key>  
+    <Key ID="STR_CSSA3_Free_Camera">
+      <Original>Freecam</Original>
+      <Italian>Visuale libera</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_First_Person">
+      <Original>First Person</Original>
+      <Italian>Prima Persona</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Third_Person">
+      <Original>Third Person</Original>
+      <Italian>Terza Persona</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Close">
+      <Original>Close</Original>
+      <Italian>Chiudi</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Respawn">
+      <Original>Respawn:</Original>
+      <Italian>Respawn:</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_currentlySpectating_Tooltip">
+      <Original>Unit you are currently spectating.</Original>
+      <Italian>L'unita' che stai attualmente guardando</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_TimeUntilRespawn">
+      <Original>Time until respawn</Original>
+      <Italian>Tempo rimanente prima del respawn</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_spectating">
+      <Original>Spectating:</Original>
+      <Italian>Assistendo da spettatore:</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Favourite">
+      <Original>Favourite</Original>
+      <Italian>Preferito</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Settings_Tooltip">
+      <Original>Settings [F2]</Original>
+      <Italian>Settaggi [F2]</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_CSSA3Settings">
+      <Original>CSSA3 Settings</Original>
+      <Italian>Settaggi CSSA3</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_HelpTooltip">
+      <Original>Help [F1]</Original>
+      <Italian>Aiuto [F1]</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_QuitMessage">
+      <Original>Do you really want to quit? &lt;br /&gt;  &lt;br /&gt;You will automatically be returned to the spectator script within 5 seconds, unless the escape menu is open.</Original>
+      <Italian>Vuoi veramente uscire? &lt;br /&gt;  &lt;br /&gt;Ritornerai automaticamente allo script spettatore entro 5 secondi, se il men? escape non ? aperto.</Italian>
+    </Key>
+
+    <Key ID="STR_CSSA3_BLUFOR">
+      <Original>BLUFOR</Original>
+      <English>BLUFOR</English>
+      <Czech>BLUFOR</Czech>
+      <French>Ouest</French>
+      <German>BLUFOR</German>
+      <Italian>BLUFOR</Italian>
+      <Polish>BLUFOR</Polish>
+      <Portuguese>FORÃ‡AS AZUIS</Portuguese>
+      <Russian>Ð¡Ð¸Ð½Ð¸Ðµ</Russian>
+      <Spanish>ALIADOS</Spanish>
+    </Key>
+
+    <Key ID="STR_CSSA3_OPFOR">
+      <Original>OPFOR</Original>
+      <English>OPFOR</English>
+      <Czech>OPFOR</Czech>
+      <French>Est</French>
+      <German>OPFOR</German>
+      <Italian>OPFOR</Italian>
+      <Polish>OPFOR</Polish>
+      <Portuguese>ForÃ§as Opositoras</Portuguese>
+      <Russian>ÐšÑ€Ð°ÑÐ½Ñ‹Ðµ</Russian>
+      <Spanish>ENEMIGO</Spanish>
+    </Key>
+
+    <Key ID="STR_CSSA3_CIVILIAN">
+      <Original>Civilian</Original>
+      <English>Civilian</English>
+      <Czech>Civilista</Czech>
+      <French>Civil</French>
+      <German>Zivilist</German>
+      <Italian>Civile</Italian>
+      <Polish>Cywil</Polish>
+      <Portuguese>Civil</Portuguese>
+      <Russian>Ð“Ñ€Ð°Ð¶Ð´Ð°Ð½ÑÐºÐ¸Ð¹</Russian>
+      <Spanish>Civil</Spanish>
+    </Key>
+
+    <Key ID="STR_CSSA3_HelpMessage">
+      <Original>- Move Camera: '&lt;t color='#ff0000'>W, A, S, D&lt;/t&gt;'
+        &lt;br /&gt;- Camera Altitude: '&lt;t color='#ff0000'&gt;Q, Z&lt;/t&gt;'
+        &lt;br /&gt;- Smooth Move: '&lt;t color='#ff0000'&gt;LMB + RMB&lt;/t&gt;'
+        &lt;br /&gt;- Switch View Perspective: '&lt;t color='#ff0000'&gt;1, 2, 3&lt;/t&gt;'
+        &lt;br /&gt;- Object Interact: '&lt;t color='#ff0000'&gt;Hold LMB on object.&lt;/t&gt;'
+        &lt;br /&gt;- Tilt Camera: '&lt;t color='#ff0000'&gt;Ctrl + RMB + Mouse Move&lt;/t&gt;'
+        &lt;br /&gt;- Rotate Camera: '&lt;t color='#ff0000'&gt;RMB + Mouse Move&lt;/t&gt;'
+        &lt;br /&gt;- Reset Camera: '&lt;t color='#ff0000'&gt;Num 5&lt;/t&gt;'
+        &lt;br /&gt;- Toggle Optic Mode: '&lt;t color='#ff0000'&gt;N&lt;/t&gt;'
+        &lt;br /&gt;- Hide units list: '&lt;t color='#ff0000'&gt;Tab&lt;/t&gt;'
+        &lt;br /&gt;- Hide HUD: '&lt;t color='#ff0000'&gt;H&lt;/t&gt;'
+        &lt;br /&gt;- Settings: '&lt;t color='#ff0000'&gt;F2&lt;/t&gt;'
+        &lt;br /&gt;- Help: '&lt;t color='#ff0000'&gt;F1&lt;/t&gt;'
+        &lt;br /&gt;- Map: '&lt;t color='#ff0000'&gt;M&lt;/t&gt;'&lt;br /&gt;
+        &lt;br /&gt;Script by Cyrokrypto
+      </Original>
+      <Italian>- Movimenti della fotocamera: '&lt;t color='#ff0000'>W, A, S, D&lt;/t&gt;'
+        &lt;br /&gt;- Altezza della fotocamera: '&lt;t color='#ff0000'&gt;Q, Z&lt;/t&gt;'
+        &lt;br /&gt;- Movimento fluido: '&lt;t color='#ff0000'&gt;pulsante sinistro mouse + pulsante destro mouse &lt;/t&gt;'
+        &lt;br /&gt;- Cambiare prospettiva di visuale: '&lt;t color='#ff0000'&gt;1, 2, 3&lt;/t&gt;'
+        &lt;br /&gt;- Interazione con gli oggetti: '&lt;t color='#ff0000'&gt;Tieni il pulsante sinistro del mouse sull'oggetto.&lt;/t&gt;'
+        &lt;br /&gt;- Inclina la fotocamera: '&lt;t color='#ff0000'&gt;Ctrl + pulsante destro mouse + muovi il mouse&lt;/t&gt;'
+        &lt;br /&gt;- Ruota la fotocamera: '&lt;t color='#ff0000'&gt;pulsante destro mouse + muovi il mouse&lt;/t&gt;'
+        &lt;br /&gt;- Resetta la fotocamera: '&lt;t color='#ff0000'&gt;Pulsante 5 del Tastierino Numerico &lt;/t&gt;'
+        &lt;br /&gt;- Cambia modalita' di visione: '&lt;t color='#ff0000'&gt;N&lt;/t&gt;'
+        &lt;br /&gt;- Nascondi la lista unita': '&lt;t color='#ff0000'&gt;Tab&lt;/t&gt;'
+        &lt;br /&gt;- Nascondi HUD: '&lt;t color='#ff0000'&gt;H&lt;/t&gt;'
+        &lt;br /&gt;- Settings: '&lt;t color='#ff0000'&gt;F2&lt;/t&gt;'
+        &lt;br /&gt;- Aiuto: '&lt;t color='#ff0000'&gt;F1&lt;/t&gt;'
+        &lt;br /&gt;- Mappa: '&lt;t color='#ff0000'&gt;M&lt;/t&gt;'&lt;br /&gt;
+        &lt;br /&gt;Script by Cyrokrypto
+        &lt;br /&gt;Translation by Nemesi
+      </Italian>
+    </Key>
+  </Package>
+  <Package name="UnitList">
+    <Key ID="STR_CSSA3_addremove">
+      <Original>Add / Remove</Original>
+      <Italian>Aggiungi / Rimuovi</Italian>
+    </Key>  
+    <Key ID="STR_CSSA3_Units">
+      <Original>Units:</Original>
+      <Italian>Units:</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_All">
+      <Original>All</Original>
+      <Italian>Tutti</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Players">
+      <Original>Players</Original>
+      <Italian>Giocatori</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Independent">
+      <Original>Independent</Original>
+      <Italian>Indipendenti</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_Favourites">
+      <Original>Favourites</Original>
+      <Italian>Preferiti</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_addremove_Tooltip">
+      <Original>Drag a unit here to add or remove it from your favourites.</Original>
+      <Italian>Trascina un'unita' qui per aggiungerla o rimuoverla dai preferiti</Italian>
+    </Key>
+  </Package>
+
+  <Package name="SettingsMenu"> 
+    <Key ID="STR_CSSA3_ShowUnitNames">
+      <Original>Show Unit Names</Original>
+      <Italian>Mostra i nomi delle unit?</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ShowUnitNames_Tooltip">
+      <Original>Display a unit's name in floating text.</Original>
+      <Italian>Mostra il nome di un'unit? come testo fluttuante</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ShowUnitTags">
+      <Original>Show Unit Tags</Original>
+      <Italian>Mostra le tag delle unit?</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ShowUnitTags_Tooltip">
+      <Original>Show floating tags above units.</Original>
+      <Italian>Mostra le tag fluttuanti sopra le unit?.</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ViewDistance">
+      <Original>View Distance:</Original>
+      <Italian>Distanza visiva</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ClickToInteract_Tooltip">
+      <Original>Enable Click To Interact: This is an experimental feature, click and hold LMB on a unit or vehicle to interact with it.</Original>
+      <Italian>Abilita il click per l'interazione: questa e' una caratteristica sperimentale, clicca e tieni premuto il tasto sinistro del mouse su un'unita' o su un veicolo per interagire con esso.</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_ClickToInteract">
+      <Original>Enabled Click To Interact</Original>
+      <Italian>"Click per l'interazione" abilitato</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_PreloadCamera">
+      <Original>Preload Camera</Original>
+      <Italian>Precarica la fotocamera</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_PreloadCamera_tooltip">
+      <Original>Enabling this will reduce lag and visual artifacts when selecting a new unit. This comes at the cost of a slight delay before the camera is repositioned.</Original>
+      <Italian>Abilitando questa funzione si ridurranno il lag e gli artefatti visivi quando si seleziona una nuova unita'. Questo viene a scapito di un piccolo ritardo prima che la fotocamera sia riposizionata.</Italian>
+    </Key>
+  </Package>
+
+  <Package name="InteractRose"> 
+    <Key ID="STR_CSSA3_freeButtonTip">
+      <Original>Switch to free camera and centre on this unit.</Original>
+      <Italian>Passa alla  fotocamera libera e centra su questa unit?</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_firstButtonTip">
+      <Original>Switch to first person.</Original>
+      <Italian>Passa alla prima persona.</Italian>
+    </Key>
+    <Key ID="STR_CSSA3_thirdButtonTip">
+      <Original>Switch to third person.</Original>
+      <Italian>Passa alla terza persona.</Italian>
+    </Key>
+  </Package>
+</Project>

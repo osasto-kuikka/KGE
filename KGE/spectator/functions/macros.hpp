@@ -1,0 +1,16 @@
+#define KGE_Spectator_DISPLAY 9228
+#define KGE_Spectator_HELPFRAME 1300
+#define KGE_Spectator_HELPBACK 1305
+#define KGE_Spectator_MOUSEHANDLER 123
+#define KGE_Spectator_UNITLIST 2100
+#define KGE_Spectator_MODESCOMBO 2101
+#define KGE_Spectator_SPECTEXT 1000
+#define KGE_Spectator_SPECHELP 1310
+#define KGE_Spectator_HELPCANCEL 1315
+//#define KGE_Spectator_MINIMAP 1350
+//#define KGE_Spectator_FULLMAP 1360
+#define KGE_Spectator_BUTTIONFILTER 2111
+#define KGE_Spectator_BUTTIONTAGS 2112
+#define KGE_Spectator_BUTTIONTAGSNAME 2113
+#define KGE_Spectator_BUTTIONFIRSTPERSON 2114
+#define KGE_Spectator_DIVIDER 4302
