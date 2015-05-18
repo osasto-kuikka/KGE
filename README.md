@@ -1,2 +1,0 @@
-# KGE
-Kuikka Game Enhancer
