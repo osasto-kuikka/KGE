@@ -14,19 +14,16 @@ if(getMarkerType _markerName == "") then {
 	_markerName setMarkerShapeLocal "ICON";
 	_markerName setMarkerTypeLocal "DOT";
 	_markerName setMarkerAlphaLocal 1;
+} else {
+	_markerName setMarkerPosLocal (getPos (_this select 0));
 };
 
 _marker = "";
 if(KGE_Respawn_MaximumRespawns != -1 AND
 	{((KGE_Player getVariable "KGE_Respawn_RespawnAmount") >= KGE_Respawn_MaximumRespawns OR !([KGE_Player] call KGE_Core_fnc_isAlive))}) then {
 
-	// Get saved dead marker position
-	switch ([KGE_Player] call KGE_Core_fnc_GetSide) do {
-		case WEST: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Blufor", ""]};
-		case EAST: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Opfor", ""]};
-		case INDEPENDENT: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Independent", ""]};
-		case CIVILIAN: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Civilian", ""]};
-	};
+	// Set marker to player position
+	_markerName setMarkerPosLocal (getPos (_this select 0));
 } else {
 	// Get saved respawn marker position
 	switch ([KGE_Player] call KGE_Core_fnc_GetSide) do {

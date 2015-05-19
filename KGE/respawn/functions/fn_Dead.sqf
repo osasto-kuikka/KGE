@@ -1,21 +1,18 @@
+private ["_pos"];
+
 // Hide player
 KGE_Player hideObjectGlobal true;
 
-// Get marker
-_marker = "";
-switch ([KGE_Player] call KGE_Core_fnc_GetSide) do {
-	case WEST: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Blufor", ""]};
-	case EAST: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Opfor", ""]};
-	case INDEPENDENT: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Independent", ""]};
-	case CIVILIAN: {_marker = missionNamespace getVariable ["KGE_Respawn_DeadMarker_Civilian", ""]};
-};
+// Get land or sea position
+_pos = getPosATL KGE_Player;
+if(surfaceIsWater _pos) then {getPosASL KGE_Player};
 
-// if marker exist then teleport player to there
-if(getMarkerType _marker != "") then {
-	[KGE_Player, (getMarkerPos _marker)] call KGE_Teleport_fnc_Teleport;
-} else {
-	["KGE_Respawn_fnc_Dead", "ERROR", localize "STR_Respawn_Marker_NotFound_Dead"] call KGE_Debug_fnc_AddLog;
-};
+// Set 10 to upwards
+_pos set [2, (_pos select 2) + 10];
+
+// Teleport and lock player there
+[KGE_Player, _pos, 0] call KGE_Teleport_fnc_Teleport;
+KGE_Player enableSimulationGlobal false;
 
 // Set respawn amount to maximum respawn amount
 KGE_Player setVariable ["KGE_Respawn_RespawnAmount", KGE_Respawn_MaximumRespawns, true];
@@ -35,7 +32,7 @@ if(["acre_main"] call KGE_Core_fnc_ClassExists) then {
 [KGE_Player, false] call KGE_Core_fnc_SetAlive;
 
 // Disable player movement
-[] call KGE_Respawn_fnc_AnimationLoop;
+//[] call KGE_Respawn_fnc_AnimationLoop;
 
 // Set player indestructable
 KGE_Player allowDamage false;

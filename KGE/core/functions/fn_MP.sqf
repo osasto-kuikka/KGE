@@ -18,7 +18,6 @@
 
 private ["_arguments", "_function", "_unit", "_id"];
 
-KGE_Core_remoteFnc = _this;
 
 _arguments = [_this, 0, [], [[]]] call BIS_fnc_param;
 _function = call compile ([_this, 1, "", [""]] call BIS_fnc_param);
@@ -33,20 +32,21 @@ if (typeName _unit == "SCALAR") exitWith {
             if (isServer) then {
                 _arguments call _function;
             } else {
-                publicVariableServer "KGE_Core_remoteFnc";
+                ["KGE_Core_remoteFnc_Server", _this] call cba_fnc_globalEvent;
             };
         };
         case 2 : {
-            _arguments call _function;
-
-            KGE_Core_remoteFnc set [2, 0];
-            publicVariable "KGE_Core_remoteFnc";
+            _this set [2, 0];
+            ["KGE_Core_remoteFnc_Client", [objNull, _this]] call cba_fnc_globalEvent;
+            ["KGE_Core_remoteFnc_Server", _this] call cba_fnc_globalEvent;
         };
         case 3 : {
             if (isDedicated) then {
                 _arguments call _function;
             } else {
-                if (!isServer) then {publicVariableServer "KGE_Core_remoteFnc"};
+                if (!isServer) then {
+                    ["KGE_Core_remoteFnc_Server", _this] call cba_fnc_globalEvent;
+                };
             };
         };
     };
@@ -55,11 +55,10 @@ if (typeName _unit == "SCALAR") exitWith {
 if(typeName _unit == "SIDE") exitWith {
     if (isServer) then {
         {
-            _id = owner _unit;
-            _id publicVariableClient "KGE_Core_remoteFnc";
+            ["KGE_Core_remoteFnc_Client", [_x, _this]] call cba_fnc_whereLocalEvent;
         } forEach (_unit call KGE_Core_fnc_GetAllPlayers);
     } else {
-        publicVariableServer "KGE_Core_remoteFnc";
+        ["KGE_Core_remoteFnc_Server", _this] call cba_fnc_globalEvent;
     };
 };
 
@@ -67,9 +66,8 @@ if (local _unit) then {
     _arguments call _function;
 } else {
     if (isServer) then {
-        _id = owner _unit;
-        _id publicVariableClient "KGE_Core_remoteFnc";
+        ["KGE_Core_remoteFnc_Client", [_unit, _this]] call cba_fnc_whereLocalEvent;
     } else {
-        publicVariableServer "KGE_Core_remoteFnc";
+        ["KGE_Core_remoteFnc_Server", _this] call cba_fnc_globalEvent;
     };
 };

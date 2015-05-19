@@ -24,6 +24,7 @@ if(_forced) then {
 
 // Show player
 KGE_Player hideObjectGlobal false;
+KGE_Player enableSimulationGlobal false;
 
 // Allow TFAR radio usage
 if(["task_force_radio"] call KGE_Core_fnc_ClassExists) then {

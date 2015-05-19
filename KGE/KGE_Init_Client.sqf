@@ -4,9 +4,9 @@ if(hasInterface) then {
 	// Get KGE version from cfgPatches
 	_version = getText (configFile >> "CfgPatches" >> "KGE" >> "version");
 
-	"KGE_Core_remoteFnc" addPublicVariableEventHandler {
+	["KGE_Core_remoteFnc_Client", {
 		(_this select 1) call KGE_Core_fnc_MP;
-	};
+	}] call cba_fnc_addEventHandler;
 
 	// New CBA keybinding for KGE
 	["KGE", "KGE_Menu", ["Avaa KGE Valikko", "Avaa KGE:n käyttöliittymän"], {
