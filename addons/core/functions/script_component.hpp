@@ -1,0 +1,1 @@
+#include "\z\kge\addons\core\script_component.hpp"
