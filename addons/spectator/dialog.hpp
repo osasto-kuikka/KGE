@@ -1,741 +1,363 @@
-#define BACKGROUND_COLOR {0.059,0.059,0.059,1}
-#define PRIMARYCOLOR {0.918,0.655,0.141,1}
-class RscSpectListBox {
-    access = 0;
-    type = 5;
-    w = 0.4;
-    h = 0.4;
-    rowHeight = 0;
-    rowWidth = 0;
-    colorText[] = {1, 1, 1, 1};
-    colorScrollbar[] = {1, 0, 0, 0};
-    colorSelect[] = {0, 0, 0, 1};
-    colorSelect2[] = {0, 0, 0, 1};
-    colorSelectBackground[] = {0.95, 0.95, 0.95, 1};
-    colorSelectBackground2[] = {1, 1, 1, 0.5};
-    colorBackground[] = {0, 0, 0, 1};
-    soundSelect[] = {"", 0.1, 1};
-    arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
-    arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
-    class ListScrollBar {
-        color[] = {1, 1, 1, 0.6};
-        colorActive[] = {1, 1, 1, 1};
-        colorDisabled[] = {1, 1, 1, 0.3};
-        shadow = 0;
-        thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
-        arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
-        arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
-        border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
-    };
-    style = 528;
-    font = "PuristaMedium";
-    sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 50) * 1)";
-    shadow = 0;
-    colorShadow[] = {0, 0, 0, 0.5};
-    color[] = {1, 1, 1, 0.1};
-    colorDisabled[] = {1, 1, 1, 0.25};
-    period = 1.2;
-    maxHistoryDelay = 1;
-    autoScrollSpeed = -1;
-    autoScrollDelay = 5;
-    autoScrollRewind = 0;
-};
-class RscSpectFrame {
-    type = 0;
-    idc = -1;
-    style = 64;
-    shadow = 2;
-    colorBackground[] = {0, 0, 0, 0};
-    colorText[] = PRIMARYCOLOR;
-    font = "PuristaMedium";
-    sizeEx = 0.02;
-    text = "";
+class vip_asp_dlg_overlay {
 
-};
-class RscSpectMapControl
-{
-    access = 0;
-    alphaFadeEndScale = 2;
-    alphaFadeStartScale = 2;
-    colorBackground[] = {0.969,0.957,0.949,1};
-    colorCountlines[] = {0.572,0.354,0.188,0.25};
-    colorCountlinesWater[] = {0.491,0.577,0.702,0.3};
-    colorForest[] = {0.624,0.78,0.388,0.5};
-    colorForestBorder[] = {0,0,0,0};
-    colorGrid[] = {0.1,0.1,0.1,0.6};
-    colorGridMap[] = {0.1,0.1,0.1,0.6};
-    colorInactive[] = {1,1,1,0.5};
-    colorLevels[] = {0.286,0.177,0.094,0.5};
-    colorMainCountlines[] = {0.572,0.354,0.188,0.5};
-    colorMainCountlinesWater[] = {0.491,0.577,0.702,0.6};
-    colorMainRoads[] = {0.9,0.5,0.3,1};
-    colorMainRoadsFill[] = {1,0.6,0.4,1};
-    colorNames[] = {0.1,0.1,0.1,0.9};
-    colorOutside[] = {0,0,0,1};
-    colorPowerLines[] = {0.1,0.1,0.1,1};
-    colorRailWay[] = {0.8,0.2,0,1};
-    colorRoads[] = {0.7,0.7,0.7,1};
-    colorRoadsFill[] = {1,1,1,1};
-    colorRocks[] = {0,0,0,0.3};
-    colorRocksBorder[] = {0,0,0,0};
-    colorSea[] = {0.467,0.631,0.851,0.5};
-    colorText[] = {0,0,0,1};
-    colorTracks[] = {0.84,0.76,0.65,0.15};
-    colorTracksFill[] = {0.84,0.76,0.65,1};
-    font = "TahomaB";
-    fontGrid = "TahomaB";
-    fontInfo = "PuristaMedium";
-    fontLabel = "PuristaMedium";
-    fontLevel = "TahomaB";
-    fontNames = "PuristaLight";
-    fontUnits = "TahomaB";
-    h = "SafeZoneH - 1.5 *                  (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-    idc = 51;
-    maxSatelliteAlpha = 0.85;
-    moveOnEdges = 1;
-    ptsPerSquareCLn = 10;
-    ptsPerSquareCost = 10;
-    ptsPerSquareExp = 10;
-    ptsPerSquareFor = 9;
-    ptsPerSquareForEdge = 9;
-    ptsPerSquareObj = 9;
-    ptsPerSquareRoad = 6;
-    ptsPerSquareSea = 5;
-    ptsPerSquareTxt = 20;
-    scaleDefault = 0.16;
-    scaleMax = 1;
-    scaleMin = 0.001;
-    shadow = 0;
-    showCountourInterval = 0;
-    sizeEx = 0.04;
-    sizeExGrid = 0.02;
-    sizeExInfo = "(         (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
-    sizeExLabel = "(            (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
-    sizeExLevel = 0.02;
-    sizeExNames = "(            (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8) * 2";
-    sizeExUnits = "(            (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
-    stickX[] = {0.2,["Gamma",1,1.5]};
-    stickY[] = {0.2,["Gamma",1,1.5]};
-    style = 48;
-    text = "#(argb,8,8,3)color(1,1,1,1)";
-    type = 101;
-    w = "SafeZoneWAbs";
-    x = "SafeZoneXAbs";
-    y = "SafeZoneY + 1.5 *                  (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-    class Legend {
-        colorBackground[] = {1, 1, 1, 0.5};
-        color[] = {0, 0, 0, 1};
-        x = "SafeZoneX +                    (           ((safezoneW / safezoneH) min 1.2) / 40)";
-        y = "SafeZoneY + safezoneH - 4.5 *                  (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-        w = "10 *                   (           ((safezoneW / safezoneH) min 1.2) / 40)";
-        h = "3.5 *                  (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-        font = "PuristaMedium";
-        sizeEx = "(         (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
-    };
-    class ActiveMarker {
-        color[] = {0.3, 0.1, 0.9, 1};
-        size = 50;
-    };
-    class Command {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\waypoint_ca.paa";
-        size = 18;
-        importance = 1;
-        coefMin = 1;
-        coefMax = 1;
-    };
-    class Task {
-        colorCreated[] = {1, 1, 1, 1};
-        colorCanceled[] = {0.7, 0.7, 0.7, 1};
-        colorDone[] = {0.7, 1, 0.3, 1};
-        colorFailed[] = {1, 0.3, 0.2, 1};
-        color[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])", "(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
-        icon = "\A3\ui_f\data\map\mapcontrol\taskIcon_CA.paa";
-        iconCreated = "\A3\ui_f\data\map\mapcontrol\taskIconCreated_CA.paa";
-        iconCanceled = "\A3\ui_f\data\map\mapcontrol\taskIconCanceled_CA.paa";
-        iconDone = "\A3\ui_f\data\map\mapcontrol\taskIconDone_CA.paa";
-        iconFailed = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_CA.paa";
-        size = 27;
-        importance = 1;
-        coefMin = 1;
-        coefMax = 1;
-    };
-    class CustomMark {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\custommark_ca.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 1;
-        coefMax = 1;
-    };
-    class Tree {
-        color[] = {0.45, 0.64, 0.33, 0.4};
-        icon = "\A3\ui_f\data\map\mapcontrol\bush_ca.paa";
-        size = 12;
-        importance = "0.9 * 16 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class SmallTree {
-        color[] = {0.45, 0.64, 0.33, 0.4};
-        icon = "\A3\ui_f\data\map\mapcontrol\bush_ca.paa";
-        size = 12;
-        importance = "0.6 * 12 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class Bush {
-        color[] = {0.45, 0.64, 0.33, 0.4};
-        icon = "\A3\ui_f\data\map\mapcontrol\bush_ca.paa";
-        size = "14/2";
-        importance = "0.2 * 14 * 0.05 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class Church {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\church_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Chapel {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\Chapel_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Cross {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\Cross_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Rock {
-        color[] = {0.1, 0.1, 0.1, 0.8};
-        icon = "\A3\ui_f\data\map\mapcontrol\rock_ca.paa";
-        size = 12;
-        importance = "0.5 * 12 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class Bunker {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\bunker_ca.paa";
-        size = 14;
-        importance = "1.5 * 14 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class Fortress {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\bunker_ca.paa";
-        size = 16;
-        importance = "2 * 16 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class Fountain {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\fountain_ca.paa";
-        size = 11;
-        importance = "1 * 12 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
-    };
-    class ViewTower {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\viewtower_ca.paa";
-        size = 16;
-        importance = "2.5 * 16 * 0.05";
-        coefMin = 0.5;
-        coefMax = 4;
-    };
-    class Lighthouse {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\lighthouse_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Quay {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\quay_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Fuelstation {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\fuelstation_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Hospital {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\hospital_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class BusStop {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\busstop_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Transmitter {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\transmitter_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Stack {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\stack_ca.paa";
-        size = 20;
-        importance = "2 * 16 * 0.05";
-        coefMin = 0.9;
-        coefMax = 4;
-    };
-    class Ruin {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\ruin_ca.paa";
-        size = 16;
-        importance = "1.2 * 16 * 0.05";
-        coefMin = 1;
-        coefMax = 4;
-    };
-    class Tourism {
-        color[] = {0, 0, 0, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\tourism_ca.paa";
-        size = 16;
-        importance = "1 * 16 * 0.05";
-        coefMin = 0.7;
-        coefMax = 4;
-    };
-    class Watertower {
-        color[] = {1, 1, 1, 1};
-        icon = "\A3\ui_f\data\map\mapcontrol\watertower_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-    };
-    class Waypoint {
-        color[] = {0, 0, 0, 0};
-        size = 24;
-        importance = 1;
-        coefMin = 1;
-        coefMax = 1;
-        icon = "";
-    };
-    class WaypointCompleted {
-        color[] = {0, 0, 0, 0};
-        size = 24;
-        importance = 1;
-        coefMin = 1;
-        coefMax = 1;
-        icon = "";
-    };
-    class power {
-        icon = "\A3\ui_f\data\map\mapcontrol\power_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-        color[] = {1, 1, 1, 1};
-    };
-    class powersolar {
-        icon = "\A3\ui_f\data\map\mapcontrol\powersolar_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-        color[] = {1, 1, 1, 1};
-    };
-    class powerwave {
-        icon = "\A3\ui_f\data\map\mapcontrol\powerwave_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-        color[] = {1, 1, 1, 1};
-    };
-    class powerwind {
-        icon = "\A3\ui_f\data\map\mapcontrol\powerwind_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-        color[] = {1, 1, 1, 1};
-    };
-    class shipwreck {
-        icon = "\A3\ui_f\data\map\mapcontrol\shipwreck_CA.paa";
-        size = 24;
-        importance = 1;
-        coefMin = 0.85;
-        coefMax = 1;
-        color[] = {1, 1, 1, 1};
-    };
-};
-class RscSpectPic
-{
-    idc = -1;
-    type = 0;
-    style = 48; //1 2 3...176
-    tileH = 2; //Tile Picture height (style = 144)
-    tileW = 5; //Tile Picture width (style = 144)
-    x = 0.25;
-    y = 0.25;
-    h = 0.5;
-    w = 0.5;
-    font = "EtelkaNarrowMediumPro";
-    sizeEx = 0.05;
-    colorBackground[] = {1,1,1,1}; //white background
-    colorText[] = {1,1,1,1}; //grey foreground
-    text = "#(argb,8,8,3)color(0.918,0.655,0.141,1)";
-    lineSpacing = 1; //required for multi-line style
-};
-class RscSpectButton {
-    access = 0;
-    borderSize = 0.001 * safezoneW;
-    colorBorder[] = PRIMARYCOLOR;
-    colorBackgroundActive[] = {0.314,0.314,0.314,1};
-    colorBackgroundDisabled[] = BACKGROUND_COLOR;
-    colorDisabled[] = {0.4,0.4,0.4,1};
-    colorFocused[] = BACKGROUND_COLOR;
-    colorShadow[] = PRIMARYCOLOR;
-    colorText[] = PRIMARYCOLOR;
-    color[] = {1,1,1,1};
-    colorBackground[] = BACKGROUND_COLOR;
-    font = "PuristaLight";
-    h = 0.039216;
-    offsetPressedX = 0;
-    offsetPressedY = 0;
-    offsetX = 0;
-    offsetY = 0;
-    shadow = 0;
-    sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
-    soundEnter[] = {"\A3\ui_f\data\Sound\RscButton\soundEnter",0.09,1};
-    soundPush[] = {"\A3\ui_f\data\Sound\RscButton\soundPush",0.09,1};
-    soundClick[] = {"\A3\ui_f\data\Sound\RscButton\soundClick",0.09,1};
-    soundEscape[] = {"\A3\ui_f\data\Sound\RscButton\soundEscape",0.09,1};
-    style = 0x02 + 160;
-    text = "";
-    type = 1;
-    blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
-    tooltipColorShade[] = BACKGROUND_COLOR; // Tooltip background color
-    tooltipColorText[] = PRIMARYCOLOR; // Tooltip text color
-    tooltipColorBox[] = PRIMARYCOLOR; // Tooltip frame color
-    w = 0.095589;
-    x = 0;
-    y = 0;
-    };
-    class RscSpectStructuredText {
-    access = 0;
-    h = 0.035;
-    idc = -1;
-    shadow = 1;
-    color = "#EAA724";
-    colorBackground[] = BACKGROUND_COLOR;
-    size = "(           (           (           ((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
-    style = 0;
-    text = "";
-    type = 13;
-    w = 0.1;
-    x = 0;
-    y = 0;
-};
-class RscSpectIGUIBack {
-    type = 0;
-    idc = 124;
-    style = 128;
-    text = "";
-    colorText[] = {0, 0, 0, 0};
-    font = "PuristaMedium";
-    sizeEx = 0;
-    shadow = 0;
-    x = 0.1;
-    y = 0.1;
-    w = 0.1;
-    h = 0.1;
-    colorbackground[] = {"(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])", "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])", "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"};
-};
-class RscSpectText {
-    access = 0;
-    type = 0;
-    idc = -1;
-    colorBackground[] = {0, 0, 0, 0};
-    colorText[] = {1, 1, 1, 1};
-    text = "";
-    fixedWidth = 0;
-    x = 0;
-    y = 0;
-    h = 0.037;
-    w = 0.3;
-    style = 0;
-    shadow = 1;
-    colorShadow[] = {0, 0, 0, 0.5};
-    font = "PuristaLight";
-    SizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
-    linespacing = 1;
-};
-class RscSpectControlsGroup {
-    type = 15;
-    idc = -1;
-    style = 0;
-    x = 0;
-    y = 0;
-    w = 1;
-    h = 1;
-    class VScrollbar  {
-    	color[] = {1,1,1,1 };
-    	width = 0.021000;
-    	autoScrollSpeed = -1;
-    	autoScrollDelay = 5;
-    	autoScrollRewind = 0;
-    };
-    class HScrollbar {
-    	color[] = {1, 1, 1, 1};
-    	height = 0.028;
-    };
-    class ListScrollBar  {
-        arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
-        arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
-        border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
-        color[] = {1,1,1,0.6};
-        colorActive[] = {1,1,1,1};
-        colorDisabled[] = {1,1,1,0.3};
-        shadow = 0;
-        thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
-    };
-    class Controls {};
-};
-
-
-class RscSpectList
-{
-    access = 0;
-    rowHeight = 0;
-    rowWidth = 0;
-    arrowEmpty = "";
-    arrowFull = "";
-    color[] = {1,1,1,1};
-    colorActive[] = {1,0,0,0.8};
-    colorBackground[] = {0,0,0,0};
-    colorDisabled[] = {1,1,1,0.25};
-    colorScrollbar[] = {1,0,0,0};
-    colorSelect[] = {1,1,1,0.8};
-    colorSelectBackground[] = {1,1,1,0.7};
-    colorText[] = {1,1,1,1};
-    font = "TahomaB";
-    h = 0.035;
-    maxHistoryDelay = 1;
-    shadow = 1;
-    sizeEx = "(         (           (           ((safezoneW / safezoneH) min 0.9) / 1.2) / 25) * 1)";
-    soundCollapse[] = {"\A3\ui_f\data\Sound\RscCombo\soundCollapse",0.1,1};
-    soundExpand[] = {"\A3\ui_f\data\Sound\RscCombo\soundExpand",0.1,1};
-    soundSelect[] = {"\A3\ui_f\data\Sound\RscCombo\soundSelect",0.1,1};
-  //  style = "0x10 + 0x200";
-    type = 5;
-     //   type = 5;
-    style = 528;
-    w = 0.12;
-    wholeHeight = 0.45;
-    x = 0;
-    y = 0;
-    class ListScrollBar
-    {
-        arrowEmpty = "";
-        arrowFull = "";
-        border = "";
-        color[] = {1,1,1,0};
-        colorActive[] = {1,1,1,0};
-        colorDisabled[] = {1,1,1,0.1};
-        shadow = 0;
-        thumb = "";
-    };
-    autoScrollSpeed = 0;
-    autoScrollDelay = 0;
-    autoScrollRewind = 0;
-
-};
-
-class RscSpectCombo
-{
-    access = 0;
-    arrowEmpty = "#(argb,8,8,3)color(0.918,0.655,0.141,1)";
-    arrowFull = "#(argb,8,8,3)color(0.918,0.655,0.141,1)";
-    color[] = PRIMARYCOLOR;
-    colorActive[] = BACKGROUND_COLOR;
-    colorBackground[] = BACKGROUND_COLOR;
-    colorDisabled[] = {1,1,1,0.25};
-    colorScrollbar[] = BACKGROUND_COLOR;
-    colorSelect[] = {1,1,1,1};
-    colorSelectBackground[] = BACKGROUND_COLOR;
-    colorText[] = PRIMARYCOLOR;
-    font = "PuristaLight";
-    h = 0.035;
-    maxHistoryDelay = 1;
-    shadow = 0;
-    colorBorder[] = PRIMARYCOLOR;
-    sizeEx = "(         (           (           ((safezoneW / safezoneH) min 1.0) / 1.0) / 25) * 1)";
-    soundCollapse[] = {"\A3\ui_f\data\sound\RscCombo\soundCollapse",0.1,1};
-    soundExpand[] = {"\A3\ui_f\data\sound\RscCombo\soundExpand",0.1,1};
-    soundSelect[] = {"\A3\ui_f\data\sound\RscCombo\soundSelect",0.1,1};
-    style = 0x02 + 160;
-    type = 4;
-    w = 0.12;
-    wholeHeight = "5 * safezoneH";
-    x = 0;
-    y = 0;
-    class ComboScrollBar
-    {
-        arrowEmpty = "";
-        arrowFull = "";
-        border = "";
-        color[] = {1,1,1,0.0};
-        colorActive[] = {1,1,1,0.0};
-        colorDisabled[] = {1,1,1,0.0};
-        shadow = 0;
-        thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
-    };
-
-};
-
-class KGE_Spectator_Dialog {
-	idd = 9228;
+	idd = 12200;
+	enableSimulation = 1;
 	movingEnable = 1;
-    enableSimulation = 1;
-    enableDisplay = 1;
-	fadein = 0;
-	fadeout = 0;
-    duration = 2147483647;
-    onMouseButtonDown = "['MouseButtonDown',_this] call KGE_Spectator_fnc_EventHandler";
-    onMouseButtonUp = "['MouseButtonUp',_this] call KGE_Spectator_fnc_EventHandler";
-    onKeyDown = "['KeyDown',_this] call KGE_Spectator_fnc_EventHandler";
-    onKeyUp= "['KeyUp',_this] call KGE_Spectator_fnc_EventHandler";
-    onUnload = "[] call KGE_Spectator_fnc_ForceExit";
-	class controlsBackground {
-		class mouseHandler: RscSpectControlsGroup 
-        {
-            class ListScrollBar
-            {
-                color[] = {1,1,1,0.6};
-                colorActive[] = {1,1,1,1};
-                colorDisabled[] = {1,1,1,0.0};
-                thumb = "";
-                arrowFull = "";
-                arrowEmpty = "";
-                border = "";
-            };
-            onMouseHolding = "['Mouse',_this] call KGE_Spectator_fnc_EventHandler;";
-            onMouseMoving = "['Mouse',_this] call KGE_Spectator_fnc_EventHandler";
-            onMouseZChanged = "['MouseZChanged',_this] call KGE_Spectator_fnc_EventHandler";           
-            
-		    idc = 123;
-            x = "SafeZoneX"; 
-            y = "SafeZoneY";
-            w = "SafeZoneW"; 
-            h = "SafeZoneH";
-		    colorBackground[] = {0.2, 0.0, 0.0, 0.0};
-		};
-        class Devider: RscSpectPic
-        {
-            idc = 4302;
-            x = 0.00293747 * safezoneW + safezoneX;
-            y = -0.00160002 * safezoneH + safezoneY;
-            w = 0.180469 * safezoneW;
-            h = 0.022 * safezoneH;
-        };
-        class SpectStrText: RscSpectStructuredText
-        {
-            idc = 1310;
-            x = 0.341317 * safezoneW + safezoneX;
-            y = 0.283882 * safezoneH + safezoneY;
-            w = 0.317366 * safezoneW;
-            h = 0.375858 * safezoneH;
-            text = "";
-           // text = "<br /> Use the mouse or the WASD to control the camera, H to show and close the help window.<br /> Press M for the map.<br /> ";
-        };
-        class SpecFrame: RscSpectFrame
-        {
-            idc = 1300;
-            x = 0.341317 * safezoneW + safezoneX;
-            y = 0.283882 * safezoneH + safezoneY;
-            w = 0.317366 * safezoneW;
-            h = 0.375858 * safezoneH;
-           // text = "<br /> Use the mouse or the WASD to control the camera, H to show and close the help window.<br /> Press M for the map.<br /> ";
-        };
+	enableDisplay = 1;
+	onLoad = "uiNamespace setVariable ['vip_asp_dlg_overlay', _this select 0]; ['OverlayList', _this select 0] call vip_asp_fnc_cl_newCamera";
+	onUnload = "";
+	
+	class controls {
+	
+		class Unitlist {
+			
+			access = 0;
+			idc = 0;
+			type = CT_TREE; 
+			style = ST_LEFT;  
+			default = 0;
+			blinkingPeriod = 0;
+
+			x = Q(safeZoneX);
+			y = Q(safeZoneY + RESUNITS_X * 4/3);
+			w = Q(RESUNITS_X * 30);
+			h = Q(RESUNITS_Y * 50);
+
+			colorBorder[] = {1,1,1,1};
+
+			colorBackground[] = {0.1,0.1,0.1,1};
+			colorSelect[] = {1,0.5,0,1}; // Selected item fill color (when multiselectEnabled is 0)
+			colorMarked[] = {1,0.5,0,0.5}; // Marked item fill color (when multiselectEnabled is 1)
+			colorMarkedSelected[] = {1,0.5,0,1}; // Selected item fill color (when multiselectEnabled is 1)
+
+			sizeEx = GUI_GRID_CENTER_H;
+			font = GUI_FONT_NORMAL;
+			shadow = 1;
+			colorText[] = {1,1,1,1};
+			colorSelectText[] = {1,1,1,1}; // Selected text color (when multiselectEnabled is 0)
+			colorMarkedText[] = {1,1,1,1}; // Selected text color (when multiselectEnabled is 1)
+
+			tooltip = "";
+			tooltipColorShade[] = {0,0,0,1};
+			tooltipColorText[] = {1,1,1,1};
+			tooltipColorBox[] = {1,1,1,1};
+
+			multiselectEnabled = 0;
+			expandOnDoubleclick = 0;
+			hiddenTexture = "A3\ui_f\data\gui\rsccommon\rsctree\hiddenTexture_ca.paa"; // Expand icon
+			expandedTexture = "A3\ui_f\data\gui\rsccommon\rsctree\expandedTexture_ca.paa"; // Collapse icon
+			maxHistoryDelay = 1; // Time since last keyboard type search to reset it
+
+			class ScrollBar {
+				width = 0;
+				height = 0;
+				scrollSpeed = 0.01;
+
+				arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
+				arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
+				border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
+				thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
+
+				color[] = {1,1,1,1};
+			};
+
+			colorDisabled[] = {0,0,0,0};
+			colorArrow[] = {0,0,0,0};
+
+			//onCanDestroy = "systemChat str ['onCanDestroy',_this]; true";
+			onDestroy = "vip_asp_var_cl_mouseBusy = false; false";
+			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
+			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			//onSetFocus = "systemChat str ['onSetFocus',_this]; false";
+			//onKillFocus = "systemChat str ['onKillFocus',_this]; false";
+			//onKeyDown = "systemChat str ['onKeyDown',_this]; false";
+			//onKeyUp = "systemChat str ['onKeyUp',_this]; false";
+			//onMouseButtonDown = "vip_asp_mouseUse = true";
+			//onMouseButtonUp = "";
+			//onMouseButtonClick = "systemChat str ['onMouseButtonClick',_this]; false";
+			//onMouseButtonDblClick = "systemChat str ['onMouseButtonDblClick',_this]; false";
+			//onMouseZChanged = "systemChat str ['onMouseZChanged',_this]; false";
+			//onMouseMoving = "";
+			//onMouseHolding = "";
+
+			//onTreeSelChanged = "['OverlaySelect', _this] call vip_asp_fnc_cl_newCamera; false";
+			//onTreeSelChanged = "systemChat str (_this select 1)";
+			onTreeDblClick = "['OverlaySelect', _this] call vip_asp_fnc_cl_newCamera; false";
+			//onTreeSelChanged = "systemChat str ['onTreeSelChanged',_this]; false";
+			//onTreeLButtonDown = "systemChat str ['onTreeLButtonDown',_this]; true";
+			//onTreeDblClick = "systemChat str ['onTreeDblClick',_this]; false";
+			//onTreeExpanded = "systemChat str ['onTreeExpanded',_this]; false";
+			//onTreeCollapsed = "systemChat str ['onTreeCollapsed',_this]; false";
+			//onTreeMouseExit = "systemChat str ['onTreeMouseExit',_this]; false";
+		};	
 	};
-    class controls {
-        class SpectButtonExit: RscSpectButton
-        {
-            idc = 1315;
-            x = 0.6 * safezoneW + safezoneX;
-            y = 0.609136 * safezoneH + safezoneY;
-            w = 0.0352629 * safezoneW;
-            h = 0.0287929 * safezoneH;
-            text = $STR_Spectator_Dialog_HelpWindow_OK;
-            action = "ctrlShow [1315, !ctrlVisible 1315];ctrlShow [1310, !ctrlVisible 1310];ctrlShow [1300, !ctrlVisible 1300];";
-        };
-        class FilterAIButton: RscSpectButton
-        {
-            idc = 2111;
-            x = 0.00046248 * safezoneW + safezoneX;
-            y = -5.99921e-005 * safezoneH + safezoneY;
-            w = 0.04 * safezoneW;
-            h = 0.02 * safezoneH;
-            text = $STR_Spectator_Dialog_Menu_HideAI;
-            tooltip = $STR_Spectator_Dialog_Menu_Tooltip_ToggleAI;
-            sizeEx = "(         (           (           ((safezoneW / safezoneH) min 0.9) / 1.2) / 25) * 1)";
-            onButtonClick = "[_this select 0,0] call KGE_Spectator_fnc_HandleMenu";
-        };
-        class TagsNameButton: RscSpectButton
-        {
-            idc = 2113;
-            x = 0.0846125 * safezoneW + safezoneX;
-            y = -5.99921e-005 * safezoneH + safezoneY;
-            w = 0.04 * safezoneW;
-            h = 0.02 * safezoneH;
-            text = $STR_Spectator_Dialog_Menu_HideTags;
-            tooltip = $STR_Spectator_Dialog_Menu_Tooltip_ToggleTags;
-            sizeEx = "(((((safezoneW / safezoneH) min 0.9) / 1.2) / 25) * 1)";
-            onButtonClick = "[_this select 0,2] call KGE_Spectator_fnc_HandleMenu";
-        };
-        class SpecUnitBox: RscSpectList
-        {
-            idc = 2100;
-            x = 0 * safezoneW + safezoneX;
-            y = 0.03 * safezoneH + safezoneY;
-            w = 0.1 * safezoneW;
-            h = 0.9 * safezoneH;
-            onLBSelChanged = "[""LBListSelChanged"",_this] call KGE_Spectator_fnc_EventHandler";
-        };
-        class SpecModes: RscSpectCombo
-        {
-            idc = 2101;
-            x = 0.178999 * safezoneW + safezoneX;
-            y = -5.99921e-005 * safezoneH + safezoneY;
-            w = 0.07 * safezoneW;
-            h = 0.02 * safezoneH;
-            sizeEx = "(((((safezoneW / safezoneH) min 0.9) / 1.2) / 25) * 1)";
-            onLBSelChanged = "[""LBListSelChanged_modes"",_this] call KGE_Spectator_fnc_EventHandler";
-        };
-    };
+};
+
+class vip_asp_dlg_vd {
+	idd = 12201;
+	enableSimulation = 1;
+	enableDisplay = 0;
+	movingEnable = true;
+
+	onLoad = "uiNamespace setVariable ['vip_asp_dlg_vd', _this select 0]; ['ViewDistance', _this] call vip_asp_fnc_cl_newCamera; false";
+	onUnload = "";
+	
+	class ControlsBackground {
+		class TextWindowTitle {
+			access = 0;
+			idc = -1;
+			type = CT_STATIC;
+			style = ST_CENTER;
+			moving = 1;
+			default = 0;
+			blinkingPeriod = 0;
+
+			x = 9 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
+			y = -1 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
+			w = 6 * GUI_GRID_CENTER_W;
+			h = 1 * GUI_GRID_CENTER_H;
+
+			colorBackground[] = {0.2,0.2,0.2,1};
+
+			text = "View Distance";
+			sizeEx = 1 * GUI_GRID_CENTER_H;
+			font = GUI_FONT_NORMAL;
+			shadow = 1;
+			lineSpacing = 1;
+			fixedWidth = 0;
+			colorText[] = {1,1,1,1};
+			colorShadow[] = {0,0,0,0.5};
+			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
+			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+		};
+		
+		class Background: vip_rsc_box {
+			idc = -1;
+			moving = 1;
+			x = 9 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
+			y = GUI_GRID_CENTER_Y;
+			w = 22 * GUI_GRID_CENTER_W;
+			h = 5 * GUI_GRID_CENTER_H;
+			colorBackground[] = {0.1,0.1,0.1,1};
+			colorText[] = {0,0,0,0};
+			onDestroy = "vip_asp_var_cl_mouseBusy = false; false";
+			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
+			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+		};
+	};
+	
+	class Controls {
+	
+		class ButtonExit: vip_rsc_button {
+
+			idc = 0;
+
+			x = 25 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
+			y = 3 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
+			w = 5 * GUI_GRID_CENTER_W;
+			h = 1 * GUI_GRID_CENTER_H;
+
+			text = "Exit";
+
+			onButtonClick = "closeDialog 0; false";
+			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
+			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+		};
+		
+		class VDText: vip_rsc_text {
+			idc = 1;
+			
+			x = 25 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
+			y = 1 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
+			w = 5 * GUI_GRID_CENTER_W;
+			h = 1 * GUI_GRID_CENTER_H;
+			sizeEx = 1 * GUI_GRID_CENTER_H;
+			font = GUI_FONT_NORMAL;
+			colorBackground[] = {0.2,0.2,0.2,1};
+			colorText[] = {1,1,1,1};
+			
+			text = "";
+		};
+		
+		class Slider {
+			idc = 2;
+		
+			type = CT_XSLIDER;
+			style = SL_HORZ;
+			shadow = 2;
+			
+			x = 10 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
+			y = 1 * GUI_GRID_CENTER_H + GUI_GRID_CENTER_Y;
+			w = 14 * GUI_GRID_CENTER_W;
+			h = 1 * GUI_GRID_CENTER_H;
+			color[] = {1,1,1,1};
+			colorActive[] = {1,1,1,1};
+			colorDisabled[] = {1,1,1,0.2};
+			arrowEmpty = "\A3\ui_f\data\gui\cfg\slider\arrowEmpty_ca.paa";
+			arrowFull = "\A3\ui_f\data\gui\cfg\slider\arrowFull_ca.paa";
+			border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
+			thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
+			
+			text = "";
+			onSliderPosChanged = "['ViewDistance', _this] call vip_asp_fnc_cl_newCamera";
+			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
+			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+		};
+	};
+};
+
+class vip_asp_dlg_map {
+
+	idd = 12202;
+	enableSimulation = 1; 
+	enableDisplay = 0;
+	onLoad = "uiNameSpace setVariable ['vip_asp_dlg_map', _this select 0]; ['MapInit', _this select 0] call vip_asp_fnc_cl_newCamera";
+	onUnload = "['MapClose', _this select 0] call vip_asp_fnc_cl_newCamera";
+	onKeyDown = "['MapKeyDown', _this] call vip_asp_fnc_cl_newCamera";
+	
+	class controls {
+	
+		class Map {
+			access = 0;
+			idc = 1; 
+			type = CT_MAP_MAIN;
+			style = ST_PICTURE;
+			default = 0;
+			blinkingPeriod = 0; 
+
+			x = safeZoneXAbs;
+			y = safeZoneY;
+			w = safeZoneWAbs;
+			h = safeZoneH;
+
+			sizeEx = GUI_GRID_CENTER_H;
+			font = GUI_FONT_NORMAL;
+			colorText[] = {0,0,0,1};
+			text = "#(argb,8,8,3)color(1,1,1,1)"; 
+
+			moveOnEdges = 1;
+
+			ptsPerSquareSea =	5;
+			ptsPerSquareTxt =	20;
+			ptsPerSquareCLn =	10;
+			ptsPerSquareExp =	10;
+			ptsPerSquareCost =	10;
+
+			ptsPerSquareFor =	9;
+			ptsPerSquareForEdge =	9;
+			ptsPerSquareRoad =	6;
+			ptsPerSquareObj =	9;
+
+			scaleMin = 0.001;
+			scaleMax = 1.0;
+			scaleDefault = 0.16;
+
+			alphaFadeStartScale = 2;
+			alphaFadeEndScale = 2;
+			maxSatelliteAlpha = 0.85;
+		
+			colorBackground[] = {1,1,1,1}; 
+			colorOutside[] = {0,0,0,1};
+			colorSea[] = {0.4,0.6,0.8,0.5}; 
+			colorForest[] = {0.6,0.8,0.4,0.5};
+			colorForestBorder[] = {0.6,0.8,0.4,1}; 
+			colorRocks[] = {0,0,0,0.3};
+			colorRocksBorder[] = {0,0,0,1};
+			colorLevels[] = {0.3,0.2,0.1,0.5}; 
+			colorMainCountlines[] = {0.6,0.4,0.2,0.5};
+			colorCountlines[] = {0.6,0.4,0.2,0.3}; 
+			colorMainCountlinesWater[] = {0.5,0.6,0.7,0.6};
+			colorCountlinesWater[] = {0.5,0.6,0.7,0.3};
+			colorPowerLines[] = {0.1,0.1,0.1,1};
+			colorRailWay[] = {0.8,0.2,0,1};
+			colorNames[] = {1.1,0.1,1.1,0.9};
+			colorInactive[] = {1,1,0,0.5};
+			colorTracks[] = {0.8,0.8,0.7,0.2};
+			colorTracksFill[] = {0.8,0.7,0.7,1};
+			colorRoads[] = {0.7,0.7,0.7,1};
+			colorRoadsFill[] = {1,1,1,1};
+			colorMainRoads[] = {0.9,0.5,0.3,1};
+			colorMainRoadsFill[] = {1,0.6,0.4,1};
+			colorGrid[] = {0.1,0.1,0.1,0.6};
+			colorGridMap[] = {0.1,0.1,0.1,0.6};
+
+			fontLabel="PuristaMedium";
+			sizeExLabel="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			fontGrid="TahomaB";
+			sizeExGrid=0.02;
+			fontUnits="TahomaB";
+			sizeExUnits="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			fontNames="EtelkaNarrowMediumPro";
+			sizeExNames="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8) * 2";
+			fontInfo="PuristaMedium";
+			sizeExInfo="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			fontLevel="TahomaB";
+			sizeExLevel=0.02;
+			showCountourInterval = 1;
+
+			class Task {
+				icon = "#(argb,8,8,3)color(1,1,1,1)";
+				color[] = {1,1,0,1};
+
+				iconCreated = "#(argb,8,8,3)color(1,1,1,1)";
+				colorCreated[] = {0,0,0,1};
+
+				iconCanceled = "#(argb,8,8,3)color(1,1,1,1)";
+				colorCanceled[] = {0,0,0,0.5};
+
+				iconDone = "#(argb,8,8,3)color(1,1,1,1)";
+				colorDone[] = {0,1,0,1};
+
+				iconFailed = "#(argb,8,8,3)color(1,1,1,1)";
+				colorFailed[] = {1,0,0,1};
+
+				size = 8;
+				importance = 1;
+				coefMin = 1;
+				coefMax = 1;
+			};
+			class ActiveMarker { //includes icons spawned by drawIcon
+				color[] = {0,0,0,1};
+				size = 2;
+				coefMin = 1; //make sure icon doesnt scale
+			};
+			class Waypoint {
+				coefMax = 1;
+				coefMin = 4;
+				color[] = {0,0,0,1};
+				icon = "#(argb,8,8,3)color(0,0,0,1)";
+				importance = 1;
+				size = 2;
+			};
+			class WaypointCompleted: Waypoint{};
+			class CustomMark: Waypoint{};
+			class Command: Waypoint{};
+			class Bush: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.2 * 14 * 0.05 * 0.05";};
+			class Rock: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.5 * 12 * 0.05";};
+			class SmallTree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.6 * 12 * 0.05";};
+			class Tree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.9 * 16 * 0.05";};
+			class BusStop: Waypoint{};
+			class FuelStation: Waypoint{};
+			class Hospital: Waypoint{};
+			class Church: Waypoint{};
+			class Lighthouse: Waypoint{};
+			class Power: Waypoint{};
+			class PowerSolar: Waypoint{};
+			class PowerWave: Waypoint{};
+			class PowerWind: Waypoint{};
+			class Quay: Waypoint{};
+			class Transmitter: Waypoint{};
+			class Watertower: Waypoint{};
+			class Cross: Waypoint{};
+			class Chapel: Waypoint{};
+			class Shipwreck: Waypoint{};
+			class Bunker: Waypoint{};
+			class Fortress: Waypoint{};
+			class Fountain: Waypoint{};
+			class Ruin: Waypoint{};
+			class Stack: Waypoint{};
+			class Tourism: Waypoint{};
+			class ViewTower: Waypoint{};
+		};
+	};
 };
