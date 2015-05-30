@@ -10,15 +10,4 @@
  * Boolean
  */
 
-
-private ["_className", "_return"];
-
-_className = [_this, 0, "", [""]] call BIS_fnc_param;
-
-_return = false;
-
-if (isClass(configFile >> "cfgPatches" >> _className)) then {
-	_return = true;
-};
-
-_return
+isClass(configFile >> "cfgPatches" >> _this)

@@ -12,20 +12,21 @@
  * Return value:
  * PFH handler ID
  */
+
+#include "script_component.hpp"
+
 _interval = _this select 3;
 [
     {
-        _args = _this select 0;
-        _func = (_args select 0) select 0;
-        _funcParams = (_args select 0) select 1;
-        _delay = (_args select 0) select 2;
-        _startTime = _args select 1;
+        EXPLODE_2_PVT(_this, _args, _pfh);
+        EXPLODE_2_PVT(_args, _params, _startTime);
+        EXPLODE_3_PVT(_params, _func, _funcParams, _delay);
 
         // Exit if the time was not reached yet
         if (time < _startTime + _delay) exitWith {};
 
         // Destroy PHF
-        [_this select 1] call CBA_fnc_removePerFrameHandler;
+        [_pfh] call CBA_fnc_removePerFrameHandler;
 
         // Execute the function
         _funcParams call _func;
