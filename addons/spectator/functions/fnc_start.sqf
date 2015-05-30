@@ -55,7 +55,7 @@ GVAR(focus) = [-1, -1];
 GVAR(lock) = [-1];
 GVAR(targets) = [];
 GVAR(attach) = objNull;
-GVAR(unit) = objNull;
+GVAR(unit) = KGE_playerOld;
 GVAR(unitCount) = 0;
 GVAR(deadList) = [];
 GVAR(mouseBusy) = false;
@@ -131,7 +131,7 @@ call FUNC(draw);
 	_side = _x call EFUNC(common,getSide);
 	_icon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "Icon");
 	_colour = _side call FUNC(sideColor);
-	_x setVariable ["vip_asp_draw", [true, _name, _side, _icon, _colour]];
+	_x setVariable [QGVAR(draw), [true, _name, _side, _icon, _colour]];
 	["UnitKilled", [_x, objNull]] call FUNC(events);
 } forEach allDead;
 		

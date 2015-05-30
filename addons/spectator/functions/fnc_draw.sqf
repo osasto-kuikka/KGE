@@ -25,10 +25,6 @@ GVAR(draw3d) = addMissionEventHandler ["Draw3D", {
 			_draw = _unit GETVAR_SYS(GVAR(draw),[false]);
 			EXPLODE_5_PVT(_draw,_canDraw,_name,_side,_icon,_colour);
 			
-			if(isNil "_colour") then {
-				_colour = [1, 1, 1, 0.9];
-			};
-
 			if (_canDraw) then {
 					
 				_veh = vehicle _unit;
@@ -176,7 +172,7 @@ GVAR(draw3d) = addMissionEventHandler ["Draw3D", {
 		_name = "";
 		_colour = [1,1,1,1];
 		if (!isNull GVAR(unit)) then {
-			_arr = GVAR(unit) getVariable "vip_asp_draw";
+			_arr = GVAR(unit) getVariable QGVAR(draw);
 			_name = _arr select 1;
 			_colour = _arr select 4;
 			_colour set [3, 1];

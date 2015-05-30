@@ -53,7 +53,7 @@ class rscTitles {
 
 	class GVAR(rsc_status) {
 
-		onLoad = QUOTE(SETUVAR(QGVAR(rsc_crosshair), _this select 0); [ARR_2(QUOTE(QUOTE(Status)), _this select 0)] call FUNC(events));
+		onLoad = QUOTE(SETUVAR(QGVAR(rsc_status), _this select 0); [ARR_2(QUOTE(QUOTE(Status)), _this select 0)] call FUNC(events));
 		idd = -1;
 		movingEnable=0;
 		fadein=0;

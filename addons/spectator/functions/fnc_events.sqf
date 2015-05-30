@@ -634,8 +634,8 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Camera": {
-	
-		_mode = _param select 0;
+		
+		_camMode = _param select 0;
 		
 		_cam = GVAR(cam);
 		_camOn = GVAR(cameraOn);
@@ -679,12 +679,12 @@ switch _mode do {
 			_ret
 		};
 		
-		switch (_mode) do {
+		switch (_camMode) do {
 		
 			case "Free": {
 				GVAR(cameraOn) = true;
 				detach _cam;
-				KGE_Player switchCamera "Internal";
+				KGE_player switchCamera "Internal";
 				_cam cameraEffect ["Internal", "Back"];
 				cameraEffectEnableHUD true;
 				_dir = getDir _unit;
@@ -779,8 +779,8 @@ switch _mode do {
 					GVAR(cam) = _cam;
 					_obj = GVAR(attach);
 					if !(isNull _obj) then {
-						_modelPos = _obj worldToModel (_camPos select 0);
-						_cam attachTo [_obj, _modelPos];
+						_camModelPos = _obj worldToModel (_camPos select 0);
+						_cam attachTo [_obj, _camModelPos];
 						_dir = _dir - getDir _obj;
 					};
 					GVAR(vector) = [_dir, _pitchBank select 0, 0];
@@ -848,8 +848,8 @@ switch _mode do {
 			_units = units _x;
 			private ["_groupNum"];
 			{
-				if (_x GETVAR_SYS(GVAR(listed), false)) then {
-					_arr = _x GETVAR_SYS(GVAR(draw), []);
+				if (_x GETVAR_SYS(GVAR(listed),false)) then {
+					_arr = _x GETVAR_SYS(GVAR(draw), [false]);
 					if (_arr select 0) then {
 						_name = _arr select 1;
 						_side = _arr select 2;
@@ -967,7 +967,7 @@ switch _mode do {
 			GVAR(mapZoom) = 0.75;
 		};
 
-		_map ctrlMapAnimAdd [0, GVAR(mapZoom), QGVAR(mapPos)];
+		_map ctrlMapAnimAdd [0, GVAR(mapZoom), GVAR(mapPos)];
 		ctrlMapAnimCommit _map;
 		setMousePosition [0.5, 0.5];
 
@@ -1066,12 +1066,12 @@ switch _mode do {
 	case "UnitKilled": {
 		_unit = _param select 0;
 		_killer = _param select 1;
-		_arr = _unit getVariable "vip_asp_draw";
+		_arr = _unit getVariable QGVAR(draw);
 		_colour = _arr select 4;
 		{_colour set [_forEachIndex, _x / 2.5]} forEach _colour;
 		_colour set [3, 0.8];
 		_arr set [4, _colour];
-		_unit setVariable ["vip_asp_draw", _arr];
+		_unit setVariable [QGVAR(draw), _arr];
 		GVAR(deadList) pushBack _unit;
 
 		if (!isNull _killer) then {
@@ -1090,7 +1090,7 @@ switch _mode do {
 			GVAR(unit) = objNull;
 		};
 		
-		if (!isNil "GVAR(trackingArray)") then {
+		if (!isNil GVAR(trackingArray)) then {
 			_pos = getPos _unit;
 			_pos resize 2;
 			_index = -1;
@@ -1106,7 +1106,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "UnitRespawn": {
 		_unit = _param select 0;
-		_unit setVariable ["vip_asp_listed", false];
+		_unit setVariable [QGVAR(listed), false];
 	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
