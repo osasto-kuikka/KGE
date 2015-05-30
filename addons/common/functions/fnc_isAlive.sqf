@@ -10,4 +10,4 @@
  * Boolean
  */
 
- (isNull _this && alive _this)
+ (!isNull _this && {alive _this})

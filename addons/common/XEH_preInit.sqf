@@ -22,7 +22,7 @@ if (hasInterface) then {
 	       	KGE_playerOld = KGE_player;	            
 	        KGE_player = call FUNC(player);
 	            
-	        SETUVAR(KGE_player, KGE_player];
+	        SETUVAR(KGE_player,KGE_player);
 	    }; 
 	}, 0, []] call cba_fnc_addPerFrameHandler;
 };

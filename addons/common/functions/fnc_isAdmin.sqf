@@ -9,4 +9,4 @@
  * Bool
  */
 
-if(serverCommandAvailable "#kick" OR {isServer}) then {true} else {false}
+serverCommandAvailable "#kick" || isServer

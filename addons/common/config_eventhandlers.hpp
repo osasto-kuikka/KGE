@@ -15,7 +15,7 @@ class Extended_PostInit_EventHandlers {
 class Extended_InitPost_EventHandlers {
     class CAManBase {
         class GVAR(setName) {
-            init = QUOTE(if (local (_this select 0)) then {_this call FUNC(setName)};);
+            init = QUOTE(if (local (_this select 0)) then {(_this select 0) call FUNC(setName)};);
         };
     };
 };

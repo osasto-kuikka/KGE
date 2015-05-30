@@ -12,10 +12,8 @@
 
 #include "script_component.hpp"
 
-PARAMS_1(_unit);
+if (!isNull _this) exitWith {};
 
-if (_unit call FUNC(isAlive)) exitWith {};
-
-if (_unit isKindOf "CAManBase") then {
-    _unit setVariable ["KGE_name", name _unit, true];
+if (_this isKindOf "CAManBase") then {
+    _this setVariable ["KGE_name", name _this, true];
 };

@@ -12,10 +12,14 @@
 
 #include "script_component.hpp"
 
-if !(_this call FUNC(isAlive)) exitWith {""};
+if (isNull _this) exitWith {"Unknown"};
 
 if (_this isKindOf "CAManBase") then {
-	_this GETVAR_SYS(KGE_Name, "Unknown");
+	if(isPlayer _this) then {
+		_this getVariable ["KGE_name", "Undefined"]
+	} else {
+		name _this
+	}
 } else {
 	getText (configFile >> "CfgVehicles" >> typeOf _this >> "displayName")
 }

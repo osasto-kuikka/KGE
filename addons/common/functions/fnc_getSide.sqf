@@ -12,4 +12,4 @@
 
 #include "script_component.hpp"
 
-if !(_this call FUNC(isAlive)) then {side (group _this)} else {sideUnknown}
+if (!isNull _this) then {side (group _this)} else {sideUnknown}
