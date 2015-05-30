@@ -7,290 +7,292 @@
 #define HELP_W RESUNITS_X * 75
 #define HELP_H RESUNITS_Y * 75
 
-class vip_asp_rsc_black {
+class rscTitles {
+	class GVAR(rsc_black) {
 
-	idd=-1;
-	movingEnable=0;
-	fadein=0;
-	fadeout=0;
-	duration=1e+011;
-	
-	class controls {
-	
-		class Black: vip_rsc_box {
-			x = safeZoneX;
-			y = safeZoneY;
-			w = safeZoneWAbs;
-			h = safeZoneH;
-			colorBackground[] = {0,0,0,1};
-		}; 
-	};
-};
-
-class vip_asp_rsc_crosshair {
-
-	onLoad = "uiNamespace setVariable ['vip_asp_rsc_crosshair', _this select 0]";
-	idd=-1;
-	movingEnable=0;
-	fadein=0;
-	fadeout=0;
-	duration=1e+011;
-
-	class controls {
-	
-		class X: vip_rsc_picture {
-			idc = 0;
-			x = Q(RESCENTRE_X - XHAIR / 2);
-			y = Q(RESCENTRE_Y - XHAIR * 4/3 / 2);
-			w = Q(XHAIR);
-			h = Q(XHAIR * 4/3);
-			text = "\a3\ui_f\data\IGUI\Cfg\Cursors\select_target_ca.paa";
-			colorText[] = {1,1,1,0.8};
+		idd=-1;
+		movingEnable=0;
+		fadein=0;
+		fadeout=0;
+		duration=1e+011;
+		
+		class controls {
+		
+			class Black: GVAR(rsc_box) {
+				x = safeZoneX;
+				y = safeZoneY;
+				w = safeZoneWAbs;
+				h = safeZoneH;
+				colorBackground[] = {0,0,0,1};
+			}; 
 		};
 	};
-};
 
-class vip_asp_rsc_status {
+	class GVAR(rsc_crosshair) {
 
-	onLoad = "uiNamespace setVariable ['vip_asp_rsc_status', _this select 0]; ['Status', _this select 0] call vip_asp_fnc_cl_newCamera";
-	idd = -1;
-	movingEnable=0;
-	fadein=0;
-	fadeout=0;
-	duration=1e+011;
+		onLoad = QUOTE(SETUVAR(QGVAR(rsc_crosshair), _this select 0));
+		idd=-1;
+		movingEnable=0;
+		fadein=0;
+		fadeout=0;
+		duration=1e+011;
 
-	class controls {
-	
-		class BGRight: vip_rsc_box {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 30);
-			y = Q(safeZoneY);
-			w = Q(RESUNITS_X * 30);
-			h = Q(COMPASS_H);
-			colorBackground[] = {0.1,0.1,0.1,1};
-		};
+		class controls {
 		
-		class BGLeft: BGRight {
-			x = Q(safeZoneX);
-		};
-		
-		class SpeedFrame: vip_rsc_frame {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 5);
-			y = Q(safeZoneY);
-			w = Q(RESUNITS_X * 5);
-			h = Q(COMPASS_H);
-			shadow = 2;
-			colorText[]={1,1,1,1};
-		};
-		
-		class Speed: vip_rsc_text {
-			idc = 0;
-			style = ST_CENTER;
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 5);
-			y = Q(safeZoneY);
-			w = Q(RESUNITS_X * 5);
-			h = Q(COMPASS_H);
-			colorText[]={1,1,1,1};
-			sizeEx = Q(RESUNITS_Y * 2);
-			font = GUI_FONT_NORMAL;
-			text = "";
-		};
-		
-		class FovFrame: SpeedFrame {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 10.5);
-		};
-		
-		class Fov: Speed {
-			idc = 4;
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 10.5);
-		};
-		
-		class TimeAccFrame: SpeedFrame {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 21.5);
-		};
-		
-		class TimeAcc: Speed {
-			idc = 5;
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 21.5);
-		};
-		
-		class FocusFrame: SpeedFrame {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 16);
-		};
-		
-		class Focus: Speed {
-			idc = 6;
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 16);
-		};
-		
-		class NameFrame: SpeedFrame {	
-			x = Q(safeZoneX);
-			w = Q(RESUNITS_X * 24.5);
-		};
-		
-		class Name: Speed {
-			idc = 1;
-			x = Q(safeZoneX);
-			w = Q(RESUNITS_X * 24.5);
-		};
-		
-		class ModeFrame: SpeedFrame {
-			x = Q(safeZoneX + RESUNITS_X * 25);
-		};
-		
-		class Mode: Speed {
-			idc = 2;
-			x = Q(safeZoneX + RESUNITS_X * 25);	
-		};
-		
-		class TimeFrame: SpeedFrame {
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 30);
-			w = Q(RESUNITS_X * 8);
-		};
-		
-		class Time: Speed {
-			idc = 3;
-			x = Q(safeZoneX + safeZoneW - RESUNITS_X * 30);
-			w = Q(RESUNITS_X * 8);
+			class X: GVAR(rsc_picture) {
+				idc = 0;
+				x = QUOTE(RESCENTRE_X - XHAIR / 2);
+				y = QUOTE(RESCENTRE_Y - XHAIR * 4/3 / 2);
+				w = QUOTE(XHAIR);
+				h = QUOTE(XHAIR * 4/3);
+				text = "\a3\ui_f\data\IGUI\Cfg\Cursors\select_target_ca.paa";
+				colorText[] = {1,1,1,0.8};
+			};
 		};
 	};
-};
 
-class vip_asp_rsc_compass {
+	class GVAR(rsc_status) {
 
-	onLoad = "uiNamespace setVariable ['vip_asp_rsc_compass', _this select 0]";
-	onUnload = "";
-	idd=-1;
-	movingEnable=0;
-	fadein=0;
-	fadeout=0;
-	duration=1e+011;
+		onLoad = QUOTE(SETUVAR(QGVAR(rsc_crosshair), _this select 0); [ARR_2(QUOTE(QUOTE(Status)), _this select 0)] call FUNC(events));
+		idd = -1;
+		movingEnable=0;
+		fadein=0;
+		fadeout=0;
+		duration=1e+011;
 
-	class controls {
+		class controls {
 		
-		class BG: vip_rsc_box {
-			x = Q(COMPASS_X);
-			y = Q(safeZoneY);
-			w = Q(COMPASS_W);
-			h = Q(COMPASS_H);
-			colorBackground[] = {0.1,0.1,0.1,1};
-		};
-		
-		class 0_90: vip_rsc_picture {
-			idc = 1;
-			x = Q(RESCENTRE_X);
-			y = Q(safeZoneY);
-			w = Q(COMPASS_W / 2);
-			h = Q(COMPASS_H);
-			text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture180_ca.paa";
-		};
-		
-		class 90_180: 0_90 {
-			idc = 2;
-			x = Q(RESCENTRE_X + COMPASS_W / 2);
-			text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture270_ca.paa";
-		};
-		
-		class 180_270: 0_90 {
-			idc = 3;
-			x = Q(RESCENTRE_X + COMPASS_W);
-			text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture0_ca.paa";
-		};
-		
-		class 270_0: 0_90 {
-			idc = 4;
-			x = Q(RESCENTRE_X + COMPASS_W * 1.5);
-			text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture90_ca.paa";
-		};
-		
-		class Post: vip_rsc_box {
-			x = Q(COMPASS_X + COMPASS_W / 2);
-			y = Q(safeZoneY);
-			w = Q(PIXEL_X * 2);
-			h = Q(COMPASS_H);
-			colorBackground[]={1,0,0,1};
-		};
-		
-		class LeftBlocker: vip_rsc_box {
-			x = Q(COMPASS_X - COMPASS_W / 2);
-			y = Q(safeZoneY);
-			w = Q(COMPASS_W / 2);
-			h = Q(COMPASS_H);
-			colorBackground[] = {0.1,0.1,0.1,1};
-		};
-		
-		class RightBlocker: LeftBlocker {
-			x = Q(COMPASS_X + COMPASS_W);
-		};
-		
-		class Frame: vip_rsc_frame {
-			x = Q(COMPASS_X);
-			y = Q(safeZoneY);
-			w = Q(COMPASS_W);
-			h = Q(COMPASS_H);
-			shadow=2;
-			colorText[]={1,1,1,1};
+			class BGRight: GVAR(rsc_box) {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 30);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(RESUNITS_X * 30);
+				h = QUOTE(COMPASS_H);
+				colorBackground[] = {0.1,0.1,0.1,1};
+			};
+			
+			class BGLeft: BGRight {
+				x = QUOTE(safeZoneX);
+			};
+			
+			class SpeedFrame: GVAR(rsc_frame) {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 5);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(RESUNITS_X * 5);
+				h = QUOTE(COMPASS_H);
+				shadow = 2;
+				colorText[]={1,1,1,1};
+			};
+			
+			class Speed: GVAR(rsc_text) {
+				idc = 0;
+				style = ST_CENTER;
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 5);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(RESUNITS_X * 5);
+				h = QUOTE(COMPASS_H);
+				colorText[]={1,1,1,1};
+				sizeEx = QUOTE(RESUNITS_Y * 2);
+				font = GUI_FONT_NORMAL;
+				text = "";
+			};
+			
+			class FovFrame: SpeedFrame {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 10.5);
+			};
+			
+			class Fov: Speed {
+				idc = 4;
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 10.5);
+			};
+			
+			class TimeAccFrame: SpeedFrame {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 21.5);
+			};
+			
+			class TimeAcc: Speed {
+				idc = 5;
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 21.5);
+			};
+			
+			class FocusFrame: SpeedFrame {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 16);
+			};
+			
+			class Focus: Speed {
+				idc = 6;
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 16);
+			};
+			
+			class NameFrame: SpeedFrame {	
+				x = QUOTE(safeZoneX);
+				w = QUOTE(RESUNITS_X * 24.5);
+			};
+			
+			class Name: Speed {
+				idc = 1;
+				x = QUOTE(safeZoneX);
+				w = QUOTE(RESUNITS_X * 24.5);
+			};
+			
+			class ModeFrame: SpeedFrame {
+				x = QUOTE(safeZoneX + RESUNITS_X * 25);
+			};
+			
+			class Mode: Speed {
+				idc = 2;
+				x = QUOTE(safeZoneX + RESUNITS_X * 25);	
+			};
+			
+			class TimeFrame: SpeedFrame {
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 30);
+				w = QUOTE(RESUNITS_X * 8);
+			};
+			
+			class Time: Speed {
+				idc = 3;
+				x = QUOTE(safeZoneX + safeZoneW - RESUNITS_X * 30);
+				w = QUOTE(RESUNITS_X * 8);
+			};
 		};
 	};
-};
 
-class vip_asp_rsc_help {
-	onLoad = "uiNamespace setVariable ['vip_asp_rsc_help', _this select 0]; ['Help', _this select 0] call vip_asp_fnc_cl_newCamera";
-	idd = -1;
-	movingEnable=0;
-	fadein=0;
-	fadeout=0;
-	duration=1e+011;
+	class GVAR(rsc_compass) {
 
-	class controls {
-	
-		class BG: vip_rsc_box {
-			idc = -1;
-			x = Q(RESCENTRE_X - HELP_W / 2);
-			y = Q(RESCENTRE_Y - HELP_H / 2);
-			w = Q(HELP_W);
-			h = Q(HELP_H);
-			colorBackground[] = {0.1,0.1,0.1,1};
+		onLoad = QUOTE(SETUVAR(QGVAR(rsc_compass), _this select 0));
+		onUnload = "";
+		idd=-1;
+		movingEnable=0;
+		fadein=0;
+		fadeout=0;
+		duration=1e+011;
+
+		class controls {
+			
+			class BG: GVAR(rsc_box) {
+				x = QUOTE(COMPASS_X);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(COMPASS_W);
+				h = QUOTE(COMPASS_H);
+				colorBackground[] = {0.1,0.1,0.1,1};
+			};
+			
+			class 0_90: GVAR(rsc_picture) {
+				idc = 1;
+				x = QUOTE(RESCENTRE_X);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(COMPASS_W / 2);
+				h = QUOTE(COMPASS_H);
+				text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture180_ca.paa";
+			};
+			
+			class 90_180: 0_90 {
+				idc = 2;
+				x = QUOTE(RESCENTRE_X + COMPASS_W / 2);
+				text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture270_ca.paa";
+			};
+			
+			class 180_270: 0_90 {
+				idc = 3;
+				x = QUOTE(RESCENTRE_X + COMPASS_W);
+				text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture0_ca.paa";
+			};
+			
+			class 270_0: 0_90 {
+				idc = 4;
+				x = QUOTE(RESCENTRE_X + COMPASS_W * 1.5);
+				text = "A3\ui_f_curator\data\cfgIngameUI\compass\texture90_ca.paa";
+			};
+			
+			class Post: GVAR(rsc_box) {
+				x = QUOTE(COMPASS_X + COMPASS_W / 2);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(PIXEL_X * 2);
+				h = QUOTE(COMPASS_H);
+				colorBackground[]={1,0,0,1};
+			};
+			
+			class LeftBlocker: GVAR(rsc_box) {
+				x = QUOTE(COMPASS_X - COMPASS_W / 2);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(COMPASS_W / 2);
+				h = QUOTE(COMPASS_H);
+				colorBackground[] = {0.1,0.1,0.1,1};
+			};
+			
+			class RightBlocker: LeftBlocker {
+				x = QUOTE(COMPASS_X + COMPASS_W);
+			};
+			
+			class Frame: GVAR(rsc_frame) {
+				x = QUOTE(COMPASS_X);
+				y = QUOTE(safeZoneY);
+				w = QUOTE(COMPASS_W);
+				h = QUOTE(COMPASS_H);
+				shadow=2;
+				colorText[]={1,1,1,1};
+			};
 		};
+	};
+
+	class GVAR(rsc_help) {
+		onLoad = QUOTE(SETUVAR(QGVAR(rsc_help), _this select 0); [ARR_2(QUOTE(QUOTE(Help)), _this select 0)] call FUNC(events));
+		idd = -1;
+		movingEnable=0;
+		fadein=0;
+		fadeout=0;
+		duration=1e+011;
+
+		class controls {
 		
-		class Title: vip_rsc_text {
-			idc = 0;
-			style = ST_CENTER;
-			x = Q(RESCENTRE_X - RESUNITS_X * 25);
-			y = Q(RESCENTRE_Y - (HELP_H / 2) + RESUNITS_Y * 3);
-			w = Q(RESUNITS_X * 50);
-			h = Q(RESUNITS_Y * 4);
-			colorText[]={1,1,1,1};
-			sizeEx = Q(RESUNITS_Y * 4);
-			font = GUI_FONT_NORMAL;
-			text = "ASP Camera Controls";
-		};
-		
-		class LeftColumn1 {
-			idc = 1;
-			type = CT_STRUCTURED_TEXT;
-			style = ST_LEFT;
-			x = Q(RESCENTRE_X - HELP_W / 2 + RESUNITS_X * 3);
-			y = Q(RESCENTRE_Y - (HELP_H / 2) + RESUNITS_Y * 12);
-			w = Q(RESUNITS_X * 14.75);
-			h = Q(RESUNITS_Y * 63);
-			text = "";
-			size = Q(RESUNITS_Y * 2.5);
-			colorBackground[] = {0,0,0,0};
-		};
-		
-		class LeftColumn2: LeftColumn1 {
-			idc = 2;
-			x = Q(RESCENTRE_X - HELP_W / 2 + RESUNITS_X * 17.75);
-		};
-		
-		class RightColumn1: LeftColumn1 {
-			idc = 3;
-			x = Q(RESCENTRE_X + HELP_W / 2 - RESUNITS_X * 3 - RESUNITS_X * 29.5);
-		};
-		
-		class RightColumn2: LeftColumn1 {
-			idc = 4;
-			x = Q(RESCENTRE_X + HELP_W / 2 - RESUNITS_X * 3 - RESUNITS_X * 11.75);
+			class BG: GVAR(rsc_box) {
+				idc = -1;
+				x = QUOTE(RESCENTRE_X - HELP_W / 2);
+				y = QUOTE(RESCENTRE_Y - HELP_H / 2);
+				w = QUOTE(HELP_W);
+				h = QUOTE(HELP_H);
+				colorBackground[] = {0.1,0.1,0.1,1};
+			};
+			
+			class Title: GVAR(rsc_text) {
+				idc = 0;
+				style = ST_CENTER;
+				x = QUOTE(RESCENTRE_X - RESUNITS_X * 25);
+				y = QUOTE(RESCENTRE_Y - (HELP_H / 2) + RESUNITS_Y * 3);
+				w = QUOTE(RESUNITS_X * 50);
+				h = QUOTE(RESUNITS_Y * 4);
+				colorText[]={1,1,1,1};
+				sizeEx = QUOTE(RESUNITS_Y * 4);
+				font = GUI_FONT_NORMAL;
+				text = "KGE Camera Controls";
+			};
+			
+			class LeftColumn1 {
+				idc = 1;
+				type = CT_STRUCTURED_TEXT;
+				style = ST_LEFT;
+				x = QUOTE(RESCENTRE_X - HELP_W / 2 + RESUNITS_X * 3);
+				y = QUOTE(RESCENTRE_Y - (HELP_H / 2) + RESUNITS_Y * 12);
+				w = QUOTE(RESUNITS_X * 14.75);
+				h = QUOTE(RESUNITS_Y * 63);
+				text = "";
+				size = QUOTE(RESUNITS_Y * 2.5);
+				colorBackground[] = {0,0,0,0};
+			};
+			
+			class LeftColumn2: LeftColumn1 {
+				idc = 2;
+				x = QUOTE(RESCENTRE_X - HELP_W / 2 + RESUNITS_X * 17.75);
+			};
+			
+			class RightColumn1: LeftColumn1 {
+				idc = 3;
+				x = QUOTE(RESCENTRE_X + HELP_W / 2 - RESUNITS_X * 3 - RESUNITS_X * 29.5);
+			};
+			
+			class RightColumn2: LeftColumn1 {
+				idc = 4;
+				x = QUOTE(RESCENTRE_X + HELP_W / 2 - RESUNITS_X * 3 - RESUNITS_X * 11.75);
+			};
 		};
 	};
 };

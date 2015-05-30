@@ -16,6 +16,8 @@
 	None.
 */
 
+#include "script_component.hpp"
+
 #define DIK_ESCAPE          0x01
 #define DIK_1               0x02
 #define DIK_2               0x03
@@ -115,167 +117,13 @@
 #define DIK_UP              0xC8    /* UpArrow on arrow keypad */
 #define DIK_DOWN            0xD0    /* DownArrow on arrow keypad */
 
-#include "script_component.hpp"
-
 disableSerialization;
 
-EXPLODE_2_PVT(_this, _mode, _this);
+EXPLODE_2_PVT(_this,_mode,_param);
 
 switch _mode do {
-
-	///////////////////////////////////////////////////////////////////////////////////////////
-	case "Init": {
-	
-		if (isNull findDisplay 46) exitWith {
-			[{
-				EXPLODE_2_PVT(_this, _param, _pfh);
-				EXPLOE_1_PVT(_param, _array)
-
-				if(isNull findDisplay 46) exitWith {};
-
-				["Init", _array] call FUNC(events);
-			}, 0.1, [_this]];		
-		};
-		
-		GVAR(noEscape) = if (count _this > 0) then {_this select 0} else {false};
-		_tracking = if (count _this > 1) then {_this select 1} else {0};
-		
-		if (_tracking > 0) then {
-			GVAR(alwaysTracking) = switch (_tracking) do {
-				case 1: {false};
-				case 2: {true};
-			};
-			
-			if (isNil "GVAR(trackingArray)") then {[true] call FUNC(tracking)};
-		};
-
-		if (isNil "GVAR(respawnPos)") then {
-			_mapSize = (configFile >> "CfgWorlds" >> worldName >> "mapSize");
-			_worldEdge = if (isNumber _mapSize) then {getNumber _mapSize} else {32768};
-			GVAR(respawnPos) = [_worldEdge, _worldEdge];
-		};
-	
-		if (isClass (configFile >> "CfgPatches" >> "uo_main")) then {
-			_uohud = GVAR(nameHUD);
-			GVAR(UOHUD) = _uohud;
-			GVAR(nameHUD) = false
-		};
-
-		//camera
-		_camPos = if (!isNil "GVAR(startingPos)") then {
-			GVAR(startingPos)
-		} else {
-			if (!GVAR(noEscape)) then {
-				getPos cameraOn
-			} else {
-				[(GVAR(respawnPos) select 0) / 2, (GVAR(respawnPos) select 0) / 2, 0]
-			};
-		};
-		_camPos set [2, (_camPos select 2) + 2];
-		_cam = missionnamespace getVariable ["GVAR(cam)", "camera" camCreate _camPos];
-		_cam cameraEffect ["internal", "back"];
-		_cam camSetFocus [-1, -1];
-		_cam camCommit 0;
-		showCinemaBorder false;
-		cameraEffectEnableHUD true;
-		setViewDistance 3000;
-		
-		//variables
-		GVAR(cam) = _cam;
-		GVAR(LMB) = false;
-		GVAR(RMB) = false;		
-		GVAR(vector) = [0,0,0];
-		GVAR(fov) = 0.7;
-		GVAR(vision) = 0;
-		GVAR(moveScale) = 0.1;
-		GVAR(cameraOn) = true;
-		GVAR(focus) = [-1, -1];
-		GVAR(lock) = [-1];
-		GVAR(targets) = [];
-		GVAR(attach) = objNull;
-		GVAR(unit) = objNull;
-		GVAR(unitCount) = 0;
-		GVAR(deadList) = [];
-		GVAR(mouseBusy) = false;
-		GVAR(displayMarkers) = 3;
-		GVAR(listLast) = false;
-		GVAR(accTime) = 1;
-		
-		if (isNil "GVAR(savedSpots)") then {
-			GVAR(savedSpots) = [];
-			for "_i" from 0 to 11 do {GVAR(savedSpots) set [_i, []]};
-		};
-		
-		if (isNil "GVAR(savedUnits)") then {
-			GVAR(savedUnits) = [];
-			for "_i" from 0 to 9 do {GVAR(savedUnits) set [_i, []]};
-		};
-		
-		GVAR(keys) = [];
-		_DIKcodes = true call BIS_fnc_keyCode;
-		_DIKlast = _DIKcodes select (count _DIKcodes - 1);
-		for "_i" from 0 to (_DIKlast - 1) do {
-			GVAR(keys) set [_i, false];
-		};
-
-		_display = findDisplay 46;
-		
-		addMissionEventHandler ["Ended", {if (!isNil "GVAR(cam)") then {call FUNC(forceExit)}}];
-		GVAR(eh_key1) = _display displayAddEventHandler ["keyDown", {['KeyDown', _this] call FUNC(events)}];
-		GVAR(eh_key2) = _display displayAddEventHandler ["keyUp", {['KeyUp', _this] call FUNC(events)}];
-		GVAR(eh_key3) = _display displayAddEventHandler ["mouseButtonDown", {['MouseButtonDown', _this] call FUNC(events)}];
-		GVAR(eh_key4) = _display displayAddEventHandler ["mouseButtonUp", {['MouseButtonUp',_this] call FUNC(events)}];
-		GVAR(eh_key5) = _display displayAddEventHandler ["mouseZChanged", {['MouseZChanged',_this] call FUNC(events)}];
-		GVAR(eh_key6) = _display displayAddEventHandler ["mouseMoving", {['Mouse',_this] call FUNC(events)}];
-		GVAR(eh_key7) = _display displayAddEventHandler ["mouseHolding", {['Mouse',_this] call FUNC(events)}];
-
-		//remove mission layer
-		_displayMission = [] call (uiNamespace getVariable "BIS_fnc_displayMission");
-		_control = _displayMission displayCtrl 11400;
-		_control ctrlSetFade 1;
-		_control ctrlCommit 0;
-
-		//kill layers
-		cutText ["", "Plain"];
-		titleText ["", "Plain"];
-		_layers = missionNamespace getVariable ["BIS_fnc_rscLayer_list",[]];
-
-		for "_i" from 1 to (count _layers - 1) step 2 do {
-			(_layers select _i) cutText ["", "Plain"];
-		};
-		
-		//crosshair
-		_layer = [QGVAR(rsc_crosshair)] call BIS_fnc_rscLayer;
-		_layer cutRsc [QGVAR(rsc_crosshair), "PLAIN", 2, true];
-		
-		//compass
-		_layer = [QGVAR(rsc_compass)] call BIS_fnc_rscLayer;
-		_layer cutRsc [QGVAR(rsc_compass), "PLAIN", 2, true];
-		
-		//status
-		_layer = [QGVAR(rsc_status)] call BIS_fnc_rscLayer;
-		_layer cutRsc [QGVAR(rsc_status), "PLAIN", 2, true];
-		
-		//help
-		_layer = ["vip_asp_rsc_help"] call BIS_fnc_rscLayer;
-		preloadTitleRsc ["vip_asp_rsc_help", "PLAIN", 0, true];
-		
-		//apply marker settings for units already dead
-		{
-			_name = name _x;
-			_side = [_x] call EFUNC(common, getSideNumber);
-			_icon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "Icon");
-			_colour = [_side] call FUNC(sideColor);
-			_x setVariable ["vip_asp_draw", [true, _name, _side, _icon, _colour]];
-			["UnitKilled", [_x, objNull]] call FUNC(events);
-		} forEach allDead;
-		
-		["Press H for Controls", 0, 1] spawn BIS_fnc_dynamicText;
-	};
-
-	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Mouse": {
-		_mapOn = uiNamespace getVariable "vip_asp_dlg_map";
+		_mapOn = uiNamespace getVariable QGVAR(dlg_map);
 		if (!isNull _mapOn) exitWith {};
 		
 		_keys = GVAR(keys);
@@ -302,8 +150,8 @@ switch _mode do {
 		
 		if (GVAR(LMB) || GVAR(RMB)) then {
 			if (GVAR(mouseBusy)) exitWith {};
-			_mX = (_this select 1) * (GVAR(accTime) max 0.05);
-			_mY = (_this select 2) * (GVAR(accTime) max 0.05);
+			_mX = (_param select 1) * (GVAR(accTime) max 0.05);
+			_mY = (_param select 2) * (GVAR(accTime) max 0.05);
 
 			if (GVAR(RMB)) then {
 
@@ -334,11 +182,9 @@ switch _mode do {
 		};		
 
 		_camMove = {
-			_dX = _this select 0;
-			_dY = _this select 1;
-			_dZ = _this select 2;
+			EXPLODE_3_PVT(_this,_dX,_dY,_dZ);
 			_pos = getPosASL _cam;
-			_moveDir = (getDir _cam) + _dX * 90;
+			_moveDir = (getDir _cam) + (_dX * 90);
 			_camPos = [
 				(_pos select 0) + ((sin (_moveDir)) * _coef * _dY),
 				(_pos select 1) + ((cos (_moveDir)) * _coef * _dY),
@@ -445,15 +291,15 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseButtonDown": {
-		_mapOn = uiNamespace getVariable "vip_asp_dlg_map";
+		_mapOn = uiNamespace getVariable QGVAR(dlg_map);
 		if (!isNull _mapOn) exitWith {};
 
-		_button = _this select 1;
-		_mX = _this select 2;
-		_mY = _this select 3;
-		_shift = _this select 4;
-		_ctrl = _this select 5;
-		_alt = _this select 6;
+		_button = _param select 1;
+		_mX = _param select 2;
+		_mY = _param select 3;
+		_shift = _param select 4;
+		_ctrl = _param select 5;
+		_alt = _param select 6;
 
 		switch (_button) do {
 			case 0: {GVAR(LMB) = true};
@@ -463,10 +309,10 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseButtonUp": {
-		_mapOn = uiNamespace getVariable "vip_asp_dlg_map";
+		_mapOn = uiNamespace getVariable QGVAR(dlg_map);
 		if (!isNull _mapOn) exitWith {};
 		
-		_button = _this select 1;
+		_button = _param select 1;
 		switch (_button) do {
 			case 0: {GVAR(LMB) = false};
 			case 1: {GVAR(RMB) = false};
@@ -475,10 +321,10 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MouseZChanged": {
-		_mapOn = uiNamespace getVariable "vip_asp_dlg_map";
+		_mapOn = uiNamespace getVariable QGVAR(dlg_map);
 		if (!isNull _mapOn) exitWith {};
 		
-		_diff = _this select 1;
+		_diff = _param select 1;
 		if (_diff > 0) then {
 			GVAR(moveScale) = GVAR(moveScale) + (GVAR(moveScale) / 10) min 5;
 		} else {
@@ -488,10 +334,7 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "KeyDown": {
-		_key = _this select 1;
-		_shift = _this select 2;
-		_ctrl = _this select 3;
-		_alt = _this select 4;
+		EXPLODE_5_PVT(_param,_null,_key,_shift,_ctrl,_alt);
 		_return = false;
 
 		GVAR(keys) set [_key, true];
@@ -504,7 +347,7 @@ switch _mode do {
 		_camPos = [getPos _cam, GVAR(vector), GVAR(fov), GVAR(focus)];
 		
 		_camSaveSpot = {
-			EXPLODE_1_PVT(_this, _num);
+			EXPLODE_1_PVT(_this,_num);
 			if (!isNull GVAR(attach)) then {
 				_vector = _camPos select 1;
 				_dir = _vector select 0;
@@ -515,7 +358,7 @@ switch _mode do {
 		};
 		
 		_camLoadSpot = {
-			EXPLODE_1_PVT(_this, _num);
+			EXPLODE_1_PVT(_this,_num);
 			_arr = GVAR(savedSpots) select _num;
 			if (count (_arr) > 0) then {
 				if (!_camOn) then {["Camera", ["Free"]] call FUNC(events);};
@@ -531,12 +374,12 @@ switch _mode do {
 		};
 		
 		_camSaveUnit = {
-			EXPLODE_1_PVT(_this, _num);
+			EXPLODE_1_PVT(_this,_num);
 			if (!isNull _unit) then {GVAR(savedUnits) set [_num, [_unit]]};
 		};
 		
 		_camLoadUnit = {
-			EXPLODE_1_PVT(_this, _num);
+			EXPLODE_1_PVT(_this,_num);
 			_arr = GVAR(savedUnits) select _num;
 			if (count (_arr) > 0) then {
 				_unit = _arr select 0;
@@ -568,16 +411,16 @@ switch _mode do {
 		
 		switch (_key) do {
 
-			case (DIK_F1): {if (_ctrl) then {[0] call _camSaveSpot} else {[0] call _camLoadSpot}; _return = true};
-			case (DIK_F2): {if (_ctrl) then {[1] call _camSaveSpot} else {[1] call _camLoadSpot}; _return = true};
-			case (DIK_F3): {if (_ctrl) then {[2] call _camSaveSpot} else {[2] call _camLoadSpot}; _return = true};
-			case (DIK_F4): {if (_ctrl) then {[3] call _camSaveSpot} else {[3] call _camLoadSpot}; _return = true};
-			case (DIK_F5): {if (_ctrl) then {[4] call _camSaveSpot} else {[4] call _camLoadSpot}; _return = true};
-			case (DIK_F6): {if (_ctrl) then {[5] call _camSaveSpot} else {[5] call _camLoadSpot}; _return = true};
-			case (DIK_F7): {if (_ctrl) then {[6] call _camSaveSpot} else {[6] call _camLoadSpot}; _return = true};
-			case (DIK_F8): {if (_ctrl) then {[7] call _camSaveSpot} else {[7] call _camLoadSpot}; _return = true};
-			case (DIK_F9): {if (_ctrl) then {[8] call _camSaveSpot} else {[8] call _camLoadSpot}; _return = true};
-			case (DIK_F10): {if (_ctrl) then {[9] call _camSaveSpot} else {[9] call _camLoadSpot}; _return = true};
+			case (DIK_F1):  {if (_ctrl) then {[0]  call _camSaveSpot} else {[0]  call _camLoadSpot}; _return = true};
+			case (DIK_F2):  {if (_ctrl) then {[1]  call _camSaveSpot} else {[1]  call _camLoadSpot}; _return = true};
+			case (DIK_F3):  {if (_ctrl) then {[2]  call _camSaveSpot} else {[2]  call _camLoadSpot}; _return = true};
+			case (DIK_F4):  {if (_ctrl) then {[3]  call _camSaveSpot} else {[3]  call _camLoadSpot}; _return = true};
+			case (DIK_F5):  {if (_ctrl) then {[4]  call _camSaveSpot} else {[4]  call _camLoadSpot}; _return = true};
+			case (DIK_F6):  {if (_ctrl) then {[5]  call _camSaveSpot} else {[5]  call _camLoadSpot}; _return = true};
+			case (DIK_F7):  {if (_ctrl) then {[6]  call _camSaveSpot} else {[6]  call _camLoadSpot}; _return = true};
+			case (DIK_F8):  {if (_ctrl) then {[7]  call _camSaveSpot} else {[7]  call _camLoadSpot}; _return = true};
+			case (DIK_F9):  {if (_ctrl) then {[8]  call _camSaveSpot} else {[8]  call _camLoadSpot}; _return = true};
+			case (DIK_F10): {if (_ctrl) then {[9]  call _camSaveSpot} else {[9]  call _camLoadSpot}; _return = true};
 			case (DIK_F11): {if (_ctrl) then {[10] call _camSaveSpot} else {[10] call _camLoadSpot}; _return = true};
 			case (DIK_F12): {if (_ctrl) then {[11] call _camSaveSpot} else {[11] call _camLoadSpot}; _return = true};
 
@@ -689,7 +532,7 @@ switch _mode do {
 			
 			case (DIK_X): {
 				_layer = [QGVAR(rsc_crosshair)] call BIS_fnc_rscLayer;
-				_xhair = uiNamespace getVariable "vip_asp_rsc_crosshair";
+				_xhair = uiNamespace getVariable QGVAR(rsc_crosshair);
 				if (isNull _xhair) then {
 					_layer cutRsc [QGVAR(rsc_crosshair), "PLAIN", 0, true];
 					["CrosshairColour"] call FUNC(events);
@@ -770,11 +613,11 @@ switch _mode do {
 			case (DIK_ESCAPE): {
 				if (!GVAR(noEscape)) then {
 					_return = true;
-					_this spawn {
+					_param spawn {
 						disableSerialization;
 						_display = _this select 0;
 						_message = ["Do you want to exit camera mode?", "KGE Spectator", nil, true, _display] call BIS_fnc_guiMessage;
-						if (_message) then {["Exit"] call FUNC(events)};
+						if (_message) then {call FUNC(forceExit)};
 					};
 				};
 			};
@@ -786,19 +629,20 @@ switch _mode do {
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "KeyUp": {
-		GVAR(keys) set [_this select 1, false];
+		GVAR(keys) set [_param select 1, false];
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Camera": {
 	
-		_mode = _this select 0;
+		_mode = _param select 0;
 		
 		_cam = GVAR(cam);
 		_camOn = GVAR(cameraOn);
 		_unit = GVAR(unit);
 		_lock = GVAR(lock) select 0;
-		
+		_camPos = [getPos _cam, GVAR(vector), GVAR(fov), GVAR(focus)];
+
 		_findTarget = {
 		
 			_ret = [];
@@ -877,7 +721,7 @@ switch _mode do {
 			
 			case "NewUnit": {
 			
-				_increment = _this select 1;
+				_increment = _param select 1;
 				if (count allUnits > 0) then {
 					_allUnits = allUnits;
 					{
@@ -920,7 +764,6 @@ switch _mode do {
 					_cam camCommitPrepared 0;
 					["CrosshairColour"] call FUNC(events);
 				} else {
-
 					_dir = getDir _cam;
 					_pitchBank = _cam call BIS_fnc_getPitchBank;
 					GVAR(lock) = [-1];
@@ -973,7 +816,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "CrosshairColour": {
 	
-		_xhair = uiNamespace getVariable "vip_asp_rsc_crosshair";
+		_xhair = uiNamespace getVariable QGVAR(rsc_crosshair);
 		if (!isNull _xhair) then {
 			_colour = if ((GVAR(lock) select 0) > -1) then {[1,0,0,0.8]} else {
 				if (!isNull GVAR(attach)) then {[1,1,0,0.8]} else {[1,1,1,0.8]};
@@ -984,8 +827,8 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "OverlayList": {
-	
-		_overlay = _this;
+		private ["_ctrl"];
+		_overlay = _param;
 		_ctrl = _overlay displayCtrl 0;
 		_count = _ctrl tvCount [];
 		for "_i" from 0 to _count do {
@@ -1040,8 +883,8 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "OverlaySelect": {
 	
-		_ctrl = _this select 0;
-		_selection = _this select 1;
+		_ctrl = _param select 0;
+		_selection = _param select 1;
 		if (count _selection < 2) exitWith {};
 		
 		_str = _ctrl tvData _selection;
@@ -1057,7 +900,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Status": {
 	
-		_display = _this;
+		_display = _param;
 		_speedText = (str ([GVAR(moveScale), 4] call BIS_fnc_cutDecimals)) + "v";
 		(_display displayCtrl 0) ctrlSetText _speedText;
 		_name = "";
@@ -1095,8 +938,8 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "ViewDistance": {
-		_dialog = if (count _this > 1) then {ctrlParent (_this select 0)} else {_this select 0};
-		_dist = if (count _this > 1) then {_this select 1} else {-1};
+		_dialog = if (count _param > 1) then {ctrlParent (_param select 0)} else {_param select 0};
+		_dist = if (count _param > 1) then {_param select 1} else {-1};
 		_text = _dialog displayCtrl 1;
 		_slider = _dialog displayCtrl 2;
 		
@@ -1114,7 +957,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MapInit": {
 
-		_map = _this displayCtrl 1;
+		_map = _param displayCtrl 1;
 
 		if (isNil QGVAR(mapPos)) then {
 			GVAR(mapPos) = [(GVAR(respawnPos) select 0) / 2, (GVAR(respawnPos) select 1) / 2];
@@ -1128,23 +971,23 @@ switch _mode do {
 		ctrlMapAnimCommit _map;
 		setMousePosition [0.5, 0.5];
 
-		_map ctrlAddEventHandler ["Draw", {['MapDraw', _this] call FUNC(events)}];
+		_map ctrlAddEventHandler ["Draw", {_this call FUNC(mapDraw)}];
 		_map ctrlAddEventHandler ["MouseButtonDblClick", {['MapClick', _this] call FUNC(events)}];	
 	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MapClose": {
-		_map = _this displayCtrl 1;
-		QGVAR(mapPos) = _map ctrlMapScreenToWorld [0.5,0.5];
+		_map = _param displayCtrl 1;
+		GVAR(mapPos) = _map ctrlMapScreenToWorld [0.5,0.5];
 		GVAR(mapZoom) = ctrlMapScale _map;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MapClick": {
-		_map = _this select 0;
-		_button = _this select 1;
-		_shift = _this select 4;
-		_mapPos = _map ctrlMapScreenToWorld [_this select 2, _this select 3];
+		_map = _param select 0;
+		_button = _param select 1;
+		_shift = _param select 4;
+		_mapPos = _map ctrlMapScreenToWorld [_param select 2, _param select 3];
 
 		if (_shift) then {
 			if (GVAR(cameraOn)) then {
@@ -1209,10 +1052,7 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MapKeyDown": {
-		_key = _this select 1;
-		_shift = _this select 2;
-		_ctrl = _this select 3;
-		_alt = _this select 4;
+		EXPLODE_5_PVT(_param,_null,_key,_shift,_ctrl,_alt)
 		_return = false;
 	
 		switch (_key) do {
@@ -1224,8 +1064,8 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "UnitKilled": {
-		_unit = _this select 0;
-		_killer = _this select 1;
+		_unit = _param select 0;
+		_killer = _param select 1;
 		_arr = _unit getVariable "vip_asp_draw";
 		_colour = _arr select 4;
 		{_colour set [_forEachIndex, _x / 2.5]} forEach _colour;
@@ -1265,14 +1105,14 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "UnitRespawn": {
-		_unit = _this select 0;
+		_unit = _param select 0;
 		_unit setVariable ["vip_asp_listed", false];
 	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Help": {
 		
-		_dialog = _this;
+		_dialog = _param;
 	
 		_c1Action = parseText "<t align='left'>
 		<t underline='true'>Camera:</t><br />

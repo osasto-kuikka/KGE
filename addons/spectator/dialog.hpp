@@ -1,10 +1,10 @@
-class vip_asp_dlg_overlay {
+class GVAR(dlg_overlay) {
 
 	idd = 12200;
 	enableSimulation = 1;
 	movingEnable = 1;
 	enableDisplay = 1;
-	onLoad = "uiNamespace setVariable ['vip_asp_dlg_overlay', _this select 0]; ['OverlayList', _this select 0] call vip_asp_fnc_cl_newCamera";
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_overlay), _this select 0); [ARR_2(QUOTE(QUOTE(OverlayList)), _this select 0)] call FUNC(events));
 	onUnload = "";
 	
 	class controls {
@@ -65,9 +65,9 @@ class vip_asp_dlg_overlay {
 			colorArrow[] = {0,0,0,0};
 
 			//onCanDestroy = "systemChat str ['onCanDestroy',_this]; true";
-			onDestroy = "vip_asp_var_cl_mouseBusy = false; false";
-			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
-			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			onDestroy = QUOTE(GVAR(mouseBusy) = false; false);
+			onMouseEnter = QUOTE(GVAR(mouseBusy) = true; false);
+			onMouseExit = QUOTE(GVAR(mouseBusy) = false; false);
 			//onSetFocus = "systemChat str ['onSetFocus',_this]; false";
 			//onKillFocus = "systemChat str ['onKillFocus',_this]; false";
 			//onKeyDown = "systemChat str ['onKeyDown',_this]; false";
@@ -82,7 +82,7 @@ class vip_asp_dlg_overlay {
 
 			//onTreeSelChanged = "['OverlaySelect', _this] call vip_asp_fnc_cl_newCamera; false";
 			//onTreeSelChanged = "systemChat str (_this select 1)";
-			onTreeDblClick = "['OverlaySelect', _this] call vip_asp_fnc_cl_newCamera; false";
+			onTreeDblClick = QUOTE([ARR_2(DQUOTE(OverlaySelect), _this)] call FUNC(events); false);
 			//onTreeSelChanged = "systemChat str ['onTreeSelChanged',_this]; false";
 			//onTreeLButtonDown = "systemChat str ['onTreeLButtonDown',_this]; true";
 			//onTreeDblClick = "systemChat str ['onTreeDblClick',_this]; false";
@@ -93,13 +93,13 @@ class vip_asp_dlg_overlay {
 	};
 };
 
-class vip_asp_dlg_vd {
+class GVAR(dlg_vd) {
 	idd = 12201;
 	enableSimulation = 1;
 	enableDisplay = 0;
 	movingEnable = true;
 
-	onLoad = "uiNamespace setVariable ['vip_asp_dlg_vd', _this select 0]; ['ViewDistance', _this] call vip_asp_fnc_cl_newCamera; false";
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_vd), _this select 0); [ARR_2(QUOTE(QUOTE(ViewDistance)), _this)] call FUNC(events); false);
 	onUnload = "";
 	
 	class ControlsBackground {
@@ -127,11 +127,11 @@ class vip_asp_dlg_vd {
 			fixedWidth = 0;
 			colorText[] = {1,1,1,1};
 			colorShadow[] = {0,0,0,0.5};
-			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
-			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			onMouseEnter = QUOTE(GVAR(mouseBusy) = true; false);
+			onMouseExit = QUOTE(GVAR(mouseBusy) = false; false);
 		};
 		
-		class Background: vip_rsc_box {
+		class Background: GVAR(rsc_box) {
 			idc = -1;
 			moving = 1;
 			x = 9 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
@@ -140,15 +140,15 @@ class vip_asp_dlg_vd {
 			h = 5 * GUI_GRID_CENTER_H;
 			colorBackground[] = {0.1,0.1,0.1,1};
 			colorText[] = {0,0,0,0};
-			onDestroy = "vip_asp_var_cl_mouseBusy = false; false";
-			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
-			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			onDestroy = QUOTE(GVAR(mouseBusy) = false; false);
+			onMouseEnter = QUOTE(GVAR(mouseBusy) = true; false);
+			onMouseExit = QUOTE(GVAR(mouseBusy) = false; false);
 		};
 	};
 	
 	class Controls {
 	
-		class ButtonExit: vip_rsc_button {
+		class ButtonExit: GVAR(rsc_button) {
 
 			idc = 0;
 
@@ -160,11 +160,11 @@ class vip_asp_dlg_vd {
 			text = "Exit";
 
 			onButtonClick = "closeDialog 0; false";
-			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
-			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			onMouseEnter = QUOTE(GVAR(mouseBusy) = true; false);
+			onMouseExit = QUOTE(GVAR(mouseBusy) = false; false);
 		};
 		
-		class VDText: vip_rsc_text {
+		class VDText: GVAR(rsc_text) {
 			idc = 1;
 			
 			x = 25 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X;
@@ -199,21 +199,21 @@ class vip_asp_dlg_vd {
 			thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
 			
 			text = "";
-			onSliderPosChanged = "['ViewDistance', _this] call vip_asp_fnc_cl_newCamera";
-			onMouseEnter = "vip_asp_var_cl_mouseBusy = true; false";
-			onMouseExit = "vip_asp_var_cl_mouseBusy = false; false";
+			onSliderPosChanged = QUOTE([ARR_2(QUOTE(QUOTE(ViewDistance)), _this)] call FUNC(events));
+			onMouseEnter = QUOTE(GVAR(mouseBusy) = true; false);
+			onMouseExit = QUOTE(GVAR(mouseBusy) = false; false);
 		};
 	};
 };
 
-class vip_asp_dlg_map {
+class GVAR(dlg_map) {
 
 	idd = 12202;
 	enableSimulation = 1; 
 	enableDisplay = 0;
-	onLoad = "uiNameSpace setVariable ['vip_asp_dlg_map', _this select 0]; ['MapInit', _this select 0] call vip_asp_fnc_cl_newCamera";
-	onUnload = "['MapClose', _this select 0] call vip_asp_fnc_cl_newCamera";
-	onKeyDown = "['MapKeyDown', _this] call vip_asp_fnc_cl_newCamera";
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_map), _this select 0); [ARR_2(QUOTE(QUOTE(MapInit)),(_this select 0))] call FUNC(events));
+	onUnload = QUOTE([ARR_2(QUOTE(QUOTE(MapClose)), _this select 0)] call FUNC(events));
+	onKeyDown = QUOTE([ARR_2(QUOTE(QUOTE(MapKeyDown)), _this)] call FUNC(events));
 	
 	class controls {
 	
@@ -282,15 +282,15 @@ class vip_asp_dlg_map {
 			colorGridMap[] = {0.1,0.1,0.1,0.6};
 
 			fontLabel="PuristaMedium";
-			sizeExLabel="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			sizeExLabel="(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			fontGrid="TahomaB";
 			sizeExGrid=0.02;
 			fontUnits="TahomaB";
-			sizeExUnits="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			sizeExUnits="(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			fontNames="EtelkaNarrowMediumPro";
-			sizeExNames="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8) * 2";
+			sizeExNames="(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8) * 2";
 			fontInfo="PuristaMedium";
-			sizeExInfo="(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
+			sizeExInfo="(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 			fontLevel="TahomaB";
 			sizeExLevel=0.02;
 			showCountourInterval = 1;
@@ -332,10 +332,10 @@ class vip_asp_dlg_map {
 			class WaypointCompleted: Waypoint{};
 			class CustomMark: Waypoint{};
 			class Command: Waypoint{};
-			class Bush: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.2 * 14 * 0.05 * 0.05";};
-			class Rock: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.5 * 12 * 0.05";};
-			class SmallTree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.6 * 12 * 0.05";};
-			class Tree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance="0.9 * 16 * 0.05";};
+			class Bush: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance=QUOTE(0.2 * 14 * 0.05 * 0.05);};
+			class Rock: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance=QUOTE(0.5 * 12 * 0.05);};
+			class SmallTree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance=QUOTE(0.6 * 12 * 0.05);};
+			class Tree: Waypoint{color[]={0.45,0.64,0.33,0.4}; importance=QUOTE(0.9 * 16 * 0.05);};
 			class BusStop: Waypoint{};
 			class FuelStation: Waypoint{};
 			class Hospital: Waypoint{};

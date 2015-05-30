@@ -5,13 +5,15 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"kge_main", "kge_common"};
+        requiredAddons[] = {"kge_common"};
         author[] = {"nikolauska"};
         authorUrl = "https://github.com/nikolauska/";
         VERSION_CONFIG;
     };
 };
 
-#include "config_eventHandlers.hpp"
-#include "dialog.hpp"
+#include "config_eventhandlers.hpp"
+#include "defines.hpp"
 #include "rscTitles.hpp"
+#include "dialog.hpp"
+
