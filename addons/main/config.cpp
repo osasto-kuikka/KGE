@@ -568,7 +568,7 @@ class CfgSettings {
         class Versioning {
             class PREFIX {
                 level = DEFAULT_VERSIONING_LEVEL;
-                handler = "ace_common_fnc_mismatch";
+                handler = "kge_common_fnc_mismatch";
                 class Dependencies {
                     CBA[]={"cba_main", {1,0,0}, "true"};
                     XEH[]={"cba_xeh", {1,0,0}, "true"};
@@ -585,4 +585,4 @@ class CfgSettings {
     };
 };
 
-#include "CfgModuleCategories.hpp"
+#include "module_config.hpp"

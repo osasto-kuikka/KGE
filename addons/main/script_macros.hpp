@@ -37,7 +37,6 @@
 
 #define PATHTOEF(var1,var2) PATHTOF_SYS(PREFIX,var1,var2)
 
-
 #define GETVAR_SYS(var1,var2) getVariable [ARR_2(QUOTE(var1),var2)]
 #define SETVAR_SYS(var1,var2) setVariable [ARR_2(QUOTE(var1),var2)]
 #define SETPVAR_SYS(var1,var2) setVariable [ARR_3(QUOTE(var1),var2,true)]
@@ -71,9 +70,12 @@
 #define FUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define EFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
 
-#define LOCALIZATION(var1) localize QUOTE(DOUBLES(STR,GVAR(var1)))
+#define STRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
+#define ESTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
+#define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
+#define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
 
-#define HASMOD(var1) [ARR_1(QUOTE(var1))] call KGE_Core_fnc_classExist
+#define HASMOD(var1) QUOTE(var1) call kge_common_fnc_classExist
 
 // Supported mod defines
 #define MOD_ACE_COMMON HASMOD(ace_main)
