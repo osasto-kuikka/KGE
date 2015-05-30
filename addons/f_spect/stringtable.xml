@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Edited with tabler. -->
-<Project name="kge_spectator">
-    <Key ID="template">
-        <Original>Value given should be type ARRAY, but %1 was given</Original>
-        <English>Annettu arvo pitäisi olla tyyppiä ARRAY, mutta %1 annettiin</English>
-    </Key>
-</Project>
