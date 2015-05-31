@@ -4,7 +4,7 @@ class GVAR(dlg_overlay) {
 	enableSimulation = 1;
 	movingEnable = 1;
 	enableDisplay = 1;
-	onLoad = QUOTE(SETUVAR(QGVAR(dlg_overlay), _this select 0); [ARR_2(QUOTE(QUOTE(OverlayList)), _this select 0)] call FUNC(events));
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_overlay),_this select 0); [ARR_2(QUOTE(QUOTE(OverlayList)),_this select 0)] call FUNC(events));
 	onUnload = "";
 	
 	class controls {
@@ -99,7 +99,7 @@ class GVAR(dlg_vd) {
 	enableDisplay = 0;
 	movingEnable = true;
 
-	onLoad = QUOTE(SETUVAR(QGVAR(dlg_vd), _this select 0); [ARR_2(QUOTE(QUOTE(ViewDistance)), _this)] call FUNC(events); false);
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_vd),_this select 0); [ARR_2(QUOTE(QUOTE(ViewDistance)),_this)] call FUNC(events); false);
 	onUnload = "";
 	
 	class ControlsBackground {
@@ -211,7 +211,7 @@ class GVAR(dlg_map) {
 	idd = 12202;
 	enableSimulation = 1; 
 	enableDisplay = 0;
-	onLoad = QUOTE(SETUVAR(QGVAR(dlg_map), _this select 0); [ARR_2(QUOTE(QUOTE(MapInit)),(_this select 0))] call FUNC(events));
+	onLoad = QUOTE(SETUVAR(QGVAR(dlg_map),_this select 0); [ARR_2(QUOTE(QUOTE(MapInit)),_this select 0)] call FUNC(events));
 	onUnload = QUOTE([ARR_2(QUOTE(QUOTE(MapClose)), _this select 0)] call FUNC(events));
 	onKeyDown = QUOTE([ARR_2(QUOTE(QUOTE(MapKeyDown)), _this)] call FUNC(events));
 	

@@ -23,7 +23,7 @@ if(isNil "_name") then {_name = ""};
 
 private ["_var", "_varID"];
 
-_var = _object GETVAR_SYS(BIS_fnc_objectVar_var, "");
+_var = _object getVariable ["BIS_fnc_objectVar_var", ""];
 
 if (_var == "") then {
 	_var = vehicleVarname _object;
@@ -34,8 +34,8 @@ if (_var == "") then {
 		_var = _var + str _varID;
 	};
 
-	_object SETVAR_SYS(BIS_fnc_objectVar_var, _var);
-	SETMVAR(_var, _object);
+	_object setVariable ["BIS_fnc_objectVar_var", _var];
+	missionNamespace setVariable [_var, _object];
 	_object setVehicleVarname _var;
 };
 

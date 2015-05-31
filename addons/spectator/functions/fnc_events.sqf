@@ -849,7 +849,7 @@ switch _mode do {
 			private ["_groupNum"];
 			{
 				if (_x GETVAR_SYS(GVAR(listed),false)) then {
-					_arr = _x GETVAR_SYS(GVAR(draw), [false]);
+					_arr = _x GETVAR_SYS(GVAR(draw),[false]);
 					if (_arr select 0) then {
 						_name = _arr select 1;
 						_side = _arr select 2;
@@ -879,6 +879,60 @@ switch _mode do {
 			_ctrl tvSetCurSel _treeIndex;
 		};
 	};
+
+	case "OverlayList": {
+	
+		_overlay = _this;
+		_ctrl = _overlay displayCtrl 0;
+		_count = _ctrl tvCount [];
+		for "_i" from 0 to _count do {
+			_ctrl tvDelete [_x];
+		};
+		
+		vip_asp_overlayClose = false;
+		
+		_ctrl tvAdd [[], "Opfor"];
+		_ctrl tvAdd [[], "Blufor"];
+		_ctrl tvAdd [[], "Indfor"];
+		_ctrl tvAdd [[], "Civilian"];
+		
+		_unitList = [];
+		
+		{
+			_units = units _x;
+			private ["_groupNum"];
+			{
+				if (_x getVariable ["vip_asp_listed", false]) then {
+					_arr = _x getVariable "vip_asp_draw";
+					if (_arr select 0) then {
+						_name = _arr select 1;
+						_side = _arr select 2;
+						_icon = _arr select 3;
+						_picture = "\a3\ui_f\data\map\VehicleIcons\" + _icon + "_ca.paa";
+						_treeIndex = [];
+						_unitList pushBack _x;
+						
+						if (_forEachIndex == 0) then {
+							_groupNum = _ctrl tvAdd [[_side], _name];
+							_treeIndex = [_side, _groupNum];
+						} else {
+							_num = _ctrl tvAdd [[_side, _groupNum], _name];
+							_treeIndex = [_side, _groupNum, _num];
+						};
+
+						_ctrl tvSetPicture [_treeIndex, _picture];
+						_ctrl tvSetData [_treeIndex, [_x] call vip_asp_fnc_cl_objectVar2];
+						_unitList pushBack _treeIndex;
+					};
+				};
+			} forEach _units;
+		} forEach allGroups;
+		
+		if (!isNull vip_asp_var_cl_unit) then {
+			_treeIndex = _unitList select ((_unitList find vip_asp_var_cl_unit) + 1);
+			_ctrl tvSetCurSel _treeIndex;
+		};
+	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "OverlaySelect": {
@@ -897,44 +951,6 @@ switch _mode do {
 		};
 	};
 
-	///////////////////////////////////////////////////////////////////////////////////////////
-	case "Status": {
-	
-		_display = _param;
-		_speedText = (str ([GVAR(moveScale), 4] call BIS_fnc_cutDecimals)) + "v";
-		(_display displayCtrl 0) ctrlSetText _speedText;
-		_name = "";
-		_colour = [1,1,1,1];
-		if (!isNull GVAR(unit)) then {
-			_arr = GVAR(unit) getVariable "vip_asp_draw";
-			_name = _arr select 1;
-			_colour = _arr select 4;
-			_colour set [3, 1];
-		};
-		(_display displayCtrl 1) ctrlSetText _name;
-		(_display displayCtrl 1) ctrlSetTextColor _colour;
-		_mode = if (GVAR(cameraOn)) then {
-			if (isNull GVAR(attach)) then {"FREE"} else {"ATTACH"};
-		} else {
-			if (cameraView == "INTERNAL") then {"FIRST"} else {"THIRD"};
-		};
-		(_display displayCtrl 2) ctrlSetText _mode;
-		
-		_timeText = [dayTime] call BIS_fnc_timeToString;
-		(_display displayCtrl 3) ctrlSetText _timeText;
-		
-		_fovText = (str ([GVAR(fov), 3] call BIS_fnc_cutDecimals)) + "a";
-		(_display displayCtrl 4) ctrlSetText _fovText;
-		
-		_timeAccText = (str ([GVAR(accTime), 4] call BIS_fnc_cutDecimals)) + "x";
-		(_display displayCtrl 5) ctrlSetText _timeAccText;
-		
-		_focusDist = [GVAR(focus) select 0, 1] call BIS_fnc_cutDecimals;
-		_focusBlur = GVAR(focus) select 1;
-		
-		_focusText = if (_focusDist == -1 && _focusBlur == 1) then {"Auto"} else {if (_focusDist < 0) then {toString [8734]} else {str _focusDist + "m"}};
-		(_display displayCtrl 6) ctrlSetText _focusText;
-	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "ViewDistance": {
@@ -1006,7 +1022,7 @@ switch _mode do {
 			
 			if (count _units > 0) then {
 				{
-					if ((_x getVariable "vip_asp_draw") select 0) exitWith {
+					if ((_x getVariable QGVAR(draw)) select 0) exitWith {
 						_newUnit = _units select _forEachIndex;
 					};
 				} forEach _units;
@@ -1019,7 +1035,7 @@ switch _mode do {
 						_crew = crew _x;
 						if (count _crew > 0) then {
 							{
-								if ((_x getVariable "vip_asp_draw") select 0) exitWith {
+								if ((_x getVariable QGVAR(draw)) select 0) exitWith {
 									_newUnit = _crew select _forEachIndex;
 								};
 							} forEach _crew;

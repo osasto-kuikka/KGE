@@ -14,9 +14,9 @@ if (GVAR(displayMarkers) > 0) then {
 	_list append GVAR(deadList);
 	{
 		_unit = _x;
-		_drawArray = _unit GETVAR_SYS(GVAR(draw), []);
+		_drawArray = _unit GETVAR_SYS(GVAR(draw),[false]);
 
-		EXPLODE_4_PVT(_drawArray,_draw,_name,_side,_icon,_colour)
+		EXPLODE_5_PVT(_drawArray,_draw,_name,_side,_icon,_colour)
 					
 		if (_draw) then {			
 			_veh = vehicle _unit;
@@ -36,7 +36,7 @@ if (GVAR(displayMarkers) > 0) then {
 				_iconSize = (50 * _size) max _scale min (_min * 2);
 				_iconText = "[" + (getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName")) + "] " + _name;
 			} else {
-				_icon = _draw select 3;
+				_icon = _drawArray select 3;
 				_iconSize = (50 * _size) max _scale min _min;
 				_iconText = _name;
 			};
@@ -77,7 +77,7 @@ if (GVAR(displayMarkers) > 0) then {
 		{
 			EXPLODE_2_PVT(_x,_unit,_positions);
 
-			_draw = _unit GETVAR_SYS(GVAR(draw),[]);
+			_draw = _unit getVariable [QGVAR(draw), [false]];
 			if (count _draw > 1) then {
 				_colour = _draw select 4;
 				if (!GVAR(cameraOn) && {_unit == GVAR(unit)}) then {
