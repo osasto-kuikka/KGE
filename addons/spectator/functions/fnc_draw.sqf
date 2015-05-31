@@ -1,8 +1,11 @@
 #include "script_component.hpp"
 
-GVAR(draw3d) = addMissionEventHandler ["Draw3D", {
-	_cam = GVAR(cam);		
-	_overlay = GETUVAR(GVAR(dlg_overlay),objNull);
+[{
+	if(GVAR(forceExit)) exitWith {
+		[_this select 1] call cba_fnc_removePerFrameHandler;
+	};
+
+	_cam = GVAR(cam);
 	_compass = GETUVAR(GVAR(rsc_compass),objNull);
 	_status = GETUVAR(GVAR(rsc_status),objNull);
 	_map = GETUVAR(GVAR(dlg_map),objNull);
@@ -201,4 +204,4 @@ GVAR(draw3d) = addMissionEventHandler ["Draw3D", {
 		_focusText = if (_focusDist == -1 && _focusBlur == 1) then {"Auto"} else {if (_focusDist < 0) then {toString [8734]} else {str _focusDist + "m"}};
 		(_status displayCtrl 6) ctrlSetText _focusText;
 	};
-}];
+}, 0, []] call cba_fnc_addPerFrameHandler;

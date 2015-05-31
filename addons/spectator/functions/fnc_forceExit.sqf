@@ -36,8 +36,7 @@ GVAR(listLast) = nil;
 GVAR(accTime) = nil;
 
 _display = findDisplay 46;
-
-removeMissionEventHandler ["draw3D", GVAR(draw3d)]; 		
+	
 _display displayRemoveEventHandler ["keyDown", GVAR(eh_key1)];
 _display displayRemoveEventHandler ["keyUp", GVAR(eh_key2)];
 _display displayRemoveEventHandler ["mouseButtonDown", GVAR(eh_key3)];

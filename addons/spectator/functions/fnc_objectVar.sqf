@@ -15,11 +15,10 @@
 
 #include "script_component.hpp";
 
-EXPLODE_1_PVT(_this, _object, _name);
+PARAMS_1(_object);
+DEFAULT_PARAM(1,_name,"");
 
 if (isNull _object) exitwith {""};
-if(isNil "_name") then {_name = ""};
-
 
 private ["_var", "_varID"];
 

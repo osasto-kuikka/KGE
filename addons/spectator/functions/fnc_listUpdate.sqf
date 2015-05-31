@@ -28,7 +28,7 @@
 							
 				if (_x distance GVAR(respawnPos) > 200) then {
 					_name = _x call EFUNC(common,getName);
-					_side = _x call EFUNC(common,getSide);
+					_side = _x call EFUNC(common,getSideNumber);
 					_icon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "Icon");
 					_color = _side call FUNC(sideColor);
 					_x setvariable [QGVAR(draw),[true,_name,_side,_icon,_color]];

@@ -827,9 +827,7 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "OverlayList": {
-		private ["_ctrl"];
-		_overlay = _param;
-		_ctrl = _overlay displayCtrl 0;
+		_ctrl = _param displayCtrl 0;
 		_count = _ctrl tvCount [];
 		for "_i" from 0 to _count do {
 			_ctrl tvDelete [_x];
@@ -842,10 +840,8 @@ switch _mode do {
 		_ctrl tvAdd [[], "Indfor"];
 		_ctrl tvAdd [[], "Civilian"];
 		
-		_unitList = [];
-		
+		_unitList = [];		
 		{
-			_units = units _x;
 			private ["_groupNum"];
 			{
 				if (_x GETVAR_SYS(GVAR(listed),false)) then {
@@ -871,7 +867,7 @@ switch _mode do {
 						_unitList pushBack _treeIndex;
 					};
 				};
-			} forEach _units;
+			} forEach (units _x);
 		} forEach allGroups;
 		
 		if (!isNull GVAR(unit)) then {
@@ -879,64 +875,9 @@ switch _mode do {
 			_ctrl tvSetCurSel _treeIndex;
 		};
 	};
-
-	case "OverlayList": {
-	
-		_overlay = _this;
-		_ctrl = _overlay displayCtrl 0;
-		_count = _ctrl tvCount [];
-		for "_i" from 0 to _count do {
-			_ctrl tvDelete [_x];
-		};
-		
-		vip_asp_overlayClose = false;
-		
-		_ctrl tvAdd [[], "Opfor"];
-		_ctrl tvAdd [[], "Blufor"];
-		_ctrl tvAdd [[], "Indfor"];
-		_ctrl tvAdd [[], "Civilian"];
-		
-		_unitList = [];
-		
-		{
-			_units = units _x;
-			private ["_groupNum"];
-			{
-				if (_x getVariable ["vip_asp_listed", false]) then {
-					_arr = _x getVariable "vip_asp_draw";
-					if (_arr select 0) then {
-						_name = _arr select 1;
-						_side = _arr select 2;
-						_icon = _arr select 3;
-						_picture = "\a3\ui_f\data\map\VehicleIcons\" + _icon + "_ca.paa";
-						_treeIndex = [];
-						_unitList pushBack _x;
-						
-						if (_forEachIndex == 0) then {
-							_groupNum = _ctrl tvAdd [[_side], _name];
-							_treeIndex = [_side, _groupNum];
-						} else {
-							_num = _ctrl tvAdd [[_side, _groupNum], _name];
-							_treeIndex = [_side, _groupNum, _num];
-						};
-
-						_ctrl tvSetPicture [_treeIndex, _picture];
-						_ctrl tvSetData [_treeIndex, [_x] call vip_asp_fnc_cl_objectVar2];
-						_unitList pushBack _treeIndex;
-					};
-				};
-			} forEach _units;
-		} forEach allGroups;
-		
-		if (!isNull vip_asp_var_cl_unit) then {
-			_treeIndex = _unitList select ((_unitList find vip_asp_var_cl_unit) + 1);
-			_ctrl tvSetCurSel _treeIndex;
-		};
-	};
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
-	case "OverlaySelect": {
-	
+	case "OverlaySelect": {	
 		_ctrl = _param select 0;
 		_selection = _param select 1;
 		if (count _selection < 2) exitWith {};
@@ -972,7 +913,6 @@ switch _mode do {
 	
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "MapInit": {
-
 		_map = _param displayCtrl 1;
 
 		if (isNil QGVAR(mapPos)) then {
@@ -1177,7 +1117,7 @@ switch _mode do {
 		Numpad Enter<br />
 		</t>
 		";
-
+		/*
 		_c2Action = parseText "<t align='left'>
 		<t underline='true'>Units:</t><br />
 		<br />
@@ -1196,7 +1136,7 @@ switch _mode do {
 		Toggle Help<br />
 		</t>
 		";
-
+	
 		_c2Control = parseText "<t align='left'>
 		<br />
 		<br />
@@ -1204,6 +1144,43 @@ switch _mode do {
 		Ctrl + 1...10<br />
 		1...10<br />
 		U<br />
+		<br />
+		<br />
+		<br />
+		X<br />
+		C<br />
+		V<br />
+		G<br />
+		T<br />
+		H<br />
+		</t>
+		";
+		*/
+
+		_c2Action = parseText "<t align='left'>
+		<t underline='true'>Units:</t><br />
+		<br />
+		Cycle Unit<br />
+		Save Unit<br />
+		Recall Unit<br />
+		<br />
+		<t underline='true'>Display:</t><br />
+		<br />
+		Toggle Crosshair<br />
+		Toggle Compass<br />
+		Toggle Status<br />
+		View Distance Dialog<br />
+		Cycle Marker Mode<br />
+		Toggle Help<br />
+		</t>
+		";
+	
+		_c2Control = parseText "<t align='left'>
+		<br />
+		<br />
+		Arrow Left, Right<br />
+		Ctrl + 1...10<br />
+		1...10<br />
 		<br />
 		<br />
 		<br />
