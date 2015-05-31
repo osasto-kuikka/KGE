@@ -7,6 +7,7 @@ PREP(execDelayed);
 PREP(fixHeadbug);
 PREP(getName);
 PREP(getSide);
+PREP(getSideNumber);
 PREP(isAdmin);
 PREP(isAlive);
 PREP(player);
