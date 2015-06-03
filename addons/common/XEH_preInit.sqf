@@ -10,6 +10,10 @@ PREP(getSide);
 PREP(getSideNumber);
 PREP(isAdmin);
 PREP(isAlive);
+PREP(isCommander);
+PREP(isDriver);
+PREP(isGunner);
+PREP(isPassenger);
 PREP(player);
 PREP(setName);
 
