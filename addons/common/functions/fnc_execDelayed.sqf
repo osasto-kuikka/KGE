@@ -16,11 +16,27 @@
 #include "script_component.hpp"
 
 _interval = _this select 3;
-[
-    {
-        EXPLODE_2_PVT(_this, _args, _pfh);
-        EXPLODE_2_PVT(_args, _params, _startTime);
-        EXPLODE_3_PVT(_params, _func, _funcParams, _delay);
+
+if(MOD_ACE_COMMON) then {
+    [{
+        EXPLODE_2_PVT(_this,_args,_pfh);
+        EXPLODE_2_PVT(_args,_params,_startTime);
+        EXPLODE_3_PVT(_params,_func,_funcParams,_delay);
+
+        // Exit if the time was not reached yet
+        if (ACE_time < _startTime + _delay) exitWith {};
+
+        // Destroy PHF
+        [_pfh] call CBA_fnc_removePerFrameHandler;
+
+        // Execute the function
+        _funcParams call _func;
+    }, _interval, [_this, ACE_time]] call CBA_fnc_addPerFrameHandler
+} else {
+    [{
+        EXPLODE_2_PVT(_this,_args,_pfh);
+        EXPLODE_2_PVT(_args,_params,_startTime);
+        EXPLODE_3_PVT(_params,_func,_funcParams,_delay);
 
         // Exit if the time was not reached yet
         if (time < _startTime + _delay) exitWith {};
@@ -30,7 +46,5 @@ _interval = _this select 3;
 
         // Execute the function
         _funcParams call _func;
-    },
-    _interval,
-    [_this, time]
-] call CBA_fnc_addPerFrameHandler
+    }, _interval, [_this, time]] call CBA_fnc_addPerFrameHandler
+}
