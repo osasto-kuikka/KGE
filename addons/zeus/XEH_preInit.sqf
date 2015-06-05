@@ -2,8 +2,6 @@
 
 ADDON = false;
 
-PREP(addEvent);
-PREP(firedEvent);
-PREP(removeEvent);
+PREP(active);
 
 ADDON = true;
