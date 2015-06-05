@@ -1,3 +1,15 @@
+/*
+ * Author: nikolauska
+ *
+ * Remove fired event from vehicle
+ *
+ * Argument:
+ * 0: Vehicle (Object)
+ *
+ * Return value:
+ * 
+ */
+
 #include "script_component.hpp"
 
 if(!(vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false)) exitWith {};

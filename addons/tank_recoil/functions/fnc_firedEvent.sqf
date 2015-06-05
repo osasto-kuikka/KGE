@@ -1,10 +1,21 @@
+/*
+ * Author: nikolauska
+ *
+ * Code run on vehicle fired event
+ *
+ * Argument:
+ * 0: Vehicle (Object)
+ * 1: Turret (String)
+ *
+ * Return value:
+ * 
+ */
+
 #include "script_component.hpp"
 
 _tank = _this select 0;
 _centerofMass = getCenterOfMass _tank;
 _turret = format["%1", (_tank weaponsTurret [0] select 0)];
-
-hint format["%1  == %2 is %3", _this select 1, _turret, _this select 1 == _turret];
 
 if (_this select 1 == _turret) then { 
     _recv = _centerofMass vectorDiff ((

@@ -1,3 +1,15 @@
+/*
+ * Author: nikolauska
+ *
+ * Adds fired event to vehicle if not already added
+ *
+ * Argument:
+ * 0: Object
+ *
+ * Return value:
+ * 
+ */
+
 #include "script_component.hpp"
 
 if((vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false)) exitWith {};
