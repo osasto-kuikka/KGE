@@ -13,3 +13,4 @@ class CfgPatches {
 };
 
 #include "config_eventhandlers.hpp"
+#include "listMenu.hpp"

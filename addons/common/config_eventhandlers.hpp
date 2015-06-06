@@ -23,7 +23,7 @@ class Extended_InitPost_EventHandlers {
 class Extended_Respawn_EventHandlers {
     class All {
         class GVAR(setName) {
-            respawn = QUOTE(_this call FUNC(setName));
+            respawn = QUOTE(if (local (_this select 0)) then {(_this select 0) call FUNC(setName)};);
         };
     };
 };
