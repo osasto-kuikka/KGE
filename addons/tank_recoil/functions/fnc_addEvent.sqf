@@ -12,6 +12,8 @@
 
 #include "script_component.hpp"
 
+hint "Advanced tank recoil loaded!";
+
 if((vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false)) exitWith {};
 
 (vehicle _this) SETVAR_SYS(GVAR(firedEventAdded),true);
