@@ -1,5 +1,16 @@
 #include "script_component.hpp"
 
+if(hasInterface) exitWith {
+	["KGE_adminChanged", {
+		EXPLODE_1_PVT(_this,_isAdmin);
+
+		if(_isAdmin) then {
+			call FUNC(activate);
+		};
+	}] call cba_fnc_addEventHandler;
+};
+if(!isServer) exitWith {};
+
 GVAR(sideLogic) = createCenter sideLogic;
 
 GVAR(curatorModule) = (createGroup KGE_Zeus_SideLogic) createUnit ["ModuleCurator_F",[0,0,0] , [], 0, ""];
@@ -20,7 +31,15 @@ _addons call BIS_fnc_activateAddons;
 GVAR(curatorModule) addcuratoraddons _addons;
 
 [QGVAR(activateEvent), {
+	// Remove old curator
+	if !(isNil QGVAR(assignedCurator)) then {
+		unassignCurator GVAR(curatorModule);
+	};
+
+	// Assign new curator
+	GVAR(assignedCurator) = _this;
 	_this assignCurator GVAR(curatorModule);
+
 	{
 		_curator = _x;
 
@@ -30,10 +49,6 @@ GVAR(curatorModule) addcuratoraddons _addons;
 		_curator addCuratorEditableObjects [(allMissionObjects "Man"),false];
 		_curator addCuratorEditableObjects [(allMissionObjects "Air"),true];
 		_curator addCuratorEditableObjects [(allMissionObjects "Ammo"),false];
-
-		// Add players to list (untested!)
-		if(isMultiplayer) then {_curator addCuratorEditableObjects [playableUnits, true]}
-		else {_curator addCuratorEditableObjects [switchableUnits, true]};
 
 		// Reduce costs for all actions
 		_curator setCuratorWaypointCost 0;

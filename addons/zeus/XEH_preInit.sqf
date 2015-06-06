@@ -2,6 +2,6 @@
 
 ADDON = false;
 
-PREP(active);
+PREP(activate);
 
 ADDON = true;
