@@ -11,5 +11,5 @@
  */
 
 if(vehicle _this != _this) then {
-	!(_this call kge_common_fnc_isDriver) && {!(_this call kge_common_fnc_isGunner) && !(_this call kge_common_fnc_isCommander)}
+    !(_this call kge_common_fnc_isDriver) && {!(_this call kge_common_fnc_isGunner) && !(_this call kge_common_fnc_isCommander)}
 } else {false}

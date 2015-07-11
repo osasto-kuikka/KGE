@@ -1,8 +1,8 @@
 #include "script_component.hpp";
 
 if (!GVAR(alwaysTracking)) then {
-	GVAR(trackingArray) = nil;
-	GVAR(trackingLast) = nil;
+    GVAR(trackingArray) = nil;
+    GVAR(trackingLast) = nil;
 };
 
 GVAR(cam) cameraEffect ["terminate", "back"];
@@ -11,7 +11,7 @@ false SetCamUseTi 0;
 camDestroy GVAR(cam);
 
 GVAR(forceExit) = true;
-		
+        
 GVAR(noEscape) = nil;
 GVAR(alwaysTracking) = nil;
 GVAR(cam) = nil;
@@ -36,7 +36,7 @@ GVAR(listLast) = nil;
 GVAR(accTime) = nil;
 
 _display = findDisplay 46;
-	
+    
 _display displayRemoveEventHandler ["keyDown", GVAR(eh_key1)];
 _display displayRemoveEventHandler ["keyUp", GVAR(eh_key2)];
 _display displayRemoveEventHandler ["mouseButtonDown", GVAR(eh_key3)];
@@ -55,8 +55,8 @@ GVAR(eh_key7) = nil;
 _layers = GETMVAR(BIS_fnc_rscLayer_list, []);
 
 for "_i" from 1 to (count _layers - 1) step 2 do {
-	(_layers select _i) cutText ["", "Plain"];
+    (_layers select _i) cutText ["", "Plain"];
 };
-		
+        
 if (!isMultiplayer) then {setAccTime 1};
 KGE_player switchCamera "Internal";

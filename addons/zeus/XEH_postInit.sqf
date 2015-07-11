@@ -1,13 +1,13 @@
 #include "script_component.hpp"
 
 if(hasInterface) exitWith {
-	["KGE_adminChanged", {
-		EXPLODE_1_PVT(_this,_isAdmin);
+    ["KGE_adminChanged", {
+        EXPLODE_1_PVT(_this,_isAdmin);
 
-		if(_isAdmin) then {
-			call FUNC(activate);
-		};
-	}] call cba_fnc_addEventHandler;
+        if(_isAdmin) then {
+            call FUNC(activate);
+        };
+    }] call cba_fnc_addEventHandler;
 };
 if(!isServer) exitWith {};
 
@@ -21,37 +21,37 @@ private ["_addons", "_cfgPatches", "_class"];
 _addons = [];
 _cfgPatches = configFile >> "cfgpatches";
 for "_i" from 0 to (count _cfgPatches - 1) do {
-	_class = _cfgPatches select _i;
+    _class = _cfgPatches select _i;
 
-	if (isclass _class) then {
-		_addons pushBack (configName _class);
-	};
+    if (isclass _class) then {
+        _addons pushBack (configName _class);
+    };
 };
 _addons call BIS_fnc_activateAddons;
 GVAR(curatorModule) addcuratoraddons _addons;
 
 [QGVAR(activateEvent), {
-	// Remove old curator
-	if !(isNil QGVAR(assignedCurator)) then {
-		unassignCurator GVAR(curatorModule);
-	};
+    // Remove old curator
+    if !(isNil QGVAR(assignedCurator)) then {
+        unassignCurator GVAR(curatorModule);
+    };
 
-	// Assign new curator
-	GVAR(assignedCurator) = _this;
-	_this assignCurator GVAR(curatorModule);
+    // Assign new curator
+    GVAR(assignedCurator) = _this;
+    _this assignCurator GVAR(curatorModule);
 
-	{
-		_curator = _x;
+    {
+        _curator = _x;
 
-		//Add all object in mission to editable
-		_curator addCuratorEditableObjects [vehicles,true];
-		_curator addCuratorEditableObjects [allUnits, true];
-		_curator addCuratorEditableObjects [(allMissionObjects "Man"),false];
-		_curator addCuratorEditableObjects [(allMissionObjects "Air"),true];
-		_curator addCuratorEditableObjects [(allMissionObjects "Ammo"),false];
+        //Add all object in mission to editable
+        _curator addCuratorEditableObjects [vehicles,true];
+        _curator addCuratorEditableObjects [allUnits, true];
+        _curator addCuratorEditableObjects [(allMissionObjects "Man"),false];
+        _curator addCuratorEditableObjects [(allMissionObjects "Air"),true];
+        _curator addCuratorEditableObjects [(allMissionObjects "Ammo"),false];
 
-		// Reduce costs for all actions
-		_curator setCuratorWaypointCost 0;
-		{_curator setCuratorCoef [_x,0];} forEach ["place","edit","delete","destroy","group","synchronize"];
-	} forEach allCurators;
+        // Reduce costs for all actions
+        _curator setCuratorWaypointCost 0;
+        {_curator setCuratorCoef [_x,0];} forEach ["place","edit","delete","destroy","group","synchronize"];
+    } forEach allCurators;
 }] call cba_fnc_addEventHandler;

@@ -15,11 +15,11 @@
 if (isNull _this) exitWith {"Unknown"};
 
 if (_this isKindOf "CAManBase") then {
-	if(isPlayer _this) then {
-		_this getVariable ["KGE_name", "Undefined"]
-	} else {
-		name _this
-	}
+    if (!(_this call FUNC(isAlive)) && {isPlayer _this}) then {
+        _this getVariable ["KGE_name", "Undefined"]
+    } else {
+        name _this
+    }
 } else {
-	getText (configFile >> "CfgVehicles" >> typeOf _this >> "displayName")
+    getText (configFile >> "CfgVehicles" >> typeOf _this >> "displayName")
 }

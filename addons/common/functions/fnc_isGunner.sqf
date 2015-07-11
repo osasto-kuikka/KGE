@@ -11,5 +11,5 @@
  */
 
 if(vehicle _this != _this) then {
-	gunner (vehicle _this) isEqualTo _this
+    gunner (vehicle _this) isEqualTo _this
 } else {false}

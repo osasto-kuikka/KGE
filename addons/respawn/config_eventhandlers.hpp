@@ -12,10 +12,10 @@ class Extended_PostInit_EventHandlers {
     };
 };
 
-class Extended_InitPost_EventHandlers {
+class Extended_Init_EventHandlers {
     class CAmanBase {
         class GVAR(init) {
-            init = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(init))] call FUNC(eventHandlers)};);
+            init = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(bisInit)))] call FUNC(eventHandlers)});
         };
     };
 };
@@ -23,16 +23,15 @@ class Extended_InitPost_EventHandlers {
 class Extended_Killed_EventHandlers {
     class CAManBase {
         class GVAR(killed) {
-            killed = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(killed))] call FUNC(eventHandlers)};);
+            killed = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(bisKilled)))] call FUNC(eventHandlers)});
         };
     };
 };
 
-
 class Extended_Respawn_EventHandlers {
     class CAManBase {
         class GVAR(respawn) {
-            respawn = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(respawn))] call FUNC(eventHandlers)};);
+            respawn = QUOTE(if (local (_this select 0)) then {[ARR_2((_this select 0),QUOTE(QUOTE(bisRespawn)))] call FUNC(eventHandlers)});
         };
     };
 };

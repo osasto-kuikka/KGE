@@ -31,6 +31,7 @@
 #define DEFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
 #define FUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define EFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
+#define CFUNC(var1) TRIPLES(cba,fnc,var1)
 
 #define QFUNC(var1) QUOTE(DFUNC(var1))
 #define QEFUNC(var1,var2) QUOTE(DEFUNC(var1,var2))
@@ -70,10 +71,13 @@
 #define FUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define EFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
 
-#define STRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
-#define ESTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-#define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
-#define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
+#ifndef STRING_MACROS_GUARD
+#define STRING_MACROS_GUARD
+    #define LSTRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
+    #define LESTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
+    #define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
+    #define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
+#endif
 
 #define HASMOD(var1) QUOTE(var1) call kge_common_fnc_classExist
 
@@ -84,10 +88,10 @@
 #define MOD_ACRE2 HASMOD(acre_main)
 
 // KGE mods
-#define KGE_MOD_AI 		   HASMOD(kge_ai)
-#define KGE_MOD_CACHE 	   HASMOD(kge_cache)
-#define KGE_MOD_GEAR 	   HASMOD(kge_gear)
-#define KGE_MOD_MENU 	   HASMOD(kge_menu)
+#define KGE_MOD_AI         HASMOD(kge_ai)
+#define KGE_MOD_CACHE      HASMOD(kge_cache)
+#define KGE_MOD_GEAR       HASMOD(kge_gear)
+#define KGE_MOD_MENU       HASMOD(kge_menu)
 #define KGE_MOD_RESPAWN    HASMOD(kge_respawn)
 #define KGE_MOD_SAFESTART  HASMOD(kge_safestart)
 #define KGE_MOD_SPECTATOR  HASMOD(kge_spectator)

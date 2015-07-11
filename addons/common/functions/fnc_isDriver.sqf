@@ -11,5 +11,5 @@
  */
 
 if(vehicle _this != _this) then {
-	driver (vehicle _this) isEqualTo _this
+    driver (vehicle _this) isEqualTo _this
 } else {false}

@@ -1,1 +1,1 @@
-#include "\z\kge\addons\zeus\script_component.hpp"
+#include "\z\kge\addons\respawn\script_component.hpp"
