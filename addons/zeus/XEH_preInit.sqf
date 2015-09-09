@@ -2,6 +2,8 @@
 
 ADDON = false;
 
-PREP(activate);
+PREP(activateClient);
+PREP(activateServer);
+PREP(serverInit);
 
 ADDON = true;
