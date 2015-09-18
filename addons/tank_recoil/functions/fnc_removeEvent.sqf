@@ -7,14 +7,17 @@
  * 0: Vehicle (Object)
  *
  * Return value:
- * 
+ *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if(!(vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false)) exitWith {};
+params [["_unit", KGE_Player, [objNull]]];
+private ["_var"];
 
-(vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false);
+_var = _unit getVariable [QGVAR(firedEvent), nil];
+if(isNil "_var") exitWith {};
 
-(vehicle _this) removeEventHandler ["fired", (vehicle _this) GETVAR_SYS(GVAR(firedEvent),nil)];
-(vehicle _this) GETVAR_SYS(GVAR(firedEvent),nil);
+_var params ["_vehicle", "_event"];
+_vehicle removeEventHandler ["fired", _event];
+_unit setVariable [QGVAR(firedEvent), nil];

@@ -7,15 +7,16 @@
  * 0: Object
  *
  * Return value:
- * 
+ *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-hint "Advanced tank recoil loaded!";
+params [["_unit", KGE_Player, [objNull]]];
 
-if((vehicle _this) GETVAR_SYS(GVAR(firedEventAdded),false)) exitWith {};
+private ["_vehicle"];
+_vehicle = vehicle _unit;
 
-(vehicle _this) SETVAR_SYS(GVAR(firedEventAdded),true);
+if (!(_vehicle isKindOf "Tank") || !(isNil {_unit getVariable [QGVAR(firedEvent), nil]})) exitWith {};
 
-(vehicle _this) setvariable [QGVAR(firedEvent), (vehicle _this) addEventHandler ["Fired", {_this call FUNC(firedEvent)}]];
+_unit setvariable [QGVAR(firedEvent), [_vehicle, _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]]];

@@ -10,16 +10,18 @@
  * String
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if (isNull _this) exitWith {"Unknown"};
+params ["_unit"];
 
-if (_this isKindOf "CAManBase") then {
-    if (!(_this call FUNC(isAlive)) && {isPlayer _this}) then {
-        _this getVariable ["KGE_name", "Undefined"]
+if !(_unit call FUNC(isAlive)) exitWith {"Unknown"};
+
+if (_unit isKindOf "CAManBase") then {
+    if (isPlayer _unit) then {
+        _unit getVariable ["KGE_name", "Undefined"];
     } else {
-        name _this
-    }
+        name _unit;
+    };
 } else {
-    getText (configFile >> "CfgVehicles" >> typeOf _this >> "displayName")
-}
+    getText (configFile >> "CfgVehicles" >> typeOf _unit >> "displayName");
+};

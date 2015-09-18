@@ -10,6 +10,11 @@
  * Boolean
  */
 
-if(vehicle _this != _this) then {
-    gunner (vehicle _this) isEqualTo _this
-} else {false}
+#include "..\script_component.hpp"
+
+params [["_unit", objNull]];
+
+if !(_unit call FUNC(isAlive)) exitWith { false };
+
+!(vehicle _unit isEqualTo _unit) &&
+gunner (vehicle _unit) isEqualTo _unit

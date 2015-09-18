@@ -11,8 +11,8 @@
 
 #include "..\script_component.hpp"
 
-// If autorun is not started, start it
-if(GVAR(isAutoRunActive) isEqualTo false) exitWith { GVAR(isAutoRunActive) = true };
+// If autorun is not started then exit
+if !(GVAR(isAutoRunActive)) exitWith {};
 
 if(GVAR(autoRunMode) isEqualTo WALK) exitWith { GVAR(autoRunMode) = JOG };
 if(GVAR(autoRunMode) isEqualTo JOG) exitWith { GVAR(autoRunMode) = SPRINT };

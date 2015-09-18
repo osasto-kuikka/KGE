@@ -11,7 +11,6 @@
 
 #include "..\script_component.hpp"
 
-if (  !(KGE_Player call EFUNC(common,isAlive)) ||
-      !(KGE_Player call EFUNC(common,isAdmin)) ) exitWith {};
+params [["_unit", KGE_Player]];
 
-[QGVAR(activateEvent), KGE_Player] call cba_fnc_globalEvent;
+[QGVAR(activateEvent), [_unit]] call cba_fnc_globalEvent;

@@ -9,15 +9,20 @@
  * 3  = passenger
  *
  * Argument:
+ * 0: Unit to
  *
  * Return value:
  * Number
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if(isNull _this || vehicle _this == _this) exitWith {-1};
-if(_this call FUNC(isCommander)) exitWith {0};
-if(_this call FUNC(isDriver)) exitWith {1};
-if(_this call FUNC(isGunner)) exitWith {2};
-if(_this call FUNC(isPassenger)) exitWith {3};
+params [
+    ["_unit", KGE_Player, [objNull]]
+    ];
+
+if((vehicle _unit) == _unit) exitWith {-1};
+if(_unit call FUNC(isCommander)) exitWith {0};
+if(_unit call FUNC(isDriver)) exitWith {1};
+if(_unit call FUNC(isGunner)) exitWith {2};
+if(_unit call FUNC(isPassenger)) exitWith {3};

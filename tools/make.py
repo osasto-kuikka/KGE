@@ -70,7 +70,7 @@ dssignfile = ""
 prefix = "ace"
 pbo_name_prefix = "ace_"
 signature_blacklist = ["ace_server.pbo"]
-importantFiles = ["mod.cpp", "README.md", "AUTHORS.txt", "LICENSE", "logo_ace3_ca.paa"]
+importantFiles = ["mod.cpp", "README.md", "LICENSE", "kuikka.paa"]
 
 ###############################################################################
 # http://akiscode.com/articles/sha-1directoryhash.shtml
@@ -581,7 +581,7 @@ def get_private_keyname(commitID,module="main"):
     global pbo_name_prefix
 
     aceVersion = get_ace_version()
-    keyName = str("{prefix}{version}-{commit_id}".format(prefix=pbo_name_prefix,version=aceVersion,commit_id=commitID))
+    keyName = str("{prefix}{version}{commit_id}".format(prefix=pbo_name_prefix,version=aceVersion,commit_id=commitID))
     return keyName
 
 
@@ -606,7 +606,7 @@ def get_commit_ID():
         os.chdir(curDir)
 
     print_yellow("COMMIT ID set to {}".format(commit_id))
-    return commit_id
+    return ""
 
 
 def version_stamp_pboprefix(module,commitID):

@@ -15,10 +15,10 @@ private ["_gradient", "_fatigue"];
 
 if(!alive KGE_Player) exitWith {false};
 if(vehicle KGE_Player != KGE_Player) exitWith {false};
-if(surfaceIsWater position KGE_Player) exitWith {false};
+if(surfaceIsWater (getPosASL KGE_Player)) exitWith {false};
 
 // If KGE respawn is used
-if(!GVAR(alive)) exitWith {false};
+if !(KGE_Player getVariable ["KGE_alive", true]) exitWith {false};
 
 // No need for fatigue and gradient check for walking
 if(GVAR(autoRunMode) isEqualTo WALK) exitWith {true};
@@ -29,5 +29,8 @@ _fatigue = getFatigue KGE_Player;
 if(_fatigue > GVAR(fatigueThreshold)) exitWith {false};
 if(_gradient < GVAR(terrainGradientMaxDecline)) exitWith {false};
 if(_gradient > GVAR(terrainGradientMaxIncline)) exitWith {false};
+
+// Disable running when weapon is holstered
+if((animationState KGE_Player) in GVAR(disablingAnimation)) exitWith {false};
 
 true;

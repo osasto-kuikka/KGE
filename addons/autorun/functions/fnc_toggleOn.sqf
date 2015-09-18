@@ -13,3 +13,7 @@
 #include "..\script_component.hpp"
 
 GVAR(isAutoRunActive) = !GVAR(isAutoRunActive);
+
+if !(GVAR(isAutoRunActive)) then {
+    KGE_Player switchMove "";
+};

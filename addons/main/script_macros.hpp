@@ -4,25 +4,6 @@
 // Default versioning level
 #define DEFAULT_VERSIONING_LEVEL 2
 
-// RGB Colors
-#define RGB_GREEN 0, 0.5, 0, 1
-#define RGB_BLUE 0, 0, 1, 1
-#define RGB_ORANGE 0.5, 0.5, 0, 1
-#define RGB_RED 1, 0, 0, 1
-#define RGB_YELLOW 1, 1, 0, 1
-#define RGB_WHITE 1, 1, 1, 1
-#define RGB_GRAY 0.5, 0.5, 0.5, 1
-#define RGB_BLACK 0, 0, 0, 1
-#define RGB_MAROON 0.5, 0, 0, 1
-#define RGB_OLIVE 0.5, 0.5, 0, 1
-#define RGB_NAVY 0, 0, 0.5, 1
-#define RGB_PURPLE 0.5, 0, 0.5, 1
-#define RGB_FUCHSIA 1, 0, 1, 1
-#define RGB_AQUA 0, 1, 1, 1
-#define RGB_TEAL 0, 0.5, 0.5, 1
-#define RGB_LIME 0, 1, 0, 1
-#define RGB_SILVER 0.75, 0.75, 0.75, 1
-
 
 #define EGVAR(module,var) TRIPLES(PREFIX,module,var)
 #define QEGVAR(module,var) QUOTE(EGVAR(module,var))
@@ -68,9 +49,6 @@
 
 #define PREP_MODULE(folder) [] call compile preprocessFileLineNumbers QUOTE(PATHTOF(folder\__PREP__.sqf))
 
-#define FUNC(var1) TRIPLES(ADDON,fnc,var1)
-#define EFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
-
 #ifndef STRING_MACROS_GUARD
 #define STRING_MACROS_GUARD
     #define LSTRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
@@ -78,24 +56,3 @@
     #define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
     #define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
 #endif
-
-#define HASMOD(var1) QUOTE(var1) call kge_common_fnc_classExist
-
-// Supported mod defines
-#define MOD_ACE_COMMON HASMOD(ace_main)
-#define MOD_ACE_MENU HASMOD(ace_interact_menu)
-#define MOD_TFAR HASMOD(task_force_radio)
-#define MOD_ACRE2 HASMOD(acre_main)
-
-// KGE mods
-#define KGE_MOD_AI         HASMOD(kge_ai)
-#define KGE_MOD_CACHE      HASMOD(kge_cache)
-#define KGE_MOD_GEAR       HASMOD(kge_gear)
-#define KGE_MOD_MENU       HASMOD(kge_menu)
-#define KGE_MOD_RESPAWN    HASMOD(kge_respawn)
-#define KGE_MOD_SAFESTART  HASMOD(kge_safestart)
-#define KGE_MOD_SPECTATOR  HASMOD(kge_spectator)
-#define KGE_MOD_STAMINABAR HASMOD(kge_staminabar)
-#define KGE_MOD_TEAMROSTER HASMOD(kge_teamroster)
-#define KGE_MOD_TELEPORT   HASMOD(kge_teleport)
-#define KGE_MOD_ZEUS       HASMOD(kge_zeus)

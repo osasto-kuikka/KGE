@@ -10,6 +10,12 @@
  * Side
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if (!isNull _this) then {getNumber (configfile >> "cfgvehicles" >> typeof _this >> "side")} else {-1}
+params [["_unit",objNull]];
+
+if (!isNull _unit) then {
+  getNumber (configfile >> "cfgvehicles" >> typeof _unit >> "side")
+} else {
+  -1
+}

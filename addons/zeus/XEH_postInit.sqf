@@ -1,19 +1,33 @@
 #include "script_component.hpp"
 
-if(hasInterface) exitWith {
-    ["KGE_adminChanged", {
-        params ["_isAdmin"];
+if(isServer) then {
+    call FUNC(serverInit);
 
-        if(_isAdmin) then {
-            call FUNC(activateClient);
-        };
+    [QGVAR(activateEvent), {
+        _this call FUNC(activateServer);
     }] call cba_fnc_addEventHandler;
 };
 
-if(!isServer) exitWith {};
+if(hasInterface) then {
+    [{
+        ["KGE_adminChanged", {
+            params ["_isAdmin"];
 
-call FUNC(serverInit);
+            if(_isAdmin) then {
+                call FUNC(activateClient);
+            };
+        }] call cba_fnc_addEventHandler;
 
-[QGVAR(activateEvent), {
-    _this call FUNC(activateServer);
-}] call cba_fnc_addEventHandler;
+        ["KGE_PlayerChanged", {
+            params ["_newPlayer"];
+
+            if(call EFUNC(common,isAdmin)) then {
+                _newPlayer call FUNC(activateClient);
+            };
+        }] call cba_fnc_addEventHandler;
+
+        if(call EFUNC(common,isAdmin)) then {
+            call FUNC(activateClient);
+        };
+    }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
+};

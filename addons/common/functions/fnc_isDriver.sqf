@@ -9,7 +9,11 @@
  * Return value:
  * Boolean
  */
+#include "..\script_component.hpp"
 
-if(vehicle _this != _this) then {
-    driver (vehicle _this) isEqualTo _this
-} else {false}
+params [["_unit", objNull]];
+
+if !(_unit call FUNC(isAlive)) exitWith { false };
+
+!(vehicle _unit isEqualTo _unit) &&
+driver (vehicle _unit) isEqualTo _unit

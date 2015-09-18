@@ -3,7 +3,6 @@
 ADDON = false;
 
 PREP(classExists);
-PREP(execDelayed);
 PREP(fixHeadbug);
 PREP(getName);
 PREP(getSide);
@@ -13,29 +12,35 @@ PREP(isAlive);
 PREP(isCommander);
 PREP(isDriver);
 PREP(isGunner);
+PREP(isLeader);
 PREP(isPassenger);
-PREP(listMenuClicked);
-PREP(listMenuOpen);
 PREP(moduleSettings);
 PREP(player);
 PREP(playerVehicleStatus);
+PREP(sanitizeString);
 PREP(setName);
-
-KGE_player = player;
-
-GVAR(admin) = false;
-GVAR(vehicleStatus) = -1;
+PREP(waitUntil);
 
 if (hasInterface) then {
+    KGE_Player = player;
+
+    GVAR(admin) = false;
+    GVAR(vehicleStatus) = -1;
+    GVAR(mapOpen) = false;
+
     // Update player information
     [{
-        if !(KGE_player isEqualTo (call FUNC(player))) then {
-               _oldPlayer = KGE_player;
-            KGE_player = call FUNC(player);
+        if !(KGE_Player isEqualTo (call FUNC(player))) then {
+            private ["_oldPlayer"];
 
-            SETUVAR(KGE_player,KGE_player);
+            _oldPlayer = KGE_Player;
+            KGE_Player = call FUNC(player);
 
-            ["KGE_playerChanged", [KGE_Player, _oldPlayer]] call cba_fnc_localEvent;
+            SETUVAR(KGE_Player,KGE_Player);
+
+            KGE_Player call FUNC(setName);
+
+            ["KGE_PlayerChanged", [KGE_Player, _oldPlayer]] call cba_fnc_localEvent;
         };
 
         if !(GVAR(admin) isEqualTo (call FUNC(isAdmin))) then {
@@ -44,10 +49,16 @@ if (hasInterface) then {
             ["KGE_adminChanged", [GVAR(admin)]] call cba_fnc_localEvent;
         };
 
-        if !(GVAR(vehicleStatus) isEqualTo (KGE_player call FUNC(playerVehicleStatus))) then {
-            GVAR(vehicleStatu) = call FUNC(playerVehicleStatus);
+        if !(GVAR(vehicleStatus) isEqualTo (KGE_Player call FUNC(playerVehicleStatus))) then {
+            GVAR(vehicleStatus) = KGE_Player call FUNC(playerVehicleStatus);
 
-            ["KGE_vahicleStatusChanged", [GVAR(vehicleStatu)]] call cba_fnc_localEvent;
+            ["KGE_vehicleStatusChanged", [GVAR(vehicleStatus)]] call cba_fnc_localEvent;
+        };
+
+        if !(GVAR(mapOpen) isEqualTo visibleMap) then {
+            GVAR(mapOpen) = visibleMap;
+
+            ["KGE_mapOpen", [GVAR(mapOpen)]] call cba_fnc_localEvent;
         };
     }, 0, []] call cba_fnc_addPerFrameHandler;
 };

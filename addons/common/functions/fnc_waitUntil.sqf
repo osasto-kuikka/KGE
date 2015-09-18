@@ -1,50 +1,56 @@
 /*
  * Author: nikolauska
  *
- * Wait and run function after ceratin criteria is met
+ * Wait and run function after certain criteria is met
  *
  * Argument:
  * 0: Code to execute (Code)
  * 1: Parameters to run the code with (Array)
- * 2: Delay in seconds before executing the code (Number)
+ * 2: (Number) time till executing or (Code) with boolean return
  * 3: Interval of time in which the execution is evaluated, 0 means every frame (Number)
  *
  * Return value:
  * PFH handler ID
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-_interval = _this select 3;
+params [
+    ["_func", {}, [{}]],
+    ["_params", []],
+    ["_condition", {true}, [{}, 0]],
+    ["_interval", 0, [0]]
+    ];
 
-if(MOD_ACE_COMMON) then {
-    [{
-        EXPLODE_2_PVT(_this,_args,_pfh);
-        EXPLODE_2_PVT(_args,_params,_startTime);
-        EXPLODE_3_PVT(_params,_func,_funcParams,_delay);
+if(typeName _condition == "CODE") exitWith {
+  [{
+          params ["_args", "_pfh"];
+          _args params ["_func", "_funcParams", "_condition"];
 
-        // Exit if the time was not reached yet
-        if (ACE_time < _startTime + _delay) exitWith {};
+          // Exit if the time was not reached yet
+          if !(call _condition) exitWith {};
 
-        // Destroy PHF
-        [_pfh] call CBA_fnc_removePerFrameHandler;
+          // Destroy PHF
+          [_pfh] call CBA_fnc_removePerFrameHandler;
 
-        // Execute the function
-        _funcParams call _func;
-    }, _interval, [_this, ACE_time]] call CBA_fnc_addPerFrameHandler
-} else {
-    [{
-        EXPLODE_2_PVT(_this,_args,_pfh);
-        EXPLODE_2_PVT(_args,_params,_startTime);
-        EXPLODE_3_PVT(_params,_func,_funcParams,_delay);
+          // Execute the function
+          _funcParams call _func;
+  }, _interval, [_func, _params, _condition]] call CBA_fnc_addPerFrameHandler;
+};
 
-        // Exit if the time was not reached yet
-        if (time < _startTime + _delay) exitWith {};
+if(typeName _condition == "SCALAR") exitWith {
+  [{
+          params ["_args", "_pfh"];
+          _args params ["_params", "_startTime"];
+          _params params ["_func", "_funcParams", "_condition"];
 
-        // Destroy PHF
-        [_pfh] call CBA_fnc_removePerFrameHandler;
+          // Exit if the time was not reached yet
+          if (diag_tickTime < _startTime + _condition) exitWith {};
 
-        // Execute the function
-        _funcParams call _func;
-    }, _interval, [_this, time]] call CBA_fnc_addPerFrameHandler
+          // Destroy PHF
+          [_pfh] call CBA_fnc_removePerFrameHandler;
+
+          // Execute the function
+          _funcParams call _func;
+  }, _interval, [[_func, _params, _condition], diag_tickTime]] call CBA_fnc_addPerFrameHandler;
 }

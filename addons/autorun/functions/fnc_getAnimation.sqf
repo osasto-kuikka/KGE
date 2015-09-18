@@ -17,6 +17,7 @@ private ["_weapon"];
 
 _weapon = currentWeapon KGE_Player;
 
+
 call {
     if(_mode == SPRINT) exitWith {
         if(_weapon == "")                         exitWith {"amovpercmevasnonwnondf"};

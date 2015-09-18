@@ -10,6 +10,12 @@
  * Side
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if (!isNull _this) then {side (group _this)} else {sideUnknown}
+params [["_unit",objNull]];
+
+if (!isNull _this) then {
+  side (group _this)
+} else {
+  sideUnknown
+};

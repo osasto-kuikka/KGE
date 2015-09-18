@@ -6,17 +6,19 @@
  * Argument:
  *
  * Return value:
- * 
+ *
  */
+
+#include "..\script_component.hpp"
 
 private ["_pos", "_dir", "_fixer"];
 
-_pos = (getpos KGE_Player);
-_dir = (getdir KGE_Player);
+_pos = (getpos KGE_player);
+_dir = (getdir KGE_player);
 
-_fixer = "B_Quadbike_01_F" createVehicleLocal (KGE_Player modelToWorld [0,-10,0]);
-KGE_Player moveincargo _fixer;
-KGE_Player action ["eject", vehicle KGE_Player];
+_fixer = "B_Quadbike_01_F" createVehicleLocal (KGE_player modelToWorld [0,-10,0]);
+KGE_player moveincargo _fixer;
+KGE_player action ["eject", vehicle KGE_player];
 deletevehicle _fixer;
-KGE_Player setpos _pos;
-KGE_Player setdir _dir; 
+KGE_player setpos _pos;
+KGE_player setdir _dir;

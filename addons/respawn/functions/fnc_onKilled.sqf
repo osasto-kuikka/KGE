@@ -1,22 +1,25 @@
 /*
  * Author: nikolauska
  *
- * When player is killed
+ * On KGE killed
  *
  * Argument:
  *
  * Return value:
- * 
+ *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-["KGE_onKilled", []] call cba_fnc_localEvent;
+params ["_unit"];
 
-KGE_player setPos GVAR(killedPos);
-KGE_player enableSimulation false;
-KGE_player hideObjectGlobal true;
+// Publish information about player dying
+["KGE_onKilled", [_unit]] call cba_fnc_globalEvent;
+
+_unit setVariable ["KGE_alive", false, true];
+
+_unit setPos ([_unit, "killed"] call FUNC(getMarkerPosition));
+_unit hideObjectGlobal true;
 
 GVAR(animationLock) = true;
 call FUNC(animationLock);
-

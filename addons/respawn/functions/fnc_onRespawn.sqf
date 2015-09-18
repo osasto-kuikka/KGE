@@ -1,20 +1,24 @@
 /*
  * Author: nikolauska
  *
- * When player respawns
+ * On KGE respawn
  *
  * Argument:
  *
  * Return value:
- * 
+ *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-["KGE_onRespawn", []] call cba_fnc_localEvent;
+params ["_unit"];
 
-KGE_player setPos GVAR(respawnPos);
-KGE_player enableSimulation true;
-KGE_player hideObjectGlobal false;
+// publish information about player respawning
+["KGE_onRespawn", [_unit]] call cba_fnc_globalEvent;
+
+_unit setVariable ["KGE_alive", true, true];
+
+_unit setPos ([_unit, "respawn"] call FUNC(getMarkerPosition));
+_unit hideObjectGlobal false;
 
 GVAR(animationLock) = false;

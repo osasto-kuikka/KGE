@@ -2,15 +2,24 @@
 
 ADDON = false;
 
+PREP(addActionsRespawn);
 PREP(animationLock);
-PREP(eventHandlers);
-PREP(getAlivePlayers);
-PREP(getDeadPlayers);
-PREP(listMenuHandler);
+PREP(clientEvent);
+PREP(getAllDead);
+PREP(getmarkerPosition);
+PREP(handleKilled);
+PREP(handleRespawn);
+PREP(moduleInit);
 PREP(onKilled);
 PREP(onRespawn);
-PREP(serverAnswer);
-PREP(serverRequest);
-PREP(setRespawnPos);
+PREP(respawnAll);
+PREP(respawnSingle);
+PREP(serverEvent);
+
+GVAR(playerList) = [];
+GVAR(maxKilled) = 0;
+GVAR(active) = false;
+GVAR(respawn) = [];
+GVAR(death) = [];
 
 ADDON = true;

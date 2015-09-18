@@ -10,4 +10,6 @@
  * Boolean
  */
 
-isClass(configFile >> "cfgPatches" >> _this)
+params [["_name", ""]];
+
+isClass(configFile >> "cfgPatches" >> _name)

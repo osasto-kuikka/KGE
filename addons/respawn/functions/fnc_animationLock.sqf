@@ -6,13 +6,13 @@
  * Argument:
  *
  * Return value:
- * 
+ *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 [{
-    EXPLODE_2_PVT(_this,_params,_pfh)
+    params ["_params", "_pfh"];
 
     if !((animationState KGE_player) isEqualTo "HubSpectator_stand") then {
         // Switch player animation to lock movement

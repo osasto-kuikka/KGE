@@ -9,10 +9,25 @@
  *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
 if !(isServer) exitWith {};
 
-EXPLODE_3_PVT(_this,_logic,_units,_activated);
+params ["_logic", "_units", "_activated"];
 
-GVAR(maxKilled) = [_logic, "amount"] call EFUNC(common,moduleSettings);
+GVAR(active) = true;
+publicVariable QGVAR(active);
+
+GVAR(maxKilled) = parseNumber ([_logic, "amount"] call EFUNC(common,moduleSettings));
+
+GVAR(respawn) set [0, [_logic, "respawn_west"] call EFUNC(common,moduleSettings)];
+GVAR(respawn) set [1, [_logic, "respawn_east"] call EFUNC(common,moduleSettings)];
+GVAR(respawn) set [2, [_logic, "respawn_independent"] call EFUNC(common,moduleSettings)];
+GVAR(respawn) set [3, [_logic, "respawn_civilian"] call EFUNC(common,moduleSettings)];
+publicVariable QGVAR(respawn);
+
+GVAR(death) set [0, [_logic, "death_west"] call EFUNC(common,moduleSettings)];
+GVAR(death) set [1, [_logic, "death_east"] call EFUNC(common,moduleSettings)];
+GVAR(death) set [2, [_logic, "death_independent"] call EFUNC(common,moduleSettings)];
+GVAR(death) set [3, [_logic, "death_civilian"] call EFUNC(common,moduleSettings)];
+publicVariable QGVAR(death);

@@ -11,19 +11,3 @@ class Extended_PostInit_EventHandlers {
         disableModuload = true;
     };
 };
-
-class Extended_InitPost_EventHandlers {
-    class All {
-        class GVAR(activate) {
-            init = QUOTE(if (local (_this select 0)) then {(_this select 0) call FUNC(activateClient)};);
-        };
-    };
-};
-
-class Extended_Respawn_EventHandlers {
-    class All {
-        class GVAR(activate) {
-            respawn = QUOTE(if (local (_this select 0)) then {(_this select 0) call FUNC(activateClient)};);
-        };
-    };
-};

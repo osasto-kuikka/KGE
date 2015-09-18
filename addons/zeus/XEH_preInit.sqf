@@ -6,4 +6,6 @@ PREP(activateClient);
 PREP(activateServer);
 PREP(serverInit);
 
+GVAR(player) = player;
+
 ADDON = true;

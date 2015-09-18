@@ -10,10 +10,12 @@
  *
  */
 
-#include "script_component.hpp"
+#include "..\script_component.hpp"
 
-if (isNull _this) exitWith {};
+params [["_unit", objNull]];
 
-if (_this isKindOf "CAManBase") then {
-    _this setVariable ["KGE_name", name _this, true];
+if !(_unit call FUNC(isAlive)) exitWith {};
+
+if (_unit isKindOf "CAManBase") then {
+    _unit setVariable ["KGE_name", name _unit, true];
 };
