@@ -26,9 +26,9 @@ if(GVAR(autoRunMode) isEqualTo WALK) exitWith {true};
 _gradient = KGE_Player call FUNC(getTerrainGradient);
 _fatigue = getFatigue KGE_Player;
 
-if(_fatigue > GVAR(fatigueThreshold)) exitWith {false};
-if(_gradient < GVAR(terrainGradientMaxDecline)) exitWith {false};
-if(_gradient > GVAR(terrainGradientMaxIncline)) exitWith {false};
+if(_fatigue > GVAR(fatigueThreshold)) then { GVAR(autoRunMode) = WALK };
+if(_gradient < GVAR(terrainGradientMaxDecline)) then { GVAR(autoRunMode) = WALK };
+if(_gradient > GVAR(terrainGradientMaxIncline)) then { GVAR(autoRunMode) = WALK };
 
 // Disable running when weapon is holstered
 if((animationState KGE_Player) in GVAR(disablingAnimation)) exitWith {false};
