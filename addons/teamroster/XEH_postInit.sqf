@@ -2,10 +2,8 @@
 
 [{
 	// Add Diary Subject
-	KGE_Player createDiarySubject [QGVAR(diarySubject), "team roster"];
+	KGE_Player createDiarySubject [QGVAR(diarySubject), "Team Roster"];
 
-	[{
-		// Update team roster text
-		call FUNC(update);
-	}, 300, []] call CBA_fnc_addPerFrameHandler;
+	// Update team roster text
+	call FUNC(update);
 }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
