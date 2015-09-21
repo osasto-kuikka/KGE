@@ -25,4 +25,4 @@
     };
 }] call cba_fnc_addEventHandler;
 
-["KGE Spectator","kge_spectator_start", "Starts spectator", {[true] call FUNC(setSpectator); true}, {true}, [59, [false, false, false]]] call CBA_fnc_addKeybind;
+["KGE","kge_spectator_start", "Starts spectator", {[true] call FUNC(setSpectator); true}, {true}, [59, [false, false, false]]] call CBA_fnc_addKeybind;
