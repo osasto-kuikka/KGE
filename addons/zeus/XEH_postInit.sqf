@@ -26,8 +26,10 @@ if(hasInterface) then {
             };
         }] call cba_fnc_addEventHandler;
 
-        if(call EFUNC(common,isAdmin)) then {
-            call FUNC(activateClient);
-        };
+        [{
+            if (!(KGE_Player call EFUNC(common,isAlive)) || !(call EFUNC(common,isAdmin))) exitWith {};
+            KGE_Player call FUNC(activateClient);
+        }, 60, []] call cba_fnc_addPerFrameHandler;
+
     }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
 };
