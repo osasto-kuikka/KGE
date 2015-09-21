@@ -34,7 +34,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
                 INC(_inVehicle);
             };
         };
-    } forEach GVAR(respawned);
+    } forEach (call cba_fnc_players);
 
     if(_inVehicle != 0) then {
         Hint "Some players were in vehicle or in water and were not teleported";
