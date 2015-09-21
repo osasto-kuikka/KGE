@@ -16,4 +16,5 @@ GVAR(isAutoRunActive) = !GVAR(isAutoRunActive);
 
 if !(GVAR(isAutoRunActive)) then {
     KGE_Player switchMove "";
+    GVAR(lastMode) = nil;
 };

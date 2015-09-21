@@ -13,10 +13,16 @@
     _animation = GVAR(autoRunMode) call FUNC(getAnimation);
 
     KGE_Player playMoveNow _animation;
+
+    // Change to last mode
+    if !(isNil QGVAR(lastMode)) then {
+         GVAR(autoRunMode) = GVAR(lastMode);
+         GVAR(lastMode) = nil;
+    };
 }, 0.02, []] call CBA_fnc_addPerFrameHandler;
 
-["KGE Autorun","kge_autorun_toggle", "Starts and stops autorun", {call FUNC(toggleOn); true}, {true}, [DIK_C, [false, true, false]], false] call CBA_fnc_addKeybind;
-["KGE Autorun","kge_autorun_mode", "Change autorun mode", {call FUNC(toggleMode); true}, {true}, [DIK_B, [false, true, false]], false] call CBA_fnc_addKeybind;
+["KGE","kge_autorun_toggle", "Starts and stops autorun", {call FUNC(toggleOn); true}, {true}, [DIK_C, [false, true, false]], false] call CBA_fnc_addKeybind;
+["KGE","kge_autorun_mode", "Change autorun mode", {call FUNC(toggleMode); true}, {true}, [DIK_B, [false, true, false]], false] call CBA_fnc_addKeybind;
 
 [{
     (findDisplay 46) displayAddEventHandler ["KeyDown", {_this call FUNC(actionKeyCheck); false}];
