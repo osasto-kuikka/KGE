@@ -1,0 +1,39 @@
+{
+  "name": "ACE3",
+  "version": "3.2.2",
+  "description": "<p align=\"center\">     <img src=\"https://github.com/acemod/ACE3/blob/master/extras/assets/logo/black/ACE3-Logo.jpg\" width=\"480\"> </p> <p align=\"center\">     <a href=\"https://github.com/acemod/ACE3/releases\">         <img src=\"https://img.shields.io/badge/Version-3.2.1-blue.svg\" alt=\"ACE3 version\">     </a>     <a href=\"https://github.com/acemod/ACE3/releases/download/v3.2.1/ace3_3.2.1.zip\">         <img src=\"http://img.shields.io/badge/Download-56.5_MB-green.svg\" alt=\"ACE3 download\">     </a>     <a href=\"https://github.com/acemod/ACE3/issues\">         <img src=\"http://img.shields.io/github/issues-raw/acemod/ACE3.svg?label=Issues\" alt=\"ACE3 issues\">     </a>     <a href=\"http://forums.bistudio.com/showthread.php?191716-ACE3-A-collaborative-merger-between-AGM-CSE-and-ACE&p=2935435&viewfull=1#post2935435\">         <img src=\"https://img.shields.io/badge/BIF-Thread-lightgrey.svg\" alt=\"BIF thread\">     </a>     <a href=\"https://github.com/acemod/ACE3/blob/master/LICENSE\">         <img src=\"http://img.shields.io/badge/License-GPLv2-red.svg\" alt=\"ACE3 license\">     </a> </p> <p align=\"center\"><sup><strong>Requires the latest version of <a href=\"http://www.armaholic.com/page.php?id=18767\">CBA A3</a>. Visit us on <a href=\"https://www.facebook.com/ACE3Mod\">Facebook</a> | <a href=\"https://www.youtube.com/c/ACE3Mod\">YouTube</a> | <a href=\"https://twitter.com/ACE3Mod\">Twitter</a> | <a href=\"http://www.reddit.com/r/arma/search?q=ACE&restrict_sr=on&sort=new&t=all\">Reddit</a></strong></sup></p>",
+  "main": "gulp",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MikeMatrix/ACE3.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/MikeMatrix/ACE3/issues"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.9.3",
+    "del": "~1.2.1",
+    "event-stream": "^3.3.1",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.0",
+    "gulp-foreach": "^0.1.0",
+    "gulp-help": "^1.6.1",
+    "gulp-newer": "^0.5.1",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-run": "^1.6.10",
+    "gulp-shell": "^0.4.3",
+    "gulp-tap": "^0.1.3",
+    "gulp-util": "^3.0.6",
+    "merge-stream": "^1.0.0",
+    "require-dir": "~0.3.0",
+    "underscore": "^1.8.3",
+    "vinyl-map": "^1.0.1"
+  }
+}

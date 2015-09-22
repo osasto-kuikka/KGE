@@ -1,9 +1,9 @@
 release/*
 WIP/*
+node_modules/*
 *.cache
 *.pbo
 texHeaders.bin
 *.swp
 *.swo
 *.biprivatekey
-
