@@ -11,12 +11,11 @@
 
 #include "..\script_component.hpp"
 
-params [["_unit", KGE_Player, [objNull]]];
 private ["_group", "_header"];
 
-if !(_unit call EFUNC(common,isAlive)) exitWith {"asd"};
+if !(KGE_Player call EFUNC(common,isAlive)) exitWith {};
 
-_group = group _unit;
+_group = group KGE_Player;
 {
     private ["_name"];
 
@@ -34,7 +33,5 @@ _group = group _unit;
     _diary = _diary + (_x call FUNC(backpack));
 
     _header = format ["%1 - %2", groupID _group, (_x call EFUNC(common,getName))];
-    _unit createDiaryRecord [QGVAR(diarySubject),[_header, _diary]];
+    KGE_Player createDiaryRecord [QGVAR(diarySubject),[_header, _diary]];
 } forEach units _group;
-
-INC(GVAR(iteration));

@@ -23,10 +23,9 @@ if !([_unit] call EFUNC(common,isAlive)) exitWith {""};
 
 // If unit is leader then add groupID if groupID is set to be shown
 if ([_unit] call EFUNC(common,isLeader)) then {
-	_returnString = "<br/>" + format["%1 - ", (group _unit)]
-} else {
-	_returnString = _returnString + "	";
+	_returnString = "<br/>" + format["%1<br/>", (group _unit)]
 };
+_returnString = _returnString + "		";
 
 // Get unit profile name and game name
 _unitName = [_unit] call EFUNC(common,getName);

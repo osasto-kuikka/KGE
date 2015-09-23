@@ -20,7 +20,10 @@
 
 #include "..\script_component.hpp"
 
-params [["_set",true,[true]]];
+params [
+    ["_set",true,[true]],
+    ["_unit",objNull,[objNull]]
+];
 
 if(_set && {GVAR(alive)}) exitWith {};
 
@@ -36,11 +39,6 @@ if !(isNull(findDisplay 49)) then {
         [_set] call FUNC(setSpectator);
     }, [], 0, {isNull(findDisplay 49)}]
 };
-
-// Handle common addon audio
-if (["ace_hearing"] call EFUNC(common,classExists)) then {EGVAR(hearing,disableVolumeUpdate) = _set};
-if (["acre_sys_radio"] call EFUNC(common,classExists)) then {[_set] call acre_api_fnc_setSpectator};
-if (["task_force_radio"] call EFUNC(common,classExists)) then {[KGE_Player, _set] call TFAR_fnc_forceSpectator};
 
 if (_set) then {
     // Initalize camera variables
@@ -60,7 +58,7 @@ if (_set) then {
     [] call FUNC(updateUnits);
 
     // Initalize the camera view
-    GVAR(camera) = "Camera" camCreate (ASLtoATL GVAR(camPos));
+    GVAR(camera) = "Camera" camCreate (ASLtoATL (getPosASL _unit));
     [] call FUNC(transitionCamera);
 
     // Close map and clear radio
@@ -79,8 +77,8 @@ if (_set) then {
     (findDisplay 46) createDisplay QGVAR(interface);
 
     // Cache and disable nametag settings
-    if (["ace_nametags"] call EFUNC(common,isModLoaded)) then {
-        GVAR(nametagSettingCache) = [EGVAR(nametags,showPlayerNames), EGVAR(nametags,showNamesForAI)];
+    if (["ace_nametags"] call EFUNC(common,classExists)) then {
+        GVAR(nametagSettingCache) = [ace_nametags_showPlayerNames, ace_nametags_showNamesForAI];
         EGVAR(nametags,showPlayerNames) = 0;
         EGVAR(nametags,showNamesForAI) = false;
     };
@@ -119,9 +117,9 @@ if (_set) then {
     GVAR(treeSel) = nil;
 
     // Reset nametag settings
-    if (["ace_nametags"] call EFUNC(common,isModLoaded)) then {
-        EGVAR(nametags,showPlayerNames) = GVAR(nametagSettingCache) select 0;
-        EGVAR(nametags,showNamesForAI) = GVAR(nametagSettingCache) select 1;
+    if (["ace_nametags"] call EFUNC(common,classExists)) then {
+        ace_nametags_showPlayerNames = GVAR(nametagSettingCache) select 0;
+        ace_nametags_showNamesForAI = GVAR(nametagSettingCache) select 1;
         GVAR(nametagSettingCache) = nil;
     };
 };

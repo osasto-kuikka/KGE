@@ -31,12 +31,12 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
             if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
                 _x setPos GVAR(mapClickPos);
 
-                // Find teleported object and remove it from respawned array
-                _respawnedIndex = GVAR(respawned) find _unit;
-                if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
+                GVAR(respawned) set [_forEachIndex, nil];
             } else {
                 INC(_inVehicle);
             };
+        } else {
+            GVAR(respawned) set [_forEachIndex, nil];
         };
     } forEach GVAR(respawned);
 

@@ -11,6 +11,8 @@
 
 #include "..\script_component.hpp"
 
-params [["_unit", KGE_Player]];
+params ["_unit", "_changeAssigned"];
 
-[QGVAR(activateEvent), [_unit]] call cba_fnc_globalEvent;
+if(call EFUNC(common,isAdmin)) then {
+    [QGVAR(activateEvent), [_unit, _changeAssigned]] call cba_fnc_globalEvent;
+};

@@ -22,7 +22,7 @@ _teamrosterText = "";
     true;
 } count (call cba_fnc_players);
 
-_title = format["%1", side (group KGE_Player), GVAR(iteration)];
+_title = format["%1 - %2", side (group KGE_Player), GVAR(iteration)];
 
 // Add diary text
 KGE_Player createDiaryRecord [QGVAR(diarySubject), [_title, _teamrosterText]];

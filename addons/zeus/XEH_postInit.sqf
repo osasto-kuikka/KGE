@@ -6,30 +6,24 @@ if(isServer) then {
     [QGVAR(activateEvent), {
         _this call FUNC(activateServer);
     }] call cba_fnc_addEventHandler;
+
+    [{
+        [objNull, false] call FUNC(activateServer);
+    }, 10, []] call cba_fnc_addPerFrameHandler;
 };
 
 if(hasInterface) then {
+    ["KGE_adminChanged", {
+        [KGE_Player, false] call FUNC(activateClient);
+    }] call cba_fnc_addEventHandler;
+
+    ["KGE_PlayerChanged", {
+        params ["_newPlayer"];
+
+        [_newPlayer, true] call FUNC(activateClient);
+    }] call cba_fnc_addEventHandler;
+
     [{
-        ["KGE_adminChanged", {
-            params ["_isAdmin"];
-
-            if(_isAdmin) then {
-                call FUNC(activateClient);
-            };
-        }] call cba_fnc_addEventHandler;
-
-        ["KGE_PlayerChanged", {
-            params ["_newPlayer"];
-
-            if(call EFUNC(common,isAdmin)) then {
-                _newPlayer call FUNC(activateClient);
-            };
-        }] call cba_fnc_addEventHandler;
-
-        [{
-            if (!(KGE_Player call EFUNC(common,isAlive)) || !(call EFUNC(common,isAdmin))) exitWith {};
-            KGE_Player call FUNC(activateClient);
-        }, 60, []] call cba_fnc_addPerFrameHandler;
-
-    }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
+        [KGE_Player, true] call FUNC(activateClient);
+    }, [], {!(isNull KGE_Player) && {getClientState == "BRIEFING READ"}}] call EFUNC(common,waitUntil);
 };

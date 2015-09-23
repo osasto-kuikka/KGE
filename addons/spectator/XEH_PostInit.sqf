@@ -7,7 +7,7 @@
 
     if(local _unit) then {
         GVAR(alive) = false;
-        [true] call FUNC(setSpectator);
+        [true, _unit] call FUNC(setSpectator);
     } else {
         call FUNC(updateUnits);
     };
@@ -19,7 +19,7 @@
 
     if(local _unit) then {
         GVAR(alive) = true;
-        [false] call FUNC(setSpectator);
+        [false, _unit] call FUNC(setSpectator);
     } else {
         call FUNC(updateUnits);
     };

@@ -41,7 +41,8 @@ _filteredUnits = [];
 {
     if (
         (_x call EFUNC(common,isAlive)) &&
-        {_x getVariable ["KGE_alive", true]}
+        {_x getVariable ["KGE_alive", true]} &&
+        {(side _x) in GVAR(availableSides)}
     ) then {
         _filteredUnits pushBack _x;
     };

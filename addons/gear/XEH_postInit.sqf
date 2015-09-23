@@ -4,7 +4,7 @@
 	KGE_Player createDiarySubject [QGVAR(diarySubject), "Group Gear"];
 
 	// Update gear text
-	KGE_Player call FUNC(diary);
+	call FUNC(diary);
 }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
 
 ["KGE_PlayerChanged", {
