@@ -35,8 +35,8 @@ _actions = [];
                     [],
                     _x
                 ];
-        }
-    }
+        };
+    };
 } forEach GVAR(respawned);
 
 // Remove nils

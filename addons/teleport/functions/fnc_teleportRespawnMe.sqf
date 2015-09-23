@@ -17,12 +17,16 @@ private ["_inVehicle"];
 _inVehicle = 0;
 
 {
-    if(!local _x) then {
+    if(!local _x && {_x getVariable ["KGE_alive", true]}) then {
         if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
             [_x, GVAR(player)] call FUNC(toBehind);
+
+            GVAR(respawned) set [_forEachIndex, nil];
         } else {
             INC(_inVehicle);
         };
+    } else {
+        GVAR(respawned) set [_forEachIndex, nil];
     };
 } forEach GVAR(respawned);
 

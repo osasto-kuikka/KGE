@@ -29,10 +29,14 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
             if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
                 _x setPos GVAR(mapClickPos);
 
-                GVAR(respawned) set [_forEachIndex, nil];
+               _respawnedIndex = GVAR(respawned) find _x;
+               if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
             } else {
                 INC(_inVehicle);
             };
+        } else {
+            _respawnedIndex = GVAR(respawned) find _x;
+            if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
         };
     } forEach (call cba_fnc_players);
 

@@ -33,8 +33,3 @@ if (surfaceIsWater (getPosASL _unit)) exitWith {
 ["KGE_onTeleport", [_target]] call cba_fnc_whereLocalEvent;
 
 [_unit, _target] call FUNC(toBehind);
-
-// Find teleported object and remove it from respawned array
-_respawnedIndex = GVAR(respawned) find _unit;
-if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
-GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);

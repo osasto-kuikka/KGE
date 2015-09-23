@@ -16,7 +16,7 @@ private ["_actions"];
 _actions = [];
 
 {
-    if(_x getVariable [QEGVAR(respawn,alive), true]) then {
+    if(_x call EFUNC(common,isAlive) && {!(_x getVariable ["KGE_alive", true])}) then {
         _actions pushBack
             [
                 [

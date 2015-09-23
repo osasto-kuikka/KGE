@@ -16,8 +16,8 @@ class CfgVehicles {
             class amount {
                 displayName = "Amount";
                 description = "How many times player can respawn before spectator (-1 unlimited respawns)";
-                typeName = "TEXT";
-                defaultValue = "";
+                typeName = "NUMBER";
+                defaultValue = "0";
             };
             class respawn_west {
                 displayName = "Respawn Blufor";

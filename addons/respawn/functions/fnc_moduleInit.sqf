@@ -18,7 +18,7 @@ params ["_logic", "_units", "_activated"];
 GVAR(active) = true;
 publicVariable QGVAR(active);
 
-GVAR(maxKilled) = parseNumber ([_logic, "amount"] call EFUNC(common,moduleSettings));
+GVAR(maxKilled) = [_logic, "amount"] call EFUNC(common,moduleSettings);
 
 GVAR(respawn) set [0, [_logic, "respawn_west"] call EFUNC(common,moduleSettings)];
 GVAR(respawn) set [1, [_logic, "respawn_east"] call EFUNC(common,moduleSettings)];

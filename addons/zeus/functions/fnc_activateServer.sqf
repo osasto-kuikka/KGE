@@ -12,16 +12,18 @@
 
 #include "..\script_component.hpp"
 
-params ["_unit"];
+params ["_unit", "_changeAssigned"];
 
-// Remove old curator
-if !(isNil QGVAR(assignedCurator)) then {
-    unassignCurator GVAR(curatorModule);
+if(_changeAssigned) then {
+    // Remove old curator
+    if !(isNil QGVAR(assignedCurator)) then {
+        unassignCurator GVAR(curatorModule);
+    };
+
+    // Assign new curator
+    GVAR(assignedCurator) = _unit;
+    _unit assignCurator GVAR(curatorModule);
 };
-
-// Assign new curator
-GVAR(assignedCurator) = _unit;
-_unit assignCurator GVAR(curatorModule);
 
 {
     _curator = _x;
