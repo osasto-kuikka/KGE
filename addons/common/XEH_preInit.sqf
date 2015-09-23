@@ -21,7 +21,9 @@ PREP(map);
 PREP(moduleSettings);
 PREP(player);
 PREP(playerVehicleStatus);
+PREP(randomPosition);
 PREP(sanitizeString);
+PREP(selectRandom);
 PREP(setName);
 PREP(waitUntil);
 
