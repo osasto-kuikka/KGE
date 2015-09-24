@@ -383,38 +383,41 @@ switch (toLower _mode) do {
             _grp = group _x;
             _side = [side _grp] call BIS_fnc_sideName;
 
-            // Use correct side node
-            if !(_side in _cachedSides) then {
-                // Add side node
-                _s = _tree tvAdd [[], _side];
-                _tree tvExpand [_s];
+            // Show only groups with players in them
+            if(GVAR(showAIList) || {isPlayer _x} count (units _grp) != 0) then {
+                // Use correct side node
+                if !(_side in _cachedSides) then {
+                    // Add side node
+                    _s = _tree tvAdd [[], _side];
+                    _tree tvExpand [_s];
 
-                _cachedSides pushBack _side;
-                _cachedSides pushBack _s;
-            } else {
-                // If side already processed, use existing node
-                _s = _cachedSides select ((_cachedSides find _side) + 1);
+                    _cachedSides pushBack _side;
+                    _cachedSides pushBack _s;
+                } else {
+                    // If side already processed, use existing node
+                    _s = _cachedSides select ((_cachedSides find _side) + 1);
+                };
+
+                // Use correct group node
+                if !(_grp in _cachedGrps) then {
+                    // Add group node
+                    _g = _tree tvAdd [[_s], groupID _grp];
+                    _tree tvSetData [[_s,_g], netID _grp];
+
+                    _cachedGrps pushBack _grp;
+                    _cachedGrps pushBack _g;
+                } else {
+                    // If group already processed, use existing node
+                    _g = _cachedGrps select ((_cachedGrps find _grp) + 1);
+                };
+
+                _u = _tree tvAdd [[_s,_g], GETVAR(_x,GVAR(uName),"")];
+                _tree tvSetData [[_s,_g,_u], netID _x];
+                _tree tvSetPicture [[_s,_g,_u], GETVAR(_x,GVAR(uIcon),"")];
+                _tree tvSetPictureColor [[_s,_g,_u], GETVAR(_grp,GVAR(gColor),[ARR_4(1,1,1,1)])];
+
+                _tree tvSort [[_s,_g],false];
             };
-
-            // Use correct group node
-            if !(_grp in _cachedGrps) then {
-                // Add group node
-                _g = _tree tvAdd [[_s], groupID _grp];
-                _tree tvSetData [[_s,_g], netID _grp];
-
-                _cachedGrps pushBack _grp;
-                _cachedGrps pushBack _g;
-            } else {
-                // If group already processed, use existing node
-                _g = _cachedGrps select ((_cachedGrps find _grp) + 1);
-            };
-
-            _u = _tree tvAdd [[_s,_g], GETVAR(_x,GVAR(uName),"")];
-            _tree tvSetData [[_s,_g,_u], netID _x];
-            _tree tvSetPicture [[_s,_g,_u], GETVAR(_x,GVAR(uIcon),"")];
-            _tree tvSetPictureColor [[_s,_g,_u], GETVAR(_grp,GVAR(gColor),[ARR_4(1,1,1,1)])];
-
-            _tree tvSort [[_s,_g],false];
         } forEach (GVAR(unitList) - _cachedUnits);
 
         _tree tvSort [[],false];
