@@ -56,7 +56,11 @@ if (_newMode == 0) then { // Free
     // Agent is switched to in free cam to hide death table and prevent AI chat while allowing icons to draw (also prevents systemChat and unit HUD)
     // (Why is so much stuff tied into the current camera unit BI?!)
     if (isNull GVAR(camAgent)) then {
-        GVAR(camAgent) = createAgent ["VirtualMan_F",markerPos QGVAR(respawn),[],0,""];
+        if !(isNil "kge_respawn") then {
+            GVAR(camAgent) = createAgent ["VirtualMan_F",EGVAR(respawn,respawnPos),[],0,""];
+        } else {
+            GVAR(camAgent) = createAgent ["VirtualMan_F",[0,0,0],[],0,""];
+        };
     };
 
     GVAR(camAgent) switchCamera "internal";
