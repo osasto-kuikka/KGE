@@ -359,7 +359,7 @@ switch (toLower _mode) do {
                     for "_u" from 0 to ((_tree tvCount [_s,_g])) do {
                         _unit = objectFromNetId (_tree tvData [_s,_g,_u]);
 
-                        if (_unit in GVAR(unitList)) then {
+                        if (_unit in GVAR(unitList) && {_unit getVariable ["KGE_alive", true]}) then {
                             _cachedUnits pushBack _unit;
                         } else {
                             _tree tvDelete [_s,_g,_u];
@@ -423,7 +423,11 @@ switch (toLower _mode) do {
         _tree tvSort [[],false];
 
         if ((_tree tvCount []) <= 0) then {
-            _tree tvAdd [[], "No units"];
+            if(GVAR(showAIList)) then {
+                _tree tvAdd [[], "No units"];
+            } else {
+                _tree tvAdd [[], "No players"];
+            }    
         };
     };
     // Map events

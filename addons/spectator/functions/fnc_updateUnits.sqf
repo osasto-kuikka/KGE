@@ -17,23 +17,9 @@
 
 #include "..\script_component.hpp"
 
-params [["_newUnits",[],[[]]],["_blacklist",false,[false]]];
-
 // Function only matters on player clients
 if !(hasInterface) exitWith {};
 
-// If adding to a list we can exit here, since it won't show up until the UI refreshes anyway
-/*
-if !(_newUnits isEqualTo []) exitWith {
-    if (_blacklist) then {
-        GVAR(unitWhitelist) = GVAR(unitWhitelist) - _newUnits;
-        GVAR(unitBlacklist) append _newUnits;
-    } else {
-        GVAR(unitBlacklist) = GVAR(unitBlacklist) - _newUnits;
-        GVAR(unitWhitelist) append _newUnits;
-    };
-};
-*/
 private ["_sides","_cond","_filteredUnits","_filteredGroups"];
 
 // Filter units and append to list
@@ -46,8 +32,7 @@ _filteredUnits = [];
     ) then {
         _filteredUnits pushBack _x;
     };
-} forEach (allUnits);// - GVAR(unitBlacklist));
-//_filteredUnits append GVAR(unitWhitelist);
+} forEach allUnits;
 
 // Cache icons and colour for drawing
 _filteredGroups = [];
