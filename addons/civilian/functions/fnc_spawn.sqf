@@ -36,14 +36,8 @@ if (count _roadlist >= 2) then {
 	_car setDir ([(_roadList select 0), _connected] call BIS_fnc_DirTo);
 };
 
-//_car allowCrewInImmobile true;
-
+_car allowCrewInImmobile true;
 _civ moveinDriver _car;
 _civ allowDamage true;
 
-private ["_pos"];
-_pos = [(getPosATL _car), 5500] call EFUNC(common,randomPosition);
-_civ setVariable [QGVAR(movePos), _pos];
-_civ setDestination [_pos, "LEADER PLANNED", true];
-
-[_civ, _car] call FUNC(civLoop);
+GVAR(spawned) pushBack _civ;

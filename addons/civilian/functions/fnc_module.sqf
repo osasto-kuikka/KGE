@@ -23,4 +23,5 @@ GVAR(maxAmount) = [_logic, "amount"] call EFUNC(common,moduleSettings);
 GVAR(minDist) = [_logic, "minDist"] call EFUNC(common,moduleSettings);
 GVAR(maxDist) = [_logic, "maxDist"] call EFUNC(common,moduleSettings);
 
+call FUNC(civLoop);
 call FUNC(mainLoop);

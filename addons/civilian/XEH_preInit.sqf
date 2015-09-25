@@ -38,6 +38,7 @@ GVAR(civCar) = [
 	"C_Van_01_box_F",
 	"C_Van_01_fuel_F"
 ];
-GVAR(currentAmount) = 0;
+GVAR(spawned) = [];
+GVAR(iterator) = 0;
 
 ADDON = true;

@@ -14,7 +14,8 @@
 #include "..\script_component.hpp"
 
 [{
-    if(GVAR(currentAmount) >= GVAR(maxAmount)) exitWith {};
+    if(count GVAR(spawned) >= GVAR(maxAmount)) exitWith {};
+
     private ["_players", "_player", "_pos", "_spawnPos"];
     _players = call cba_fnc_players;
     _player = ([_players] call EFUNC(common,selectRandom)) select 0;
@@ -31,4 +32,4 @@
     if(count _spawnPos == 0) exitWith {};
 
     [_spawnPos] call FUNC(spawn);
-}, 2, []] call cba_fnc_addPerFrameHandler;
+}, 0.2, []] call cba_fnc_addPerFrameHandler;

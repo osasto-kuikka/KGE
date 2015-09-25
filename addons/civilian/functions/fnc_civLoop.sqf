@@ -12,34 +12,43 @@
 
 #include "..\script_component.hpp"
 
-params ["_civ", "_car"];
-
 [{
-    (_this select 0) params ["_civ", "_car"];
-    private ["_carPos", "_movePos", "_pos"];
+    if(count GVAR(spawned) == 0) exitWith {};
+    if(GVAR(iterator) >= count GVAR(spawned)) then {GVAR(iterator) = 0};
 
-    _carPos = getPosATL _car;
+    // Select handled _civ and _car from list
+    (GVAR(spawned) select GVAR(iterator)) params ["_civ", "_lastPos"];
+    INC(GVAR(iterator));
+
+    private ["_carPos", "_movePos", "_pos"];
+    _carPos = position _civ;
     _movePos = _civ getVariable [QGVAR(movePos), _carPos];
+    _lastPos = _civ getVariable [QGVAR(lastPos), _carPos];
+
+    _civ setVariable [QGVAR(lastPos), _carPos];
 
     if((_carPos distance2D _movePos) < 100) exitWith {
-        _pos = [(getPosATL _car), 5500] call EFUNC(common,randomPosition);
-        _civ setVariable [QGVAR(movePos), _pos];
-        _civ setDestination [_pos, "LEADER PLANNED", true];
+        _pos = [(position _civ), GVAR(minDist)] call EFUNC(common,randomPosition);
+        _pos = [_pos, 250] call FUNC(getRoad);
+
+        if(count _pos != 0) then {
+            _civ setVariable [QGVAR(movePos), _pos];
+            _civ forceSpeed (_civ getSpeed "FAST");
+            _civ setDestination [_pos, "LEADER PLANNED", true];
+        };
     };
 
-    if({(_x distance2D _car) < GVAR(minDist)} count (call cba_fnc_players) != 0) then {
-        _pos = [(getPosATL _car), 5500] call EFUNC(common,randomPosition);
-        _civ setVariable [QGVAR(movePos), _pos];
-        _civ setDestination [_pos, "LEADER PLANNED", true];
+    if(_lastPos isEqualTo _carPos || {(_x distance _civ) < GVAR(maxDist)} count (call cba_fnc_players) == 0) exitWith {
+        GVAR(spawned) = GVAR(spawned) - [_civ, _carPos];
+        DEC(GVAR(iterator));
+
+        // Empty vehicle cargo
+        if("ace_cargo" call EFUNC(common,classExists)) then {
+            [(vehicle _civ)] call ace_cargo_fnc_handleDestroyed;
+        };
+
+        deleteVehicle (vehicle _civ);
+        deleteVehicle _civ;
     };
 
-    if({(_x distance2D _car) < GVAR(maxDist)} count (call cba_fnc_players) != 0) exitWith {};
-
-    deleteVehicle _car;
-    deleteVehicle _civ;
-
-    DEC(GVAR(currentAmount));
-
-    [(_this select 1)] call cba_fnc_removePerFrameHandler;
-
-}, 2, [_civ, _car]] call cba_fnc_addPerFrameHandler;
+}, 0.2, []] call cba_fnc_addPerFrameHandler;
