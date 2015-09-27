@@ -50,7 +50,7 @@ if(_hweaponName != "") then {
     _returnText = _returnText + format ["<font color='#FFFF00'>Sidearm: </font>%1<br/>", _name];
 
     _image = getText(configFile >> "CfgWeapons" >> _hweaponName >> "picture") call FUNC(imageCheck);
-    _returnText = _returnText + format ["<img image='%1' width='50' height='50'/>", _image];
+    _returnText = _returnText + format ["<img image='%1' width='100' height='50'/>", _image];
 
     {
         if(_x != "") then {

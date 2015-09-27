@@ -51,6 +51,7 @@ GVAR(showInterface) = true;
 GVAR(showMap) = false;
 GVAR(showTool) = true;
 GVAR(showUnit) = true;
+GVAR(showAIList) = false;
 
 GVAR(unitList) = [];
 GVAR(unitBlacklist) = [];

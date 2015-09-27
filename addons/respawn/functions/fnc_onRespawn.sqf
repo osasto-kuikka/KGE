@@ -18,6 +18,8 @@ params ["_unit"];
 
 _unit setVariable ["KGE_alive", true, true];
 
+_unit allowDamage true;
+
 _unit setPos ([_unit, "respawn"] call FUNC(getMarkerPosition));
 _unit hideObjectGlobal false;
 

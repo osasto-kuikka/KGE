@@ -31,6 +31,7 @@ if (hasInterface) then {
     GVAR(admin) = false;
     GVAR(vehicleStatus) = -1;
     GVAR(mapOpen) = false;
+    GVAR(ratingDisabled) = true;
 
     // Update player information
     [{
@@ -63,6 +64,12 @@ if (hasInterface) then {
             GVAR(mapOpen) = visibleMap;
 
             ["KGE_mapOpen", [GVAR(mapOpen)]] call cba_fnc_localEvent;
+        };
+
+        // So player never turns to enemy side
+        if(GVAR(ratingDisabled) && {rating KGE_Player < 0}) then {
+                // Set rating to 0
+                KGE_Player addRating (0 - (rating KGE_Player));
         };
     }, 0, []] call cba_fnc_addPerFrameHandler;
 };
