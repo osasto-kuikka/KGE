@@ -32,3 +32,5 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 };
 
 GVAR(animationLock) = false;
+
+KGE_LOGINFO_1("%1 respawned",_unit);

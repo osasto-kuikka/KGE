@@ -41,6 +41,8 @@ if !(isNull(findDisplay 49)) then {
 };
 
 if (_set) then {
+    KGE_LOGINFO("Spectator started");
+
     // Initalize camera variables
     GVAR(camBoom) = 0;
     GVAR(camDolly) = [0,0];
@@ -83,6 +85,8 @@ if (_set) then {
         EGVAR(nametags,showNamesForAI) = false;
     };
 } else {
+    KGE_LOGINFO("Spectator closed");
+
     // Close any open dialogs (could be interrupts)
     while {dialog} do {
         closeDialog 0;
@@ -115,6 +119,11 @@ if (_set) then {
     GVAR(mouse) = nil;
     GVAR(mousePos) = nil;
     GVAR(treeSel) = nil;
+
+    if !(isNil QGVAR(camAgent)) then {
+        deleteVehicle GVAR(camAgent);
+        GVAR(camAgent) = nil;
+    };
 
     // Reset nametag settings
     if (["ace_nametags"] call EFUNC(common,classExists)) then {

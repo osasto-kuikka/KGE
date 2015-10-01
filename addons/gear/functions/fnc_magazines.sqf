@@ -15,7 +15,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {"asd"};
+if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
 private ["_returnText", "_magazinesAll", "_magazinesSingle"];
 _returnText = format ["<font color='#FFFF00'>Magazines and items: </font>(Click count for info.)<br/>", _unit];

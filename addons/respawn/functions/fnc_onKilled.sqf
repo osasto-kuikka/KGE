@@ -33,3 +33,5 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 
 GVAR(animationLock) = true;
 call FUNC(animationLock);
+
+KGE_LOGINFO_1("%1 killed",_unit);

@@ -20,6 +20,8 @@ if !(GVAR(isAutoRunActive)) exitWith {};
         GVAR(isAutoRunActive) = false;
         //KGE_Player switchMove "";
 
+        KGE_LOGINFO("Autorun stopped");
+
         [{
             params ["_action"];
 

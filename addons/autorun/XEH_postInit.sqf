@@ -7,6 +7,7 @@
 
     if !(call FUNC(canAutoRun)) exitWith {
         GVAR(isAutoRunActive) = false;
+        KGE_LOGINFO("Autorun stopped");
     };
 
     private ["_animation"];
@@ -29,7 +30,9 @@
 }, [], {!(isNull (findDisplay 46))}] call EFUNC(common,waitUntil);
 
 // Disable autorun when teleported
-["KGE_onTeleport", {
+["onTeleport", {
     GVAR(isAutoRunActive) = false;
     KGE_Player playMoveNow "";
-}] call cba_fnc_addLocalEventHandler;
+}] call AFUNC(common,addEventHandler);
+
+KGE_LOGINFO("Autorun Module Initialized.");

@@ -31,3 +31,5 @@ GVAR(death) set [1, [_logic, "death_east"] call EFUNC(common,moduleSettings)];
 GVAR(death) set [2, [_logic, "death_independent"] call EFUNC(common,moduleSettings)];
 GVAR(death) set [3, [_logic, "death_civilian"] call EFUNC(common,moduleSettings)];
 publicVariable QGVAR(death);
+
+KGE_LOGINFO("Respawn Module Initialized.");

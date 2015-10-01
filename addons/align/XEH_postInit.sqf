@@ -26,3 +26,5 @@
 	addCamshake [0.22 + _intensity, 0.7, 0.83];
 
 }, 0.2, []] call CBA_fnc_addPerFrameHandler;
+
+KGE_LOGINFO("Align Module Initialized.");

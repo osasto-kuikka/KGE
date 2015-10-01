@@ -15,7 +15,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-if(isNull _unit) exitWith {"null"};
+if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
 private ["_returnText", "_sweaponName", "_hweaponName", "_weaponName"];
 _returnText = "";

@@ -27,3 +27,5 @@ if(hasInterface) then {
         [KGE_Player, true] call FUNC(activateClient);
     }, [], {!(isNull KGE_Player) && {getClientState == "BRIEFING READ"}}] call EFUNC(common,waitUntil);
 };
+
+KGE_LOGINFO("Zeus Module Initialized.");

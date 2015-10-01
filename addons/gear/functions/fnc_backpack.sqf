@@ -15,7 +15,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-if !(alive _unit || _unit getVariable [QEGVAR(respawn,alive), true]) exitWith {"asd"};
+if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
 private ["_returnText", "_backpack"];
 _returnText = "";

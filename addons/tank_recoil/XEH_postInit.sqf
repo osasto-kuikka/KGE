@@ -2,12 +2,14 @@
 
 GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
 
-["vehicleStatusChanged", {
-    params ["_vehicleStatus"];
+["playerVehicleChanged", {
+    params ["_unit"];
 
-    if(_vehicleStatus == 2) exitWith {
-        call FUNC(addEvent);
+    if(_unit call EFUNC(common,vehicleStatus) == 2) exitWith {
+        _unit call FUNC(addEvent);
     };
 
-    call FUNC(removeEvent);
+    _unit call FUNC(removeEvent);
 }] call AFUNC(common,addEventHandler);
+
+KGE_LOGINFO("Tank Recoil Module Initialized.");

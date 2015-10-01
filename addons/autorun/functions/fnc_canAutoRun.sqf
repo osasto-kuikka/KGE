@@ -13,8 +13,10 @@
 
 private ["_gradient", "_fatigue"];
 
+if !(alive KGE_Player) exitWith {false};
+
 // If KGE respawn is used
-if !(call EFUNC(common,isAlive)) exitWith {false};
+if !(KGE_Player getVariable [QEGVAR(respawn,alive), true]) exitWith {false};
 
 if(vehicle KGE_Player != KGE_Player) exitWith {false};
 if(surfaceIsWater (getPosASL KGE_Player)) exitWith {false};
