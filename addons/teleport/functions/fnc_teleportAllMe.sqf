@@ -17,7 +17,7 @@ private ["_inVehicle"];
 _inVehicle = 0;
 
 {
-    if(!local _x && {_x getVariable ["KGE_alive", true]}) then {
+    if(!local _x && {alive _x || _x getVariable [QEGVAR(respawn,alive), true]}) then {
         if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
             [_x, GVAR(player)] call FUNC(toBehind);
 

@@ -14,9 +14,9 @@
 params ["_unit"];
 
 // publish information about player respawning
-["KGE_onRespawn", [_unit]] call cba_fnc_globalEvent;
+[QGVAR(onRespawn), [_unit]] call AFUNC(common,globalEvent);
 
-_unit setVariable ["KGE_alive", true, true];
+_unit setVariable [QGVAR(alive), true, true];
 
 _unit allowDamage true;
 

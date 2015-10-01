@@ -14,9 +14,9 @@
 params ["_unit"];
 
 // Publish information about player dying
-["KGE_onKilled", [_unit]] call cba_fnc_globalEvent;
+[QGVAR(onKilled), [_unit]] call AFUNC(common,globalEvent);
 
-_unit setVariable ["KGE_alive", false, true];
+_unit setVariable [QGVAR(alive), false, true];
 
 _unit allowDamage false;
 

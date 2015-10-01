@@ -2,7 +2,7 @@
 
 GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
 
-["KGE_vehicleStatusChanged", {
+["vehicleStatusChanged", {
     params ["_vehicleStatus"];
 
     if(_vehicleStatus == 2) exitWith {
@@ -10,4 +10,4 @@ GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
     };
 
     call FUNC(removeEvent);
-}] call cba_fnc_addEventHandler;
+}] call AFUNC(common,addEventHandler);

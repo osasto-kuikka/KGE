@@ -1,7 +1,7 @@
 /*
  * Author: nikolauska
  *
- * Check if unit is alive (Not used to check if player is in spectator!)
+ * Check if unit is alive
  *
  * Argument:
  * 0: Unit <Object>
@@ -10,6 +10,10 @@
  * Boolean
  */
 
-params ["_unit"];
+#include "..\script_component.hpp"
 
-(!isNull _unit && {alive _unit})
+params [
+    ["_unit", KGE_Player, [objNull]]
+];
+
+_unit getVariable [QEGVAR(respawn,alive), true]

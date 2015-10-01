@@ -14,4 +14,4 @@
 if !(GVAR(active)) exitWith {};
 
 // Send event info to server
-[QGVAR(serverEvent), [_unit, "BIS_KILLED"]] call cba_fnc_globalEvent;
+[QGVAR(serverEvent), [_unit, "BIS_KILLED"]] call AFUNC(common,serverEvent);

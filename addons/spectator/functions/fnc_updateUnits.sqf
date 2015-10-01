@@ -26,8 +26,7 @@ private ["_sides","_cond","_filteredUnits","_filteredGroups"];
 _filteredUnits = [];
 {
     if (
-        (_x call EFUNC(common,isAlive)) &&
-        {_x getVariable ["KGE_alive", true]} &&
+        (alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) &&
         {(side _x) in GVAR(availableSides)}
     ) then {
         _filteredUnits pushBack _x;

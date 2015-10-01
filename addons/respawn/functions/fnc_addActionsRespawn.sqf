@@ -16,7 +16,7 @@ private ["_actions"];
 _actions = [];
 
 {
-    if(_x call EFUNC(common,isAlive) && {!(_x getVariable ["KGE_alive", true])}) then {
+    if (alive _x && {!(_x getVariable [QEGVAR(respawn,alive), true])}) then {
         _actions pushBack
             [
                 [
@@ -27,7 +27,7 @@ _actions = [];
                     {true},
                     {},
                     [_x, "KGE_RESPAWN"]
-                ] call ace_interact_menu_fnc_createAction,
+                ] call AFUNC(interact_menu,createAction),
                 [],
                 _x
             ];

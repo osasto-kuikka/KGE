@@ -27,7 +27,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
     _inVehicle = 0;
 
     {
-        if(_x getVariable ["KGE_alive", true]) then {
+        if(alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) then {
             if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
                 _x setPos GVAR(mapClickPos);
 

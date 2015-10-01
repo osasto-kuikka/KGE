@@ -14,5 +14,5 @@
 params ["_unit", "_changeAssigned"];
 
 if(call EFUNC(common,isAdmin)) then {
-    [QGVAR(activateEvent), [_unit, _changeAssigned]] call cba_fnc_globalEvent;
+    [QGVAR(activateEvent), [_unit, _changeAssigned]] call AFUNC(common,serverEvent);
 };

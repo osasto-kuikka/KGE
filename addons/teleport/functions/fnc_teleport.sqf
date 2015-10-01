@@ -30,6 +30,6 @@ if (surfaceIsWater (getPosASL _unit)) exitWith {
     Hint "Player is currently in water and cannot be teleported!";
 };
 
-["KGE_onTeleport", [_target]] call cba_fnc_whereLocalEvent;
+[QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);
 
 [_unit, _target] call FUNC(toBehind);

@@ -12,7 +12,7 @@
 #include "..\script_component.hpp"
 
 {
-    if !(_x getVariable ["KGE_alive", true]) then {
-        [QGVAR(serverEvent), [_x, "KGE_RESPAWN"]] call cba_fnc_globalEvent;
+    if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {
+        [QGVAR(serverEvent), [_x, "KGE_RESPAWN"]] call AFUNC(common,serverEvent);
     };
 } forEach (call cba_fnc_players);
