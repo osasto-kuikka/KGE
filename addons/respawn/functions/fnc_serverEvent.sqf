@@ -25,13 +25,13 @@ switch(_event) do {
                 if(_unitName isEqualTo _name) exitWith {
                     _found = true;
 
-                    [QGVAR(clientEvent),[_unit, _event, _status]] call cba_fnc_whereLocalEvent;
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
 
             if !(_found) then {
                 GVAR(playerList) pushBack [_unitName, "alive", 0];
-                [QGVAR(clientEvent),[_unit, _event, "alive"]] call cba_fnc_whereLocalEvent;
+                [QGVAR(clientEvent), _unit, [_unit, _event, "alive"]] call AFUNC(common,targetEvent);
             };
         };
         case "BIS_KILLED": {
@@ -64,7 +64,7 @@ switch(_event) do {
                         GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
                     };
 
-                    [QGVAR(clientEvent),[_unit, _event, _status]] call cba_fnc_whereLocalEvent;
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
         };
@@ -77,7 +77,7 @@ switch(_event) do {
                 if(_unitName isEqualTo _name) exitWith {
                     _status = "alive";
                     GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
-                    [QGVAR(clientEvent),[_unit, _event, _status]] call cba_fnc_whereLocalEvent;
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
         };

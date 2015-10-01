@@ -15,7 +15,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-if !(_unit call EFUNC(common,isAlive)) exitWith {"asd"};
+if !(alive _unit || _unit getVariable [QEGVAR(respawn,alive), true]) exitWith {"asd"};
 
 private ["_returnText", "_backpack"];
 _returnText = "";

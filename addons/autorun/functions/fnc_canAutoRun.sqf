@@ -13,12 +13,11 @@
 
 private ["_gradient", "_fatigue"];
 
-if(!alive KGE_Player) exitWith {false};
+// If KGE respawn is used
+if !(call EFUNC(common,isAlive)) exitWith {false};
+
 if(vehicle KGE_Player != KGE_Player) exitWith {false};
 if(surfaceIsWater (getPosASL KGE_Player)) exitWith {false};
-
-// If KGE respawn is used
-if !(KGE_Player getVariable ["KGE_alive", true]) exitWith {false};
 
 // No need for fatigue and gradient check for walking
 if(GVAR(autoRunMode) isEqualTo WALK) exitWith {true};

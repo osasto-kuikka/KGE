@@ -13,6 +13,7 @@
 #define FUNC(var1) TRIPLES(ADDON,fnc,var1)
 #define EFUNC(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
 #define CFUNC(var1) TRIPLES(cba,fnc,var1)
+#define AFUNC(var1,var2) TRIPLES(DOUBLES(ace,var1),fnc,var2)
 
 #define QFUNC(var1) QUOTE(DFUNC(var1))
 #define QEFUNC(var1,var2) QUOTE(DEFUNC(var1,var2))

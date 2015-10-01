@@ -41,4 +41,4 @@ _respawnedIndex = GVAR(respawned) find _unit;
 if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
 GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
 
-["KGE_onTeleport", [_target]] call cba_fnc_whereLocalEvent;
+[QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);

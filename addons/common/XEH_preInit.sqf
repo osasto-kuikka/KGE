@@ -27,6 +27,7 @@ PREP(waitUntil);
 
 if (hasInterface) then {
     KGE_Player = player;
+    KGE_PlayerOld = player;
 
     GVAR(admin) = false;
     GVAR(vehicleStatus) = -1;
@@ -35,35 +36,22 @@ if (hasInterface) then {
 
     // Update player information
     [{
-        if !(KGE_Player isEqualTo (call FUNC(player))) then {
-            private ["_oldPlayer"];
-
-            _oldPlayer = KGE_Player;
-            KGE_Player = call FUNC(player);
-
-            SETUVAR(KGE_Player,KGE_Player);
-
-            KGE_Player call FUNC(setName);
-
-            ["KGE_PlayerChanged", [KGE_Player, _oldPlayer]] call cba_fnc_localEvent;
-        };
-
         if !(GVAR(admin) isEqualTo (call FUNC(isAdmin))) then {
             GVAR(admin) = call FUNC(isAdmin);
 
-            ["KGE_adminChanged", [GVAR(admin)]] call cba_fnc_localEvent;
+            ["adminChanged", [GVAR(admin)]] call AFUNC(common,localEvent);
         };
 
         if !(GVAR(vehicleStatus) isEqualTo (KGE_Player call FUNC(playerVehicleStatus))) then {
             GVAR(vehicleStatus) = KGE_Player call FUNC(playerVehicleStatus);
 
-            ["KGE_vehicleStatusChanged", [GVAR(vehicleStatus)]] call cba_fnc_localEvent;
+            ["vehicleStatusChanged", [GVAR(vehicleStatus)]] call AFUNC(common,localEvent);
         };
 
         if !(GVAR(mapOpen) isEqualTo visibleMap) then {
             GVAR(mapOpen) = visibleMap;
 
-            ["KGE_mapOpen", [GVAR(mapOpen)]] call cba_fnc_localEvent;
+            ["KGE_mapOpen", [GVAR(mapOpen)]] call AFUNC(common,localEvent);
         };
 
         // So player never turns to enemy side
