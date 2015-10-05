@@ -16,7 +16,7 @@ private ["_actions"];
 _actions = [];
 
 {
-    if !(_x call EFUNC(common,isAlive)) then {
+    if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {
         // Stage for removal
         GVAR(respawned) set [_forEachIndex, nil];
     } else {

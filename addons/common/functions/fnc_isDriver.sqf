@@ -13,7 +13,7 @@
 
 params [["_unit", objNull]];
 
-if !(_unit call FUNC(isAlive)) exitWith { false };
+if !(alive _unit) exitWith { false };
 
 !(vehicle _unit isEqualTo _unit) &&
 driver (vehicle _unit) isEqualTo _unit

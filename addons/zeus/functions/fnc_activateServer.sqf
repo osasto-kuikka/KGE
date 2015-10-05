@@ -23,6 +23,8 @@ if(_changeAssigned) then {
     // Assign new curator
     GVAR(assignedCurator) = _unit;
     _unit assignCurator GVAR(curatorModule);
+
+    KGE_LOGINFO_1("Zeus curator changed to %1",_unit);
 };
 
 {

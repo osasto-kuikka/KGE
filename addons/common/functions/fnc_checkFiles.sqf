@@ -14,7 +14,7 @@
 private "_version";
 _version = getText (configFile >> "CfgPatches" >> "kge_main" >> "versionStr");
 
-diag_log text format ["[KGE]: KGE is version %1.", _version];
+KGE_LOGINFO_1("KGE is version %1",_version);
 
 private "_addons";
 _addons = "true" configClasses (configFile >> "CfgPatches");//
@@ -25,12 +25,12 @@ _addons = [_addons, {_this find "kge_" == 0}] call FUNC(filter);
     if (getText (configFile >> "CfgPatches" >> _x >> "versionStr") != _version) then {
         private "_errorMsg";
         _errorMsg = format ["File %1.pbo is outdated.", _x];
+        KGE_LOGERROR(_errorMsg);
 
-        diag_log text format ["[KGE] ERROR: %1", _errorMsg];
         if(isServer) then {
-            ["KGE_SystemChatEvent", [format ["[KGE] Server: %1", _errorMsg]]] call cba_fnc_globalEvent;
+            ["systemChatEvent", [format ["[KGE] Server: %1", _errorMsg]]] call AFUNC(common,globalEvent);
         } else {
-            ["KGE_SystemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call cba_fnc_globalEvent;
+            ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
         };
 
 
@@ -60,8 +60,8 @@ if (isMultiplayer) then {
                 private "_errorMsg";
                 _errorMsg = format ["Client/Server Version Mismatch. Server: %1, Client: %2.", GVAR(ServerVersion), _version];
 
-                diag_log text format ["[KGE] ERROR: %1", _errorMsg];
-                ["KGE_SystemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call cba_fnc_globalEvent;
+                KGE_LOGERROR(_errorMsg);
+                ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
 
                 if (hasInterface) then {
                     ["[KGE] ERROR", _errorMsg, {findDisplay 46 closeDisplay 0}] call FUNC(errorMessage);
@@ -72,8 +72,8 @@ if (isMultiplayer) then {
             if !(_addons isEqualTo []) then {
                 _errorMsg = format ["Client/Server Addon Mismatch. Client has extra addons: %1.",_addons];
 
-                diag_log text format ["[KGE] ERROR: %1", _errorMsg];
-                ["KGE_SystemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call cba_fnc_globalEvent;
+                KGE_LOGERROR(_errorMsg);
+                ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
 
                 if (hasInterface) then {
                     ["[KGE] ERROR", _errorMsg, {findDisplay 46 closeDisplay 0}] call FUNC(errorMessage);

@@ -14,7 +14,7 @@
 
 params ["_unit"];
 
-if !(_unit call FUNC(isAlive)) exitWith {"Unknown"};
+if !(alive _unit) exitWith {"Unknown"};
 
 if (_unit isKindOf "CAManBase") then {
     if (isPlayer _unit) then {

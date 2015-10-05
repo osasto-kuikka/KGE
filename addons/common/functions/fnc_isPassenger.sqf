@@ -14,7 +14,7 @@
 
 params [["_unit", objNull]];
 
-if !(_unit call FUNC(isAlive)) exitWith { false };
+if !(alive _unit) exitWith { false };
 
 vehicle _unit != _unit &&
 {!(_this call kge_common_fnc_isDriver)} &&

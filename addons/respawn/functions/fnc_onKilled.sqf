@@ -14,9 +14,11 @@
 params ["_unit"];
 
 // Publish information about player dying
-["KGE_onKilled", [_unit]] call cba_fnc_globalEvent;
+[QGVAR(onKilled), [_unit]] call AFUNC(common,globalEvent);
 
-_unit setVariable ["KGE_alive", false, true];
+_unit setVariable [QGVAR(alive), false, true];
+
+_unit allowDamage false;
 
 _unit setPos ([_unit, "killed"] call FUNC(getMarkerPosition));
 _unit hideObjectGlobal true;
@@ -31,3 +33,5 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 
 GVAR(animationLock) = true;
 call FUNC(animationLock);
+
+KGE_LOGINFO_1("%1 killed",_unit);

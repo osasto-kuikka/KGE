@@ -18,7 +18,7 @@ private ["_returnString", "_unitName", "_unitDesc", "_unitRank"];
 _returnString = "";
 
 // If unit is null or dead then don't add any text
-if !([_unit] call EFUNC(common,isAlive)) exitWith {""};
+if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
 
 // If unit is leader then add groupID if groupID is set to be shown

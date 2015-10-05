@@ -171,7 +171,7 @@ class GVAR(interface) {
                     colorText[] = {COL_FORE};
                     colorBackground[] = {COL_FORE_D};
                     sizeEx = H_PART(1);
-                    text = CSTRING(UnitTitle);
+                    text = QUOTE(Spectator Units);
                 };
                 class unitTree: RscTree {
                     idc = IDC_UNIT_TREE;
@@ -219,7 +219,7 @@ class GVAR(interface) {
                     colorText[] = {COL_FORE};
                     colorBackground[] = {COL_FORE_D};
                     sizeEx = H_PART(1);
-                    text = CSTRING(HelpTitle);
+                    text = QUOTE(Spectator Controls);
                 };
                 class helpContent: RscListBox {
                     idc = IDC_HELP_LIST;

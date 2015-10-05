@@ -13,7 +13,7 @@
 
 private ["_group", "_header"];
 
-if !(KGE_Player call EFUNC(common,isAlive)) exitWith {};
+if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {};
 
 _group = group KGE_Player;
 {

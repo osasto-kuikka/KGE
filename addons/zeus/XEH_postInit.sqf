@@ -5,7 +5,7 @@ if(isServer) then {
 
     [QGVAR(activateEvent), {
         _this call FUNC(activateServer);
-    }] call cba_fnc_addEventHandler;
+    }] call AFUNC(common,addEventHandler);
 
     [{
         [objNull, false] call FUNC(activateServer);
@@ -13,17 +13,19 @@ if(isServer) then {
 };
 
 if(hasInterface) then {
-    ["KGE_adminChanged", {
+    ["adminChanged", {
         [KGE_Player, false] call FUNC(activateClient);
-    }] call cba_fnc_addEventHandler;
+    }] call AFUNC(common,addEventHandler);
 
-    ["KGE_PlayerChanged", {
+    ["playerChanged", {
         params ["_newPlayer"];
 
         [_newPlayer, true] call FUNC(activateClient);
-    }] call cba_fnc_addEventHandler;
+    }] call AFUNC(common,addEventHandler);
 
     [{
         [KGE_Player, true] call FUNC(activateClient);
     }, [], {!(isNull KGE_Player) && {getClientState == "BRIEFING READ"}}] call EFUNC(common,waitUntil);
 };
+
+KGE_LOGINFO("Zeus Module Initialized.");

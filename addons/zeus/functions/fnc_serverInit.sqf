@@ -29,3 +29,5 @@ for "_i" from 0 to (count _cfgPatches - 1) do {
 };
 //_addons call BIS_fnc_activateAddons;
 GVAR(curatorModule) addcuratoraddons _addons;
+
+KGE_LOGINFO("Zeus module added");

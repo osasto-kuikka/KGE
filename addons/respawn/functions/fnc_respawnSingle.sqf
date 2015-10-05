@@ -13,4 +13,4 @@
 
 params ["_unit"];
 
-[QGVAR(serverEvent), [_unit, "KGE_RESPAWN"]] call cba_fnc_globalEvent;
+[QGVAR(serverEvent), [_unit, "KGE_RESPAWN"]] call AFUNC(common,serverEvent);

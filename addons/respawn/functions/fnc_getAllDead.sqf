@@ -14,7 +14,7 @@
 private ["_deadArray"];
 _deadArray = [];
 {
-    if !(_x getVariable ["KGE_alive", true]) then {
+    if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {
         _deadArray pushBack _x;
     };
 } forEach (call cba_fnc_players);

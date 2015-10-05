@@ -14,9 +14,11 @@
 params ["_unit"];
 
 // publish information about player respawning
-["KGE_onRespawn", [_unit]] call cba_fnc_globalEvent;
+[QGVAR(onRespawn), [_unit]] call AFUNC(common,globalEvent);
 
-_unit setVariable ["KGE_alive", true, true];
+_unit setVariable [QGVAR(alive), true, true];
+
+_unit allowDamage true;
 
 _unit setPos ([_unit, "respawn"] call FUNC(getMarkerPosition));
 _unit hideObjectGlobal false;
@@ -30,3 +32,5 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 };
 
 GVAR(animationLock) = false;
+
+KGE_LOGINFO_1("%1 respawned",_unit);

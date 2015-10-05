@@ -32,7 +32,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    ["KGE_onTeleport", [_target]] call cba_fnc_whereLocalEvent;
+    [QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);
 
     _unit setPos GVAR(mapClickPos);
 
@@ -42,5 +42,5 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
     _respawnedIndex = GVAR(respawned) find _unit;
     if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
     GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
-    
+
 }, [_unit], {!(isNil QGVAR(mapClickPos))}] call EFUNC(common,waitUntil);
