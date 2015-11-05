@@ -1,7 +1,7 @@
 /*
  * Author: nikolauska
  *
- * Replace watch for target unit
+ * Replace GPS for target unit
  *
  * Argument:
  * 0: Config path <Config>
@@ -16,7 +16,7 @@
 params ["_configPath", "_loadoutTarget"];
 
 if(getText _configPath == "") then {
-  	_loadoutTarget unlinkItem "ItemWatch";
+    [_loadoutTarget, "empty"] call bis_fnc_setUnitInsignia;
 } else {
-  	_loadoutTarget linkItem (getText _configPath call FUNC(fixer));
+    [_loadoutTarget, (getText _configPath call FUNC(fixer))] call bis_fnc_setUnitInsignia;
 };

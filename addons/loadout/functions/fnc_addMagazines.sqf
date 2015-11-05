@@ -11,6 +11,8 @@
  *
  */
 
+#include "..\script_component.hpp"
+
 params ["_configPath", "_loadoutTarget"];
 
-{ _loadoutTarget addMagazine _x; } forEach getArray (_configPath);
+{ _loadoutTarget addMagazine (_x call FUNC(fixer)); } forEach getArray (_configPath);

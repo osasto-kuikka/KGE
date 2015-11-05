@@ -173,3 +173,8 @@ if ( [_config, "compass"] call FUNC(isConfigEntry) ) then {
 if ( [_config, "watch"] call FUNC(isConfigEntry) ) then {
     [_config >> "watch", _unit] call FUNC(replaceWatch);
 };
+
+// Insignia
+if ( [_config, "insignia"] call FUNC(isConfigEntry) ) then {
+    [_config >> "insignia", _unit] call FUNC(replaceInsignia);
+};

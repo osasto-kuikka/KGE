@@ -11,6 +11,8 @@
  *
  */
 
+#include "..\script_component.hpp"
+
 params ["_configPath", "_loadoutTarget"];
 
-{ _loadoutTarget addItemToUniform _x; } forEach getArray (_configPath);
+{ _loadoutTarget addItemToUniform (_x call FUNC(fixer)); } forEach getArray (_configPath);

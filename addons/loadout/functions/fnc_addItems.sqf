@@ -8,9 +8,11 @@
  * 1: Loadout target <Object>
  *
  * Return value:
- * 
+ *
  */
+
+#include "..\script_component.hpp"
 
 params ["_configPath", "_loadoutTarget"];
 
-{ _loadoutTarget addItem _x; } forEach getArray (_configPath);
+{ _loadoutTarget addItem (_x call FUNC(fixer)); } forEach getArray (_configPath);

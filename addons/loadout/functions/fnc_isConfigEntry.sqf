@@ -13,4 +13,4 @@
 
 params ["_configPath", "_entryName"];
 
-([_configPath, _entryName, false] call bis_fnc_returnConfigEntry) isEqualTo false;
+!(([_configPath, _entryName, false] call bis_fnc_returnConfigEntry) isEqualTo false)

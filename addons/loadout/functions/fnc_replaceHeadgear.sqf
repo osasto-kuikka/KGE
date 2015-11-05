@@ -11,10 +11,12 @@
  *
  */
 
+#include "..\script_component.hpp"
+
 params ["_configPath", "_loadoutTarget"];
 
 if(getText _configPath == "") then {
     removeHeadgear _loadoutTarget;
 } else {
-    _loadoutTarget addHeadgear getText (_configPath);
+    _loadoutTarget addHeadgear (getText _configPath call FUNC(fixer));
 };

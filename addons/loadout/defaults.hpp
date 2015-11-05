@@ -1,4 +1,4 @@
-#include "defaults/cup.hpp"
-#include "defaults/lop.hpp"
-#include "defaults/rhs.hpp"
-#include "defaults/vanilla.hpp"
+#include "defaults/fdf_winter.hpp"
+#include "defaults/fdf_woodland.hpp"
+#include "defaults/usarmy_desert.hpp"
+#include "defaults/usarmy_woodland.hpp"

@@ -13,3 +13,13 @@ class CfgPatches {
 };
 
 #include "config_eventhandlers.hpp"
+
+class CfgUnitInsignia
+{
+	class empty
+	{
+		author = "";
+		displayName = "";
+		texture = "";
+	};
+};

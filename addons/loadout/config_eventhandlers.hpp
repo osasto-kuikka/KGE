@@ -12,6 +12,6 @@ class Extended_PostInit_EventHandlers {
 
 class Extended_Respawn_EventHandlers {
     class ADDON {
-        respawn = QUOTE(call FUNC(applyLoadout));
+        respawn = QUOTE(_this call FUNC(applyLoadout));
     };
 };
