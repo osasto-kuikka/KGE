@@ -1,6 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * License
+   * [License](Introduction/license.md)
 * Introduction
 
