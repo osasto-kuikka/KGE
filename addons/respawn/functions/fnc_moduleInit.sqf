@@ -15,8 +15,7 @@ if !(isServer) exitWith {};
 
 params ["_logic", "_units", "_activated"];
 
-GVAR(active) = true;
-publicVariable QGVAR(active);
+
 
 GVAR(maxKilled) = [_logic, "amount"] call EFUNC(common,moduleSettings);
 

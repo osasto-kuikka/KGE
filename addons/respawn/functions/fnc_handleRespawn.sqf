@@ -11,7 +11,6 @@
 
 #include "..\script_component.hpp"
 
-if !(GVAR(active)) exitWith {};
 
 params ["_unit", "_corpse"];
 
