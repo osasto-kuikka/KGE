@@ -17,9 +17,8 @@
 #define MAXDISTANCE 10
 
 params ["_unit", "_target"];
-private ["_targetPos", "_targetDir", "_isFlat"];
 
-_targetPos = (position _target) findEmptyPosition [MINDISTANCE, MAXDISTANCE, (typeof _target)];
+private _targetPos = (position _target) findEmptyPosition [MINDISTANCE, MAXDISTANCE, (typeof _target)];
 
 if(count _targetPos == 0) exitWith {
     GVAR(target) = _target;
@@ -37,7 +36,7 @@ if(count _targetPos == 0) exitWith {
 _unit setPos _targetPos;
 
 // Find teleported object and remove it from respawned array
-_respawnedIndex = GVAR(respawned) find _unit;
+private _respawnedIndex = GVAR(respawned) find _unit;
 if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
 GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
 

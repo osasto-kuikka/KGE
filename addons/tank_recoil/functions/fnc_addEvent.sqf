@@ -14,8 +14,7 @@
 
 params [["_unit", KGE_Player, [objNull]]];
 
-private ["_vehicle"];
-_vehicle = vehicle _unit;
+private _vehicle = vehicle _unit;
 
 if !(isNil {_unit getVariable [QGVAR(firedEvent), nil]}) exitWith {};
 if !([GVAR(allowedTanks), (typeOf _vehicle)] call cba_fnc_hashHasKey) exitWith {};

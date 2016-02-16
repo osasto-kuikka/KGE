@@ -31,18 +31,19 @@ GVAR(availableSides) = [west,east,resistance,civilian];
 GVAR(availableVisions) = [-2,-1,0,1];
 
 GVAR(camAgent) = objNull;
+GVAR(camDistance) = 10;
 GVAR(camMode) = 0;
 GVAR(camPan) = 0;
-GVAR(camPos) = ATLtoASL [worldSize * 0.5, worldSize * 0.5, 20];
-GVAR(camSpeed) = 2.5;
+GVAR(camPos) = [0,0,0];
+GVAR(camSpeed) = 1.5;
 GVAR(camTilt) = -10;
 GVAR(camUnit) = objNull;
 GVAR(camVision) = -2;
 GVAR(camZoom) = 1.25;
+GVAR(camPrev) = objNull;
 
 GVAR(interrupts) = [];
 GVAR(isSet) = false;
-GVAR(alive) = true;
 
 GVAR(showComp) = true;
 GVAR(showHelp) = true;
@@ -51,11 +52,17 @@ GVAR(showInterface) = true;
 GVAR(showMap) = false;
 GVAR(showTool) = true;
 GVAR(showUnit) = true;
-GVAR(showAIList) = false;
 
 GVAR(unitList) = [];
 GVAR(unitBlacklist) = [];
 GVAR(unitWhitelist) = [];
 GVAR(groupList) = [];
+
+GVAR(filterUnits) = 3;
+GVAR(filterSides) = 3;
+GVAR(restrictModes) = 0;
+GVAR(restrictVisions) = 0;
+
+GVAR(alive) = true;
 
 ADDON = true;

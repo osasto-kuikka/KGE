@@ -12,9 +12,8 @@
 // Remove killed players from respawned array
 [QEGVAR(respawn,onKilled), {
     params ["_unit"];
-    private ["_respawnedIndex"];
 
-    _respawnedIndex = GVAR(respawned) find _unit;
+    private _respawnedIndex = GVAR(respawned) find _unit;
     if(_respawnedIndex != -1) then {
         GVAR(respawned) set [_respawnedIndex, nil];
 

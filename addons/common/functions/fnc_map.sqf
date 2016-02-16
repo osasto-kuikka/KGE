@@ -15,12 +15,11 @@
  */
 #include "..\script_component.hpp"
 
-private ["_array"];
 params ["_arrayIn", "_code"];
-_array = +_arrayIn;
+private _array = +_arrayIn;
 
 if (isNil "_array") exitWith {
-    diag_log text "[KGE] ERROR: No array for function map";
+    KGE_LOGERROR("No array for function map");
     []
 };
 

@@ -17,32 +17,29 @@ params [
 
 if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
-private ["_returnText", "_itemsAll", "_itemsSingle", "_items"];
-_returnText = "";
+private _returnText = "";
 
 // Get all assigned items and remove dublicates
-_itemsAll = assignedItems _unit;
+private _itemsAll = assignedItems _unit;
 if(uniform _unit != "") then { _itemsAll pushBack (uniform _x) };
 if(vest _unit != "") then { _itemsAll pushBack (vest _x) };
 
-_itemsSingle = _itemsAll arrayIntersect _itemsAll;
+private _itemsSingle = _itemsAll arrayIntersect _itemsAll;
 
 // Add item amount
-_items = [];
+private _items = [];
 {
-    private ["_item"];
-    _item = _x;
+    private _item = _x;
     _items pushBack [_item, ({_x == _item} count _itemsAll)];
 } forEach _itemsSingle;
 
 // Add magazine images and text
 {
     _x params ["_item", "_count"];
-    private ["_conf", "_image", "_name"];
 
-    _conf = configFile >> "CfgWeapons" >> _item;
-    _image = getText(_conf >> "picture") call FUNC(imageCheck);
-    _name = getText(_conf >> "displayName");
+    private _conf = configFile >> "CfgWeapons" >> _item;
+    private _image = getText(_conf >> "picture") call FUNC(imageCheck);
+    private _name = getText(_conf >> "displayName");
     _returnText = _returnText + format ["<img image='%2' width='32' height='32'/><execute expression='systemChat ""Item: %3""'>x%1</execute>, ", _count, _image, _name];
 
     INC(GVAR(addedItems));

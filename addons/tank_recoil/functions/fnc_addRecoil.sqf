@@ -13,9 +13,8 @@
  #include "..\script_component.hpp"
 
 params ["_tank", "_usedGun"];
-private ["_centerofMass", "_recv"];
 
-_centerofMass = getCenterOfMass _tank;
+private _centerofMass = getCenterOfMass _tank;
 
 // If player is gunner add camera shake
 if (KGE_player call EFUNC(common,isGunner)) then {
@@ -23,7 +22,7 @@ if (KGE_player call EFUNC(common,isGunner)) then {
 };
 
 // Calculate new center of mass from turret direction
-_recv = _centerofMass vectorDiff ((
+private _recv = _centerofMass vectorDiff ((
     _tank worldToModelVisual (_tank weaponDirection _usedGun)
     vectorDiff (_tank worldToModelVisual [0, 0, 0])
 ) vectorMultiply 1.4);

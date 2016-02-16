@@ -11,16 +11,13 @@
 
 #include "..\script_component.hpp"
 
-params ["_unit"];
-
-// publish information about player respawning
-[QGVAR(onRespawn), [_unit]] call AFUNC(common,globalEvent);
+params ["_unit", "_position"];
 
 _unit setVariable [QGVAR(alive), true, true];
 
 _unit allowDamage true;
 
-_unit setPos ([_unit, "respawn"] call FUNC(getMarkerPosition));
+_unit setPos _position;
 _unit hideObjectGlobal false;
 
 // Handle common addon audio
@@ -32,5 +29,8 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 };
 
 GVAR(animationLock) = false;
+
+// publish information about player respawning
+[QGVAR(onRespawn), [_unit]] call AFUNC(common,globalEvent);
 
 KGE_LOGINFO_1("%1 respawned",_unit);

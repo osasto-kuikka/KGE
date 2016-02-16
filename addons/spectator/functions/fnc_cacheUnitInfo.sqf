@@ -14,7 +14,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit"];
 private ["_color","_icon","_name"];
@@ -27,8 +27,7 @@ if (isNil { GETVAR((group _unit),GVAR(gColor),nil) }) then {
 
 // Unit info should be updated each time
 _icon = getText (configFile >> "CfgVehicles" >> typeOf _unit >> "Icon");
-//_name = _unit call EFUNC(common,getName);
-_name = name _unit;
+_name = [_unit,false] call AFUNC(common,getName);
 
 // Handle CfgVehicleIcons
 if (isText (configFile >> "CfgVehicleIcons" >> _icon)) then {

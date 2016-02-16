@@ -21,21 +21,19 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 [{
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    private ["_inVehicle"];
-    _inVehicle = 0;
-
+    private _inVehicle = 0;
     {
         if(alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) then {
             if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
                 _x setPos GVAR(mapClickPos);
 
-               _respawnedIndex = GVAR(respawned) find _x;
+               private _respawnedIndex = GVAR(respawned) find _x;
                if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
             } else {
                 INC(_inVehicle);
             };
         } else {
-            _respawnedIndex = GVAR(respawned) find _x;
+            private _respawnedIndex = GVAR(respawned) find _x;
             if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
         };
     } forEach (call cba_fnc_players);

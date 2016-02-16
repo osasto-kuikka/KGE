@@ -24,14 +24,21 @@ if(surfaceIsWater (getPosASL KGE_Player)) exitWith {false};
 // No need for fatigue and gradient check for walking
 if(GVAR(autoRunMode) isEqualTo WALK) exitWith {true};
 
+// Disable running when weapon is holstered
+if((animationState KGE_Player) in GVAR(disablingAnimation)) exitWith {false};
+
 _gradient = KGE_Player call FUNC(getTerrainGradient);
 _fatigue = getFatigue KGE_Player;
 
-if(_fatigue > GVAR(fatigueThreshold)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = WALK; };
+if(_fatigue > GVAR(fatigueThreshold)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = JOG; };
 if(_gradient < GVAR(terrainGradientMaxDecline)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = WALK };
 if(_gradient > GVAR(terrainGradientMaxIncline)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = WALK };
 
-// Disable running when weapon is holstered
-if((animationState KGE_Player) in GVAR(disablingAnimation)) exitWith {false};
+// If sprint is not allowed, change to jog
+if(!isSprintAllowed KGE_Player && GVAR(autoRunMode) == SPRINT) then { GVAR(autoRunMode) = JOG; };
+
+// If forced walk, switch to walk
+if([KGE_Player, "forceWalk"] call ace_common_fnc_statusEffect_get && GVAR(autoRunMode) != WALK) then { GVAR(autoRunMode) = WALK; };
+if(isForcedWalk KGE_Player && GVAR(autoRunMode) != WALK) then { GVAR(autoRunMode) = WALK; };
 
 true;

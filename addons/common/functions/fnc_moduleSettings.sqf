@@ -16,16 +16,18 @@ if !(isServer) exitWith {};
 
 params [
   ["_logic", objNull],
-  ["_moduleVariable", ""]
+  ["_moduleVariable", ""],
+  ["_default", nil]
 ];
 
 if(isNull _logic || _moduleVariable isEqualTo "") exitWith {
-    ERROR("Invalid parameters for module object or variable text");
+    KGE_LOGERROR("Invalid parameters for module object or variable text");
 };
 
 // Check if the parameter is defined in the module
 if (isNil {_logic getVariable _moduleVariable}) exitWith {
-    ERROR(FORMAT_2("Warning in %1 module: %2 setting is missing. Propably obsolete version of module in use on mission.",typeOf _logic,_moduleVariable));
+    KGE_LOGERROR_2("Warning in %1 module: %2 setting is missing. Propably obsolete version of module in use on mission.",typeOf _logic,_moduleVariable);
+    _default
 };
 
 _logic getVariable _moduleVariable

@@ -18,8 +18,9 @@ PREP(serverEvent);
 
 GVAR(playerList) = [];
 GVAR(maxKilled) = 0;
-GVAR(active) = false;
 GVAR(respawn) = [];
 GVAR(death) = [];
+
+GVAR(active) = false;
 
 ADDON = true;

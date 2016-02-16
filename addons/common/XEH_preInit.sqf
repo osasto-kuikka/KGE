@@ -6,7 +6,6 @@ PREP(checkFiles);
 PREP(classExists);
 PREP(errorMessage);
 PREP(filter);
-PREP(fixHeadbug);
 PREP(getName);
 PREP(getSide);
 PREP(getSideNumber);

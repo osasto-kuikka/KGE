@@ -18,7 +18,7 @@
  * Public: Yes
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_addSides",[],[[]]], ["_removeSides",[],[[]]]];
 

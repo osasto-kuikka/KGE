@@ -171,7 +171,7 @@ class GVAR(interface) {
                     colorText[] = {COL_FORE};
                     colorBackground[] = {COL_FORE_D};
                     sizeEx = H_PART(1);
-                    text = QUOTE(Spectator Units);
+                    text = CSTRING(UnitTitle);
                 };
                 class unitTree: RscTree {
                     idc = IDC_UNIT_TREE;
@@ -184,14 +184,14 @@ class GVAR(interface) {
                     colorBorder[] = {0,0,0,0};
                     colorBackground[] = {COL_BACK};
                     colorSelect[] = {
-                        "profilenamespace getvariable ['GUI_BCG_RGB_R',0.77]",
-                        "profilenamespace getvariable ['GUI_BCG_RGB_G',0.51]",
-                        "profilenamespace getvariable ['GUI_BCG_RGB_B',0.08]",
+                        "profilenamespace getVariable ['GUI_BCG_RGB_R',0.77]",
+                        "profilenamespace getVariable ['GUI_BCG_RGB_G',0.51]",
+                        "profilenamespace getVariable ['GUI_BCG_RGB_B',0.08]",
                         1
                     };
                     multiselectEnabled = 0;
+                    maxHistoryDelay = 10e10;
                     onTreeDblClick = QUOTE([ARR_2('onTreeDblClick',_this)] call FUNC(handleInterface));
-                    onTreeSelChanged = QUOTE([ARR_2('onTreeSelChanged',_this)] call FUNC(handleInterface));
                 };
                 class unitFrame: RscFrame {
                     x = 0;
@@ -219,7 +219,7 @@ class GVAR(interface) {
                     colorText[] = {COL_FORE};
                     colorBackground[] = {COL_FORE_D};
                     sizeEx = H_PART(1);
-                    text = QUOTE(Spectator Controls);
+                    text = CSTRING(HelpTitle);
                 };
                 class helpContent: RscListBox {
                     idc = IDC_HELP_LIST;
@@ -248,7 +248,7 @@ class GVAR(interface) {
             y = safeZoneY;
             w = safeZoneW;
             h = safeZoneH;
-            onMouseButtonDown = QUOTE([ARR_2('onMapClick',_this)] call FUNC(handleInterface));
+            onMouseButtonDown = QUOTE([ARR_2('onmapclick',_this)] call FUNC(handleInterface));
             onDraw = QUOTE(_this call FUNC(handleMap));
         };
     };

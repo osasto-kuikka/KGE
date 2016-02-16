@@ -69,16 +69,17 @@ def main():
         print("# Making {} ...".format(p))
 
         try:
-            subprocess.check_output([
+            out = subprocess.check_output([
                 "makepbo",
                 "-NUP",
                 "-@={}\\{}\\addons\\{}".format(MAINPREFIX,PREFIX.rstrip("_"),p),
                 p,
                 "{}{}.pbo".format(PREFIX,p)
-            ], stderr=subprocess.STDOUT)
-        except:
+            ], shell=True, stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as e:
             failed += 1
-            print("  Failed to make {}.".format(p))
+            outre = str(e.output).replace("\\r\\n"," ").replace("b\"","\"")
+            print("  Failed to make {}.\n  Error message: {}\n".format(p, outre))
         else:
             made += 1
             print("  Successfully made {}.".format(p))

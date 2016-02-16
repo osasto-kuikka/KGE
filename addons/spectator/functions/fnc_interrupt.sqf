@@ -4,7 +4,7 @@
  *
  * Arguments:
  * 0: Reason <STRING>
- * 1: Interrupting <BOOL>
+ * 1: Interrupting <BOOL> (default: true)
  *
  * Return Value:
  * None <NIL>
@@ -14,7 +14,7 @@
  *
  * Public: Yes
  */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_reason", "", [""]], ["_interrupt", true, [true]]];
 

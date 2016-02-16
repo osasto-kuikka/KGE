@@ -15,7 +15,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_display"];
 
@@ -26,8 +26,13 @@ private ["_name","_vision","_fov","_speed","_mode","_time","_toolbar"];
 _toolbar = _display displayCtrl IDC_TOOL;
 
 // Find all tool values
+if (GVAR(camVision) >= 0) then {
+    _vision = localize LSTRING(VisionThermal);
+} else {
+    _vision = [localize LSTRING(VisionNight), localize LSTRING(VisionNormal)] select (GVAR(camVision) < -1);
+};
+
 if (GVAR(camMode) == 0) then {
-    _vision = if (GVAR(camVision) >= 0) then {"Thermal"} else { ["Night", "Normal"] select (GVAR(camVision) < -1) };
     _fov = format ["%1x", floor(GVAR(camZoom) * 100) * 0.01];
     _speed = format ["%1 m/s", floor(GVAR(camSpeed) * 100) * 0.01];
 } else {
@@ -39,10 +44,10 @@ if (GVAR(camMode) == 0) then {
 if (alive GVAR(camUnit)) then {
     _name = GETVAR(GVAR(camUnit),GVAR(uName),"");
 } else {
-    _name = "Undefined";
+    _name = localize "STR_Special_None";
 };
 
-_mode = ["Free", "Internal", "External"] select GVAR(camMode);
+_mode = [localize LSTRING(ViewFree),localize LSTRING(ViewInternal),localize LSTRING(ViewExternal)] select GVAR(camMode);
 _time = [daytime,"HH:MM"] call BIS_fnc_timeToString;
 
 // Update the UI tools

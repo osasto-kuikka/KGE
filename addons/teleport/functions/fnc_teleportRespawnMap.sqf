@@ -23,9 +23,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 [{
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    private ["_inVehicle"];
-    _inVehicle = 0;
-
+    private _inVehicle = 0;
     {
         if(alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) then {
             if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {

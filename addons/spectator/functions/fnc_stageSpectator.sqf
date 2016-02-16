@@ -7,8 +7,8 @@
  * Upon unstage, units will be moved to the position they were in upon staging
  *
  * Arguments:
- * 0: Unit to put into spectator stage <OBJECT> <OPTIONAL>
- * 1: Spectator stage <BOOL> <OPTIONAL>
+ * 0: Unit to put into spectator stage <OBJECT> (default: player)
+ * 1: Unit should be staged <BOOL> (default: true)
  *
  * Return Value:
  * None <NIL>
@@ -19,22 +19,22 @@
  * Public: Yes
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_unit",player,[objNull]], ["_set",true,[true]]];
 
 // No change, no service (but allow spectators to be reset)
 if !(_set || (GETVAR(_unit,GVAR(isStaged),false))) exitWith {};
 
-if !(local _unit) exitwith {
-    [[_unit, _set], QFUNC(stageSpectator), _unit] call EFUNC(common,execRemoteFnc);
+if !(local _unit) exitWith {
+    [[_unit, _set], QFUNC(stageSpectator), _unit] call AFUNC(common,execRemoteFnc);
 };
 
 // Prevent unit falling into water
 _unit enableSimulation !_set;
 
 // Move to/from group as appropriate
-[_unit, _set, QGVAR(isStaged), side group _unit] call EFUNC(common,switchToGroupSide);
+[_unit, _set, QGVAR(isStaged), side group _unit] call AFUNC(common,switchToGroupSide);
 
 if (_set) then {
     // Position should only be saved on first entry
@@ -43,14 +43,14 @@ if (_set) then {
     };
 
     // Ghosts can't talk
-    [_unit, QGVAR(isStaged)] call EFUNC(common,hideUnit);
-    [_unit, QGVAR(isStaged)] call EFUNC(common,muteUnit);
+    [_unit, QGVAR(isStaged)] call AFUNC(common,hideUnit);
+    [_unit, QGVAR(isStaged)] call AFUNC(common,muteUnit);
 
     _unit setPos (markerPos QGVAR(respawn));
 } else {
     // Physical beings can talk
-    [_unit, QGVAR(isStaged)] call EFUNC(common,unhideUnit);
-    [_unit, QGVAR(isStaged)] call EFUNC(common,unmuteUnit);
+    [_unit, QGVAR(isStaged)] call AFUNC(common,unhideUnit);
+    [_unit, QGVAR(isStaged)] call AFUNC(common,unmuteUnit);
 
     _unit setPosATL GVAR(oldPos);
 };
@@ -64,5 +64,5 @@ if !(_set isEqualTo (GETVAR(_unit,GVAR(isStaged),false))) then {
     // Mark spectator state for reference
     _unit setVariable [QGVAR(isStaged), _set, true];
 
-    ["spectatorStaged",[_set]] call EFUNC(common,localEvent);
+    ["spectatorStaged",[_set]] call AFUNC(common,localEvent);
 };

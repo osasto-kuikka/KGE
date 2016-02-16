@@ -11,16 +11,13 @@
 
 #include "..\script_component.hpp"
 
-params ["_unit"];
-
-// Publish information about player dying
-[QGVAR(onKilled), [_unit]] call AFUNC(common,globalEvent);
+params ["_unit", "_position"];
 
 _unit setVariable [QGVAR(alive), false, true];
 
 _unit allowDamage false;
 
-_unit setPos ([_unit, "killed"] call FUNC(getMarkerPosition));
+_unit setPos _position;
 _unit hideObjectGlobal true;
 
 // Handle common addon audio
@@ -33,5 +30,8 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 
 GVAR(animationLock) = true;
 call FUNC(animationLock);
+
+// Publish information about player dying
+[QGVAR(onKilled), [_unit]] call AFUNC(common,globalEvent);
 
 KGE_LOGINFO_1("%1 killed",_unit);

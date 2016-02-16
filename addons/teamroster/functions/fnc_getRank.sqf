@@ -14,8 +14,7 @@
 
 params ["_unit"];
 
-private ["_rank"];
-_rank = rankId _unit;
+private _rank = rankId _unit;
 
 if(_rank == 0) exitWith {"Private"};
 if(_rank == 1) exitWith {"Corporal"};

@@ -19,7 +19,7 @@
  * Public: Yes
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_addModes",[],[[]]], ["_removeModes",[],[[]]]];
 private ["_newModes","_currentModes"];
@@ -41,7 +41,7 @@ if (_newModes isEqualTo []) then {
 };
 
 // Update camera in case of change
-if !(isNil QGVAR(camera)) then {
+if (GVAR(isSet)) then {
     [] call FUNC(transitionCamera);
 };
 

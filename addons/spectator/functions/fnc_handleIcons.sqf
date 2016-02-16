@@ -15,24 +15,18 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
+
+if(GVAR(alive)) exitwith { [_this select 1] call CBA_fnc_removePerFrameHandler; };
 
 if !(GVAR(showIcons)) exitWith {};
 private ["_refPoint","_drawVehicles","_leader","_color","_txt","_unit"];
 
 // Draw groups unless leader is within distance
-_refPoint = [GVAR(camera),GVAR(camUnit)] select (GVAR(camMode) > 0);
+_refPoint = [GVAR(freeCamera),GVAR(camUnit)] select (GVAR(camMode) > 0);
 _drawVehicles = [];
 {
     _leader = leader _x;
-
-    // If leader is dead, select next alive player from group
-    if !(_leader getVariable [QEGVAR(respawn,alive), true]) then {
-        {
-            if(_x getVariable [QEGVAR(respawn,alive), true]) exitWith { _leader = _x };
-        } forEach (units _x);
-    };
-
     if ((_leader distanceSqr _refPoint) > 40000) then {
         _color = GETVAR(_x,GVAR(gColor),[ARR_4(0,0,0,0)]);
         _txt = groupID _x;

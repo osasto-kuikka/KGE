@@ -17,11 +17,10 @@ GVAR(curatorModule) = (createGroup KGE_Zeus_SideLogic) createUnit ["ModuleCurato
 GVAR(curatorModule) setVariable ["Addons",3,true];
 
 // Add all addons to zeus
-private ["_addons", "_cfgPatches", "_class"];
-_addons = [];
-_cfgPatches = configFile >> "cfgpatches";
+private _addons = [];
+private _cfgPatches = configFile >> "cfgpatches";
 for "_i" from 0 to (count _cfgPatches - 1) do {
-    _class = _cfgPatches select _i;
+    private _class = _cfgPatches select _i;
 
     if (isclass _class) then {
         _addons pushBack (configName _class);

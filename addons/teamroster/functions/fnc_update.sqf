@@ -11,9 +11,7 @@
 
 #include "..\script_component.hpp"
 
-private ["_title", "_teamrosterText", "_groupText"];
-
-_teamrosterText = "";
+private _teamrosterText = "";
 
 // Loop throug all players and add them to teamroster text
 {
@@ -22,7 +20,7 @@ _teamrosterText = "";
     true;
 } count (call cba_fnc_players);
 
-_title = format["%1 - %2", side (group KGE_Player), GVAR(iteration)];
+private _title = format["%1 - %2", side (group KGE_Player), GVAR(iteration)];
 
 // Add diary text
 KGE_Player createDiaryRecord [QGVAR(diarySubject), [_title, _teamrosterText]];

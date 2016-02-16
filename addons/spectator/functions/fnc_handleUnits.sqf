@@ -16,7 +16,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_display"];
 
@@ -36,5 +36,5 @@ if !(GVAR(camUnit) in GVAR(unitList)) then {
 // Reduce overhead when unit tree is hidden
 if (ctrlShown (_display displayCtrl IDC_UNIT)) then {
     // Reduce overhead by spreading across frames
-    [FUNC(handleInterface),["onUnitsUpdate",[(_display displayCtrl IDC_UNIT) controlsGroupCtrl IDC_UNIT_TREE]],0.1,1] call EFUNC(common,waitUntil);
+    [FUNC(handleInterface),["onUnitsUpdate",[(_display displayCtrl IDC_UNIT) controlsGroupCtrl IDC_UNIT_TREE]],1] call AFUNC(common,waitAndExecute);
 };

@@ -13,9 +13,8 @@
 #include "..\script_component.hpp"
 
 params [["_unit", KGE_Player, [objNull]]];
-private ["_var"];
 
-_var = _unit getVariable [QGVAR(firedEvent), nil];
+private _var = _unit getVariable [QGVAR(firedEvent), nil];
 if(isNil "_var") exitWith {};
 
 _var params ["_vehicle", "_event"];

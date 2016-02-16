@@ -13,10 +13,9 @@
 #include "..\script_component.hpp"
 
 params [["_text", ""]];
-private "_arrayNew";
 
 _text = toArray _text;
-_arrayNew = [];
+private _arrayNew = [];
 
 {
     // uppercase and lowercase letter according to unicode characters

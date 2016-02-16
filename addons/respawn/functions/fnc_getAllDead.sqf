@@ -1,18 +1,17 @@
 /*
  * Author: nikolauska
  *
- * Respawn all dead players
+ * List all dead players
  *
  * Argument:
  *
  * Return value:
- *
+ * Dead players <ARRAY>
  */
 
 #include "..\script_component.hpp"
 
-private ["_deadArray"];
-_deadArray = [];
+private _deadArray = [];
 {
     if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {
         _deadArray pushBack _x;

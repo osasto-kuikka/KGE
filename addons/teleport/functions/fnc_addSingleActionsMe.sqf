@@ -11,9 +11,7 @@
 
 #include "..\script_component.hpp"
 
-private ["_actions"];
-
-_actions = [];
+private _actions = [];
 
 {
     if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {
@@ -30,7 +28,7 @@ _actions = [];
                         {(_this select 2) call FUNC(teleport)},
                         {true},
                         {},
-                        [_x, GVAR(player)]
+                        [_x, KGE_Player]
                     ] call ace_interact_menu_fnc_createAction,
                     [],
                     _x

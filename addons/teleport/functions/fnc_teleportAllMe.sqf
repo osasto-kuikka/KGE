@@ -13,21 +13,19 @@
 
 #include "..\script_component.hpp"
 
-private ["_inVehicle"];
-_inVehicle = 0;
-
+private _inVehicle = 0;
 {
     if(!local _x && {alive _x || _x getVariable [QEGVAR(respawn,alive), true]}) then {
         if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
-            [_x, GVAR(player)] call FUNC(toBehind);
+            [_x, KGE_Player] call FUNC(toBehind);
 
-            _respawnedIndex = GVAR(respawned) find _x;
+            private _respawnedIndex = GVAR(respawned) find _x;
             if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
         } else {
             INC(_inVehicle);
         };
     } else {
-        _respawnedIndex = GVAR(respawned) find _x;
+        private _respawnedIndex = GVAR(respawned) find _x;
         if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
     };
 } forEach (call cba_fnc_players);

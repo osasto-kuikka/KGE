@@ -7,7 +7,8 @@
  * The spectator interface will be opened/closed
  *
  * Arguments:
- * 0: Spectator state of local client <BOOL> <OPTIONAL>
+ * 0: Spectator state of local client <BOOL> (default: true)
+ * 1: Force interface <BOOL> (default: true)
  *
  * Return Value:
  * None <NIL>
@@ -18,31 +19,28 @@
  * Public: Yes
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
-params [
-    ["_set",true,[true]],
-    ["_unit",objNull,[objNull]]
-];
-
-if(_set && {GVAR(alive)}) exitWith {};
+params [["_set",true,[true]], ["_force",true,[true]]];
 
 // Only clients can be spectators
-if !(hasInterface) exitWith {};
+if (!hasInterface) exitWith {};
+
+// Only dead can open spectator
+if (_set && {GVAR(alive)}) exitWith {};
 
 // Exit if no change
-if (_set isEqualTo GVAR(isSet)) exitwith {};
+if (_set isEqualTo GVAR(isSet)) exitWith {};
 
-// Waituntil player is no longer is menu to prevent crashing
-if !(isNull(findDisplay 49)) then {
-    [{
-        [_set] call FUNC(setSpectator);
-    }, [], 0, {isNull(findDisplay 49)}]
+// Handle common addon audio
+if (["ace_hearing"] call AFUNC(common,isModLoaded)) then {
+    EGVAR(hearing,disableVolumeUpdate) = _set;
+    EGVAR(hearing,deafnessDV) = 0;
 };
+if (["acre_sys_radio"] call AFUNC(common,isModLoaded)) then {[_set] call acre_api_fnc_setSpectator};
+if (["task_force_radio"] call AFUNC(common,isModLoaded)) then {[player, _set] call TFAR_fnc_forceSpectator};
 
 if (_set) then {
-    KGE_LOGINFO("Spectator started");
-
     // Initalize camera variables
     GVAR(camBoom) = 0;
     GVAR(camDolly) = [0,0];
@@ -54,13 +52,27 @@ if (_set) then {
     GVAR(heldKeys) resize 255;
     GVAR(mouse) = [false,false];
     GVAR(mousePos) = [0.5,0.5];
-    GVAR(treeSel) = objNull;
 
     // Update units before opening to support pre-set camera unit
     [] call FUNC(updateUnits);
 
-    // Initalize the camera view
-    GVAR(camera) = "Camera" camCreate (ASLtoATL (getPosASL _unit));
+    GVAR(camPos) params ["_camX", "_camY", "_camZ"];
+    if(_camX == 0 && {_camY == 0} && {_camZ == 0}) then {
+        if(!isNull KGE_Player) then {
+            GVAR(camPos) = getPosASL KGE_Player;
+        } else {
+            GVAR(camPos) = ATLtoASL [worldSize * 0.5, worldSize * 0.5, 20]
+        };
+    };
+
+    // Initalize the camera objects
+    GVAR(freeCamera) = "Camera" camCreate (ASLtoATL GVAR(camPos));
+    GVAR(unitCamera) = "Camera" camCreate [0,0,0];
+    GVAR(targetCamera) = "Camera" camCreate [0,0,0];
+
+    // Initalize view
+    GVAR(unitCamera) camSetTarget GVAR(targetCamera);
+    GVAR(unitCamera) camCommit 0;
     [] call FUNC(transitionCamera);
 
     // Close map and clear radio
@@ -75,18 +87,28 @@ if (_set) then {
         closeDialog 0;
     };
 
-    // Create the display
-    (findDisplay 46) createDisplay QGVAR(interface);
+    [{
+        // Create the display
+        (findDisplay 46) createDisplay QGVAR(interface);
+
+        // If not forced, make esc end spectator
+        if (_this) then {
+            (findDisplay 12249) displayAddEventHandler ["KeyDown", {
+                if (_this select 1 == 1) then {
+                    [false] call ace_spectator_fnc_setSpectator;
+                    true
+                };
+            }];
+        };
+    }, !_force] call AFUNC(common,execNextFrame);
 
     // Cache and disable nametag settings
-    if (["ace_nametags"] call EFUNC(common,classExists)) then {
-        GVAR(nametagSettingCache) = [ace_nametags_showPlayerNames, ace_nametags_showNamesForAI];
+    if (["ace_nametags"] call AFUNC(common,isModLoaded)) then {
+        GVAR(nametagSettingCache) = [EGVAR(nametags,showPlayerNames), EGVAR(nametags,showNamesForAI)];
         EGVAR(nametags,showPlayerNames) = 0;
         EGVAR(nametags,showNamesForAI) = false;
     };
 } else {
-    KGE_LOGINFO("Spectator closed");
-
     // Close any open dialogs (could be interrupts)
     while {dialog} do {
         closeDialog 0;
@@ -96,8 +118,10 @@ if (_set) then {
     (findDisplay 12249) closeDisplay 0;
 
     // Terminate camera
-    GVAR(camera) cameraEffect ["terminate", "back"];
-    camDestroy GVAR(camera);
+    GVAR(freeCamera) cameraEffect ["terminate", "back"];
+    camDestroy GVAR(freeCamera);
+    camDestroy GVAR(unitCamera);
+    camDestroy GVAR(targetCamera);
 
     clearRadio;
 
@@ -108,29 +132,31 @@ if (_set) then {
     BIS_fnc_feedback_allowPP = true;
 
     // Cleanup camera variables
-    GVAR(camera) = nil;
     GVAR(camBoom) = nil;
     GVAR(camDolly) = nil;
     GVAR(camGun) = nil;
+    GVAR(freeCamera) = nil;
+    GVAR(unitCamera) = nil;
+    GVAR(targetCamera) = nil;
 
     // Cleanup display variables
     GVAR(ctrlKey) = nil;
     GVAR(heldKeys) = nil;
     GVAR(mouse) = nil;
     GVAR(mousePos) = nil;
-    GVAR(treeSel) = nil;
-
-    if !(isNil QGVAR(camAgent)) then {
-        deleteVehicle GVAR(camAgent);
-        GVAR(camAgent) = nil;
-    };
 
     // Reset nametag settings
-    if (["ace_nametags"] call EFUNC(common,classExists)) then {
-        ace_nametags_showPlayerNames = GVAR(nametagSettingCache) select 0;
-        ace_nametags_showNamesForAI = GVAR(nametagSettingCache) select 1;
+    if (["ace_nametags"] call AFUNC(common,isModLoaded)) then {
+        EGVAR(nametags,showPlayerNames) = GVAR(nametagSettingCache) select 0;
+        EGVAR(nametags,showNamesForAI) = GVAR(nametagSettingCache) select 1;
         GVAR(nametagSettingCache) = nil;
     };
+
+    // Incase unload doesn't happen automatically
+    if(!isNil QGVAR(iconHandler) {
+        removeMissionEventHandler ["Draw3D",GVAR(iconHandler)];
+        GVAR(iconHandler) = nil;
+    }
 };
 
 // Reset interruptions
@@ -138,3 +164,5 @@ GVAR(interrupts) = [];
 
 // Mark spectator state for reference
 GVAR(isSet) = _set;
+
+["spectatorSet",[_set]] call AFUNC(common,localEvent);

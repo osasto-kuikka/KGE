@@ -28,7 +28,7 @@ if(_changeAssigned) then {
 };
 
 {
-    _curator = _x;
+    private _curator = _x;
 
     //Add all object in mission to editable
     _curator addCuratorEditableObjects [vehicles,true];

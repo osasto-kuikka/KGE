@@ -11,20 +11,17 @@
  */
 #include "..\script_component.hpp"
 
-private "_version";
-_version = getText (configFile >> "CfgPatches" >> "kge_main" >> "versionStr");
+private _version = getText (configFile >> "CfgPatches" >> "kge_main" >> "versionStr");
 
 KGE_LOGINFO_1("KGE is version %1",_version);
 
-private "_addons";
-_addons = "true" configClasses (configFile >> "CfgPatches");//
+private _addons = "true" configClasses (configFile >> "CfgPatches");//
 _addons = [_addons, {toLower configName _this}] call FUNC(map);//
 _addons = [_addons, {_this find "kge_" == 0}] call FUNC(filter);
 
 {
     if (getText (configFile >> "CfgPatches" >> _x >> "versionStr") != _version) then {
-        private "_errorMsg";
-        _errorMsg = format ["File %1.pbo is outdated.", _x];
+        private _errorMsg = format ["File %1.pbo is outdated.", _x];
         KGE_LOGERROR(_errorMsg);
 
         if(isServer) then {
@@ -53,12 +50,10 @@ if (isMultiplayer) then {
     } else {
         // clients have to wait for the variables
         [{
-            params ["_params", "_pfh"];
-            _params params ["_version", "_addons"];
+            params ["_version", "_addons"];
 
             if (_version != GVAR(ServerVersion)) then {
-                private "_errorMsg";
-                _errorMsg = format ["Client/Server Version Mismatch. Server: %1, Client: %2.", GVAR(ServerVersion), _version];
+                private _errorMsg = format ["Client/Server Version Mismatch. Server: %1, Client: %2.", GVAR(ServerVersion), _version];
 
                 KGE_LOGERROR(_errorMsg);
                 ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
@@ -70,7 +65,7 @@ if (isMultiplayer) then {
 
             _addons = _addons - GVAR(ServerAddons);
             if !(_addons isEqualTo []) then {
-                _errorMsg = format ["Client/Server Addon Mismatch. Client has extra addons: %1.",_addons];
+                private _errorMsg = format ["Client/Server Addon Mismatch. Client has extra addons: %1.",_addons];
 
                 KGE_LOGERROR(_errorMsg);
                 ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);

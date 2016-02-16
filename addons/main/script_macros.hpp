@@ -4,7 +4,6 @@
 // Default versioning level
 #define DEFAULT_VERSIONING_LEVEL 2
 
-
 #define EGVAR(module,var) TRIPLES(PREFIX,module,var)
 #define QEGVAR(module,var) QUOTE(EGVAR(module,var))
 
@@ -40,24 +39,11 @@
 #define GETGVAR(var1,var2) GETMVAR(GVAR(var1),var2)
 #define GETEGVAR(var1,var2,var3) GETMVAR(EGVAR(var1,var2),var3)
 
-#define ARR_SELECT(ARRAY,INDEX,DEFAULT) if (count ARRAY > INDEX) then {ARRAY select INDEX} else {DEFAULT}
-
 #ifdef DISABLE_COMPILE_CACHE
     #define PREP(fncName) DFUNC(fncName) = compile preprocessFileLineNumbers QUOTE(PATHTOF(functions\DOUBLES(fnc,fncName).sqf))
 #else
-    #define PREP(fncName) DFUNC(fncName) = QUOTE(PATHTOF(functions\DOUBLES(fnc,fncName).sqf)) call SLX_XEH_COMPILE
+    #define PREP(fncName) [QUOTE(PATHTOF(functions\DOUBLES(fnc,fncName).sqf)), QFUNC(fncName)] call SLX_XEH_COMPILE_NEW
 #endif
-
-#define PREP_MODULE(folder) [] call compile preprocessFileLineNumbers QUOTE(PATHTOF(folder\__PREP__.sqf))
-
-#ifndef STRING_MACROS_GUARD
-#define STRING_MACROS_GUARD
-    #define LSTRING(var1) QUOTE(TRIPLES(STR,ADDON,var1))
-    #define LESTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-    #define CSTRING(var1) QUOTE(TRIPLES($STR,ADDON,var1))
-    #define ECSTRING(var1,var2) QUOTE(TRIPLES($STR,DOUBLES(PREFIX,var1),var2))
-#endif
-
 
 #define KGE_LOG(module,level,message) diag_log text KGE_LOGFORMAT(module,level,message)
 #define KGE_LOGFORMAT(module,level,message) FORMAT_2(QUOTE([KGE] (module) %1: %2),level,message)

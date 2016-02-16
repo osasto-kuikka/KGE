@@ -15,35 +15,71 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 // Kill PFH when not in free cam (or display is closed)
 if (isNil QGVAR(camHandler)) exitWith { [_this select 1] call CBA_fnc_removePerFrameHandler; };
 
-private ["_camera","_oldPos","_altMod","_zoomMod","_mX","_mY","_mZ","_pan","_x","_y","_z","_height"];
-
-_camera = GVAR(camera);
-_oldPos = getPosASL _camera;
-
-// Dolly/Boom amount should be influnced by zoom level (it should really be exponential)
-// Dollying should also slow as the camera gets close to the ground
-_zoomMod = (GVAR(camZoom) * 0.8) max 1;
-_altMod = ((((getPos _camera) select 2) * 0.05) max 0.1) min 1;
-
-_mX = (GVAR(camDolly) select 0) * _altMod / _zoomMod;
-_mY = (GVAR(camDolly) select 1) * _altMod / _zoomMod;
-_mZ = GVAR(camBoom) / _zoomMod;
+private ["_camera","_pan","_tilt"];
 
 _pan = (GVAR(camPan) + 360) % 360;
-_x = (_oldPos select 0) + (_mX * cos(_pan)) + (_mY * sin(_pan));
-_y = (_oldPos select 1) - (_mX * sin(_pan)) + (_mY * cos(_pan));
-_z = (_oldPos select 2) + _mZ;
+_tilt = GVAR(camTilt);
 
-// Prevent camera going under terrain
-_height = getTerrainHeightASL [_x,_y];
-GVAR(camPos) = [_x,_y,_z max _height];
+if (GVAR(camMode) == 0) then {
+    private ["_oldPos","_altMod","_zoomMod","_mX","_mY","_mZ","_x","_y","_z"];
+    _camera = GVAR(freeCamera);
+    _oldPos = GVAR(camPos);
 
-// Update camera position and rotation
-_camera setPosASL GVAR(camPos);
-_camera setDir GVAR(camPan);
-[_camera, GVAR(camTilt), 0] call BIS_fnc_setPitchBank;
+    if(isNil "_camera" && isNil "_oldPos") exitWith {
+        KGE_LOGERROR_2("Invalid value detected where it should not be! _camera should be object, but is %1. _oldPos should be position, but is %2", typeName _camera, typeName _oldPos);
+    };
+
+    // Dolly/Boom amount should be influnced by zoom level (it should really be exponential)
+    // Dollying should also slow as the camera gets close to the ground
+    _zoomMod = (GVAR(camZoom) * 0.8) max 1;
+    _altMod = ((((getPos _camera) select 2) * 0.05) max 0.1) min 1;
+
+    _mX = (GVAR(camDolly) select 0) * _altMod / _zoomMod;
+    _mY = (GVAR(camDolly) select 1) * _altMod / _zoomMod;
+    _mZ = GVAR(camBoom) / _zoomMod;
+
+    _x = (_oldPos select 0) + (_mX * cos(_pan)) + (_mY * sin(_pan));
+    _y = (_oldPos select 1) - (_mX * sin(_pan)) + (_mY * cos(_pan));
+    _z = (_oldPos select 2) + _mZ;
+
+    if(isNil "_x" && isNil "_y") exitWith {
+        KGE_LOGERROR_2("Invalid value detected where it should not be! _x should be number, but is %1. _y should be number, but is %2", typeName _x, typeName _y);
+        _x = 0;
+        _y = 0;
+    };
+
+    // Prevent camera going under terrain
+    GVAR(camPos) = [_x,_y,_z max (getTerrainHeightASL [_x,_y])];
+
+    // Update camera position and rotation
+    _camera setPosASL GVAR(camPos);
+    _camera setDir _pan;
+    [_camera, _tilt, 0] call BIS_fnc_setPitchBank;
+} else {
+    private ["_unit","_target","_distance","_vector"];
+    _camera = GVAR(unitCamera);
+
+    _unit = GVAR(camUnit);
+    _target = GVAR(targetCamera);
+    _distance = GVAR(camDistance);
+
+    // Generate a position vector relative to the unit
+    _vector = [0,-_distance*cos(_tilt),0];
+    _vector = [_vector,[-_pan] call CBA_fnc_simplifyAngle180] call BIS_fnc_rotateVector2D;
+    _vector = _vector vectorAdd [0,0,_distance*sin(-_tilt)];
+
+    // Update the position of the target camera (used for smooth unit tracking)
+    _target camSetPos ((_unit modelToWorldVisual [0,0,0]) vectorAdd [0,0,1.5]);
+    _target camCommit 0;
+
+    // Update the relative position of the unit camera
+    _camera camSetRelPos _vector;
+    _camera camCommit 0;
+
+    GVAR(camPos) = getPosASL _camera;
+};

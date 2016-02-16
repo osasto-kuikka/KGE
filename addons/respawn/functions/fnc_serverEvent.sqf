@@ -12,61 +12,63 @@
 #include "..\script_component.hpp"
 
 params ["_unit", "_event"];
-private ["_unitName"];
 
-_unitName = _unit call EFUNC(common,getName);
+// KGE respawn is not active so don't handle events
+if (!GVAR(active)) exitWith {};
+
+private _unitName = _unit call EFUNC(common,getName);
 
 switch(_event) do {
         case "BIS_INIT": {
-            _found = false;
+            private _found = false;
             {
                 _x params ["_name","_status", "_killedAmount"];
 
                 if(_unitName isEqualTo _name) exitWith {
                     _found = true;
-
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
+                    private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
 
             if !(_found) then {
-                GVAR(playerList) pushBack [_unitName, "alive", 0];
-                [QGVAR(clientEvent), _unit, [_unit, _event, "alive"]] call AFUNC(common,targetEvent);
+                private _status = "alive";
+                private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                GVAR(playerList) pushBack [_unitName, _status, 0];
+                [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
             };
-        };
-        case "BIS_KILLED": {
-            // Don change status due to unlimited deaths
-            if(GVAR(maxKilled) isEqualTo -1) exitWith {};
-
-            {
-                _x params ["_name","_status", "_killedAmount"];
-
-                if(_unitName isEqualTo _name) exitWith {
-                    INC(_killedAmount);
-
-                    if(_killedAmount > GVAR(maxKilled)) then {
-                        _status = "death";
-                        GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
-                    };
-                };
-            } forEach GVAR(playerList);
         };
 
         case "BIS_RESPAWN": {
+            // Don change status due to unlimited deaths
+            if(GVAR(maxKilled) isEqualTo -1) exitWith {};
+
+            private _found = false;
             {
                 _x params ["_name","_status", "_killedAmount"];
 
                 if(_unitName isEqualTo _name) exitWith {
                     INC(_killedAmount);
 
-                    if(GVAR(maxKilled) != -1 && {_killedAmount > GVAR(maxKilled)}) then {
-                        _status = "death";
+                    _found = true;
+
+                    if(_killedAmount > GVAR(maxKilled)) then {
+                        _status = "dead";
                         GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
                     };
 
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
+                    private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
+
+            if !(_found) then {
+                private _status = "alive";
+                if(GVAR(maxKilled) == 0) then { _status = "dead" };
+                private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                GVAR(playerList) pushBack [_unitName, _status, 1];
+                [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+            };
         };
 
         // Force respawn
@@ -77,7 +79,9 @@ switch(_event) do {
                 if(_unitName isEqualTo _name) exitWith {
                     _status = "alive";
                     GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status]] call AFUNC(common,targetEvent);
+
+                    private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
                 };
             } forEach GVAR(playerList);
         };

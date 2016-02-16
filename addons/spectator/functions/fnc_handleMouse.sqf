@@ -15,7 +15,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_x","_y"];
 private ["_leftButton","_rightButton","_oldX","_oldY","_deltaX","_deltaY","_zoomMod"];

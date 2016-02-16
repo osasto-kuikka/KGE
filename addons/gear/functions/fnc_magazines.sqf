@@ -17,29 +17,26 @@ params [
 
 if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
 
-private ["_returnText", "_magazinesAll", "_magazinesSingle"];
-_returnText = format ["<font color='#FFFF00'>Magazines and items: </font>(Click count for info.)<br/>", _unit];
+private _returnText = format ["<font color='#FFFF00'>Magazines and items: </font>(Click count for info.)<br/>", _unit];
 
 // Get all magazines and remove dublicates
-_magazinesAll = magazines _unit;
-_magazinesSingle = _magazinesAll arrayIntersect _magazinesAll;
+private _magazinesAll = magazines _unit;
+private _magazinesSingle = _magazinesAll arrayIntersect _magazinesAll;
 
 // Add magazine amount
-_magazines = [];
+private _magazines = [];
 {
-    private ["_magazine"];
-    _magazine = _x;
+    private _magazine = _x;
     _magazines pushBack [_magazine, ({_x == _magazine} count _magazinesAll)];
 } forEach _magazinesSingle;
 
 // Add magazine images and text
 {
     _x params ["_magazine", "_count"];
-    private ["_conf", "_image", "_name"];
 
-    _conf = configFile >> "CfgMagazines" >> _magazine;
-    _image = getText(_conf >> "picture") call FUNC(imageCheck);
-    _name = getText(_conf >> "displayName");
+    private _conf = configFile >> "CfgMagazines" >> _magazine;
+    private _image = getText(_conf >> "picture") call FUNC(imageCheck);
+    private _name = getText(_conf >> "displayName");
     _returnText = _returnText + format ["<img image='%2' width='32' height='32'/><execute expression='systemChat ""Item: %3""'>x%1</execute>, ", _count, _image, _name];
 
     INC(GVAR(addedItems));

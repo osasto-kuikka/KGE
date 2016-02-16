@@ -16,7 +16,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_stepMode",0], ["_stepUnit",0], ["_stepVision",0]];
 private ["_modes","_visions","_iMode","_iVision","_countModes","_countVisions","_newMode","_newVision","_newUnit"];

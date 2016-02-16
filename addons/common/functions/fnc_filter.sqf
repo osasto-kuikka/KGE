@@ -15,15 +15,14 @@
  */
 #include "..\script_component.hpp"
 
-private ["_newArray", "_index"];
 params ["_array", "_code"];
 
 if (isNil "_array") exitWith {
-    diag_log text "[KGE] ERROR: No array for function filter";
+    KGE_LOGERROR("No array for function filter");
     []
 };
 
-_newArray = [];
+private _newArray = [];
 for "_index" from 0 to (count _array - 1) do {
     if ((_array select _index) call _code) then {
         _newArray pushBack (_array select _index);

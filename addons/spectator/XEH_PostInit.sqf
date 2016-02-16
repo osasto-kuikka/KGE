@@ -1,5 +1,7 @@
 #include "script_component.hpp"
-#include "\a3\editor_f\Data\Scripts\dikCodes.h"
+
+// Should prevent unending spectator on mission end
+addMissionEventHandler ["Ended",{ [false] call FUNC(setSpectator) }];
 
 // Start spectator if killed unit is player and add given unit to blacklist
 [QEGVAR(respawn,onKilled), {
@@ -7,9 +9,10 @@
 
     if(local _unit) then {
         GVAR(alive) = false;
-        [true, _unit] call FUNC(setSpectator);
+        //[true] call FUNC(setSpectator);
+        titleText ["You're dead! Press 'Open Spectator' button (default F1) to open spectator!", "PLAIN"];
     } else {
-        call FUNC(updateUnits);
+        [] call FUNC(updateUnits);
     };
 }] call AFUNC(common,addEventHandler);
 
@@ -19,12 +22,10 @@
 
     if(local _unit) then {
         GVAR(alive) = true;
-        [false, _unit] call FUNC(setSpectator);
+        [false] call FUNC(setSpectator);
     } else {
-        call FUNC(updateUnits);
+        [] call FUNC(updateUnits);
     };
 }] call AFUNC(common,addEventHandler);
 
-["KGE","kge_spectator_start", "Starts spectator", {[true] call FUNC(setSpectator); true}, {true}, [59, [false, false, false]]] call CBA_fnc_addKeybind;
-
-KGE_LOGINFO("Spectator Module Initialized.");
+["KGE","kge_spectator_start", "Open Spectator", {[true] call FUNC(setSpectator); true}, {true}, [59, [false, false, false]]] call CBA_fnc_addKeybind;

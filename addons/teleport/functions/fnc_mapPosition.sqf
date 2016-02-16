@@ -39,7 +39,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
     GVAR(mapClickPos) = nil;
 
     // Find teleported object and remove it from respawned array
-    _respawnedIndex = GVAR(respawned) find _unit;
+    private _respawnedIndex = GVAR(respawned) find _unit;
     if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
     GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
 

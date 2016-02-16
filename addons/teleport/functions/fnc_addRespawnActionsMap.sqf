@@ -11,9 +11,7 @@
 
 #include "..\script_component.hpp"
 
-private ["_actions"];
-
-_actions = [];
+private _actions = [];
 
 {
     if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {

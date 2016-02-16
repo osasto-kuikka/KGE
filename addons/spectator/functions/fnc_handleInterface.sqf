@@ -15,7 +15,7 @@
  * Public: No
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_mode",["_args",[]]];
 
@@ -27,7 +27,7 @@ switch (toLower _mode) do {
         [_display,nil,nil,!GVAR(showInterface),GVAR(showMap)] call FUNC(toggleInterface);
 
         // Keep unit list and tree up to date
-        [FUNC(handleUnits), 5, _display] call CBA_fnc_addPerFrameHandler;
+        [FUNC(handleUnits), 21, _display] call CBA_fnc_addPerFrameHandler;
 
         // Handle 3D unit icons
         GVAR(iconHandler) = addMissionEventHandler ["Draw3D",FUNC(handleIcons)];
@@ -44,38 +44,37 @@ switch (toLower _mode) do {
                 _help lbSetTooltip [_i,_x select 1];
             };
         } forEach [
-            ["Interface",""],
-            ["Toggle Unit List","1"],
-            ["Toggle Help","2"],
-            ["Toggle Toolbar","3"],
-            ["Toggle Compass","4"],
-            ["Toggle Unit Icons","5"],
-            ["Toggle Map","M"],
-            ["Toggle Interface","Backspace"],
-            ["Free Camera",""],
-            ["Camera Forward","W"],
-            ["Camera Backward","S"],
-            ["Camera Left","A"],
-            ["Camera Right","D"],
-            ["Camera Up","Q"],
-            ["Camera Down","Z"],
-            ["Pan Camera","RMB (Hold)"],
-            ["Dolly Camera","LMB (Hold)"],
-            ["Speed Boost","Shift (Hold)"],
-            ["Focus on Unit","F"],
-            ["Camera Attributes",""],
-            ["Next Camera","Up Arrow"],
-            ["Previous Camera","Down Arrow"],
-            ["Next Unit","Right Arrow"],
-            ["Previous Unit","Left Arrow"],
-            ["Next Vision Mode","N"],
-            ["Previous Vision Mode","Ctrl + N"],
-            ["Adjust Zoom","Scrollwheel"],
-            ["Adjust Speed","Ctrl + Scrollwheel"],
-            ["Increment Zoom","Num-/Num+"],
-            ["Increment Speed","Ctrl + Num-/Num+"],
-            ["Reset Zoom","Alt + Num-"],
-            ["Reset Speed","Alt + Num+"]
+            [localize LSTRING(uiControls),""],
+            [localize LSTRING(uiToggleUnits),keyName 2],
+            [localize LSTRING(uiToggleHelp),keyName 3],
+            [localize LSTRING(uiToggleTools),keyName 4],
+            [localize LSTRING(uiToggleCompass),keyName 5],
+            [localize LSTRING(uiToggleIcons),keyName 6],
+            [localize LSTRING(uiToggleMap),keyName 50],
+            [localize LSTRING(uiToggleInterface),keyName 14],
+            [localize LSTRING(freeCamControls),""],
+            [localize LSTRING(freeCamForward),keyName 17],
+            [localize LSTRING(freeCamBackward),keyName 31],
+            [localize LSTRING(freeCamLeft),keyName 30],
+            [localize LSTRING(freeCamRight),keyName 32],
+            [localize LSTRING(freeCamUp),keyName 16],
+            [localize LSTRING(freeCamDown),keyName 44],
+            [localize LSTRING(freeCamPan),"RMB (Hold)"],
+            [localize LSTRING(freeCamDolly),"LMB (Hold)"],
+            [localize LSTRING(freeCamBoost),"Shift (Hold)"],
+            [localize LSTRING(attributeControls),""],
+            [localize LSTRING(nextCam),keyName 200],
+            [localize LSTRING(prevCam),keyName 208],
+            [localize LSTRING(nextUnit),keyName 205],
+            [localize LSTRING(prevUnit),keyName 203],
+            [localize LSTRING(nextVis),keyName 49],
+            [localize LSTRING(prevVis),format["%1 + %2",keyName 29,keyname 49]],
+            [localize LSTRING(adjZoom),"Scrollwheel"],
+            [localize LSTRING(adjSpeed),format["%1 + Scrollwheel",keyName 29]],
+            [localize LSTRING(incZoom),format["%1/%2",keyName 74,keyName 78]],
+            [localize LSTRING(incSpeed),format["%1 + %2/%3",keyName 29,keyName 74,keyName 78]],
+            [localize LSTRING(reZoom),format["%1 + %2",keyName 56,keyName 74]],
+            [localize LSTRING(reSpeed),format["%1 + %2",keyName 56,keyName 78]]
         ];
 
         // Handle support for BI's respawn counter
@@ -108,7 +107,7 @@ switch (toLower _mode) do {
                 _timer ctrlCommit 0;
                 _frame ctrlCommit 0;
             };
-        },[],0.5] call EFUNC(common,waitAndExecute);
+        },[],0.5] call AFUNC(common,waitAndExecute);
     };
     case "onunload": {
         // Kill GUI PFHs
@@ -126,7 +125,6 @@ switch (toLower _mode) do {
         GVAR(heldKeys) resize 255;
         GVAR(mouse) = [false,false];
         GVAR(mousePos) = [0.5,0.5];
-        GVAR(treeSel) = objNull;
     };
     // Mouse events
     case "onmousebuttondown": {
@@ -149,11 +147,16 @@ switch (toLower _mode) do {
     case "onmousezchanged": {
         _args params ["_ctrl","_zChange"];
 
-        // Scroll to change speed, modifier for zoom
-        if (GVAR(ctrlKey)) then {
-            [nil,nil,nil,nil,nil,nil,nil, GVAR(camSpeed) + _zChange * 0.2] call FUNC(setCameraAttributes);
+        // Scroll to modify distance value in third person
+        if (GVAR(camMode) == 0) then {
+            // Scroll to change speed, modifier for zoom
+            if (GVAR(ctrlKey)) then {
+                [nil,nil,nil,nil,nil,nil,nil, GVAR(camSpeed) + _zChange * 0.2] call FUNC(setCameraAttributes);
+            } else {
+                [nil,nil,nil,nil,nil,nil, GVAR(camZoom) + _zChange * 0.1] call FUNC(setCameraAttributes);
+            };
         } else {
-            [nil,nil,nil,nil,nil,nil, GVAR(camZoom) + _zChange * 0.1] call FUNC(setCameraAttributes);
+            GVAR(camDistance) = ((GVAR(camDistance) - _zChange * 2) max 5) min 50;
         };
     };
     case "onmousemoving": {
@@ -174,7 +177,7 @@ switch (toLower _mode) do {
         };
 
         // Handle held keys (prevent repeat calling)
-        if (GVAR(heldKeys) param [_dik,false]) exitwith {};
+        if (GVAR(heldKeys) param [_dik,false]) exitWith {};
         // Exclude movement/adjustment keys so that speed can be adjusted on fly
         if !(_dik in [16,17,30,31,32,44,74,78]) then {
             GVAR(heldKeys) set [_dik,true];
@@ -183,8 +186,6 @@ switch (toLower _mode) do {
         switch (_dik) do {
             case 1: { // Esc
                 [false] call FUNC(setSpectator);
-                //[QGVAR(escape)] call FUNC(interrupt);
-                //["escape"] call FUNC(handleInterface);
             };
             case 2: { // 1
                 [_display,nil,nil,nil,nil,nil,true] call FUNC(toggleInterface);
@@ -222,19 +223,11 @@ switch (toLower _mode) do {
             case 32: { // D
                 GVAR(camDolly) set [0, GVAR(camSpeed) * ([1, 2] select _shift)];
             };
-            case 33: { // F
-                private ["_sel","_vector"];
-                _sel = GVAR(treeSel);
-                if ((GVAR(camMode) == 0) && {!isNull _sel} && {_sel in GVAR(unitList)}) then {
-                    _vector = (positionCameraToWorld [0,0,0]) vectorDiff (positionCameraToWorld [0,0,25]);
-                    [nil,nil,nil,(getPosATL _sel) vectorAdd _vector] call FUNC(setCameraAttributes);
-                };
-            };
             case 44: { // Z
                 GVAR(camBoom) = -0.5 * GVAR(camSpeed) * ([1, 2] select _shift);
             };
             case 49: { // N
-                if (GVAR(camMode) == 0) then {
+                if (GVAR(camMode) != 1) then {
                     if (_ctrl) then {
                         [nil,nil,-1] call FUNC(cycleCamera);
                     } else {
@@ -246,7 +239,8 @@ switch (toLower _mode) do {
                 [_display,nil,nil,nil,true] call FUNC(toggleInterface);
             };
             case 57: { // Spacebar
-                // Freecam attachment here, if in external then set cam pos and attach
+                // Switch between unit and freecam here
+                [0] call FUNC(transitionCamera);
             };
             case 74: { // Num -
                 if (_alt) exitWith { [nil,nil,nil,nil,nil,nil, 1.25] call FUNC(setCameraAttributes); };
@@ -257,7 +251,7 @@ switch (toLower _mode) do {
                 };
             };
             case 78: { // Num +
-                if (_alt) exitWith { [nil,nil,nil,nil,nil,nil,nil, 2.5] call FUNC(setCameraAttributes); };
+                if (_alt) exitWith { [nil,nil,nil,nil,nil,nil,nil, 1.5] call FUNC(setCameraAttributes); };
                 if (_ctrl) then {
                     [nil,nil,nil,nil,nil,nil,nil, GVAR(camSpeed) + 0.05] call FUNC(setCameraAttributes);
                 } else {
@@ -331,15 +325,6 @@ switch (toLower _mode) do {
             [_newMode,_newUnit] call FUNC(transitionCamera);
         };
     };
-    case "ontreeselchanged": {
-        _args params ["_tree","_sel"];
-
-        if (count _sel == 3) then {
-            GVAR(treeSel) = objectFromNetId (_tree tvData _sel);
-        } else {
-            GVAR(treeSel) = objNull;
-        };
-    };
     case "onunitsupdate": {
         _args params ["_tree"];
         private ["_cachedUnits","_cachedGrps","_cachedSides","_s","_g","_grp","_u","_unit","_side"];
@@ -348,7 +333,6 @@ switch (toLower _mode) do {
         _cachedUnits = [];
         _cachedGrps = [];
         _cachedSides = [];
-
         for "_s" from 0 to ((_tree tvCount []) - 1) do {
             for "_g" from 0 to ((_tree tvCount [_s]) - 1) do {
                 _grp = groupFromNetID (_tree tvData [_s,_g]);
@@ -360,7 +344,7 @@ switch (toLower _mode) do {
                     for "_u" from 0 to ((_tree tvCount [_s,_g])) do {
                         _unit = objectFromNetId (_tree tvData [_s,_g,_u]);
 
-                        if (_unit in GVAR(unitList) && {alive _unit} && {_unit getVariable [QEGVAR(respawn,alive), true]}) then {
+                        if (_unit in GVAR(unitList) && {_unit getVariable [QEGVAR(respawn,alive), true]}) then {
                             _cachedUnits pushBack _unit;
                         } else {
                             _tree tvDelete [_s,_g,_u];
@@ -383,60 +367,45 @@ switch (toLower _mode) do {
         {
             _grp = group _x;
             _side = [side _grp] call BIS_fnc_sideName;
-            _hasPlayers = {isPlayer _x} count (units _grp) != 0;
 
-            // Show only groups with players in them
-            //if(GVAR(showAIList) || _hasPlayers) then {
-                // Use correct side node
-                if !(_side in _cachedSides) then {
-                    // Add side node
-                    _s = _tree tvAdd [[], _side];
+            // Use correct side node
+            if !(_side in _cachedSides) then {
+                // Add side node
+                _s = _tree tvAdd [[], _side];
+                _tree tvExpand [_s];
 
-                    if(_hasPlayers) then {
-                        _tree tvExpand [_s];
-                    };
+                _cachedSides pushBack _side;
+                _cachedSides pushBack _s;
+            } else {
+                // If side already processed, use existing node
+                _s = _cachedSides select ((_cachedSides find _side) + 1);
+            };
 
-                    _cachedSides pushBack _side;
-                    _cachedSides pushBack _s;
-                } else {
-                    // If side already processed, use existing node
-                    _s = _cachedSides select ((_cachedSides find _side) + 1);
-                };
+            // Use correct group node
+            if !(_grp in _cachedGrps) then {
+                // Add group node
+                _g = _tree tvAdd [[_s], groupID _grp];
+                _tree tvSetData [[_s,_g], netID _grp];
 
-                // Use correct group node
-                if !(_grp in _cachedGrps) then {
-                    // Add group node
-                    _g = _tree tvAdd [[_s], groupID _grp];
-                    _tree tvSetData [[_s,_g], netID _grp];
+                _cachedGrps pushBack _grp;
+                _cachedGrps pushBack _g;
+            } else {
+                // If group already processed, use existing node
+                _g = _cachedGrps select ((_cachedGrps find _grp) + 1);
+            };
 
-                    if(_hasPlayers) then {
-                        _tree tvExpand [_s,_g];
-                    };
+            _u = _tree tvAdd [[_s,_g], GETVAR(_x,GVAR(uName),"")];
+            _tree tvSetData [[_s,_g,_u], netID _x];
+            _tree tvSetPicture [[_s,_g,_u], GETVAR(_x,GVAR(uIcon),"")];
+            _tree tvSetPictureColor [[_s,_g,_u], GETVAR(_grp,GVAR(gColor),[ARR_4(1,1,1,1)])];
 
-                    _cachedGrps pushBack _grp;
-                    _cachedGrps pushBack _g;
-                } else {
-                    // If group already processed, use existing node
-                    _g = _cachedGrps select ((_cachedGrps find _grp) + 1);
-                };
-
-                _u = _tree tvAdd [[_s,_g], GETVAR(_x,GVAR(uName),"")];
-                _tree tvSetData [[_s,_g,_u], netID _x];
-                _tree tvSetPicture [[_s,_g,_u], GETVAR(_x,GVAR(uIcon),"")];
-                _tree tvSetPictureColor [[_s,_g,_u], GETVAR(_grp,GVAR(gColor),[ARR_4(1,1,1,1)])];
-
-                _tree tvSort [[_s,_g],false];
-            //};
+            _tree tvSort [[_s,_g],false];
         } forEach (GVAR(unitList) - _cachedUnits);
 
         _tree tvSort [[],false];
 
         if ((_tree tvCount []) <= 0) then {
-            if(GVAR(showAIList)) then {
-                _tree tvAdd [[], "No units"];
-            } else {
-                _tree tvAdd [[], "No players"];
-            }
+            _tree tvAdd [[], localize LSTRING(units_none)];
         };
     };
     // Map events
@@ -451,45 +420,6 @@ switch (toLower _mode) do {
             [nil,nil,nil, _newPos] call FUNC(setCameraAttributes);
         };
     };
-    // Interrupt events
-    case "escape": {
-        private "_dlg";
-
-        createDialog (["RscDisplayInterrupt", "RscDisplayMPInterrupt"] select isMultiplayer);
-
-        disableSerialization;
-        _dlg = finddisplay 49;
-        _dlg displayAddEventHandler ["KeyDown", {
-            _key = _this select 1;
-            !(_key == 1)
-        }];
-
-        // Disable save, respawn, options & manual buttons
-        (_dlg displayCtrl 103) ctrlEnable false;
-        if !(alive player) then {
-            (_dlg displayCtrl 1010) ctrlEnable false;
-        };
-        (_dlg displayCtrl 101) ctrlEnable false;
-        (_dlg displayCtrl 122) ctrlEnable false;
-
-        // Initalize abort button (the "spawn" is a necessary evil)
-        (_dlg displayCtrl 104) ctrlAddEventHandler ["ButtonClick",{_this spawn {
-            disableSerialization;
-            _display = ctrlparent (_this select 0);
-            _abort = true;//[localize "str_msg_confirm_return_lobby",nil,localize "str_disp_xbox_hint_yes",localize "str_disp_xbox_hint_no",_display,nil,true] call BIS_fnc_guiMessage;
-            if (_abort) then {_display closeDisplay 2; failMission "loser"};
-        }}];
-
-        // PFH to re-open display when menu closes
-        [{
-            if !(isNull (findDisplay 49)) exitWith {};
-
-            // If still a spectator then re-enter the interface
-            [QGVAR(escape),false] call FUNC(interrupt);
-
-            [_this select 1] call CBA_fnc_removePerFrameHandler;
-        },0] call CBA_fnc_addPerFrameHandler;
-    };
     case "zeus": {
         openCuratorInterface;
 
@@ -503,7 +433,7 @@ switch (toLower _mode) do {
 
                 [_this select 1] call CBA_fnc_removePerFrameHandler;
             },0] call CBA_fnc_addPerFrameHandler;
-        },[],5] call EFUNC(common,waitAndExecute);
+        },[],5] call AFUNC(common,waitAndExecute);
 
         true
     };
