@@ -9,7 +9,7 @@
  * Return value:
  * None.
  */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private _version = getText (configFile >> "CfgPatches" >> "kge_main" >> "versionStr");
 
@@ -17,7 +17,7 @@ KGE_LOGINFO_1("KGE is version %1",_version);
 
 private _addons = "true" configClasses (configFile >> "CfgPatches");//
 _addons = [_addons, {toLower configName _this}] call FUNC(map);//
-_addons = [_addons, {_this find "kge_" == 0}] call FUNC(filter);
+_addons = [_addons, {_x find "kge_" == 0}] call FUNC(filter);
 
 {
     if (getText (configFile >> "CfgPatches" >> _x >> "versionStr") != _version) then {

@@ -23,24 +23,13 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 [{
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    private _inVehicle = 0;
     {
-        if(alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) then {
-            if(((vehicle _x) == _x) && {!(surfaceIsWater (getPosASL _x))}) then {
-                _x setPos GVAR(mapClickPos);
-
-                GVAR(respawned) set [_forEachIndex, nil];
-            } else {
-                INC(_inVehicle);
-            };
-        } else {
-            GVAR(respawned) set [_forEachIndex, nil];
+        if(alive _x && {_x getVariable [QEGVAR(respawn,alive), true]} && {(_x call EFUNC(common,playerVehicleStatus)) in [-1, 3]}) then {
+            _x setPos GVAR(mapClickPos);
         };
-    } forEach GVAR(respawned);
 
-    if(_inVehicle != 0) then {
-        Hint "Some players were in vehicle or in water and were not teleported";
-    };
+        GVAR(respawned) set [_forEachIndex, nil];
+    } forEach GVAR(respawned);
 
     // Remove nils
     GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);

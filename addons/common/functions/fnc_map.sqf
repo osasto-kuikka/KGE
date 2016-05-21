@@ -13,7 +13,7 @@
  * Usage:
  * [["2", "gobblecock", "25"], {parseNumber _this}] call FUNC(map) ==> [2, 0, 25]
  */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_arrayIn", "_code"];
 private _array = +_arrayIn;

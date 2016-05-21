@@ -1,7 +1,7 @@
 name = "KGE";
 picture = "kuikka.paa";
-actionName = "GitHub";
-action = "https://github.com/nikolauska/KGE";
+actionName = "Github";
+action = "https://github.com/osasto-kuikka/KGE";
 description = "KGE";
 logo = "kuikka.paa";
 logoOver = "kuikka.paa";

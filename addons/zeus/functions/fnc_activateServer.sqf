@@ -10,7 +10,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "\z\kge\addons\zeus\script_component.hpp"
 
 params ["_unit", "_changeAssigned"];
 

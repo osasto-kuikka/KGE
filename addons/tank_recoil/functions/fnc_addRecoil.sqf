@@ -10,7 +10,7 @@
  *
  */
 
- #include "..\script_component.hpp"
+#include "\z\kge\addons\tank_recoil\script_component.hpp"
 
 params ["_tank", "_usedGun"];
 

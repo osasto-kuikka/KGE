@@ -10,7 +10,8 @@ PREP(removeEvent);
 
 GVAR(debug) = false;
 GVAR(allowedTanks) = [];
-GVAR(allowedTanksPair) = [
+GVAR(tankNamespace) = call cba_fnc_createNameSpace;
+GVAR(tankDefines) = [
     // RHS
     ["rhs_sprut_vdv", "rhs_weap_2a75"],
     ["rhsusf_m1a1fep_d", "rhs_weap_m256"],

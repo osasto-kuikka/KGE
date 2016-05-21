@@ -365,14 +365,18 @@ switch (toLower _mode) do {
 
         // Update the tree from the unit list
         {
-            _grp = group _x;
-            _side = [side _grp] call BIS_fnc_sideName;
+            private _grp = group _x;
+            private _side = [side _grp] call BIS_fnc_sideName;
+            private _hasPlayers = isPlayer _x || {isPlayer _x} count (units _group) != 0;
 
             // Use correct side node
             if !(_side in _cachedSides) then {
                 // Add side node
                 _s = _tree tvAdd [[], _side];
-                _tree tvExpand [_s];
+
+                if(_hasPlayers) then {
+                    _tree tvExpand [_s];
+                };
 
                 _cachedSides pushBack _side;
                 _cachedSides pushBack _s;
@@ -386,6 +390,10 @@ switch (toLower _mode) do {
                 // Add group node
                 _g = _tree tvAdd [[_s], groupID _grp];
                 _tree tvSetData [[_s,_g], netID _grp];
+
+                if(_hasPlayers) then {
+                    _tree tvExpand [_s,_g];
+                };
 
                 _cachedGrps pushBack _grp;
                 _cachedGrps pushBack _g;

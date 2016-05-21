@@ -13,9 +13,9 @@
 
 private _teamrosterText = "";
 
-// Loop throug all players and add them to teamroster text
+// Loop through all players and add them to teamroster text
 {
-	_teamrosterText = _teamrosterText + ([_x] call FUNC(getPlayerEntry));
+    _teamrosterText = _teamrosterText + ([_x] call FUNC(getPlayerEntry));
 
     true;
 } count (call cba_fnc_players);

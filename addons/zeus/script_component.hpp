@@ -1,3 +1,3 @@
 #define COMPONENT zeus
-#include "..\main\script_mod.hpp"
-#include "..\main\script_macros.hpp"
+#include "\z\kge\addons\main\script_mod.hpp"
+#include "\z\kge\addons\main\script_macros.hpp"

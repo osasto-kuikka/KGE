@@ -10,7 +10,7 @@
  * Return Value:
  * Variable form module
  */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 if !(isServer) exitWith {};
 

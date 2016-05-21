@@ -33,7 +33,20 @@ if(count _targetPos == 0) exitWith {
     hint "No space nearby! Get to more open area for teleport!";
 };
 
+// If unit is in water
+// We need to change animation and teleport location height before teleporting
+if (surfaceIsWater (getPosASL _unit) && {!(surfaceIsWater _targetPos)}) then {
+    _unit switchMove "AmovPercMstpSlowWrflDnon";
+    _targetPos set [2, (_targetPos select 2) + 1];
+};
+
+if !((_unit call EFUNC(common,playerVehicleStatus)) in [-1, 3]) exitWith {
+    Hint "You cannot teleport player who is in vehicle and is not passenger!";
+};
+
 _unit setPos _targetPos;
+
+Hint format ["%1 teleported to your location!", _unit call EFUNC(common,getName)];
 
 // Find teleported object and remove it from respawned array
 private _respawnedIndex = GVAR(respawned) find _unit;

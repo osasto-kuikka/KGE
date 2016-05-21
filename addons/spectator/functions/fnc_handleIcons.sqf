@@ -26,10 +26,17 @@ private ["_refPoint","_drawVehicles","_leader","_color","_txt","_unit"];
 _refPoint = [GVAR(freeCamera),GVAR(camUnit)] select (GVAR(camMode) > 0);
 _drawVehicles = [];
 {
-    _leader = leader _x;
+    private _leader = leader _x;
     if ((_leader distanceSqr _refPoint) > 40000) then {
         _color = GETVAR(_x,GVAR(gColor),[ARR_4(0,0,0,0)]);
         _txt = groupID _x;
+
+        // Check if some units still need to be drawn
+        {
+            if ((_x distanceSqr _refPoint) > 40000) then {
+                _drawVehicles pushBack _x;
+            };
+        } forEach (units _x - _leader);
 
         drawIcon3D ["\A3\ui_f\data\map\markers\nato\b_inf.paa", _color, _leader modelToWorldVisual [0,0,30], 1, 1, 0, _txt, 2, 0.02];
     } else {

@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_event", "_status", "_position"];
 

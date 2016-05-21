@@ -10,7 +10,7 @@
  * Boolean
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [
     ["_unit", KGE_Player, [objNull]]

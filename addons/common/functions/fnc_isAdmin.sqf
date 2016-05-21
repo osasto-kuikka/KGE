@@ -1,7 +1,7 @@
 /*
  * Author: nikolauska
  *
- * Checks if local unit is admin
+ * Checks if unit is admin
  *
  * Argument:
  *
@@ -9,4 +9,6 @@
  * Bool
  */
 
-serverCommandAvailable "#kick" || isServer
+params [["_unit", KGE_Player, [objNull]]]
+
+_unit getVariable ["KGE_Admin", false] || serverCommandAvailable "#kick" || isServer

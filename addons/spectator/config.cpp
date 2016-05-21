@@ -14,12 +14,5 @@ class CfgPatches {
 
 #include "CfgEventHandlers.hpp"
 #include "CfgVehicles.hpp"
-#include "CfgEden.hpp"
-#include "ui\interface.hpp"
-
-class CfgRespawnTemplates {
-    class ADDON {
-        onPlayerKilled = QFUNC(respawnTemplate);
-        onPlayerRespawn = QFUNC(respawnTemplate);
-    };
-};
+//#include "CfgEden.hpp"
+#include "UI\interface.hpp"

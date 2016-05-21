@@ -57,7 +57,8 @@ _filteredUnits = [];
         (alive _x) &&
         {(_x isKindOf "CAManBase")} &&
         {(side group _x) in _sides} && // Side filter
-        {_x getVariable [QEGVAR(respawn,alive), true]}
+        {_x getVariable [QEGVAR(respawn,alive), true]} &&
+        {!_x in _filteredUnits}
     ) then {
         _filteredUnits pushBack _x;
     };

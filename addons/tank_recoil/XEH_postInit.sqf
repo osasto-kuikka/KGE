@@ -2,10 +2,15 @@
 
 GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
 
+{
+    _x params ["_tank", "_weapon"];
+    GVAR(tankNamespace) setVariable [_tank,_weapon];
+} forEach GVAR(tankDefines);
+
 ["playerVehicleChanged", {
     params ["_unit"];
 
-    if(_unit call EFUNC(common,vehicleStatus) == 2) exitWith {
+    if(_unit call FUNC(playerVehicleStatus) == 2) exitWith {
         _unit call FUNC(addEvent);
     };
 

@@ -22,7 +22,7 @@ if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWi
 
 // If unit is leader then add groupID if groupID is set to be shown
 if ([_unit] call EFUNC(common,isLeader)) then {
-	_returnString = "<br/>" + format["%1<br/>", (group _unit)]
+    _returnString = "<br/>" + format["%1<br/>", (group _unit)]
 };
 _returnString = _returnString + "		";
 

@@ -13,7 +13,7 @@ class Cfg3DEN {
                             tooltip = CSTRING(units_Description);
                             typeName = "NUMBER";
                             defaultValue = "";
-                            //control = "Combo";
+                            control = "Combo";
                             expression = "%s = _value";
                             class Value: Combo {
 	                            class Items {
@@ -42,7 +42,7 @@ class Cfg3DEN {
                             tooltip = CSTRING(sides_Description);
                             typeName = "NUMBER";
                             defaultValue = "";
-                            //control = "Combo";
+                            control = "Combo";
                             expression = "%s = _value";
                             class Value: Combo {
 	                            class Items {
@@ -71,7 +71,7 @@ class Cfg3DEN {
                             tooltip = CSTRING(modes_Description);
                             typeName = "NUMBER";
                             defaultValue = "";
-                            //control = "Combo";
+                            control = "Combo";
                             expression = "%s = _value";
                             class Value: Combo {
 	                            class Items {
@@ -104,7 +104,7 @@ class Cfg3DEN {
                             tooltip = CSTRING(visions_Description);
                             typeName = "NUMBER";
                             defaultValue = "";
-                            //control = "Combo";
+                            control = "Combo";
                             expression = "%s = _value";
                             class Value: Combo {
 	                            class Items {

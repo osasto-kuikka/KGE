@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 {
     if (!(alive _x) || !(_x getVariable [QEGVAR(respawn,alive), true])) then {

@@ -8,7 +8,6 @@ PREP(addSingleActionsMap);
 PREP(addSingleActionsMe);
 PREP(toBehind);
 PREP(mapPosition);
-PREP(teleport);
 PREP(teleportAllMap);
 PREP(teleportAllMe);
 PREP(teleportRespawnMap);
