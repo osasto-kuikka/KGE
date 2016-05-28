@@ -1,14 +1,12 @@
 stages:
   - test
 
-build:
+build-windows:
   stage: test
   script:
-    - git clone https://github.com/KoffeinFlummi/armake.git
-    - cd armake && make && make install && cd ..
-    - make
+    - make.bat
 
 sqf-validator:
   stage: test
   script:
-    - python3 tools/sqf_validator.py
+    - python tools/sqf_validator.py
