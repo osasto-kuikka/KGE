@@ -1,4 +1,6 @@
 # KGE - Kuikka Game Enhancer
+[![build status](https://gitlab.com/osasto-kuikka/kge/badges/master/build.svg)](https://gitlab.com/osasto-kuikka/kge/commits/master)
+
 
 ## Description
 Kuikka Game Enhancer also known as KGE is small script package that was created for Osasto Kuikka to allow things that other mods didn't offer like admin respawn.
