@@ -1,0 +1,14 @@
+stages:
+  - test
+
+build:
+  stage: test
+  script:
+    - git clone https://github.com/KoffeinFlummi/armake.git
+    - cd armake && make && make install && cd ..
+    - make
+
+sqf-validator:
+  stage: test
+  script:
+    - python3 tools/sqf_validator.py
