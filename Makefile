@@ -36,13 +36,6 @@ $(BIN)/addons/$(PREFIX)_%.pbo.$(PREFIX)_$(VERSION_FULL).bisign: $(BIN)/addons/$(
 signatures: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo.$(PREFIX)_$(VERSION_FULL).bisign, $(wildcard addons/*)) \
 		$(patsubst optionals/%, $(BIN)/optionals/$(PREFIX)_%.pbo.$(PREFIX)_$(VERSION_FULL).bisign, $(wildcard optionals/*))
 
-extensions: $(wildcard extensions/*/*)
-	cd extensions/build && cmake .. && make
-	find ./extensions/build/ \( -name "*.so" -o -name "*.dll" \) -exec cp {} ./ \;
-
-extensions-win64: $(wildcard extensions/*/*)
-	cd extensions/build && CXX=$(eval $(which g++-w64-mingw-i686)) cmake .. && make
-
 clean:
 	rm -rf $(BIN) $(ZIP)_*.zip
 
