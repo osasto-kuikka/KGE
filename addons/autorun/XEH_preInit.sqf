@@ -15,7 +15,7 @@ GVAR(terrainGradientMaxIncline) = 30;
 GVAR(terrainGradientMaxDecline) = -30;
 GVAR(fatigueThreshold) = 0.7;
 GVAR(alive) = true;
-GVAR 
+GVAR(disablingActions) = [ 
     "MoveForward",
     "MoveBack",
     "MoveUp",
