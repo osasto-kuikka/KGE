@@ -14,6 +14,8 @@
 
 params ["_unit", "_changeAssigned"];
 
+if( isNull _unit ) exitWith {};
+
 if(_changeAssigned) then {
     // Remove old curator
     if !(isNil QGVAR(assignedCurator)) then {
