@@ -21,7 +21,8 @@ $(BIN)/addons/$(PREFIX)_%.pbo: addons/%
 
 all: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo, $(wildcard addons/*))
 
-filepatching: "$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
+filepatching:
+	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
 
 $(BIN)/keys/%.biprivatekey:
 	@mkdir -p $(BIN)/keys
