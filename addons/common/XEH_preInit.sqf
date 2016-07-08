@@ -33,13 +33,13 @@ if (hasInterface) then {
     ["systemChatEvent", {
         params ["_msg"];
         systemChat _msg;
-    }] call AFUNC(common,addEventHandler);
+    }] call CBA_fnc_addEventHandler;
 
     ["playerChanged", {
         params ["_newPlayer", "_oldPlayer"];
         KGE_Player = _newPlayer;
         KGE_PlayerOld = _oldPlayer;
-    }] call AFUNC(common,addEventHandler);
+    }] call CBA_fnc_addEventHandler;
 
     GVAR(admin) = false;
     GVAR(ratingDisabled) = true;
@@ -51,7 +51,7 @@ if (hasInterface) then {
 
             _unit setVariable ["KGE_Admin", GVAR(admin), true];
 
-            ["adminChanged", [GVAR(admin)]] call AFUNC(common,localEvent);
+            ["adminChanged", [GVAR(admin)]] call CBA_fnc_localEvent;
         };
 
         // So player never turns to enemy side

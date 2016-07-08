@@ -5,7 +5,7 @@ if(isServer) then {
 
     [QGVAR(activateEvent), {
         _this call FUNC(activateServer);
-    }] call AFUNC(common,addEventHandler);
+    }] call CBA_fnc_addEventHandler;
 
     [{
         [objNull, false] call FUNC(activateServer);
@@ -15,13 +15,13 @@ if(isServer) then {
 if(hasInterface) then {
     ["adminChanged", {
         [KGE_Player, false] call FUNC(activateClient);
-    }] call AFUNC(common,addEventHandler);
+    }] call CBA_fnc_addEventHandler;
 
     ["playerChanged", {
         params ["_newPlayer"];
 
         [_newPlayer, true] call FUNC(activateClient);
-    }] call AFUNC(common,addEventHandler);
+    }] call CBA_fnc_addEventHandler;
 
     [{
         [KGE_Player, true] call FUNC(activateClient);

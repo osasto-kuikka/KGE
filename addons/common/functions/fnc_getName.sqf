@@ -14,4 +14,4 @@
 
 params ["_unit"];
 
-[_unit] call AFUNC(common,getName);
+[_unit] call ace_common_fnc_getName;

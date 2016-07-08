@@ -107,7 +107,7 @@ switch (toLower _mode) do {
                 _timer ctrlCommit 0;
                 _frame ctrlCommit 0;
             };
-        },[],0.5] call AFUNC(common,waitAndExecute);
+        },[],0.5] call CBA_fnc_waitAndExecute;
     };
     case "onunload": {
         // Kill GUI PFHs
@@ -441,7 +441,7 @@ switch (toLower _mode) do {
 
                 [_this select 1] call CBA_fnc_removePerFrameHandler;
             },0] call CBA_fnc_addPerFrameHandler;
-        },[],5] call AFUNC(common,waitAndExecute);
+        },[],5] call CBA_fnc_waitAndExecute;
 
         true
     };

@@ -14,7 +14,7 @@ addMissionEventHandler ["Ended",{ [false] call FUNC(setSpectator) }];
     } else {
         [] call FUNC(updateUnits);
     };
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 // Stop spectator if respawning unit is player and remove unit from blacklist
 [QEGVAR(respawn,onRespawn), {
@@ -26,6 +26,6 @@ addMissionEventHandler ["Ended",{ [false] call FUNC(setSpectator) }];
     } else {
         [] call FUNC(updateUnits);
     };
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 ["KGE","kge_spectator_start", "Open Spectator", {[true] call FUNC(setSpectator); true}, {true}, [59, [false, false, false]]] call CBA_fnc_addKeybind;

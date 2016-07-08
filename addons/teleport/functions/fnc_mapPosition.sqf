@@ -32,7 +32,7 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    [QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);
+    [QGVAR(onTeleport), _target, []] call CBA_fnc_targetEvent;
 
     // If unit is in water
     // We need to change animation and teleport location height before teleporting

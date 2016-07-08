@@ -25,7 +25,7 @@ private _actions = [];
                     {true},
                     {},
                     [_x, "KGE_RESPAWN"]
-                ] call AFUNC(interact_menu,createAction),
+                ] call ace_interact_menu_fnc_createAction,
                 [],
                 _x
             ];

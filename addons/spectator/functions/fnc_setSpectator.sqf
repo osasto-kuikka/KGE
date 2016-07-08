@@ -92,10 +92,10 @@ if (_set) then {
                 };
             }];
         };
-    }, !_force] call AFUNC(common,execNextFrame);
+    }, !_force] call CBA_fnc_execNextFrame;
 
     // Cache and disable nametag settings
-    if (["ace_nametags"] call AFUNC(common,isModLoaded)) then {
+    if (["ace_nametags"] call ace_common_fnc_isModLoaded) then {
         GVAR(nametagSettingCache) = [EGVAR(nametags,showPlayerNames), EGVAR(nametags,showNamesForAI)];
         EGVAR(nametags,showPlayerNames) = 0;
         EGVAR(nametags,showNamesForAI) = false;
@@ -138,7 +138,7 @@ if (_set) then {
     GVAR(mousePos) = nil;
 
     // Reset nametag settings
-    if (["ace_nametags"] call AFUNC(common,isModLoaded)) then {
+    if (["ace_nametags"] call ace_common_fnc_isModLoaded) then {
         EGVAR(nametags,showPlayerNames) = GVAR(nametagSettingCache) select 0;
         EGVAR(nametags,showNamesForAI) = GVAR(nametagSettingCache) select 1;
         GVAR(nametagSettingCache) = nil;
@@ -157,4 +157,4 @@ GVAR(interrupts) = [];
 // Mark spectator state for reference
 GVAR(isSet) = _set;
 
-["spectatorSet",[_set]] call AFUNC(common,localEvent);
+["spectatorSet",[_set]] call CBA_fnc_localEvent;

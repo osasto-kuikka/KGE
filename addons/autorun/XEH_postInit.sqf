@@ -33,6 +33,6 @@
 ["onTeleport", {
     GVAR(isAutoRunActive) = false;
     KGE_Player playMoveNow "";
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 KGE_LOGINFO("Autorun Module Initialized.");

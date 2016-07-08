@@ -15,6 +15,6 @@ GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
     };
 
     _unit call FUNC(removeEvent);
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 KGE_LOGINFO("Tank Recoil Module Initialized.");

@@ -32,6 +32,6 @@ GVAR(animationLock) = true;
 call FUNC(animationLock);
 
 // Publish information about player dying
-[QGVAR(onKilled), [_unit]] call AFUNC(common,globalEvent);
+[QGVAR(onKilled), [_unit]] call CBA_fnc_globalEvent;
 
 KGE_LOGINFO_1("%1 killed",_unit);

@@ -2,20 +2,20 @@
 
 if(isServer) then {
     // Server request event
-    [QGVAR(serverEvent), {_this call FUNC(serverEvent)}] call AFUNC(common,addEventHandler);
+    [QGVAR(serverEvent), {_this call FUNC(serverEvent)}] call CBA_fnc_addEventHandler;
 };
 
 if !(hasInterface) exitWith {};
 
 // Server return event
-[QGVAR(clientEvent), {_this call FUNC(clientEvent)}] call AFUNC(common,addEventHandler);
+[QGVAR(clientEvent), {_this call FUNC(clientEvent)}] call CBA_fnc_addEventHandler;
 
 // When player gets out of briefing, check if player status is dead for reconnecting
 [{
     // BIS event handlers
     KGE_Player addEventHandler ["respawn", {_this call FUNC(handleRespawn)}];
 
-    [QGVAR(serverEvent), [KGE_player, "BIS_INIT"]] call AFUNC(common,serverEvent);
+    [QGVAR(serverEvent), [KGE_player, "BIS_INIT"]] call CBA_fnc_serverEvent;
 }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
 
 /*

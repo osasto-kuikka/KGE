@@ -17,7 +17,7 @@
 
 params ["_logic", "_units", "_activated"];
 
-[_logic, QGVAR(filterUnits), "unitsFilter"] call AFUNC(common,readSettingFromModule);
-[_logic, QGVAR(filterSides), "sidesFilter"] call AFUNC(common,readSettingFromModule);
-[_logic, QGVAR(restrictModes), "cameraModes"] call AFUNC(common,readSettingFromModule);
-[_logic, QGVAR(restrictVisions), "visionModes"] call AFUNC(common,readSettingFromModule);
+[_logic, QGVAR(filterUnits), "unitsFilter"] call ace_common_fnc_readSettingFromModule;
+[_logic, QGVAR(filterSides), "sidesFilter"] call ace_common_fnc_readSettingFromModule;
+[_logic, QGVAR(restrictModes), "cameraModes"] call ace_common_fnc_readSettingFromModule;
+[_logic, QGVAR(restrictVisions), "visionModes"] call ace_common_fnc_readSettingFromModule;
