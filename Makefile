@@ -23,6 +23,7 @@ all: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo, $(wildcard addons/*))
 
 filepatching:
 	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
+	@cp LICENSE README.md kuikka.paa mod.cpp $(BIN)
 
 $(BIN)/keys/%.biprivatekey:
 	@mkdir -p $(BIN)/keys
