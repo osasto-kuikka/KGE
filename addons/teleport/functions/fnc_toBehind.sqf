@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 #define MINDISTANCE 2
 #define MAXDISTANCE 10
@@ -44,7 +44,7 @@ if !((_unit call EFUNC(common,playerVehicleStatus)) in [-1, 3]) exitWith {
     Hint "You cannot teleport player who is in vehicle and is not passenger!";
 };
 
-_unit setPos _targetPos;
+[QGVAR(remoteTeleport), [_unit, _targetPos, KGE_Player], _unit] call CBA_fnc_targetEvent;
 
 Hint format ["%1 teleported to your location!", _unit call EFUNC(common,getName)];
 
@@ -52,5 +52,3 @@ Hint format ["%1 teleported to your location!", _unit call EFUNC(common,getName)
 private _respawnedIndex = GVAR(respawned) find _unit;
 if(_respawnedIndex != -1) then {GVAR(respawned) set [_respawnedIndex, nil]};
 GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
-
-[QGVAR(onTeleport), _target, []] call CBA_fnc_targetEvent;

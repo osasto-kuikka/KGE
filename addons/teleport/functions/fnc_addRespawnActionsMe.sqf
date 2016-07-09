@@ -9,7 +9,7 @@
   * Action children array
   */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private _actions = [];
 

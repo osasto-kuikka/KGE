@@ -26,14 +26,15 @@
 
 // When teleport
 [QGVAR(remoteTeleport), {
-    params ["_unit", "_position"];
+    params ["_unit", "_position", "_teleporter"];
 
     KGE_LOGINFO_2("%1 teleported to %2",_unit,_position);
 
-    ["onTeleport", [_unit, _position]] call CBA_fnc_localEvent; 
+    [QGVAR(onTeleport), [_unit, _position]] call CBA_fnc_localEvent;
 
     if (typeName _position isEqualTo "ARRAY") exitWith {
         _unit setPos _position;
+        hint format["You were teleported to %1 by %2", _position, name _teleporter];
     };
 
     _unit moveincargo (vehicle _position);

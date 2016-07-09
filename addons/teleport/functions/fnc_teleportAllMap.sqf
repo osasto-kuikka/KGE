@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 

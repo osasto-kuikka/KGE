@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_target"];
 
@@ -43,4 +43,4 @@ _unit moveInCargo _target;
 
 Hint format ["%1 teleported to your vehicle!", _unit call EFUNC(common,getName)];
 
-[QGVAR(onTeleport), _target, []] call CBA_fnc_targetEvent;
+[QGVAR(onTeleport), [], _target] call CBA_fnc_targetEvent;
