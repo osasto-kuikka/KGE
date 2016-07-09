@@ -28,14 +28,12 @@ if (hasInterface) then {
     KGE_Player = player;
     KGE_PlayerOld = player;
 
-    KGE_Player call FUNC(setName);
-
-    ["systemChatEvent", {
+    [QGVAR(systemChatEvent), {
         params ["_msg"];
         systemChat _msg;
     }] call CBA_fnc_addEventHandler;
 
-    ["playerChanged", {
+    ["ace_playerChanged", {
         params ["_newPlayer", "_oldPlayer"];
         KGE_Player = _newPlayer;
         KGE_PlayerOld = _oldPlayer;
@@ -46,20 +44,12 @@ if (hasInterface) then {
 
     // Update player information
     [{
-        if !(GVAR(admin) isEqualTo (call FUNC(isAdmin))) then {
-            GVAR(admin) = call FUNC(isAdmin);
-
-            _unit setVariable ["KGE_Admin", GVAR(admin), true];
-
-            ["adminChanged", [GVAR(admin)]] call CBA_fnc_localEvent;
-        };
-
         // So player never turns to enemy side
         if(rating KGE_Player < 0) then {
             // Set rating to 0
             KGE_Player addRating (0 - (rating KGE_Player));
         };
-    }, 1, [], 0.1] call cba_fnc_addPerFrameHandler;
+    }, 1, [], 0.2] call cba_fnc_addPerFrameHandler;
 };
 
 ADDON = true;

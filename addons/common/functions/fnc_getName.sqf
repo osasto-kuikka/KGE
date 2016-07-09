@@ -14,4 +14,8 @@
 
 params ["_unit"];
 
-[_unit] call ace_common_fnc_getName;
+if (isNull _unit || !(_unit isKindOf "CAManBase")) exitWith {
+  [_unit] call ace_common_fnc_getName;
+};
+
+name _unit
