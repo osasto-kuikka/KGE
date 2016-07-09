@@ -1,10 +1,12 @@
 #include "script_component.hpp"
 
 [{
-    KGE_Player createDiarySubject [QGVAR(diarySubject), "Group Gear"];
+    KGE_Player createDiarySubject [QGVAR(diarySubject), "Teamroster"];
 
-    // Update gear text
-    call FUNC(diary);
+    [{
+      // Update teamroster text
+      call FUNC(update);
+    }, 10, []] call CBA_fnc_addPerFrameHandler;
 }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
 
-KGE_LOGINFO("Gear Module Initialized.");
+KGE_LOGINFO("Teamroster Module Initialized.");
