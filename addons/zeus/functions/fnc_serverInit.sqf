@@ -9,7 +9,7 @@
  *
  */
 
-#include "\z\kge\addons\zeus\script_component.hpp"
+#include "script_component.hpp"
 
 GVAR(sideLogic) = createCenter sideLogic;
 
