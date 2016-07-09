@@ -1,7 +1,7 @@
 /*
   * Author: nikolauska
   *
-  * Create ace action menu for respawning single unit
+  * Create ace action menu for killing single unit
   *
   * Argument:
   *
@@ -14,14 +14,14 @@
 private _actions = [];
 
 {
-    if (alive _x && {!(_x getVariable [QEGVAR(respawn,alive), true])}) then {
+    if (alive _x && {_x getVariable [QEGVAR(respawn,alive), true]}) then {
         _actions pushBack
             [
                 [
                     str(_x),
                     _x call EFUNC(common,getName),
                     "",
-                    {(_this select 2) call FUNC(respawnSingle)},
+                    {(_this select 2) call FUNC(killSingle)},
                     {true},
                     {},
                     [_x]

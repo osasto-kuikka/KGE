@@ -40,4 +40,10 @@ switch(_event) do {
             // Respawn player
             [_unit, _position] call FUNC(onRespawn);
         };
+
+        // Force respawn
+        case "KGE_KILL": {
+            // Kill player
+            [_unit, _position] call FUNC(onKilled);
+        };
 };
