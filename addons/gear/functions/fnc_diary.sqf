@@ -9,7 +9,7 @@
   *
   */
 
-#include "\z\kge\addons\gear\script_component.hpp"
+#include "script_component.hpp"
 
 if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {};
 

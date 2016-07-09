@@ -9,7 +9,7 @@
   * Diary text
   */
 
-#include "\z\kge\addons\gear\script_component.hpp"
+#include "script_component.hpp"
 
 params [
     ["_unit", objNull, [objNull]]
