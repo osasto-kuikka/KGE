@@ -1,6 +1,6 @@
 name = "KGE";
 picture = "kuikka.paa";
-actionName = "Github";
+actionName = "Gitlab";
 action = "https://gitlab.com/osasto-kuikka/kge";
 description = "KGE";
 logo = "kuikka.paa";
