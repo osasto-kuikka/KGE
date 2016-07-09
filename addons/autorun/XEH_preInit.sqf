@@ -10,12 +10,13 @@ PREP(toggleMode);
 PREP(toggleOn);
 
 GVAR(autoRunMode) = JOG;
+GVAR(forceWalk) = false;
 GVAR(isAutoRunActive) = false;
 GVAR(terrainGradientMaxIncline) = 30;
 GVAR(terrainGradientMaxDecline) = -30;
 GVAR(fatigueThreshold) = 0.7;
 GVAR(alive) = true;
-GVAR(disablingActions) = [ 
+GVAR(disablingActions) = [
     "MoveForward",
     "MoveBack",
     "MoveUp",
@@ -32,6 +33,6 @@ GVAR(disablingActions) = [
     "Fire",
     "Optics"
 ];
-GVAR(disablingAnimation) = ["amovppnemstpsraswrfldnon", "amovpercmstpsnonwnondf", "amovpercmrunsnonwnondf"];
+GVAR(disablingAnimation) = [];
 
 ADDON = true;
