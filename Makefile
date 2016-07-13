@@ -9,6 +9,7 @@ BIN = @kge
 ZIP = kge
 CBA = tools/cba
 FLAGS = -i $(CBA) -w unquoted-string
+COPY = cp LICENSE README.md kuikka.paa mod.cpp CHANGELOG.md $(BIN)
 
 $(BIN)/addons/$(PREFIX)_%.pbo: addons/%
 	@mkdir -p $(BIN)/addons
@@ -23,7 +24,7 @@ all: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo, $(wildcard addons/*))
 
 filepatching:
 	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
-	@cp LICENSE README.md kuikka.paa mod.cpp $(BIN)
+	@$(COPY)
 
 $(BIN)/keys/%.biprivatekey:
 	@mkdir -p $(BIN)/keys
@@ -44,7 +45,7 @@ release:
 	@"$(MAKE)" clean
 	@"$(MAKE)" $(MAKEFLAGS) signatures
 	@echo "  ZIP  kge_$(VERSION).zip"
-	@cp LICENSE README.md kuikka.paa mod.cpp $(BIN)
+	@$(COPY)
 	@zip -r $(ZIP)_$(VERSION).zip $(BIN) &> /dev/null
 
 .PHONY: release
