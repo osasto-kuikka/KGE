@@ -49,4 +49,3 @@ class CfgSettings {
 };
 
 #include "module_config.hpp"
-#include "eden_config.hpp"
