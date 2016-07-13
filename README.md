@@ -17,7 +17,7 @@ Kuikka Game Enhancer also known as KGE is small script package that was created 
 - Respawn
   - Allow admin to respawn units when it best suits the current mission
 - Spectator
-  - Modified ace3 spectator with support for KGE respawn
+  - Support for ACE3 spectator with KGE respawn
 - Tank Recoil
   - When tank main cannon shoots, it shakes tank a litte
 - Teamroster
