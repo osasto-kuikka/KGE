@@ -6,7 +6,7 @@
     [{
       // Update teamroster text
       call FUNC(update);
-    }, 10, []] call CBA_fnc_addPerFrameHandler;
+    }, 600, []] call CBA_fnc_addPerFrameHandler;
 }, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
 
 KGE_LOGINFO("Teamroster Module Initialized.");
