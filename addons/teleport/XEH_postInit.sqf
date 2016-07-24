@@ -36,8 +36,6 @@
         _unit setPos _position;
         hint format["You were teleported to %1 by %2", _position, name _teleporter];
     };
-
-    _unit moveincargo (vehicle _position);
 }] call CBA_fnc_addEventHandler;
 
 KGE_LOGINFO("Teleport Module Initialized.");
