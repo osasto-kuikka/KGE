@@ -34,7 +34,7 @@ build-release:
   script:
     - make release
   only:
-    - master@osasto-kuikka/kge
+    - branches@osasto-kuikka/kge
   artifacts:
     paths:
       - ./@kge
