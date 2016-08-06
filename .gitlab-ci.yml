@@ -33,6 +33,8 @@ build-release:
     - docker
   script:
     - make release
+  only:
+    - master@osasto-kuikka/kge
   artifacts:
     paths:
       - ./@kge
