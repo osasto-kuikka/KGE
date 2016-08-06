@@ -23,9 +23,9 @@
         [false] call ace_spectator_fnc_setSpectator;
     };
 
-    // Remove unit from blacklist by adding it to whitelist
-    [[_unit],false] call ace_spectator_fnc_updateUnits;
-
+    // Remove unit from blacklist manually and refresh unit list
+    ace_spectator_unitBlacklist = ace_spectator_unitBlacklist - [_unit];
+    [] call ace_spectator_fnc_updateUnits;
 }] call CBA_fnc_addEventHandler;
 
 ["KGE","kge_spectator_start", "Open Spectator", {
