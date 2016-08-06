@@ -9,9 +9,9 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_killer"];
 
 // Send event info to server
-[QGVAR(serverEvent), [_unit, "BIS_KILLED"]] call AFUNC(common,serverEvent);
+[QGVAR(serverEvent), [_unit, "BIS_KILLED"]] call CBA_fnc_serverEvent;

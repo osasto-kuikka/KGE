@@ -1,12 +1,12 @@
 name = "KGE";
 picture = "kuikka.paa";
-actionName = "GitHub";
-action = "https://github.com/nikolauska/KGE";
+actionName = "Gitlab";
+action = "https://gitlab.com/osasto-kuikka/kge";
 description = "KGE";
 logo = "kuikka.paa";
 logoOver = "kuikka.paa";
 tooltip = "KGE";
 tooltipOwned = "KGE Owned";
-overview = "KGE is script modpack meant for Osasto Kuikka";
+overview = "KGE is script pack created for Osasto Kuikka";
 author = "nikolauska";
 overviewPicture = "kuikka.paa";

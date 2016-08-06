@@ -9,7 +9,7 @@
   * Action children array
   */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private _actions = [];
 
@@ -24,8 +24,8 @@ private _actions = [];
                     {(_this select 2) call FUNC(respawnSingle)},
                     {true},
                     {},
-                    [_x, "KGE_RESPAWN"]
-                ] call AFUNC(interact_menu,createAction),
+                    [_x]
+                ] call ace_interact_menu_fnc_createAction,
                 [],
                 _x
             ];

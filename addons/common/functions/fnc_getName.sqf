@@ -10,18 +10,12 @@
  * String
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit"];
 
-if !(alive _unit) exitWith {"Unknown"};
-
-if (_unit isKindOf "CAManBase") then {
-    if (isPlayer _unit) then {
-        _unit getVariable ["KGE_name", "Undefined"];
-    } else {
-        name _unit;
-    };
-} else {
-    getText (configFile >> "CfgVehicles" >> typeOf _unit >> "displayName");
+if (isNull _unit || !(_unit isKindOf "CAManBase")) exitWith {
+  [_unit] call ace_common_fnc_getName;
 };
+
+name _unit

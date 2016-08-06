@@ -9,7 +9,7 @@
  * Return value:
  * None.
  */
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private _version = getText (configFile >> "CfgPatches" >> "kge_main" >> "versionStr");
 
@@ -17,7 +17,7 @@ KGE_LOGINFO_1("KGE is version %1",_version);
 
 private _addons = "true" configClasses (configFile >> "CfgPatches");//
 _addons = [_addons, {toLower configName _this}] call FUNC(map);//
-_addons = [_addons, {_this find "kge_" == 0}] call FUNC(filter);
+_addons = [_addons, {_x find "kge_" == 0}] call FUNC(filter);
 
 {
     if (getText (configFile >> "CfgPatches" >> _x >> "versionStr") != _version) then {
@@ -25,9 +25,9 @@ _addons = [_addons, {_this find "kge_" == 0}] call FUNC(filter);
         KGE_LOGERROR(_errorMsg);
 
         if(isServer) then {
-            ["systemChatEvent", [format ["[KGE] Server: %1", _errorMsg]]] call AFUNC(common,globalEvent);
+            [QGVAR(systemChatEvent), [format ["[KGE] Server: %1", _errorMsg]]] call CBA_fnc_globalEvent;
         } else {
-            ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
+            [QGVAR(systemChatEvent), [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call CBA_fnc_globalEvent;
         };
 
 
@@ -56,7 +56,7 @@ if (isMultiplayer) then {
                 private _errorMsg = format ["Client/Server Version Mismatch. Server: %1, Client: %2.", GVAR(ServerVersion), _version];
 
                 KGE_LOGERROR(_errorMsg);
-                ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
+                [QGVAR(systemChatEvent), [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call CBA_fnc_globalEvent;
 
                 if (hasInterface) then {
                     ["[KGE] ERROR", _errorMsg, {findDisplay 46 closeDisplay 0}] call FUNC(errorMessage);
@@ -68,7 +68,7 @@ if (isMultiplayer) then {
                 private _errorMsg = format ["Client/Server Addon Mismatch. Client has extra addons: %1.",_addons];
 
                 KGE_LOGERROR(_errorMsg);
-                ["systemChatEvent", [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call AFUNC(common,globalEvent);
+                [QGVAR(systemChatEvent), [format ["[KGE] %1: %2", (KGE_Player call FUNC(getName)), _errorMsg]]] call CBA_fnc_globalEvent;
 
                 if (hasInterface) then {
                     ["[KGE] ERROR", _errorMsg, {findDisplay 46 closeDisplay 0}] call FUNC(errorMessage);

@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 // If autorun is not started then exit
 if !(GVAR(isAutoRunActive)) exitWith {};

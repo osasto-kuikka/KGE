@@ -9,7 +9,7 @@
   * Action children array
   */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private _actions = [];
 
@@ -25,7 +25,7 @@ private _actions = [];
                         str(_x),
                         name _x,
                         "",
-                        {(_this select 2) call FUNC(teleport)},
+                        {(_this select 2) call FUNC(toBehind)},
                         {true},
                         {},
                         [_x, KGE_Player]

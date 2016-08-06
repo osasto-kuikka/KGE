@@ -12,7 +12,7 @@
  * PFH handler ID
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [
     ["_func", {}, [{}]],
@@ -21,9 +21,9 @@ params [
 ];
 
 if(typeName _condition == "CODE") exitWith {
-    [_condition, _func, _params] call AFUNC(common,waitUntilAndExecute);
+    [_condition, _func, _params] call CBA_fnc_waitUntilAndExecute;
 };
 
 if(typeName _condition == "SCALAR") exitWith {
-    [_func, _params, _condition] call AFUNC(common,waitAndExecute);
+    [_func, _params, _condition] call CBA_fnc_waitAndExecute;
 }

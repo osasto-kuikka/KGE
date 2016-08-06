@@ -5,21 +5,11 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"ace_common","kge_common"};
-        author[] = {"F3 Project","Head","SilentSpike","voiper", "nikolauska"};
-        authorUrl = "https://github.com/acemod";
+        requiredAddons[] = {"kge_common"};
+        author[] = {"nikolauska"};
+        authorUrl = "https://gitlab.com/osasto-kuikka/kge";
         VERSION_CONFIG;
     };
 };
 
 #include "CfgEventHandlers.hpp"
-#include "CfgVehicles.hpp"
-#include "CfgEden.hpp"
-#include "ui\interface.hpp"
-
-class CfgRespawnTemplates {
-    class ADDON {
-        onPlayerKilled = QFUNC(respawnTemplate);
-        onPlayerRespawn = QFUNC(respawnTemplate);
-    };
-};

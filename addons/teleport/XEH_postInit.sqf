@@ -7,7 +7,7 @@
     GVAR(respawned) pushBack _unit;
 
     KGE_LOGINFO_1("%1 added to respawned array",_unit);
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 // Remove killed players from respawned array
 [QEGVAR(respawn,onKilled), {
@@ -22,21 +22,20 @@
 
     // Remove nils
     GVAR(respawned) = GVAR(respawned) arrayIntersect GVAR(respawned);
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 // When teleport
 [QGVAR(remoteTeleport), {
-    params ["_unit", "_position"];
+    params ["_unit", "_position", "_teleporter"];
 
     KGE_LOGINFO_2("%1 teleported to %2",_unit,_position);
 
-    ["onTeleport", [_unit, _position]] call AFUNC(common,localEvent); 
+    [QGVAR(onTeleport), [_unit, _position]] call CBA_fnc_localEvent;
 
     if (typeName _position isEqualTo "ARRAY") exitWith {
         _unit setPos _position;
+        hint format["You were teleported to %1 by %2", _position, name _teleporter];
     };
-
-    _unit moveincargo (vehicle _position);
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
 
 KGE_LOGINFO("Teleport Module Initialized.");

@@ -10,14 +10,14 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params [["_unit", KGE_Player, [objNull]]];
 
 private _vehicle = vehicle _unit;
 
 if !(isNil {_unit getVariable [QGVAR(firedEvent), nil]}) exitWith {};
-if !([GVAR(allowedTanks), (typeOf _vehicle)] call cba_fnc_hashHasKey) exitWith {};
+if !(GVAR(tankNamespace) getVariable [typeOf _vehicle, ""] == "") exitWith {};
 
 _unit setvariable [QGVAR(firedEvent), [_vehicle, _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]]];
 

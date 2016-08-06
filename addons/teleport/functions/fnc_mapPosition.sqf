@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit"];
 
@@ -32,9 +32,22 @@ cutText ["Select position to teleport by clicking position on map", "PLAIN"];
 
     [QGVAR(mapClick), "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 
-    [QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);
+    [QGVAR(onTeleport), [], _target] call CBA_fnc_targetEvent;
 
-    _unit setPos GVAR(mapClickPos);
+    // If unit is in water
+    // We need to change animation and teleport location height before teleporting
+    if (surfaceIsWater (getPosASL _unit) && {!(surfaceIsWater GVAR(mapClickPos))}) then {
+        _unit switchMove "AmovPercMstpSlowWrflDnon";
+        GVAR(mapClickPos) set [2, (GVAR(mapClickPos) select 2) + 1];
+    };
+
+    if !((_unit call EFUNC(common,playerVehicleStatus)) in [-1, 3]) exitWith {
+        Hint "You cannot teleport player who is in vehicle and is not passenger!";
+    };
+
+    [QGVAR(remoteTeleport), [_unit, GVAR(mapClickPos), KGE_Player], _unit] call CBA_fnc_targetEvent;
+
+    Hint format ["%1 teleported to %2!", _unit call EFUNC(common,getName), GVAR(mapClickPos)];
 
     GVAR(mapClickPos) = nil;
 

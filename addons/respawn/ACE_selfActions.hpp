@@ -29,4 +29,29 @@ class KGE_Menu {
             insertChildren = QUOTE(_this call DFUNC(addActionsRespawn));
         };
     };
+
+    class KGE_Respawn_Kill {
+        displayName = "Kill";
+        icon = "";
+        exceptions[] = {"isNotInside", "isNotSitting", "isNotOnLadder", "isNotSwimming"};
+        condition = QUOTE(GVAR(active));
+        statement = "";
+
+        class KGE_Respawn_Kill_All {
+            displayName = "All";
+            icon = "";
+            exceptions[] = {"isNotInside", "isNotSitting", "isNotOnLadder", "isNotSwimming"};
+            condition = "true";
+            statement = QUOTE(_this call DFUNC(killAll));
+        };
+
+        class KGE_Respawn_Kill_Single {
+            displayName = "Single";
+            icon = "";
+            exceptions[] = {"isNotInside", "isNotSitting", "isNotOnLadder", "isNotSwimming"};
+            condition = "true";
+            statement = "";
+            insertChildren = QUOTE(_this call DFUNC(addActionsKill));
+        };
+    };
 };

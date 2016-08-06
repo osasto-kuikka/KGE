@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_event"];
 
@@ -27,7 +27,7 @@ switch(_event) do {
                 if(_unitName isEqualTo _name) exitWith {
                     _found = true;
                     private _position = [_unit, _status] call FUNC(getMarkerPosition);
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+                    [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
                 };
             } forEach GVAR(playerList);
 
@@ -35,7 +35,7 @@ switch(_event) do {
                 private _status = "alive";
                 private _position = [_unit, _status] call FUNC(getMarkerPosition);
                 GVAR(playerList) pushBack [_unitName, _status, 0];
-                [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+                [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
             };
         };
 
@@ -58,7 +58,7 @@ switch(_event) do {
                     };
 
                     private _position = [_unit, _status] call FUNC(getMarkerPosition);
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+                    [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
                 };
             } forEach GVAR(playerList);
 
@@ -67,7 +67,7 @@ switch(_event) do {
                 if(GVAR(maxKilled) == 0) then { _status = "dead" };
                 private _position = [_unit, _status] call FUNC(getMarkerPosition);
                 GVAR(playerList) pushBack [_unitName, _status, 1];
-                [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+                [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
             };
         };
 
@@ -81,7 +81,22 @@ switch(_event) do {
                     GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
 
                     private _position = [_unit, _status] call FUNC(getMarkerPosition);
-                    [QGVAR(clientEvent), _unit, [_unit, _event, _status, _position]] call AFUNC(common,targetEvent);
+                    [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
+                };
+            } forEach GVAR(playerList);
+        };
+
+        // Force dead
+        case "KGE_KILL": {
+            {
+                _x params ["_name","_status", "_killedAmount"];
+
+                if(_unitName isEqualTo _name) exitWith {
+                    _status = "dead";
+                    GVAR(playerList) set [_forEachIndex, [_name, _status, _killedAmount]];
+
+                    private _position = [_unit, _status] call FUNC(getMarkerPosition);
+                    [QGVAR(clientEvent), [_unit, _event, _status, _position], _unit] call CBA_fnc_targetEvent;
                 };
             } forEach GVAR(playerList);
         };

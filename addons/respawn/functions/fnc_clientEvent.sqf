@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_event", "_status", "_position"];
 
@@ -39,5 +39,11 @@ switch(_event) do {
         case "KGE_RESPAWN": {
             // Respawn player
             [_unit, _position] call FUNC(onRespawn);
+        };
+
+        // Force respawn
+        case "KGE_KILL": {
+            // Kill player
+            [_unit, _position] call FUNC(onKilled);
         };
 };

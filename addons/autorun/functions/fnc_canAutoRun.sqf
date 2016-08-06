@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 private ["_gradient", "_fatigue"];
 
@@ -38,7 +38,7 @@ if(_gradient > GVAR(terrainGradientMaxIncline)) then { GVAR(lastMode) = GVAR(aut
 if(!isSprintAllowed KGE_Player && GVAR(autoRunMode) == SPRINT) then { GVAR(autoRunMode) = JOG; };
 
 // If forced walk, switch to walk
-if([KGE_Player, "forceWalk"] call ace_common_fnc_statusEffect_get && GVAR(autoRunMode) != WALK) then { GVAR(autoRunMode) = WALK; };
+if(GVAR(forceWalk) && GVAR(autoRunMode) != WALK) then { GVAR(autoRunMode) = WALK; };
 if(isForcedWalk KGE_Player && GVAR(autoRunMode) != WALK) then { GVAR(autoRunMode) = WALK; };
 
 true;

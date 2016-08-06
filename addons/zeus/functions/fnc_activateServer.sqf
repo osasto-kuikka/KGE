@@ -10,9 +10,11 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_changeAssigned"];
+
+if( isNull _unit ) exitWith {};
 
 if(_changeAssigned) then {
     // Remove old curator

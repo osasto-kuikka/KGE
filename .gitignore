@@ -1,8 +1,9 @@
-release/*
+@kge/*
 *.cache
 *.pbo
 texHeaders.bin
 *.swp
 *.swo
 *.biprivatekey
+*.zip
 

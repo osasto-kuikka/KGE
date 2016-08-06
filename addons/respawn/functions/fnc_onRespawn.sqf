@@ -9,7 +9,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_position"];
 
@@ -31,6 +31,6 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
 GVAR(animationLock) = false;
 
 // publish information about player respawning
-[QGVAR(onRespawn), [_unit]] call AFUNC(common,globalEvent);
+[QGVAR(onRespawn), [_unit]] call CBA_fnc_globalEvent;
 
 KGE_LOGINFO_1("%1 respawned",_unit);

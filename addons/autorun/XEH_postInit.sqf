@@ -20,7 +20,7 @@
          GVAR(autoRunMode) = GVAR(lastMode);
          GVAR(lastMode) = nil;
     };
-}, 0.02, []] call CBA_fnc_addPerFrameHandler;
+}, 0.04, []] call CBA_fnc_addPerFrameHandler;
 
 ["KGE","kge_autorun_toggle", "Starts and stops autorun", {call FUNC(toggleOn); true}, {true}, [DIK_C, [false, true, false]], false] call CBA_fnc_addKeybind;
 ["KGE","kge_autorun_mode", "Change autorun mode", {call FUNC(toggleMode); true}, {true}, [DIK_B, [false, true, false]], false] call CBA_fnc_addKeybind;
@@ -30,9 +30,17 @@
 }, [], {!(isNull (findDisplay 46))}] call EFUNC(common,waitUntil);
 
 // Disable autorun when teleported
-["onTeleport", {
+[QEGVAR(teleport,onTeleport), {
     GVAR(isAutoRunActive) = false;
     KGE_Player playMoveNow "";
-}] call AFUNC(common,addEventHandler);
+}] call CBA_fnc_addEventHandler;
+
+["ace_common_forceWalk", {
+  params ["_unit", "_set"];
+
+  if(local _unit) then {
+    GVAR(forceWalk) = _set;
+  };
+}] call CBA_fnc_addEventHandler;
 
 KGE_LOGINFO("Autorun Module Initialized.");

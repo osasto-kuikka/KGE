@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\script_component.hpp"
+#include "script_component.hpp"
 
 params ["_unit", "_target"];
 
@@ -39,6 +39,8 @@ if !((_unit call EFUNC(common,playerVehicleStatus)) in [-1, 3]) exitWith {
     Hint "You cannot teleport player who is in vehicle and is not passenger!";
 };
 
-[QGVAR(remoteTeleport), _target, [_target, _unit]] call AFUNC(common,targetEvent);
+_unit moveInCargo _target;
 
-[QGVAR(onTeleport), _target, []] call AFUNC(common,targetEvent);
+Hint format ["%1 teleported to your vehicle!", _unit call EFUNC(common,getName)];
+
+[QGVAR(onTeleport), [], _target] call CBA_fnc_targetEvent;
