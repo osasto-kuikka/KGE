@@ -1,3 +1,8 @@
+- v1.0.6
+  - Updated: Defines for tanks that uses tank recoil
+  - Fixed: Kill command doesn't remove player damage
+  - Fixed: Pleyers who have been respawned and died again shows on spectator
+
 - v1.0.5
   - Added: Message when player is teleported
   - Added: Option to kill player with KGE respawn
