@@ -28,6 +28,11 @@ if (["task_force_radio"] call EFUNC(common,classExists)) then {
     KGE_Player setVariable ["tf_unable_to_use_radio", true];
 };
 
+// Do full heal if ace medcal is in use
+if(ace_medical) then {
+    [_unit, _unit] call ace_medical_fnc_treatmentAdvanced_fullHealLocal;
+};
+
 GVAR(animationLock) = true;
 call FUNC(animationLock);
 
