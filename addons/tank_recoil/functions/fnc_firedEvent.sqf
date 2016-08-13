@@ -16,7 +16,6 @@
 params ["_tank", "_usedGun"];
 
 // Check if fired weapon is allowed for recoil
-if !(GVAR(tankNamespace) getVariable [typeOf _vehicle, ""] == _usedGun) exitWith {};
+if !((GVAR(tankNamespace) getVariable (typeOf _tank)) isEqualTo _usedGun) exitWith {};
 
 [_tank, _usedGun] call FUNC(addRecoil);
-//[_tank, _usedGun] call FUNC(addSmoke);

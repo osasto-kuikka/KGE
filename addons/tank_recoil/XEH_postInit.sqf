@@ -9,7 +9,7 @@
 ["ace_playerVehicleChanged", {
     params ["_unit"];
 
-    if(_unit call FUNC(playerVehicleStatus) == 2) exitWith {
+    if(_unit call EFUNC(common,playerVehicleStatus) == 2) exitWith {
         _unit call FUNC(addEvent);
     };
 

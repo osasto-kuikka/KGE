@@ -16,9 +16,17 @@ params [["_unit", KGE_Player, [objNull]]];
 
 private _vehicle = vehicle _unit;
 
+// Check if fired event is already added or if vehicle is not defined
 if !(isNil {_unit getVariable [QGVAR(firedEvent), nil]}) exitWith {};
-if !(GVAR(tankNamespace) getVariable [typeOf _vehicle, ""] == "") exitWith {};
+if (isNil {GVAR(tankNamespace) getVariable (typeOf _vehicle)}) exitWith {};
 
-_unit setvariable [QGVAR(firedEvent), [_vehicle, _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]]];
+// Save vehicle and fired event to firedEvent variable
+_unit setvariable [
+    QGVAR(firedEvent),
+    [
+        _vehicle,
+        _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]
+    ]
+];
 
 KGE_LOGINFO_1("Fired event added for %1",_vehicle);

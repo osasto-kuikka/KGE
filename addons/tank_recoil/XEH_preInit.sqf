@@ -2,7 +2,7 @@
 
 ADDON = false;
 
-#iclude "XEH_PREP.hpp"
+#include "XEH_PREP.hpp"
 
 GVAR(debug) = false;
 GVAR(allowedTanks) = [];
