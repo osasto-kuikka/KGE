@@ -45,7 +45,7 @@ $ sudo apt-get update
 $ sudo apt-get install armake
 ```
 
-Then, simply navigate to the ACE3 project directory and run `$ make`
+Then, simply navigate to the KGE project directory and run `$ make`
 
 Other make targets include:
 
@@ -57,7 +57,7 @@ Other make targets include:
 
 File Patching allows you to change the files in an addon while the game is running, requiring only a restart of the mission. This makes it great for debugging, as it cuts down the time required between tests. Note that this only works with PBOs created using `$ make filepatching`.
 
-For file patching to work, you need a symbolic link from "[Arma 3 installation folder]/z/ace" to your ACE project folder. To do this on Windows and Linux respectively, run these commands:
+For file patching to work, you need a symbolic link from "[Arma 3 installation folder]/z/kge" to your KGE project folder. To do this on Windows and Linux respectively, run these commands:
 
 ```sh
 $ # Windows
@@ -94,7 +94,6 @@ class CfgSettings {
 #define DISABLE_COMPILE_CACHE
 ```
 
-
 ### Running Arma 3 with File Patching Enabled
 
 Starting from version 1.50, Arma 3 was changed to disable file patching by default, making the feature opt-in. To execute the game with file patching enabled add the `-filePatching` flag to the command line.
@@ -102,3 +101,4 @@ Starting from version 1.50, Arma 3 was changed to disable file patching by defau
 ### Restrictions of File Patching
 
 If you need to add/remove files, then you'll need to run `$ make filepatching` again without the game running, and restart. That is all that is required to add new files to then further use in testing.
+
