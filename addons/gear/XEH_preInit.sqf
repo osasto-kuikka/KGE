@@ -2,13 +2,7 @@
 
 ADDON = false;
 
-PREP(assignedItems);
-PREP(backpack);
-PREP(diary);
-PREP(imageCheck);
-PREP(items);
-PREP(magazines);
-PREP(weapons);
+#include "XEH_PREP.hpp"
 
 GVAR(addedItems) = 0;
 GVAR(iteration) = 1;

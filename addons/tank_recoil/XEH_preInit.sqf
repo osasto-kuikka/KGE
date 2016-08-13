@@ -2,11 +2,7 @@
 
 ADDON = false;
 
-PREP(addEvent);
-PREP(addRecoil);
-PREP(addSmoke);
-PREP(firedEvent);
-PREP(removeEvent);
+#include "XEH_PREP.hpp"
 
 GVAR(debug) = false;
 GVAR(allowedTanks) = [];

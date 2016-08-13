@@ -2,27 +2,7 @@
 
 ADDON = false;
 
-PREP(checkFiles);
-PREP(classExists);
-PREP(errorMessage);
-PREP(filter);
-PREP(getName);
-PREP(getSide);
-PREP(getSideNumber);
-PREP(isAdmin);
-PREP(isAlive);
-PREP(isCommander);
-PREP(isDriver);
-PREP(isGunner);
-PREP(isLeader);
-PREP(isPassenger);
-PREP(map);
-PREP(moduleSettings);
-PREP(player);
-PREP(playerVehicleStatus);
-PREP(sanitizeString);
-PREP(setName);
-PREP(waitUntil);
+#include "XEH_PREP.hpp"
 
 if (hasInterface) then {
     KGE_Player = player;
@@ -38,9 +18,6 @@ if (hasInterface) then {
         KGE_Player = _newPlayer;
         KGE_PlayerOld = _oldPlayer;
     }] call CBA_fnc_addEventHandler;
-
-    GVAR(admin) = false;
-    GVAR(ratingDisabled) = true;
 
     // Update player information
     [{

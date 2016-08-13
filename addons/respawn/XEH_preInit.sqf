@@ -2,22 +2,7 @@
 
 ADDON = false;
 
-PREP(addActionsKill);
-PREP(addActionsRespawn);
-PREP(animationLock);
-PREP(clientEvent);
-PREP(getAllDead);
-PREP(getmarkerPosition);
-PREP(handleKilled);
-PREP(handleRespawn);
-PREP(killAll);
-PREP(killSingle);
-PREP(moduleInit);
-PREP(onKilled);
-PREP(onRespawn);
-PREP(respawnAll);
-PREP(respawnSingle);
-PREP(serverEvent);
+#include "XEH_PREP.hpp"
 
 GVAR(playerList) = [];
 GVAR(maxKilled) = 0;

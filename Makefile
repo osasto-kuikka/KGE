@@ -22,7 +22,7 @@ $(BIN)/addons/$(PREFIX)_%.pbo: addons/%
 
 all: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo, $(wildcard addons/*))
 
-filepatching:
+filepatching: clean
 	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
 	@$(COPY)
 
