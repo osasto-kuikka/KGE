@@ -1,7 +1,9 @@
 - v1.0.6
+  - Added: Function caching on game start to speedup loading
   - Updated: Defines for tanks that uses tank recoil
+  - Fixed: Tank recoil not working on any vehicle
   - Fixed: Kill command doesn't remove player damage
-  - Fixed: Pleyers who have been respawned and died again shows on spectator
+  - Fixed: Players who have been respawned and died again shows on spectator
 
 - v1.0.5
   - Added: Message when player is teleported
