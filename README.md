@@ -62,11 +62,11 @@ For file patching to work, you need a symbolic link from "[Arma 3 installation f
 ```sh
 $ # Windows
 $ mkdir "[Arma 3 installation folder]\z"
-$ mklink /J "[Arma 3 installation folder]\z\ace" "[location of the ACE3 project]"
+$ mklink /J "[Arma 3 installation folder]\z\kge" "[location of the KGE project]"
 
 $ # Linux
 $ mkdir "[Arma 3 installation folder]/z"
-$ ln -s "[Arma 3 installation folder]/z/ace" "[location of the ACE3 project]"
+$ ln -s "[Arma 3 installation folder]/z/kge" "[location of the KGE project]"
 ```
 
 ### Disabling CBA Function Caching
@@ -93,6 +93,7 @@ class CfgSettings {
 ```cpp
 #define DISABLE_COMPILE_CACHE
 ```
+
 
 ### Running Arma 3 with File Patching Enabled
 
