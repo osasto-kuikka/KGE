@@ -2,12 +2,7 @@
 
 ADDON = false;
 
-PREP(actionKeyCheck);
-PREP(canAutoRun);
-PREP(getAnimation);
-PREP(getTerrainGradient);
-PREP(toggleMode);
-PREP(toggleOn);
+#include "XEH_PREP.hpp"
 
 GVAR(autoRunMode) = JOG;
 GVAR(forceWalk) = false;

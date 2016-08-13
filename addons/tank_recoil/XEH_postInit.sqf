@@ -1,10 +1,9 @@
 #include "script_component.hpp"
 
-GVAR(allowedTanks) = [GVAR(allowedTanksPair), ""] call cba_fnc_hashCreate;
-
+// Add tank defines to tank namespace
 {
     _x params ["_tank", "_weapon"];
-    GVAR(tankNamespace) setVariable [_tank,_weapon];
+    GVAR(tankNamespace) setVariable [_tank, _weapon];
 } forEach GVAR(tankDefines);
 
 ["ace_playerVehicleChanged", {

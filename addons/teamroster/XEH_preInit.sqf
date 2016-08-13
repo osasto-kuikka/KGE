@@ -2,9 +2,7 @@
 
 ADDON = false;
 
-PREP(getPlayerEntry);
-PREP(getRank);
-PREP(update);
+#include "XEH_PREP.hpp"
 
 GVAR(iteration) = 1;
 
