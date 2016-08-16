@@ -6,8 +6,7 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"extended_eventhandlers", "CBA_UI", "CBA_XEH", "CBA_XEH_A3", "ace_main"};
-        author[] = {"Nikolauska"};
-        authorUrl = "";
+        authors[] = {"nikolauska"};
         versionDesc = "K.G.E.";
         VERSION_CONFIG;
     };
@@ -21,8 +20,8 @@ class CfgMods {
         hidePicture = "true";
         hideName = "true";
         actionName = "Website";
-        action = "https://github.com/nikolauska/KGE";
-        description = "KGE public github repository";
+        action = "https://gitlab.com/osasto-kuikka/KGE";
+        description = "KGE public git repository";
     };
 };
 
