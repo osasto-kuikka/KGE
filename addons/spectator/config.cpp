@@ -6,8 +6,7 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"kge_common"};
-        author[] = {"nikolauska"};
-        authorUrl = "https://gitlab.com/osasto-kuikka/kge";
+        authors[] = {"nikolauska"};
         VERSION_CONFIG;
     };
 };
