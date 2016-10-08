@@ -1,3 +1,12 @@
+- v1.0.6
+  - Added: Function caching on game start to speedup loading
+  - Updated: Defines for tanks that uses tank recoil
+  - Updated: Mod website now points to gitlab repository
+  - Fixed: Author is not a value
+  - Fixed: Tank recoil not working on any vehicle
+  - Fixed: Kill command doesn't remove player damage
+  - Fixed: Players who have been respawned and died again shows on spectator
+
 - v1.0.5
   - Added: Message when player is teleported
   - Added: Option to kill player with KGE respawn
