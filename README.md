@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/osasto-kuikka/KGE/blob/master/extras/logo.svg" width="480">
+    <img src="https://raw.githubusercontent.com/osasto-kuikka/KGE/master/extras/logo.svg" width="480">
 </p>
 
 <p align="center">
