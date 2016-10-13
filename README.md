@@ -1,6 +1,28 @@
-# KGE - Kuikka Game Enhancer
-[![build status](https://gitlab.com/osasto-kuikka/kge/badges/master/build.svg)](https://gitlab.com/osasto-kuikka/kge/commits/master)
+<p align="center">
+    <img src="https://github.com/osasto-kuikka/KGE/blob/master/extras/logo.svg" width="480">
+</p>
 
+<p align="center">
+    <a href="https://github.com/osasto-kuikka/KGE/releases/latest">
+        <img src="https://img.shields.io/badge/Version-1.0.6-blue.svg?style=flat-square" alt="KGE Version">
+    </a>
+    <a href="https://github.com/osasto-kuikka/KGE/issues">
+        <img src="https://img.shields.io/github/issues-raw/osasto-kuikka/KGE.svg?style=flat-square&label=Issues" alt="KGE Issues">
+    </a>
+    <a href="https://github.com/osasto-kuikka/KGE/releases">
+        <img src="https://img.shields.io/github/downloads/osasto-kuikka/KGE/total.svg?style=flat-square&label=Downloads" alt="KGE Downloads">
+    </a>
+    <a href="https://github.com/osasto-kuikka/KGE/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/License-GPLv2-red.svg?style=flat-square" alt="KGE License">
+    </a>
+    <a href="https://travis-ci.org/osasto-kuikka/KGE">
+        <img src="https://img.shields.io/travis/osasto-kuikka/KGE.svg?style=flat-square&label=Build" alt="KGE Build Status">
+    </a>
+</p>
+
+<p align="center">
+    <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a> and <a href="">ACE3</a></strong></sup>
+</p>
 
 ## Description
 Kuikka Game Enhancer also known as KGE is small script package that was created for Osasto Kuikka to allow things that other mods didn't offer like admin respawn.
