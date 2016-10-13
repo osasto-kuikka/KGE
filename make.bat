@@ -12,5 +12,3 @@ for /d %%f in (addons\*) do (
     echo   PBO  @kge\addons\kge_!name!.pbo
     !armake! build -w unquoted-string -f !folder! @kge\addons\kge_!name!.pbo
 )
-
-pause

@@ -1,4 +1,0 @@
-build:
-  image: nikolauska/armake:latest
-  script:
-    - make
