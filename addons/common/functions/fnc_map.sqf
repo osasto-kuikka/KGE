@@ -17,7 +17,7 @@
 
 params [
   ["_array", [], [[]]],
-  ["_code", {true}, [{}]
+  ["_code", {true}, [{}]]
 ];
 
 KGE_DEPRECATED(QFUNC(map),"1.2.0","ARRAY apply CODE");
