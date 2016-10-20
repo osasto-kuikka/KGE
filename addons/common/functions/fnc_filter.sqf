@@ -1,25 +1,22 @@
 /*
- * Author: KoffeinFlummi, commy2
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Filters array and removes every element not fitting the condition
  *
  * Arguments:
- * 0: Array to be filtered.
- * 1: Code to be evaluated.
+ * 0: Array to be filtered <ARRAY>
+ * 1: Code to be evaluated <CODE>
  *
  * Return Value:
- * Final array
- *
- * Usage:
- * [[0,1,2,3,4], {_x > 2}] call kge_common_fnc_filter ==> [3,4]
+ * Filtered array <ARRAY>
  */
+
 #include "script_component.hpp"
 
 params ["_array", "_code"];
 
-if (isNil "_array") exitWith {
-    KGE_LOGERROR("No array for function filter");
-    []
-};
+KGE_DEPRECATED(QFUNC(filter),"1.2.0","select CODE")
 
-_array select _code
+_array select _code;

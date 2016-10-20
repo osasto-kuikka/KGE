@@ -20,5 +20,3 @@ if(isNil "_var") exitWith {};
 _var params ["_vehicle", "_event"];
 _vehicle removeEventHandler ["fired", _event];
 _unit setVariable [QGVAR(firedEvent), nil];
-
-KGE_LOGINFO_1("Fired event removed from %1",_vehicle);

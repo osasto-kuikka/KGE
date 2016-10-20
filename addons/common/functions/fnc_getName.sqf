@@ -1,6 +1,8 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Get unit saved name
  *
  * Argument:
@@ -12,10 +14,6 @@
 
 #include "script_component.hpp"
 
-params ["_unit"];
+KGE_DEPRECATED(QFUNC(getName),"1.2.0","ace_common_fnc_getName")
 
-if (isNull _unit || !(_unit isKindOf "CAManBase")) exitWith {
-  [_unit] call ace_common_fnc_getName;
-};
-
-name _unit
+this call ace_common_fnc_getName;

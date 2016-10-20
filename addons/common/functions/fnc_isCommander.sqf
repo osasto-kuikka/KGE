@@ -1,19 +1,17 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Check if unit is commander of vehicle
  *
  * Argument:
- * 0: Unit (Object)
+ * 0: Unit <OBJECT>
  *
  * Return value:
- * Boolean
+ * Is commander <BOOLEAN>
  */
+
 #include "script_component.hpp"
 
-params [["_unit", objNull]];
-
-if !(alive _unit) exitWith { false };
-
-!(vehicle _unit isEqualTo _unit) &&
-commander (vehicle _unit) isEqualTo _unit
+this call CBA_fnc_vehicleRole == "commander"

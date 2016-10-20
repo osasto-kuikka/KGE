@@ -12,17 +12,6 @@
 
 #include "script_component.hpp"
 
-params [["_text", ""]];
+KGE_DEPRECATED(QFUNC(sanitizeString),"1.2.0","ace_common_fnc_sanitizeString")
 
-_text = toArray _text;
-private _arrayNew = [];
-
-{
-    // uppercase and lowercase letter according to unicode characters
-    // https://en.wikipedia.org/wiki/List_of_Unicode_characters
-    if(_x > 34 && _x < 59 || _x >= 66 && _x < 91) then {
-        PUSH(_arrayNew,_x);
-    };
-} forEach _array;
-
-toString _arrayNew
+this call ace_common_fnc_sanitizeString;

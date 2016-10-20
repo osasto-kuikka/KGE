@@ -18,11 +18,13 @@
 #include "script_component.hpp"
 
 params [
-    ["_unit", KGE_Player, [objNull]]
-    ];
+  ["_unit", KGE_Player, [objNull]]
+];
 
-if((vehicle _unit) == _unit) exitWith {-1};
-if(_unit call FUNC(isCommander)) exitWith {0};
-if(_unit call FUNC(isDriver)) exitWith {1};
-if(_unit call FUNC(isGunner)) exitWith {2};
-if(_unit call FUNC(isPassenger)) exitWith {3};
+private _role = _unit call CBA_fnc_vehicleRole;
+
+if(_role == "") exitWith {-1};
+if(_role == "commander") exitWith {0};
+if(_role == "driver") exitWith {1};
+if(_role == "gunner") exitWith {2};
+if(_role == "cargo") exitWith {3};

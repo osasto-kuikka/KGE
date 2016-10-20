@@ -13,7 +13,7 @@
 
 if !(isServer) exitWith {};
 
-params ["_logic", "_units", "_activated"];
+params ["_logic"];
 
 // Activate KGE respawn, so server handles events
 GVAR(active) = true;

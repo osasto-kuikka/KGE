@@ -1,13 +1,15 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description
  * Toggles autorun on and off
  *
- * Argument:
- * 0: Unit <Object>
+ * Arguments:
+ * None
  *
- * Return value:
- *
+ * Return:
+ * None
  */
 
 #include "script_component.hpp"

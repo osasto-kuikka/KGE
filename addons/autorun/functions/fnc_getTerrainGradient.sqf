@@ -1,13 +1,15 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Get terrain gradient on unit location
  *
  * Argument:
- * 0: Unit <Object>
+ * 0: Unit <OBJECT>
  *
- * Return value:
- *
+ * Return:
+ * Terraing gradient <NUMBER>
  */
 
 #include "script_component.hpp"

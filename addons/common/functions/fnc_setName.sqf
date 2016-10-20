@@ -12,10 +12,6 @@
 
 #include "script_component.hpp"
 
-params [["_unit", objNull]];
+KGE_DEPRECATED(QFUNC(setName),"1.2.0","ace_common_fnc_setName");
 
-if !(alive _unit) exitWith {};
-
-if (_unit isKindOf "CAManBase") then {
-    _unit setVariable ["KGE_name", name _unit, true];
-};
+this call ace_common_fnc_setName;

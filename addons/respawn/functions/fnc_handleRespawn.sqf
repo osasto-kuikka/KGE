@@ -11,7 +11,7 @@
 
 #include "script_component.hpp"
 
-params ["_unit", "_corpse"];
+params ["_unit"];
 
 // Send event info to server
 [QGVAR(serverEvent), [_unit, "BIS_RESPAWN"]] call CBA_fnc_serverEvent;
