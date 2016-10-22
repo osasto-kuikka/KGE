@@ -11,5 +11,3 @@ if(isServer) then {
     [objNull, false] call FUNC(activateServer);
   }, 10, []] call cba_fnc_addPerFrameHandler;
 };
-
-KGE_LOGINFO("Zeus Module Initialized.");

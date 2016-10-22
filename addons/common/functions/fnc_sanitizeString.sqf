@@ -12,6 +12,6 @@
 
 #include "script_component.hpp"
 
-KGE_DEPRECATED(QFUNC(sanitizeString),"1.2.0","ace_common_fnc_sanitizeString")
+KGE_DEPRECATED(QFUNC(sanitizeString),"1.2.0","ace_common_fnc_sanitizeString");
 
 this call ace_common_fnc_sanitizeString;

@@ -17,6 +17,6 @@
 
 params ["_array", "_code"];
 
-KGE_DEPRECATED(QFUNC(filter),"1.2.0","select CODE")
+KGE_DEPRECATED(QFUNC(filter),"1.2.0","select CODE");
 
 _array select _code;

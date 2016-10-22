@@ -17,10 +17,6 @@
 GVAR(isAutoRunActive) = !GVAR(isAutoRunActive);
 
 if !(GVAR(isAutoRunActive)) exitWith {
-    KGE_LOGINFO("Autorun stopped");
-
-    KGE_Player switchMove "";
-    GVAR(lastMode) = nil;
+  KGE_Player switchMove "";
+  GVAR(lastMode) = nil;
 };
-
-KGE_LOGINFO("Autorun started");

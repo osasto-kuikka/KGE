@@ -8,5 +8,3 @@
     call FUNC(update);
   }, 600, []] call CBA_fnc_addPerFrameHandler;
 }, [], {!(isNull KGE_Player)}] call CBA_fnc_waitUntilAndExecute;
-
-KGE_LOGINFO("Teamroster Module Initialized.");

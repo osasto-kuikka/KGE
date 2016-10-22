@@ -28,5 +28,3 @@ _unit setvariable [
     _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]
   ]
 ];
-
-KGE_LOGINFO_1("Fired event added for %1",_vehicle);

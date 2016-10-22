@@ -11,9 +11,10 @@ if !(hasInterface) exitWith {};
 [QGVAR(clientEvent), {_this call FUNC(clientEvent)}] call CBA_fnc_addEventHandler;
 
 // When player gets out of briefing, check if player status is dead for reconnecting
-[{
+[{!(isNull KGE_Player)},
+{
   // BIS event handlers
   KGE_Player addEventHandler ["respawn", {_this call FUNC(handleRespawn)}];
 
   [QGVAR(serverEvent), [KGE_player, "BIS_INIT"]] call CBA_fnc_serverEvent;
-}, [], {!(isNull KGE_Player)}] call EFUNC(common,waitUntil);
+}, []] call CBA_fnc_waitUntilAndExecute;

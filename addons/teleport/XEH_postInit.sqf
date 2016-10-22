@@ -5,8 +5,6 @@
   params ["_unit"];
 
   GVAR(respawned) pushBack _unit;
-
-  KGE_LOGINFO_1("%1 added to respawned array",_unit);
 }] call CBA_fnc_addEventHandler;
 
 // Remove killed players from respawned array
@@ -16,8 +14,6 @@
   private _respawnedIndex = GVAR(respawned) find _unit;
   if(_respawnedIndex != -1) then {
       GVAR(respawned) set [_respawnedIndex, nil];
-
-      KGE_LOGINFO_1("%1 removed from respawned array",_unit);
   };
 
   // Remove nils
@@ -28,8 +24,6 @@
 [QGVAR(remoteTeleport), {
   params ["_unit", "_position", "_teleporter"];
 
-  KGE_LOGINFO_2("%1 teleported to %2",_unit,_position);
-
   [QGVAR(onTeleport), [_unit, _position]] call CBA_fnc_localEvent;
 
   if (typeName _position isEqualTo "ARRAY") exitWith {
@@ -37,5 +31,3 @@
     hint format["You were teleported to %1 by %2", _position, name _teleporter];
   };
 }] call CBA_fnc_addEventHandler;
-
-KGE_LOGINFO("Teleport Module Initialized.");

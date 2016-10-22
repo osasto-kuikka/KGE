@@ -14,6 +14,6 @@
 
 #include "script_component.hpp"
 
-KGE_DEPRECATED(QFUNC(getName),"1.2.0","ace_common_fnc_getName")
+KGE_DEPRECATED(QFUNC(getName),"1.2.0","ace_common_fnc_getName");
 
 this call ace_common_fnc_getName;

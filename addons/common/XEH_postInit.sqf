@@ -3,5 +3,3 @@
 if(hasInterface) then {
   call FUNC(checkFiles);
 };
-
-KGE_LOGINFO("Common Module Initialized.");

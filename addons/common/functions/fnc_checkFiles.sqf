@@ -17,8 +17,6 @@
 private _version = getText (configFile >> "CfgPatches" >>
                                           "kge_main" >> "versionStr");
 
-KGE_LOGINFO_1("KGE is version %1",_version);
-
 private _cfgPatches = configFile >> "CfgPatches";
 private _addons = "true" configClasses _cfgPatches;
 _addons = [_addons, {toLower configName _this}] call FUNC(map);

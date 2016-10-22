@@ -7,7 +7,6 @@
 
   if !(call FUNC(canAutoRun)) exitWith {
     GVAR(isAutoRunActive) = false;
-    KGE_LOGINFO("Autorun stopped");
   };
 
   private _animation = GVAR(autoRunMode) call FUNC(getAnimation);
@@ -30,12 +29,13 @@
   true
 }, {true}, [DIK_B, [false, true, false]], false] call CBA_fnc_addKeybind;
 
-[{
+[{!(isNull (findDisplay 46))},
+{
   (findDisplay 46) displayAddEventHandler ["KeyDown", {
     (_this select 1) call FUNC(actionKeyCheck);
     false
   }];
-}, [], {!(isNull (findDisplay 46))}] call EFUNC(common,waitUntil);
+}, []] call CBA_fnc_waitUntilAndExecute;
 
 // Disable autorun when teleported
 [QEGVAR(teleport,onTeleport), {
@@ -50,5 +50,3 @@
     GVAR(forceWalk) = _set;
   };
 }] call CBA_fnc_addEventHandler;
-
-KGE_LOGINFO("Autorun Module Initialized.");

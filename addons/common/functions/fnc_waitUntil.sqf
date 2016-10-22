@@ -21,11 +21,11 @@ params [
 ];
 
 if(typeName _condition == "CODE") exitWith {
-  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitUntilAndExecute")
+  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitUntilAndExecute");
   [_condition, _func, _params] call CBA_fnc_waitUntilAndExecute;
 };
 
 if(typeName _condition == "SCALAR") exitWith {
-  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitAndExecute")
+  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitAndExecute");
   [_func, _params, _condition] call CBA_fnc_waitAndExecute;
 }
