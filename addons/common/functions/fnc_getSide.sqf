@@ -1,13 +1,15 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Get unit side
  *
  * Argument:
- * 0: Unit (Object)
+ * 0: Unit <OBJECT>
  *
  * Return value:
- * Side
+ * Side <SIDE>
  */
 
 #include "script_component.hpp"

@@ -20,13 +20,11 @@ GVAR(curatorModule) setVariable ["Addons",3,true];
 private _addons = [];
 private _cfgPatches = configFile >> "cfgpatches";
 for "_i" from 0 to (count _cfgPatches - 1) do {
-    private _class = _cfgPatches select _i;
+  private _class = _cfgPatches select _i;
 
-    if (isclass _class) then {
-        _addons pushBack (configName _class);
-    };
+  if (isclass _class) then {
+    _addons pushBack (configName _class);
+  };
 };
 //_addons call BIS_fnc_activateAddons;
 GVAR(curatorModule) addcuratoraddons _addons;
-
-KGE_LOGINFO("Zeus module added");

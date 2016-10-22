@@ -15,7 +15,7 @@ params [
     ["_unit", objNull, [objNull]]
 ];
 
-if (!(alive _unit) || !(_unit getVariable [QEGVAR(respawn,alive), true])) exitWith {""};
+if (_unit call EFUNC(common,isAlive)) exitWith {""};
 
 private _returnText = "";
 
@@ -35,16 +35,16 @@ private _items = [];
 
 // Add magazine images and text
 {
-    _x params ["_item", "_count"];
+  _x params ["_item", "_count"];
 
-    private _conf = configFile >> "CfgWeapons" >> _item;
-    private _image = getText(_conf >> "picture") call FUNC(imageCheck);
-    private _name = getText(_conf >> "displayName");
-    _returnText = _returnText + format ["<img image='%2' width='32' height='32'/><execute expression='systemChat ""Item: %3""'>x%1</execute>, ", _count, _image, _name];
+  private _conf = configFile >> "CfgWeapons" >> _item;
+  private _image = getText(_conf >> "picture") call FUNC(imageCheck);
+  private _name = getText(_conf >> "displayName");
+  _returnText = _returnText + format ["<img image='%2' width='32' height='32'/><execute expression='systemChat ""Item: %3""'>x%1</execute>, ", _count, _image, _name];
 
-    INC(GVAR(addedItems));
+  INC(GVAR(addedItems));
 
-    if((GVAR(addedItems) mod 6) == 0) then { _returnText = _returnText + "<br/>" };
+  if((GVAR(addedItems) mod 6) == 0) then { _returnText = _returnText + "<br/>" };
 } forEach _items;
 
 _returnText

@@ -1,12 +1,15 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Checks if unit is admin
  *
- * Argument:
+ * Arguments:
+ * 0: Unit <OBJECT>
  *
  * Return value:
- * Bool
+ * Is admin <BOOLEAN>
  */
 
 params [["_unit", KGE_Player, [objNull]]];

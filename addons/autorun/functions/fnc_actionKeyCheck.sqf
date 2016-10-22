@@ -4,36 +4,28 @@
  * Check if disabling actionkey has been pressed
  *
  * Argument:
+ * 1: Keycode <NUMBER>
  *
- * Return value:
- *
+ * Return:
+ * None
  */
 
 #include "script_component.hpp"
 
-params ["_control", "_keycode"];
+params ["", "_keycode"];
 
 if !(GVAR(isAutoRunActive)) exitWith {};
 
 {
-    if(_keyCode in actionKeys _x) exitWith {
-        GVAR(isAutoRunActive) = false;
-        //KGE_Player switchMove "";
+  params ["_action"];
 
-        KGE_LOGINFO("Autorun stopped");
+  if(_keyCode in actionKeys _action) exitWith {
+    GVAR(isAutoRunActive) = false;
 
-        [{
-            params ["_action"];
+    if(_action == "MoveUp") then { _action = "PlayerCrouch"; };
+    if(_action == "MoveDown") then { _action = "PlayerProne"; };
 
-            if(_action == "MoveUp") then {
-                    _action = "PlayerCrouch";
-            };
-            if(_action == "MoveDown") then {
-                    _action = "PlayerProne";
-            };
-
-            KGE_Player playActionNow _action;
-        }, [_x], 0.01] call EFUNC(common,waitUntil);
-
-    };
+    KGE_Player playActionNow _action;
+  };
 } forEach GVAR(disablingActions);
+

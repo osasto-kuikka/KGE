@@ -1,12 +1,15 @@
 /*
- * Author: nikolauska
+ * Author:
+ * Nikolauska
  *
+ * Description:
  * Changes autorun mode
  *
- * Argument:
+ * Arguments:
+ * None
  *
- * Return value:
- *
+ * Return:
+ * None
  */
 
 #include "script_component.hpp"

@@ -15,15 +15,17 @@
 #include "script_component.hpp"
 
 params [
-    ["_func", {}, [{}]],
-    ["_params", []],
-    ["_condition", {true}, [{}, 0]]
+  ["_func", {}, [{}]],
+  ["_params", []],
+  ["_condition", {true}, [{}, 0]]
 ];
 
 if(typeName _condition == "CODE") exitWith {
-    [_condition, _func, _params] call CBA_fnc_waitUntilAndExecute;
+  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitUntilAndExecute");
+  [_condition, _func, _params] call CBA_fnc_waitUntilAndExecute;
 };
 
 if(typeName _condition == "SCALAR") exitWith {
-    [_func, _params, _condition] call CBA_fnc_waitAndExecute;
+  KGE_DEPRECATED(QFUNC(waitUntil),"1.2.0","CBA_fnc_waitAndExecute");
+  [_func, _params, _condition] call CBA_fnc_waitAndExecute;
 }

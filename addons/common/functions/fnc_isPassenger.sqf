@@ -12,11 +12,4 @@
 
 #include "script_component.hpp"
 
-params [["_unit", objNull]];
-
-if !(alive _unit) exitWith { false };
-
-vehicle _unit != _unit &&
-{!(_this call kge_common_fnc_isDriver)} &&
-{!(_this call kge_common_fnc_isGunner)} &&
-{!(_this call kge_common_fnc_isCommander)}
+this call CBA_fnc_vehicleRole == "cargo"

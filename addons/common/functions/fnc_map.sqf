@@ -1,29 +1,25 @@
 /*
- * Author: KoffeinFlummi, commy2
+ * Author:
+ * Nikolauska
  *
- * Applies given code to every element in an array, LIKE SOMETHING SQF SHOULD HAVE BY DEFAULT.
+ * Description
+ * Applies given code to every element in an array
  *
  * Arguments:
- * 0: Array to be thingied.
- * 1: Code to be applied to every element.
+ * 0: Array to be changed <ARRAY>
+ * 1: Code to be applied to every element <CODE>
  *
  * Return Value:
- * Final array
- *
- * Usage:
- * [["2", "gobblecock", "25"], {parseNumber _this}] call FUNC(map) ==> [2, 0, 25]
+ * Final array <ARRAY>
  */
+
 #include "script_component.hpp"
 
-params ["_arrayIn", "_code"];
-private _array = +_arrayIn;
+params [
+  ["_array", [], [[]]],
+  ["_code", {true}, [{}]]
+];
 
-if (isNil "_array") exitWith {
-    KGE_LOGERROR("No array for function map");
-    []
-};
+KGE_DEPRECATED(QFUNC(map),"1.2.0","ARRAY apply CODE");
 
-{
-    _array set [_forEachIndex, _x call _code];
-} forEach _array;
-_array
+_array apply _code;
