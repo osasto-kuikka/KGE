@@ -2,19 +2,21 @@
 
 class CfgPatches {
     class ADDON {
+        name = COMPONENT_NAME;
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"extended_eventhandlers", "CBA_UI", "CBA_XEH", "CBA_XEH_A3", "ace_main"};
+        requiredAddons[] = {"ace_common"};
+        author = "Osasto Kuikka";
         authors[] = {"nikolauska"};
-        versionDesc = "K.G.E.";
+        url = "https://github.com/osasto-kuikka/KGE";
         VERSION_CONFIG;
     };
 };
 
 class CfgMods {
     class PREFIX {
-        dir = "@KGE";
+        dir = "@kge";
         name = "Core - Kuikka Game Enhancer";
         picture = "A3\Ui_f\data\Logos\arma3_expansion_alpha_ca";
         hidePicture = "true";
@@ -28,22 +30,13 @@ class CfgMods {
 class CfgSettings {
     class CBA {
         class Versioning {
-            class PREFIX {
-                level = DEFAULT_VERSIONING_LEVEL;
-                handler = "kge_common_fnc_mismatch";
-                class Dependencies {
-                    CBA[]={"cba_main", {1,0,0}, "true"};
-                    XEH[]={"cba_xeh", {1,0,0}, "true"};
+            class KGE {
+                class dependencies {
+                    //KGE will hard exit if this is missing
+                    CBA[] = {"cba_main", REQUIRED_CBA_VERSION, "(true)"};
                 };
             };
         };
-        /*
-    class Registry {
-    class PREFIX {
-        removed[] = {};
-    };
-    };
- */
     };
 };
 

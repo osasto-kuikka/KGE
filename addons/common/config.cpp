@@ -2,11 +2,14 @@
 
 class CfgPatches {
     class ADDON {
+        name = COMPONENT_NAME;
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"kge_main", "ace_common"};
+        requiredAddons[] = {"kge_main"};
+        author = "Osasto Kuikka";
         authors[] = {"nikolauska"};
+        url = "https://github.com/osasto-kuikka/KGE";
         VERSION_CONFIG;
     };
 };
