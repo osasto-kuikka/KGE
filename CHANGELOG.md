@@ -1,3 +1,9 @@
+- v1.0.7
+  - Added: Beautified names for addons
+  - Updated: Configs now only allow latest CBA
+  - Updated: Configs are now correctly requiring needed other addons
+  - Fixed: KGE_Player update now uses CBA playerEventHandler
+
 - v1.0.6
   - Added: Function caching on game start to speedup loading
   - Updated: Defines for tanks that uses tank recoil
