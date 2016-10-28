@@ -13,11 +13,11 @@ if (hasInterface) then {
         systemChat _msg;
     }] call CBA_fnc_addEventHandler;
 
-    ["ace_playerChanged", {
+    ["unit", {
         params ["_newPlayer", "_oldPlayer"];
         KGE_Player = _newPlayer;
         KGE_PlayerOld = _oldPlayer;
-    }] call CBA_fnc_addEventHandler;
+    }] call CBA_fnc_addPlayerEventHandler;
 
     // Update player information
     [{
