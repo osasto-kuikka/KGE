@@ -12,11 +12,10 @@
 
 #include "script_component.hpp"
 
-params [["_unit", objNull]];
+params [["_unit", objNull, [objNull]]];
 
-if !(alive _unit) exitWith { false };
-
-vehicle _unit != _unit &&
-{!(_this call kge_common_fnc_isDriver)} &&
-{!(_this call kge_common_fnc_isGunner)} &&
-{!(_this call kge_common_fnc_isCommander)}
+([_unit] call FUNC(isAlive)) &&
+{vehicle _unit isEqualTo _unit} &&
+{!(_unit call kge_common_fnc_isDriver)} &&
+{!(_unit call kge_common_fnc_isGunner)} &&
+{!(_unit call kge_common_fnc_isCommander)}

@@ -28,7 +28,7 @@ private _unitRank = [_unit] call FUNC(getRank);
 if ([_unit] call EFUNC(common,isLeader)) then {
   _returnString = format["<br/>%1 - %2 %3 (%4)<br/>", (group _unit), _unitRank, _unitName, _unitDesc]
 } else {
-  _returnString = format["	-	%1 %2 (%3)<br/>", _unitRank, _unitName, _unitDesc];
+  _returnString = format["  - %1 %2 (%3)<br/>", _unitRank, _unitName, _unitDesc];
 };
 
 _returnString

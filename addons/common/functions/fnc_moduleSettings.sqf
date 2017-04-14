@@ -21,13 +21,13 @@ params [
 ];
 
 if(isNull _logic || _moduleVariable isEqualTo "") exitWith {
-    KGE_LOGERROR("Invalid parameters for module object or variable text");
+  KGE_LOGERROR("Invalid parameters for module object or variable text");
 };
 
 // Check if the parameter is defined in the module
 if (isNil {_logic getVariable _moduleVariable}) exitWith {
-    KGE_LOGERROR_2("Warning in %1 module: %2 setting is missing. Propably obsolete version of module in use on mission.",typeOf _logic,_moduleVariable);
-    _default
+  KGE_LOGERROR_2("Warning in %1 module: %2 setting is missing. Propably obsolete version of module in use on mission.",typeOf _logic,_moduleVariable);
+  _default
 };
 
 _logic getVariable _moduleVariable

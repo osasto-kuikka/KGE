@@ -12,21 +12,21 @@ GVAR(terrainGradientMaxDecline) = -30;
 GVAR(fatigueThreshold) = 0.7;
 GVAR(alive) = true;
 GVAR(disablingActions) = [
-	"MoveForward",
-	"MoveBack",
-	"MoveUp",
-	"MoveDown",
-	"MoveLeft",
-	"MoveRight",
-	"TurnLeft",
-	"TurnRight",
-	"Crouch",
-	"Prone",
-	"GetOver",
-	"ToggleWeapons",
-	"SwitchWeapon",
-	"Fire",
-	"Optics"
+  "MoveForward",
+  "MoveBack",
+  "MoveUp",
+  "MoveDown",
+  "MoveLeft",
+  "MoveRight",
+  "TurnLeft",
+  "TurnRight",
+  "Crouch",
+  "Prone",
+  "GetOver",
+  "ToggleWeapons",
+  "SwitchWeapon",
+  "Fire",
+  "Optics"
 ];
 GVAR(disablingAnimation) = [];
 

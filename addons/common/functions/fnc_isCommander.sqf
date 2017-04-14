@@ -11,9 +11,8 @@
  */
 #include "script_component.hpp"
 
-params [["_unit", objNull]];
+params [["_unit", objNull, [objNull]]];
 
-if !(alive _unit) exitWith { false };
-
-!(vehicle _unit isEqualTo _unit) &&
-commander (vehicle _unit) isEqualTo _unit
+[_unit] call FUNC(isAlive) &&
+{vehicle _unit isEqualTo _unit} &&
+{commander (vehicle _unit) isEqualTo _unit}

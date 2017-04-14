@@ -15,12 +15,12 @@
 GVAR(isAutoRunActive) = !GVAR(isAutoRunActive);
 
 if !(GVAR(isAutoRunActive)) exitWith {
-		[GVAR(autorunLoop)] call CBA_fnc_removePerFrameHandler;
+	[GVAR(autorunLoop)] call CBA_fnc_removePerFrameHandler;
 
-    KGE_LOGINFO("Autorun stopped");
+	KGE_LOGINFO("Autorun stopped");
 
-    KGE_Player switchMove "";
-    GVAR(lastMode) = nil;
+	KGE_Player switchMove "";
+	GVAR(lastMode) = nil;
 } else {
 	// Autorun loop
 	GVAR(autorunLoop) = [{

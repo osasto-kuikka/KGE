@@ -20,8 +20,8 @@ private _teamrosterText = "";
   if(side _group == side (group KGE_Player) && {isPlayer _x} count (units _group) != 0) then {
     _teamrosterText = format["%1 %2", _teamrosterText, ([leader _group] call FUNC(getPlayerEntry))];
     {
-        _x params ["_unit"];
-        _teamrosterText = format["%1 %2", _teamrosterText, ([_unit] call FUNC(getPlayerEntry))];
+      _x params ["_unit"];
+      _teamrosterText = format["%1 %2", _teamrosterText, ([_unit] call FUNC(getPlayerEntry))];
     } forEach (units _group) - [leader _group];
   };
 } forEach allGroups;

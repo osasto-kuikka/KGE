@@ -17,9 +17,7 @@
 
 #include "script_component.hpp"
 
-params [
-    ["_unit", KGE_Player, [objNull]]
-    ];
+params [["_unit", KGE_Player, [objNull]]];
 
 if((vehicle _unit) == _unit) exitWith {-1};
 if(_unit call FUNC(isCommander)) exitWith {0};

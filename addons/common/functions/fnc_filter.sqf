@@ -18,8 +18,8 @@
 params ["_array", "_code"];
 
 if (isNil "_array") exitWith {
-    KGE_LOGERROR("No array for function filter");
-    []
+  KGE_LOGERROR("No array for function filter");
+  []
 };
 
 _array select _code

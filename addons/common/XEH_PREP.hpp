@@ -1,6 +1,4 @@
-PREP(checkFiles);
 PREP(classExists);
-PREP(errorMessage);
 PREP(filter);
 PREP(getName);
 PREP(getSide);
@@ -12,7 +10,6 @@ PREP(isDriver);
 PREP(isGunner);
 PREP(isLeader);
 PREP(isPassenger);
-PREP(map);
 PREP(moduleSettings);
 PREP(player);
 PREP(playerVehicleStatus);

@@ -5,13 +5,13 @@
 ["KGE","kge_autorun_mode", "Change autorun mode", {call FUNC(toggleMode); true}, {true}, [DIK_B, [false, true, false]], false] call CBA_fnc_addKeybind;
 
 [{
-    (findDisplay 46) displayAddEventHandler ["KeyDown", {_this call FUNC(actionKeyCheck); false}];
+	(findDisplay 46) displayAddEventHandler ["KeyDown", {_this call FUNC(actionKeyCheck); false}];
 }, [], {!(isNull (findDisplay 46))}] call EFUNC(common,waitUntil);
 
 // Disable autorun when teleported
 [QEGVAR(teleport,onTeleport), {
-    GVAR(isAutoRunActive) = false;
-    KGE_Player playMoveNow "";
+	GVAR(isAutoRunActive) = false;
+	KGE_Player playMoveNow "";
 }] call CBA_fnc_addEventHandler;
 
 ["ace_common_forceWalk", {
