@@ -7,8 +7,8 @@ VERSION_FULL = $(VERSION).$(BUILD)
 PREFIX = kge
 BIN = @kge
 ZIP = kge
-CBA = tools/cba
-FLAGS = -i $(CBA) -w unquoted-string
+CBA = include/cba
+FLAGS = -i $(CBA)
 COPY = cp LICENSE README.md kuikka.paa mod.cpp CHANGELOG.md $(BIN)
 
 $(BIN)/addons/$(PREFIX)_%.pbo: addons/%
@@ -22,8 +22,9 @@ $(BIN)/addons/$(PREFIX)_%.pbo: addons/%
 
 all: $(patsubst addons/%, $(BIN)/addons/$(PREFIX)_%.pbo, $(wildcard addons/*))
 
-filepatching: clean
-	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -w unquoted-string -p"
+filepatching:
+	@"$(MAKE)" clean
+	@"$(MAKE)" $(MAKEFLAGS) FLAGS="-i $(CBA) -p"
 	@$(COPY)
 
 $(BIN)/keys/%.biprivatekey:

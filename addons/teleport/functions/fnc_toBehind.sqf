@@ -21,27 +21,27 @@ params ["_unit", "_target"];
 private _targetPos = (position _target) findEmptyPosition [MINDISTANCE, MAXDISTANCE, (typeof _target)];
 
 if(count _targetPos == 0) exitWith {
-    GVAR(target) = _target;
-    [{
-        params ["_unit", "_target"];
+	GVAR(target) = _target;
+	[{
+			params ["_unit", "_target"];
 
-        [_unit, _target] call FUNC(toBehind);
+			[_unit, _target] call FUNC(toBehind);
 
-    },[_unit, _target],
-    {count ((position GVAR(target)) findEmptyPosition [MINDISTANCE, MAXDISTANCE, (typeof GVAR(target))]) != 0}, 1] call EFUNC(common,waitUntil);
+	},[_unit, _target],
+	{count ((position GVAR(target)) findEmptyPosition [MINDISTANCE, MAXDISTANCE, (typeof GVAR(target))]) != 0}, 1] call EFUNC(common,waitUntil);
 
-    hint "No space nearby! Get to more open area for teleport!";
+	hint "No space nearby! Get to more open area for teleport!";
 };
 
 // If unit is in water
 // We need to change animation and teleport location height before teleporting
 if (surfaceIsWater (getPosASL _unit) && {!(surfaceIsWater _targetPos)}) then {
-    _unit switchMove "AmovPercMstpSlowWrflDnon";
-    _targetPos set [2, (_targetPos select 2) + 1];
+	_unit switchMove "AmovPercMstpSlowWrflDnon";
+	_targetPos set [2, (_targetPos select 2) + 1];
 };
 
 if !((_unit call EFUNC(common,playerVehicleStatus)) in [-1, 3]) exitWith {
-    Hint "You cannot teleport player who is in vehicle and is not passenger!";
+	Hint "You cannot teleport player who is in vehicle and is not passenger!";
 };
 
 [QGVAR(remoteTeleport), [_unit, _targetPos, KGE_Player], _unit] call CBA_fnc_targetEvent;

@@ -18,13 +18,13 @@ private _centerofMass = getCenterOfMass _tank;
 
 // If player is gunner add camera shake
 if (KGE_player call EFUNC(common,isGunner)) then {
-    addCamShake [5, 0.5, 25];
+	addCamShake [5, 0.5, 25];
 };
 
 // Calculate new center of mass from turret direction
 private _recv = _centerofMass vectorDiff ((
-    _tank worldToModelVisual (_tank weaponDirection _usedGun)
-    vectorDiff (_tank worldToModelVisual [0, 0, 0])
+	_tank worldToModelVisual (_tank weaponDirection _usedGun)
+	vectorDiff (_tank worldToModelVisual [0, 0, 0])
 ) vectorMultiply 1.4);
 
 // Return y to original and set new center of mass
@@ -33,6 +33,6 @@ _tank setCenterOfMass _recv;
 
 // Return center of mass after certain time
 [{
-    params ["_tank", "_centerofMass"];
-    _tank setCenterOfMass _centerofMass;
+	params ["_tank", "_centerofMass"];
+	_tank setCenterOfMass _centerofMass;
 }, [_tank, _centerOfMass], 0.2] call EFUNC(common,waitUntil);

@@ -14,7 +14,7 @@
 params ["_image"];
 
 if((_image find ".paa") == -1) then {
-    _image = format["%1.paa", _image];
+	_image = format["%1.paa", _image];
 };
 
 _image

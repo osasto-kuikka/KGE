@@ -22,11 +22,11 @@ if (isNil {GVAR(tankNamespace) getVariable (typeOf _vehicle)}) exitWith {};
 
 // Save vehicle and fired event to firedEvent variable
 _unit setvariable [
-    QGVAR(firedEvent),
-    [
-        _vehicle,
-        _vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]
-    ]
+	QGVAR(firedEvent),
+	[
+		_vehicle,
+		_vehicle addEventHandler ["Fired", {_this call FUNC(firedEvent)}]
+	]
 ];
 
 KGE_LOGINFO_1("Fired event added for %1",_vehicle);

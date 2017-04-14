@@ -11,8 +11,6 @@
 
 #include "script_component.hpp"
 
-private ["_gradient", "_fatigue"];
-
 if !(alive KGE_Player) exitWith {false};
 
 // If KGE respawn is used
@@ -27,8 +25,8 @@ if(GVAR(autoRunMode) isEqualTo WALK) exitWith {true};
 // Disable running when weapon is holstered
 if((animationState KGE_Player) in GVAR(disablingAnimation)) exitWith {false};
 
-_gradient = KGE_Player call FUNC(getTerrainGradient);
-_fatigue = getFatigue KGE_Player;
+private _gradient = KGE_Player call FUNC(getTerrainGradient);
+private _fatigue = getFatigue KGE_Player;
 
 if(_fatigue > GVAR(fatigueThreshold)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = JOG; };
 if(_gradient < GVAR(terrainGradientMaxDecline)) then { GVAR(lastMode) = GVAR(autoRunMode); GVAR(autoRunMode) = WALK };
