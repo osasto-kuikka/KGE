@@ -10,6 +10,6 @@
  * Boolean
  */
 
-params [["_unit", objNull, [objNull]];
+params [["_unit", objNull, [objNull]]];
 
 [_unit] call FUNC(isAlive) && {_unit isEqualTo leader (group _unit)}
