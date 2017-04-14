@@ -2,11 +2,11 @@
 #define COMPONENT_BEAUTIFIED TankRecoil
 
 #ifdef DEBUG_ENABLED_TANK_RECOIL
-    #define DEBUG_MODE_FULL
+  #define DEBUG_MODE_FULL
 #endif
 
 #ifdef DEBUG_SETTINGS_TANK_RECOIL
-    #define DEBUG_SETTINGS DEBUG_SETTINGS_TANK_RECOIL
+  #define DEBUG_SETTINGS DEBUG_SETTINGS_TANK_RECOIL
 #endif
 
 #include "\z\kge\addons\main\script_mod.hpp"

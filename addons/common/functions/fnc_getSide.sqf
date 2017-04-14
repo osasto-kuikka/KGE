@@ -15,7 +15,7 @@
 params [["_unit",objNull]];
 
 if (!isNull _this) then {
-    side (group _this)
+  side (group _this)
 } else {
-    sideUnknown
+  sideUnknown
 };

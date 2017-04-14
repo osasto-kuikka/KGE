@@ -12,8 +12,6 @@
 
 #include "script_component.hpp"
 
-params [
-    ["_unit", KGE_Player, [objNull]]
-];
+params [["_unit", KGE_Player, [objNull]]];
 
 _unit call CBA_fnc_isAlive || _unit getVariable [QEGVAR(respawn,alive), true]

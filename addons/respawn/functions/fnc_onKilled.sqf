@@ -24,13 +24,13 @@ _unit hideObjectGlobal true;
 if (["ace_hearing"] call EFUNC(common,classExists)) then {ace_hearing_disableVolumeUpdate = true};
 if (["acre_sys_radio"] call EFUNC(common,classExists)) then {[true] call acre_api_fnc_setSpectator};
 if (["task_force_radio"] call EFUNC(common,classExists)) then {
-    [KGE_Player, true] call TFAR_fnc_forceSpectator;
-    KGE_Player setVariable ["tf_unable_to_use_radio", true];
+  [KGE_Player, true] call TFAR_fnc_forceSpectator;
+  KGE_Player setVariable ["tf_unable_to_use_radio", true];
 };
 
 // Do full heal if ace medcal is in use
 if(ace_medical) then {
-    [_unit, _unit] call ace_medical_fnc_treatmentAdvanced_fullHealLocal;
+  [_unit, _unit] call ace_medical_fnc_treatmentAdvanced_fullHealLocal;
 };
 
 GVAR(animationLock) = true;

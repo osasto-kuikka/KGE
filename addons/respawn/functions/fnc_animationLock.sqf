@@ -12,18 +12,18 @@
 #include "script_component.hpp"
 
 [{
-    params ["_params", "_pfh"];
+  params ["_params", "_pfh"];
 
-    if !((animationState KGE_player) isEqualTo "HubSpectator_stand") then {
-        // Switch player animation to lock movement
-        KGE_player playMove "HubSpectator_stand";
-    };
+  if !((animationState KGE_player) isEqualTo "HubSpectator_stand") then {
+    // Switch player animation to lock movement
+    KGE_player playMove "HubSpectator_stand";
+  };
 
-    if !(GVAR(animationLock)) then {
-        // Free player from animation lock
-        KGE_player switchMove "AmovPercMstpSlowWrflDnon";
+  if !(GVAR(animationLock)) then {
+    // Free player from animation lock
+    KGE_player switchMove "AmovPercMstpSlowWrflDnon";
 
-        // Delete this PFH
-        [_pfh] call cba_fnc_removePerFrameHandler;
-    };
+    // Delete this PFH
+    [_pfh] call cba_fnc_removePerFrameHandler;
+  };
 }, 1, []] call cba_fnc_addPerFrameHandler;

@@ -2,11 +2,11 @@
 #define COMPONENT_BEAUTIFIED Teamroster
 
 #ifdef DEBUG_ENABLED_TEAMROSTER
-    #define DEBUG_MODE_FULL
+  #define DEBUG_MODE_FULL
 #endif
 
 #ifdef DEBUG_SETTINGS_TEAMROSTER
-    #define DEBUG_SETTINGS DEBUG_SETTINGS_TEAMROSTER
+  #define DEBUG_SETTINGS DEBUG_SETTINGS_TEAMROSTER
 #endif
 
 #include "\z\kge\addons\main\script_mod.hpp"
